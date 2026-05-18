@@ -1,0 +1,16 @@
+{
+  "name": "vrm-avatar-extension",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --minify",
+    "dev":   "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --watch"
+  },
+  "dependencies": {
+    "three": "^0.169.0",
+    "@pixiv/three-vrm": "^2.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}
