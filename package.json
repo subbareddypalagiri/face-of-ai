@@ -4,13 +4,31 @@
   "private": true,
   "scripts": {
     "build": "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --minify",
-    "dev":   "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --watch"
+    "dev": "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --watch",
+    "start": "node server.js"
   },
   "dependencies": {
-    "three": "^0.169.0",
-    "@pixiv/three-vrm": "^2.1.0"
+    "@pixiv/three-vrm": "^2.1.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.6.2",
+    "three": "^0.169.0"
   },
   "devDependencies": {
-    "esbuild": "^0.24.0"
-  }
+    "esbuild": "^0.28.0"
+  },
+  "description": "",
+  "main": "content.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subbareddypalagiri/face-of-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/subbareddypalagiri/face-of-ai/issues"
+  },
+  "homepage": "https://github.com/subbareddypalagiri/face-of-ai#readme"
 }
