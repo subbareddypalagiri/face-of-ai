@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face of AI - Aura Edition</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.154.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.154.0/examples/jsm/",
+      "@pixiv/three-vrm": "https://unpkg.com/@pixiv/three-vrm@2.0.0/lib/three-vrm.module.js"
+    }
+  }
+  </script>
+
+  <style>
+    * { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    
+    /* 3D Avatar Canvas Styling */
+    #canvas-container {
+      position: fixed; inset: 0; z-index: 0;
+      width: 100%; height: 100%;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.8s ease-in-out;
+    }
+    #canvas-container.active {
+      opacity: 1; pointer-events: auto;
+    }
+    #canvas-container canvas {
+      position: absolute; left: 0; top: 0; width: 100% !important; height: 100% !important;
+      background: transparent; display: block; cursor: grab;
+    }
+    #canvas-container canvas:active { cursor: grabbing; }
+
+    /* Jarvis Orb animations */
+    @keyframes orb-hue-rotate {
+      0% { filter: hue-rotate(0deg); }
+      25% { filter: hue-rotate(45deg); }
+      50% { filter: hue-rotate(90deg); }
+      75% { filter: hue-rotate(45deg); }
+      100% { filter: hue-rotate(0deg); }
+    }
+    @keyframes orb-hue-rotate-blur {
+      0% { filter: blur(19px) hue-rotate(0deg); }
+      50% { filter: blur(19px) hue-rotate(90deg); }
+      100% { filter: blur(19px) hue-rotate(0deg); }
+    }
+    @keyframes orb-orbit-1 { 0% { transform: rotate(0deg) translateX(25%) rotate(0deg) scale(1); } 100% { transform: rotate(360deg) translateX(25%) rotate(-360deg) scale(1); } }
+    @keyframes orb-orbit-2 { 0% { transform: rotate(90deg) translateX(20%) rotate(-90deg) scale(1); } 100% { transform: rotate(450deg) translateX(20%) rotate(-450deg) scale(1); } }
+    @keyframes orb-orbit-3 { 0% { transform: rotate(180deg) translateX(30%) rotate(-180deg) scale(1); } 100% { transform: rotate(540deg) translateX(30%) rotate(-540deg) scale(1); } }
+    
+    .orb-circle-1 { animation: orb-orbit-1 6s ease-in-out infinite; }
+    .orb-circle-2 { animation: orb-orbit-2 5s ease-in-out infinite; }
+    .orb-circle-3 { animation: orb-orbit-3 7s ease-in-out infinite; }
+    
+    .orb-intro { animation: orb-intro 4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transition: opacity 0.5s ease, transform 0.5s ease; }
+    @keyframes orb-intro {
+      0% { transform: translateY(-100px) scale(4); filter: blur(30px); opacity: 0; }
+      100% { transform: translateY(0) scale(1); filter: blur(0px); opacity: 1; }
+    }
+    
+    .orb-hidden { opacity: 0 !important; transform: scale(0.5) !important; pointer-events: none; }
+
+    /* UI Layers Layering Fix */
+    #messageList { pointer-events: none; }
+    #mainOrbContainer, #messagesContainer, #typingIndicator, .chat-message { pointer-events: auto; }
+
+    .composer-intro { animation: composer-intro 2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards; opacity: 0; }
+    @keyframes composer-intro { 0% { transform: translateY(100px); opacity: 0; } 100% { transform: translateY(0); opacity: 1; } }
+    
+    .shadow-soft { box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px; }
+    
+    @keyframes slide-up-bounce { 0% { transform: translateY(20px); opacity: 0; } 60% { transform: translateY(-4px); } 100% { transform: translateY(0); opacity: 1; } }
+    .user-message-enter { animation: slide-up-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+    @keyframes fade-slide-in { 0% { opacity: 0; transform: translateY(8px); } 100% { opacity: 1; transform: translateY(0); } }
+    .assistant-message-enter { animation: fade-slide-in 0.3s ease-out; }
+    .typing-dot { animation: bounce 0.6s ease-in-out infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  </style>
+</head>
+<body class="bg-stone-50 h-screen overflow-hidden relative">
+  
+  <div id="canvas-container"></div>
+
+  <div class="relative h-dvh bg-transparent shadow-soft" style="z-index: 10; pointer-events: none;">
+    
+    <button onclick="window.location.reload()" class="absolute top-4 left-4 z-20 h-10 w-10 rounded-full bg-white hover:bg-stone-100 text-stone-600 flex items-center justify-center transition-colors shadow-soft pointer-events-auto border border-stone-100">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M13.73 4a2 2 0 0 1 .55.06A2 2 0 0 1 16 6v10l-4-4H7"/>
+      </svg>
+    </button>
+
+    <div class="absolute top-4 right-4 z-30 flex gap-2 pointer-events-auto">
+      <div class="relative">
+        <button id="voiceBtn" class="h-10 px-4 rounded-full bg-white hover:bg-stone-100 text-stone-700 text-xs font-semibold flex items-center gap-2 transition-colors shadow-soft border border-stone-200">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          Voice Settings
+        </button>
+        <div id="voiceDropdown" class="absolute top-12 right-0 w-56 p-3 rounded-2xl bg-white shadow-xl border border-stone-200 hidden z-50">
+          <label class="text-[10px] font-bold text-stone-400 block mb-1 tracking-wider">SELECT COMPANION VOICE</label>
+          <select id="voiceSelect" class="w-full text-xs p-2 bg-stone-50 rounded-xl border border-stone-200/60 outline-none cursor-pointer text-stone-700"></select>
+        </div>
+      </div>
+
+      <button id="switchCharacterBtn" class="h-10 px-4 rounded-full bg-white hover:bg-stone-100 text-stone-700 text-xs font-semibold flex items-center gap-2 transition-colors shadow-soft border border-stone-200">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2.1l4 4-4 4"/><path d="M3 12.2v-2a4 4 0 0 1 4-4h12.8M7 21.9l-4-4 4-4"/><path d="M21 11.8v2a4 4 0 0 1-4 4H4.2"/></svg>
+        Switch Character
+      </button>
+    </div>
+    
+    <div class="absolute inset-0 overflow-y-auto pt-16 pb-32 px-6 pointer-events-auto" id="messageList">
+      
+      <div class="flex flex-col items-center justify-center h-full text-center transition-all duration-500" id="mainOrbContainer">
+        <div class="mb-4 orb-intro" id="glowingOrb">
+          <div class="relative rounded-full overflow-hidden" style="width: 140px; height: 140px; background-color: #cff1f4; animation: orb-hue-rotate 8s linear infinite; box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
+            <div class="absolute inset-0 flex items-center justify-center" style="animation: orb-hue-rotate-blur 6s linear infinite reverse;">
+              <div class="orb-circle-1 absolute rounded-full" style="width: 60px; height: 60px; opacity: 0.9; background-color: #9e9fef;"></div>
+              <div class="orb-circle-2 absolute rounded-full" style="width: 50px; height: 50px; opacity: 0.85; background-color: #c471ec;"></div>
+              <div class="orb-circle-3 absolute rounded-full" style="width: 70px; height: 70px; opacity: 0.9; background-color: #9bc761;"></div>
+            </div>
+            <div class="absolute inset-0 rounded-full pointer-events-none" style="background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, transparent 100%);"></div>
+          </div>
+        </div>
+        <p class="text-lg font-semibold text-stone-800 drop-shadow-sm transition-opacity duration-300" id="orbText1">Hi, my name is Nikkulu</p>
+        <p class="text-sm mt-1 text-stone-500 drop-shadow-sm transition-opacity duration-300" id="orbText2">Click "Face of AI" or send a message to start.</p>
+      </div>
+      
+      <div id="messagesContainer" class="hidden space-y-4 pb-20 mt-10">
+        <div class="flex gap-3 max-w-[90%] md:max-w-[80%] mr-auto assistant-message-enter" id="typingIndicator" style="display: none;">
+          <div class="px-4 py-3 rounded-2xl rounded-bl-md bg-white/80 backdrop-blur-md border border-stone-200 shadow-soft">
+            <div class="flex items-center gap-1">
+              <span class="w-2 h-2 rounded-full bg-stone-400 typing-dot"></span>
+              <span class="w-2 h-2 rounded-full bg-stone-400 typing-dot" style="animation-delay: 150ms;"></span>
+              <span class="w-2 h-2 rounded-full bg-stone-400 typing-dot" style="animation-delay: 300ms;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="h-10"></div>
+    </div>
+    
+    <div class="fixed bottom-6 left-0 right-0 px-4 z-20 composer-intro pointer-events-none">
+      <div class="relative max-w-3xl mx-auto pointer-events-auto">
+        <div class="flex flex-col gap-3 p-3 bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-stone-200/60">
+          
+          <div class="flex gap-3 items-end px-2">
+            <textarea id="messageInput" placeholder="Type a message..." rows="1" class="flex-1 resize-none bg-transparent py-2.5 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none max-h-[100px] overflow-y-auto"></textarea>
+            
+            <button id="sendButton" class="h-10 w-10 shrink-0 rounded-full bg-stone-900 text-white flex items-center justify-center hover:bg-stone-800 transition-all opacity-50" disabled>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </div>
+          
+          <div class="flex items-center justify-between px-2 pb-1">
+            <div class="flex items-center gap-2">
+              <button id="micButton" class="h-8 w-8 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 flex items-center justify-center transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+              </button>
+              
+              <button onclick="window.setGeminiAPIKey()" class="h-8 px-3 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-medium flex items-center gap-1.5 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+                Key
+              </button>
+            </div>
+
+            <button id="faceOfAiBtn" class="h-9 px-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-md hover:shadow-lg transition-all flex items-center gap-2 text-xs font-bold tracking-wide">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              Face of AI
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <audio id="clickSound" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/click-FM4Xaa1FJj237591TiZw4yL1fIxdOw.mp3" preload="auto"></audio>
+
+  <script>
+    const clickSound = document.getElementById('clickSound');
+    function playClick() { clickSound.volume = 0.3; clickSound.currentTime = 0; clickSound.play().catch(()=>{}); }
+
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
+    const faceOfAiBtn = document.getElementById('faceOfAiBtn');
+    const canvasContainer = document.getElementById('canvas-container');
+    const glowingOrb = document.getElementById('glowingOrb');
+    const mainOrbContainer = document.getElementById('mainOrbContainer');
+    const voiceBtn = document.getElementById('voiceBtn');
+    const voiceDropdown = document.getElementById('voiceDropdown');
+    
+    let isAvatarActive = false;
+
+    // Voice Panel Dropdown Toggle
+    voiceBtn.addEventListener('click', (e) => {
+      playClick();
+      e.stopPropagation();
+      voiceDropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!voiceBtn.contains(e.target) && !voiceDropdown.contains(e.target)) {
+        voiceDropdown.classList.add('hidden');
+      }
+    });
+
+    // Face of AI Interface State Handler (Safely toggles visual without wiping chat nodes)
+    faceOfAiBtn.addEventListener('click', () => {
+      playClick();
+      if (!isAvatarActive) {
+        glowingOrb.classList.add('orb-hidden');
+        document.getElementById('orbText1').style.opacity = '0';
+        document.getElementById('orbText2').style.opacity = '0';
+        
+        setTimeout(() => {
+          mainOrbContainer.style.visibility = 'hidden';
+          mainOrbContainer.style.opacity = '0';
+          canvasContainer.classList.add('active');
+          faceOfAiBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM9 9h6v6H9z"/></svg> Hide Avatar';
+          faceOfAiBtn.classList.replace('from-cyan-500', 'from-stone-500');
+          faceOfAiBtn.classList.replace('to-blue-500', 'to-stone-700');
+        }, 300);
+        isAvatarActive = true;
+      } else {
+        canvasContainer.classList.remove('active');
+        mainOrbContainer.style.visibility = 'visible';
+        mainOrbContainer.style.opacity = '1';
+        
+        setTimeout(() => {
+          glowingOrb.classList.remove('orb-hidden');
+          document.getElementById('orbText1').style.opacity = '1';
+          document.getElementById('orbText2').style.opacity = '1';
+          faceOfAiBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> Face of AI';
+          faceOfAiBtn.classList.replace('from-stone-500', 'from-cyan-500');
+          faceOfAiBtn.classList.replace('to-stone-700', 'to-blue-500');
+        }, 100);
+        isAvatarActive = false;
+      }
+    });
+
+    messageInput.addEventListener('input', () => {
+      messageInput.style.height = 'auto';
+      messageInput.style.height = Math.min(messageInput.scrollHeight, 100) + 'px';
+      if (messageInput.value.trim()) {
+        sendButton.disabled = false; sendButton.classList.remove('opacity-50');
+      } else {
+        sendButton.disabled = true; sendButton.classList.add('opacity-50');
+      }
+    });
+
+    messageInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (messageInput.value.trim()) sendMessage(); }
+    });
+    sendButton.addEventListener('click', () => { if (messageInput.value.trim()) sendMessage(); });
+
+    function sendMessage() {
+      playClick();
+      const message = messageInput.value.trim();
+      if (!message) return;
+      
+      if (!isAvatarActive) faceOfAiBtn.click();
+      
+      document.getElementById('messagesContainer').classList.remove('hidden');
+      addUserMessage(message);
+      
+      messageInput.value = '';
+      messageInput.style.height = 'auto';
+      sendButton.disabled = true; sendButton.classList.add('opacity-50');
+      
+      document.getElementById('typingIndicator').style.display = 'flex';
+      scrollToBottom();
+      
+      if(window.processAvatarResponse) window.processAvatarResponse(message);
+    }
+
+    function addUserMessage(text) {
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const indicator = document.getElementById('typingIndicator');
+      const html = `
+        <div class="flex max-w-[90%] md:max-w-[80%] gap-2 ml-auto flex-row-reverse user-message-enter mt-4">
+          <div class="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div class="flex flex-col items-end">
+            <div class="rounded-2xl rounded-br-sm bg-stone-900 text-white shadow-sm px-4 py-2.5">
+              <p class="text-sm whitespace-pre-wrap">${escapeHtml(text)}</p>
+            </div>
+            <span class="text-[10px] text-stone-400 mt-1">${time}</span>
+          </div>
+        </div>`;
+      indicator.insertAdjacentHTML('beforebegin', html);
+      scrollToBottom();
+    }
+
+    window.addAssistantMessage = function(text) {
+      const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      const indicator = document.getElementById('typingIndicator');
+      const html = `
+        <div class="flex max-w-[90%] md:max-w-[80%] gap-2 mr-auto assistant-message-enter mt-4">
+          <div class="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center shrink-0 border border-cyan-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </div>
+          <div class="flex flex-col items-start">
+            <div class="rounded-2xl rounded-bl-sm bg-white border border-stone-200 shadow-sm px-4 py-2.5">
+              <p class="text-sm whitespace-pre-wrap text-stone-800 leading-relaxed">${escapeHtml(text)}</p>
+            </div>
+            <span class="text-[10px] text-stone-400 mt-1">${time}</span>
+          </div>
+        </div>`;
+      indicator.insertAdjacentHTML('beforebegin', html);
+      scrollToBottom();
+    }
+
+    function scrollToBottom() { const list = document.getElementById('messageList'); list.scrollTop = list.scrollHeight; }
+    function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
+
+    window.setGeminiAPIKey = function() {
+      const userKey = prompt("Nee Gemini API Key ni ikkada paste chey buddy:");
+      if (userKey && userKey.trim()) { localStorage.setItem('gemini_companion_key', userKey.trim()); alert("Key saved! Setup Ready."); }
+    };
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { VRMLoaderPlugin } from '@pixiv/three-vrm';
+
+    const container = document.getElementById('canvas-container');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(window.devicePixelRatio); 
+    renderer.setSize(window.innerWidth, window.innerHeight); 
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 20.0);
+    camera.position.set(0.0, 1.2, 4.5); 
+    
+    const light = new THREE.DirectionalLight(0xffffff, Math.PI); 
+    light.position.set(1.0, 1.0, 1.0).normalize(); scene.add(light);
+    const lookAtTarget = new THREE.Object3D(); scene.add(lookAtTarget);
+
+    let currentVRM = null;
+    let chatHistory = [];
+    let availableVoices = [];
+    let selectedVoice = null;
+    
+    const loader = new GLTFLoader(); 
+    loader.register(parser => new VRMLoaderPlugin(parser));
+    
+    // Character Switch System (No Alert Popups!)
+    const avatarFiles = ['./avatar.vrm', './avatar2.vrm'];
+    let currentAvatarIndex = 0;
+
+    function loadAvatar(path) {
+      if(currentVRM) { scene.remove(currentVRM.scene); }
+      loader.load(path, gltf => { 
+        const vrm = gltf.userData.vrm;
+        vrm.scene.rotation.y = Math.PI; 
+        vrm.scene.position.y = -0.15; 
+        vrm.scene.position.x = 0; 
+        vrm.lookAt.target = lookAtTarget; 
+        scene.add(vrm.scene); 
+        currentVRM = vrm; 
+      }, undefined, err => console.error("Avatar Load Error:", err));
+    }
+
+    loadAvatar(avatarFiles[currentAvatarIndex]);
+
+    document.getElementById('switchCharacterBtn').addEventListener('click', () => {
+      playClick();
+      currentAvatarIndex = (currentAvatarIndex + 1) % avatarFiles.length;
+      loadAvatar(avatarFiles[currentAvatarIndex]);
+    });
+
+    // Native Speech Synthesis System
+    function initVoices() {
+      availableVoices = window.speechSynthesis.getVoices();
+      const select = document.getElementById('voiceSelect');
+      select.innerHTML = '';
+      availableVoices.forEach((voice, i) => {
+        const opt = document.createElement('option');
+        opt.textContent = `${voice.name} (${voice.lang})`;
+        opt.value = i;
+        if (voice.lang === 'en-IN' || voice.name.toLowerCase().includes('india')) {
+          opt.selected = true;
+          selectedVoice = voice;
+        }
+        select.appendChild(opt);
+      });
+      if (!selectedVoice && availableVoices.length > 0) selectedVoice = availableVoices[0];
+    }
+    if (typeof window.speechSynthesis !== 'undefined') window.speechSynthesis.onvoiceschanged = initVoices;
+    setTimeout(initVoices, 500);
+
+    document.getElementById('voiceSelect').addEventListener('change', (e) => {
+      selectedVoice = availableVoices[e.target.value];
+    });
+
+    // 🔥 FIXED: Global Interaction Mouse Drag Logic 🔥
+    let isDragging = false;
+    let previousMousePosition = { x: 0, y: 0 };
+
+    window.addEventListener('pointerdown', (e) => {
+      // Input boxes, dropdown panels, or trigger buttons click block down propagation
+      if (e.target.closest('button') || e.target.closest('textarea') || e.target.closest('select') || e.target.closest('#voiceDropdown')) {
+        return;
+      }
+      if (isAvatarActive) {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      }
+    });
+
+    window.addEventListener('pointermove', (e) => { 
+      lookAtTarget.position.set(2.0 * (e.clientX / window.innerWidth) - 1.0, -2.0 * (e.clientY / window.innerHeight) + 1.0, 2.0); 
+      
+      if (isDragging && currentVRM) {
+        const deltaX = e.clientX - previousMousePosition.x;
+        const deltaY = e.clientY - previousMousePosition.y;
+        
+        currentVRM.scene.position.x += deltaX * 0.005;
+        currentVRM.scene.position.y -= deltaY * 0.005;
+        
+        previousMousePosition = { x: e.clientX, y: e.clientY };
+      }
+    });
+
+    window.addEventListener('pointerup', () => { isDragging = false; });
+
+    const clock = new THREE.Clock();
+    function animate() { 
+      requestAnimationFrame(animate); 
+      const delta = clock.getDelta(); 
+      if (currentVRM) currentVRM.update(delta); 
+      camera.lookAt(0.0, 1.2, 0); 
+      renderer.render(scene, camera); 
+    } 
+    animate();
+    
+    window.addEventListener('resize', () => { 
+      camera.aspect = window.innerWidth / window.innerHeight; 
+      camera.updateProjectionMatrix(); 
+      renderer.setSize(window.innerWidth, window.innerHeight); 
+    });
+
+    // Gemini Engine Communication Loop
+    window.processAvatarResponse = async function(promptText) {
+      const savedKey = localStorage.getItem('gemini_companion_key');
+      if (!savedKey) { 
+        document.getElementById('typingIndicator').style.display = 'none';
+        window.addAssistantMessage("Buddy, Key inka raledhu. 'Key' button nokki API key ivvu!"); 
+        return; 
+      }
+      chatHistory.push({ role: 'user', parts: [{ text: promptText }] });
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent?key=${savedKey}`, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: chatHistory, systemInstruction: { parts: [{ text: "You are a friendly AI companion. Talk in Roman Telugu (Tinglish) using a buddy tone." }] } })
+        });
+        if (!response.ok) throw new Error('API Failed'); 
+        const data = await response.json(); 
+        const aiAnswer = data.candidates[0].content.parts[0].text; 
+        chatHistory.push({ role: 'model', parts: [{ text: aiAnswer }] }); 
+        
+        document.getElementById('typingIndicator').style.display = 'none';
+        window.addAssistantMessage(aiAnswer);
+        
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(aiAnswer);
+        if (selectedVoice) utterance.voice = selectedVoice;
+        utterance.rate = 1.0; utterance.pitch = 1.05;
+        window.speechSynthesis.speak(utterance);
+      } catch(e) { 
+        chatHistory.pop(); 
+        document.getElementById('typingIndicator').style.display = 'none';
+        window.addAssistantMessage("API request error vachindi buddy."); 
+      }
+    };
+  </script>
+</body>
+</html>
