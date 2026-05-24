@@ -1,6 +1,7 @@
 // src/avatar.js
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { VRMLoaderPlugin, VRMUtils, VRMExpressionPresetName, VRMHumanBoneName } from '@pixiv/three-vrm';
 
 if (window.__vrmAvatarRunning) {
@@ -50,6 +51,7 @@ function initVRMAvatar() {
 
   let currentVRM = null; let blinkTimer = 0; let blinkInterval = 3.5; let isBlinking = false; let blinkT = 0;
   let smoothYaw = 0; let smoothPitch = 0;
+  let mixer = null; let currentAction = null; let animationClips = {}; let fbxLoader = new FBXLoader();
 
   const loader = new GLTFLoader();
   loader.register(parser => new VRMLoaderPlugin(parser));
@@ -64,7 +66,15 @@ function initVRMAvatar() {
 
     scene.add(vrm.scene);
     currentVRM = vrm;
+    
+    // Setup animation mixer
+    mixer = new THREE.AnimationMixer(vrm.scene);
+    
+    // Load Mixamo animations
+    loadAnimations(vrm);
+    
     console.log('[VRM Avatar] ✓ Model loaded safely!');
+    console.log('[VRM Avatar] ✓ Animation system ready!');
   });
 
   const clock = new THREE.Clock();
@@ -72,6 +82,9 @@ function initVRMAvatar() {
     requestAnimationFrame(animate);
     const delta = Math.min(clock.getDelta(), 0.05);
     const elapsed = clock.getElapsedTime();
+
+    // Update animations
+    if (mixer) mixer.update(delta);
 
     if (currentVRM) {
       const humanoid = currentVRM.humanoid;
@@ -102,4 +115,70 @@ function initVRMAvatar() {
     renderer.render(scene, camera);
   }
   animate();
+
+  // ========== ANIMATION FUNCTIONS ==========
+  function loadAnimations(vrm) {
+    const animationPaths = [
+      './avatar.vrm', // Will be replaced with actual animation files
+      './Locomotion Pack/idle.fbx',
+      './Locomotion Pack/walking.fbx',
+      './Locomotion Pack/running.fbx',
+      './Locomotion Pack/jump.fbx',
+      './Moonwalk.fbx',
+      './Stylish Flip.fbx',
+      './Swing To Land.fbx'
+    ];
+
+    animationPaths.forEach(path => {
+      if (path === './avatar.vrm') return; // Skip the model itself
+      
+      fbxLoader.load(path, (group) => {
+        const clips = group.animations;
+        if (clips && clips.length > 0) {
+          const name = path.split('/').pop().replace('.fbx', '');
+          animationClips[name] = clips[0];
+          console.log(`[Animation] ✓ Loaded: ${name}`);
+        }
+      }, undefined, (error) => {
+        console.log(`[Animation] ⚠ Could not load: ${path}`);
+      });
+    });
+  }
+
+  // Public function to play an animation
+  window.playAnimation = function(animationName) {
+    if (!mixer || !animationClips[animationName]) {
+      console.log(`[Animation] ✗ Animation not found: ${animationName}`);
+      console.log(`[Animation] Available: ${Object.keys(animationClips).join(', ')}`);
+      return;
+    }
+
+    // Stop current animation
+    if (currentAction) {
+      currentAction.fadeOut(0.5);
+    }
+
+    // Play new animation
+    const clip = animationClips[animationName];
+    currentAction = mixer.clipAction(clip);
+    currentAction.reset();
+    currentAction.fadeIn(0.5);
+    currentAction.play();
+    
+    console.log(`[Animation] Playing: ${animationName}`);
+  };
+
+  // List all available animations
+  window.listAnimations = function() {
+    console.log('Available animations:', Object.keys(animationClips));
+    return Object.keys(animationClips);
+  };
+
+  // Stop current animation
+  window.stopAnimation = function() {
+    if (currentAction) {
+      currentAction.fadeOut(0.5);
+      currentAction = null;
+    }
+  };
 }

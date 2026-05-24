@@ -1,282 +1,276 @@
-// expressions.js - Masterclass Locomotion State Machine with Advanced Phonetic Lip Sync & Dynamic Contextual Gestures
+// expressions.js — Human-Like Avatar + Mixamo Animation Support
 
-const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+const easeInOut = t => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
 
 export class AvatarExpressions {
   constructor() {
+    // Blink
     this.blinkTimer = 0;
-    this.nextBlinkTime = 2 + Math.random() * 3; 
-    this.currentMood = 'neutral';
-    this.activeGesture = 'neutral'; // 🔥 UPGRADE: Tracks the current body gesture state
-    this.initialHipsY = null; 
-    this.lastVRM = null;      
-    
-    this.speechNoiseTime = 0;
-    this.currentVowelType = 0;
-    this.vowelSwitchTimer = 0;
+    this.nextBlinkTime = 1.5 + Math.random() * 3;
+    this.isBlinking = false;
+    this.blinkProgress = 0;
+
+    // Emotion memory (smooth lerp)
+    this.targetExpressions  = { happy:0, sad:0, angry:0, relaxed:0.3, surprised:0 };
+    this.currentExpressions = { happy:0, sad:0, angry:0, relaxed:0.3, surprised:0 };
+
+    // Gesture
+    this.activeGesture = 'neutral';
+
+    // Lip sync
+    this.lipAA = 0; this.lipEE = 0; this.lipOH = 0;
+    this.vowelType = 0; this.vowelTimer = 0;
+
+    // Idle fidget
+    this.fidgetTimer = 0; this.nextFidget = 4 + Math.random()*5;
+    this.fidgetType = 'none'; this.fidgetProg = 0;
+    this.headTilt = 0; this.headTiltTarget = 0;
+    this.weightShift = 0; this.weightTarget = 0;
+
+    // Dance
+    this.danceMode = 'none';
+    this.danceTime = 0;
+    this.danceBlend = 0;
+
+    // 🔑 Mixamo mode — when FBX animation plays, stop procedural bones
+    this.mixamoMode = false;
+    this.mixamoBlend = 0; // 0=procedural, 1=mixamo
+
+    // Bone cache
+    this.bones = {};
+    this.lastVRM = null;
+    this.initialHipsY = null;
   }
 
-  // 1. Fluid Phonetic Vowel Lip-Sync Upgrade
-  handleLipSync(vrm, isSpeaking, elapsedTime, delta) {
-    if (!vrm || !vrm.expressionManager || vrm.scene.userData?.isPlaceholder) return;
-    
-    if (!isSpeaking) {
-      vrm.expressionManager.setValue('aa', 0.0);
-      vrm.expressionManager.setValue('ee', 0.0);
-      vrm.expressionManager.setValue('oh', 0.0);
-      this.speechNoiseTime = 0;
-      return;
-    }
-
-    this.speechNoiseTime += delta;
-    const primaryWave   = Math.sin(elapsedTime * 16.0); 
-    const secondaryWave = Math.cos(elapsedTime * 8.5);  
-    const microJitter   = Math.sin(elapsedTime * 32.0) * 0.12; 
-
-    let rawMouthOpen = (primaryWave * 0.5 + secondaryWave * 0.3 + 0.3) + microJitter;
-    let mouthOpen = Math.min(Math.max(rawMouthOpen, 0.0), 0.75); 
-
-    this.vowelSwitchTimer += delta;
-    if (this.vowelSwitchTimer >= 0.14) {
-      this.currentVowelType = Math.floor(Math.random() * 3);
-      this.vowelSwitchTimer = 0;
-    }
-
-    vrm.expressionManager.setValue('aa', 0.0);
-    vrm.expressionManager.setValue('ee', 0.0);
-    vrm.expressionManager.setValue('oh', 0.0);
-
-    if (this.currentVowelType === 0) {
-      vrm.expressionManager.setValue('aa', mouthOpen);
-    } else if (this.currentVowelType === 1) {
-      vrm.expressionManager.setValue('ee', mouthOpen * 0.5);
-      vrm.expressionManager.setValue('aa', mouthOpen * 0.15); 
-    } else {
-      vrm.expressionManager.setValue('oh', mouthOpen * 0.7);
-      vrm.expressionManager.setValue('aa', mouthOpen * 0.2);
-    }
-  }
-
-  // 2. Adaptive Automatic Eye Blinking
+  // ── Blink (natural double-blink) ──────────────────────────
   handleAutoBlink(vrm, delta) {
-    if (!vrm || !vrm.expressionManager || vrm.scene.userData?.isPlaceholder) return;
+    if (!vrm?.expressionManager) return;
     this.blinkTimer += delta;
-    if (this.blinkTimer >= this.nextBlinkTime) {
-      vrm.expressionManager.setValue('blink', 1.0);
-      if (this.blinkTimer >= this.nextBlinkTime + 0.12) {
-        vrm.expressionManager.setValue('blink', 0.0);
-        this.blinkTimer = 0;
-        this.nextBlinkTime = 2.5 + Math.random() * 4; 
+    if (!this.isBlinking && this.blinkTimer >= this.nextBlinkTime) {
+      this.isBlinking = true; this.blinkProgress = 0;
+      this.blinkTimer = 0; this.nextBlinkTime = 2 + Math.random()*4;
+    }
+    if (this.isBlinking) {
+      this.blinkProgress += delta * 10;
+      const raw = this.blinkProgress < 1 ? this.blinkProgress : Math.max(0, 2 - this.blinkProgress);
+      try { vrm.expressionManager.setValue('blink', clamp(easeInOut(clamp(raw,0,1)),0,1)); } catch(e){}
+      if (this.blinkProgress >= 2) {
+        this.isBlinking = false;
+        try { vrm.expressionManager.setValue('blink', 0); } catch(e){}
       }
     }
   }
 
-  // 3. Procedural State Machine (Now with CONTEXTUAL GESTURES!)
-  handleLocomotionAndGestures(vrm, state, isSpeaking, elapsedTime, delta) {
-    if (!vrm || !vrm.humanoid || vrm.scene.userData?.isPlaceholder) return;
+  // ── Smooth expression lerp ────────────────────────────────
+  _updateExpressions(vrm, delta) {
+    if (!vrm?.expressionManager) return;
+    for (const k in this.currentExpressions) {
+      this.currentExpressions[k] = lerp(this.currentExpressions[k], this.targetExpressions[k], delta*2.5);
+      try { vrm.expressionManager.setValue(k, clamp(this.currentExpressions[k],0,1)); } catch(e){}
+    }
+  }
 
-    const bones = {
-      hips: vrm.humanoid.getNormalizedBoneNode('hips'),
-      spine: vrm.humanoid.getNormalizedBoneNode('spine'),
-      neck: vrm.humanoid.getNormalizedBoneNode('neck'),
-      head: vrm.humanoid.getNormalizedBoneNode('head'),
-      leftUpperArm: vrm.humanoid.getNormalizedBoneNode('leftUpperArm'),
-      rightUpperArm: vrm.humanoid.getNormalizedBoneNode('rightUpperArm'),
-      leftLowerArm: vrm.humanoid.getNormalizedBoneNode('leftLowerArm'),
-      rightLowerArm: vrm.humanoid.getNormalizedBoneNode('rightLowerArm'),
-      leftUpperLeg: vrm.humanoid.getNormalizedBoneNode('leftUpperLeg'),
-      rightUpperLeg: vrm.humanoid.getNormalizedBoneNode('rightUpperLeg'),
-      leftLowerLeg: vrm.humanoid.getNormalizedBoneNode('leftLowerLeg'),
-      rightLowerLeg: vrm.humanoid.getNormalizedBoneNode('rightLowerLeg')
-    };
+  // ── Lip Sync ──────────────────────────────────────────────
+  handleLipSync(vrm, isSpeaking, elapsed, delta) {
+    if (!vrm?.expressionManager) return;
+    if (!isSpeaking) {
+      this.lipAA = lerp(this.lipAA, 0, delta*8);
+      this.lipEE = lerp(this.lipEE, 0, delta*8);
+      this.lipOH = lerp(this.lipOH, 0, delta*8);
+    } else {
+      this.vowelTimer += delta;
+      if (this.vowelTimer >= 0.12 + Math.random()*0.06) {
+        this.vowelType = Math.floor(Math.random()*3); this.vowelTimer = 0;
+      }
+      const p = Math.sin(elapsed*14)*0.45 + Math.cos(elapsed*7)*0.25 + 0.3;
+      const open = clamp(p, 0, 0.8);
+      const tAA = this.vowelType===0 ? open : this.vowelType===1 ? open*0.15 : open*0.2;
+      const tEE = this.vowelType===1 ? open*0.55 : 0;
+      const tOH = this.vowelType===2 ? open*0.72 : 0;
+      const s = delta*18;
+      this.lipAA = lerp(this.lipAA, tAA, s);
+      this.lipEE = lerp(this.lipEE, tEE, s);
+      this.lipOH = lerp(this.lipOH, tOH, s);
+    }
+    try { vrm.expressionManager.setValue('aa', clamp(this.lipAA,0,1)); } catch(e){}
+    try { vrm.expressionManager.setValue('ee', clamp(this.lipEE,0,1)); } catch(e){}
+    try { vrm.expressionManager.setValue('oh', clamp(this.lipOH,0,1)); } catch(e){}
+  }
 
+  // ── Dance targets ─────────────────────────────────────────
+  _getDanceTargets(elapsed) {
+    const t = this.danceTime;
+    const bps = 128/60;
+    const beat = Math.sin(t*bps*Math.PI*2);
+    const beat2= Math.sin(t*bps*Math.PI*4);
+    const half = Math.sin(t*bps*Math.PI);
+    let d = this._defaultBones();
+
+    if (this.danceMode==='pop') {
+      d.hipsY=-Math.abs(beat)*0.07-0.04; d.hipsZ=beat*0.05; d.spineX=beat*0.05; d.spineZ=half*0.04;
+      d.headZ=-half*0.09; d.headY=beat*0.06;
+      d.lArmX=-half*0.4-0.1; d.lArmZ=0.4+beat*0.3; d.lArmLowerY=half*0.6;
+      d.rArmX=half*0.4-0.1;  d.rArmZ=-0.4-beat*0.3; d.rArmLowerY=-half*0.6;
+      d.lLegX=beat>0?beat*0.1:0; d.rLegX=beat<0?-beat*0.1:0;
+    } else if (this.danceMode==='hiphop') {
+      const b=Math.abs(beat);
+      d.hipsY=-b*0.06; d.hipsZ=half*0.09; d.spineZ=-half*0.07;
+      d.headY=half*0.12; d.headZ=beat*0.05;
+      d.lArmX=beat2*0.25; d.lArmZ=0.7+half*0.3; d.lArmLowerY=beat*0.9;
+      d.rArmX=-beat2*0.25; d.rArmZ=-0.7-half*0.3; d.rArmLowerY=-beat*0.9;
+      d.lLegX=b*0.08; d.rLegX=b*0.08; d.lLegLowerX=b*0.06; d.rLegLowerX=b*0.06;
+    } else if (this.danceMode==='wave') {
+      const s=Math.sin(t*1.2), m=Math.sin(t*2.1);
+      d.hipsY=s*0.04; d.hipsZ=m*0.03; d.spineX=s*0.04; d.spineZ=m*0.05;
+      d.headZ=s*0.06; d.headX=m*0.04;
+      d.lArmX=s*0.3; d.lArmZ=0.6+m*0.4; d.lArmLowerZ=m*0.5;
+      d.rArmX=-s*0.3; d.rArmZ=-0.6-m*0.4; d.rArmLowerZ=-m*0.5;
+    } else if (this.danceMode==='idol') {
+      const c=Math.sin(t*3), c2=Math.cos(t*2);
+      d.hipsY=Math.abs(c)*0.05-0.02; d.hipsZ=c2*0.05; d.spineX=c*0.03;
+      d.headZ=-c2*0.10; d.headX=Math.abs(c)*0.05;
+      d.lArmZ=0.8+Math.abs(c)*0.3; d.lArmX=c*0.2; d.lArmLowerY=c*0.4;
+      d.rArmZ=-0.8-Math.abs(c)*0.3; d.rArmX=-c*0.2; d.rArmLowerY=-c*0.4;
+      d.lLegX=c>0?c*0.06:0; d.rLegX=c<0?-c*0.06:0;
+    }
+    return d;
+  }
+
+  _defaultBones() {
+    return { hipsY:0,hipsZ:0, spineX:0,spineZ:0, chestX:0,
+      neckX:0,neckY:0,neckZ:0, headX:0,headY:0,headZ:0,
+      lArmX:0,lArmZ:1.1,lArmLowerY:0,lArmLowerZ:0,
+      rArmX:0,rArmZ:-1.1,rArmLowerY:0,rArmLowerZ:0,
+      lLegX:0,lLegZ:0,lLegLowerX:0, rLegX:0,rLegZ:0,rLegLowerX:0 };
+  }
+
+  // ── Procedural body (idle / gesture / dance) ──────────────
+  handleLocomotionAndGestures(vrm, state, isSpeaking, elapsed, delta) {
+    if (!vrm?.humanoid) return;
+
+    // Cache bones
     if (this.lastVRM !== vrm) {
       this.lastVRM = vrm;
-      this.initialHipsY = bones.hips ? bones.hips.position.y : null;
+      const names = ['hips','spine','chest','neck','head',
+        'leftUpperArm','rightUpperArm','leftLowerArm','rightLowerArm',
+        'leftUpperLeg','rightUpperLeg','leftLowerLeg','rightLowerLeg'];
+      this.bones = {};
+      for (const n of names) this.bones[n] = vrm.humanoid.getNormalizedBoneNode(n);
+      this.initialHipsY = this.bones.hips?.position.y ?? 0;
     }
 
-    const t = Math.min(delta * 5.0, 1.0);
-
-    let target = {
-      hipsY: 0.0, hipsRotationZ: 0.0,
-      spineX: 0.0, spineZ: 0.0,
-      headX: 0.0, headY: 0.0, headZ: 0.0, // Added headZ for tilting
-      lArmX: 0.0, lArmZ: 1.1, lArmLowerY: 0.0, lArmLowerZ: 0.0,
-      rArmX: 0.0, rArmZ: -1.1, rArmLowerY: 0.0, rArmLowerZ: 0.0,
-      lLegX: 0.0, lLegLowerX: 0.0,
-      rLegX: 0.0, rLegLowerX: 0.0
-    };
-
-    const waveFast  = Math.sin(elapsedTime * 5.5);
-    const cosFast   = Math.cos(elapsedTime * 5.5);
-    const waveRun   = Math.sin(elapsedTime * 8.5);
-    const cosRun    = Math.cos(elapsedTime * 8.5);
-    const slowBreathe = Math.sin(elapsedTime * 1.8);
-    const slowSway    = Math.cos(elapsedTime * 0.9);
-
-    // BASE LOCOMOTION
-    if (state === 'walk') {
-      target.hipsY = Math.abs(waveFast) * 0.04 - 0.02; 
-      target.hipsRotationZ = cosFast * 0.03;          
-      target.spineX = 0.04;                           
-
-      target.lLegX = waveFast * 0.38;
-      target.rLegX = -waveFast * 0.38;
-      target.lLegLowerX = (cosFast > 0 ? cosFast * 0.25 : 0.0);
-      target.rLegLowerX = (cosFast < 0 ? -cosFast * 0.25 : 0.0);
-
-      target.lArmX = -waveFast * 0.35 + 0.1;
-      target.lArmZ = 0.2;
-      target.rArmX = waveFast * 0.35 + 0.1;
-      target.rArmZ = -0.2;
-
-    } else if (state === 'run') {
-      target.hipsY = Math.abs(waveRun) * 0.09 - 0.06; 
-      target.hipsRotationZ = cosRun * 0.06;
-      target.spineX = 0.16; 
-
-      target.lLegX = waveRun * 0.65;
-      target.rLegX = -waveRun * 0.65;
-      target.lLegLowerX = (cosRun > 0 ? cosRun * 0.55 : 0.0);
-      target.rLegLowerX = (cosRun < 0 ? -cosRun * 0.55 : 0.0);
-
-      target.lArmX = -waveRun * 0.6 - 0.2;
-      target.lArmZ = 0.3;
-      target.lArmLowerY = 0.8; 
-      target.rArmX = waveRun * 0.6 - 0.2;
-      target.rArmZ = -0.3;
-      target.rArmLowerY = -0.8;
-
+    // Dance blend
+    if (this.danceMode !== 'none') {
+      this.danceTime += delta;
+      this.danceBlend = Math.min(this.danceBlend + delta*2, 1);
     } else {
-      target.spineX = slowBreathe * 0.02;
-      target.spineZ = slowSway * 0.01;
-      target.headY = slowSway * 0.03;
-      target.lArmZ = 1.1;
-      target.rArmZ = -1.1;
+      this.danceBlend = Math.max(this.danceBlend - delta*3, 0);
     }
 
-    // 🔥 DYNAMIC GESTURE OVERRIDES WHEN SPEAKING
-    if (isSpeaking) {
-      const talkWave1 = Math.sin(elapsedTime * 4.0);
-      const talkWave2 = Math.cos(elapsedTime * 2.3);
+    // Mixamo blend — skip procedural bones when mixamo plays
+    this.mixamoBlend = this.mixamoMode
+      ? Math.min(this.mixamoBlend + delta*4, 1)
+      : Math.max(this.mixamoBlend - delta*4, 0);
 
-      if (this.activeGesture === 'greeting') {
-        // Wave right hand enthusiastically
-        target.rArmX = lerp(target.rArmX, -0.2, 0.8);
-        target.rArmZ = lerp(target.rArmZ, -1.2 + Math.sin(elapsedTime * 12.0) * 0.3, 0.8);
-        target.rArmLowerZ = lerp(target.rArmLowerZ, -0.5, 0.8);
-        target.headX = Math.abs(talkWave1) * 0.05;
-        
-      } else if (this.activeGesture === 'thinking') {
-        // Hand to chin, head tilted, looking thoughtful
-        target.rArmX = lerp(target.rArmX, -1.2, 0.8);
-        target.rArmZ = lerp(target.rArmZ, -0.2, 0.8);
-        target.rArmLowerZ = lerp(target.rArmLowerZ, -1.5, 0.8); // Fold arm sharply
-        target.rArmLowerY = lerp(target.rArmLowerY, -0.5, 0.8);
-        target.headZ = lerp(target.headZ, 0.15, 0.8); // Tilt head
-        target.headX = lerp(target.headX, 0.05, 0.8);
-        
-      } else if (this.activeGesture === 'celebrating') {
-        // Both hands thrown up in joy/excitement
-        target.lArmX = lerp(target.lArmX, -0.5, 0.8);
-        target.lArmZ = lerp(target.lArmZ, 1.4 + talkWave1 * 0.1, 0.8);
-        target.rArmX = lerp(target.rArmX, -0.5, 0.8);
-        target.rArmZ = lerp(target.rArmZ, -1.4 + talkWave2 * 0.1, 0.8);
-        target.spineX = lerp(target.spineX, -0.05, 0.8); // Lean back slightly
-        target.headX = lerp(target.headX, -0.1, 0.8);    // Look up slightly
-        
+    // If fully in mixamo mode, skip ALL procedural bone work
+    if (this.mixamoBlend >= 0.99) return;
+
+    // ── Idle targets ──
+    const slow = Math.sin(elapsed*1.4), sway = Math.cos(elapsed*0.7);
+    const breathe = Math.sin(elapsed*0.9)*0.015;
+    if (Math.random()<0.002) this.weightTarget=(Math.random()-0.5)*0.04;
+    this.weightShift = lerp(this.weightShift, this.weightTarget, delta*0.8);
+    this.headTiltTarget = Math.sin(elapsed*0.3)*0.015 + Math.sin(elapsed*0.7)*0.01;
+    this.headTilt = lerp(this.headTilt, this.headTiltTarget, delta*1.2);
+
+    let tgt = this._defaultBones();
+    tgt.spineX = breathe; tgt.spineZ = this.weightShift;
+    tgt.hipsZ  = this.weightShift*0.5;
+    tgt.headZ  = this.headTilt + sway*0.008;
+    tgt.headY  = slow*0.01;
+
+    // Speaking gesture overrides
+    if (isSpeaking && this.danceMode==='none') {
+      const tw1=Math.sin(elapsed*3.5), tw2=Math.cos(elapsed*2.0);
+      if (this.activeGesture==='greeting') {
+        tgt.rArmX=-0.2; tgt.rArmZ=-1.3+Math.sin(elapsed*11)*0.25; tgt.rArmLowerZ=-0.4;
+      } else if (this.activeGesture==='thinking') {
+        tgt.rArmX=-1.1; tgt.rArmZ=-0.2; tgt.rArmLowerZ=-1.4; tgt.rArmLowerY=-0.4;
+        tgt.headZ=0.14; tgt.headX=0.06;
+      } else if (this.activeGesture==='celebrating') {
+        tgt.lArmX=-0.5+tw1*0.08; tgt.lArmZ=1.4+tw2*0.1;
+        tgt.rArmX=-0.5+tw2*0.08; tgt.rArmZ=-1.4-tw1*0.1;
+        tgt.spineX=-0.06; tgt.headX=-0.08;
       } else {
-        // Standard explaining/talking (Your original smooth logic)
-        target.lArmX = lerp(target.lArmX, -0.2 + talkWave1 * 0.15, 0.7);
-        target.lArmZ = lerp(target.lArmZ, 0.6 + talkWave2 * 0.1, 0.7);
-        target.lArmLowerY = lerp(target.lArmLowerY, 0.5 + talkWave1 * 0.2, 0.7);
-
-        target.rArmX = lerp(target.rArmX, -0.2 + talkWave2 * 0.15, 0.7);
-        target.rArmZ = lerp(target.rArmZ, -0.6 - talkWave1 * 0.1, 0.7);
-        target.rArmLowerY = lerp(target.rArmLowerY, -0.5 - talkWave2 * 0.2, 0.7);
-
-        target.headX = Math.abs(talkWave1) * 0.06;
+        tgt.lArmX=-0.15+tw1*0.18; tgt.lArmZ=0.55+tw2*0.12; tgt.lArmLowerY=0.45+tw1*0.22;
+        tgt.rArmX=-0.15+tw2*0.18; tgt.rArmZ=-0.55-tw1*0.12; tgt.rArmLowerY=-0.45-tw2*0.22;
+        tgt.headX=Math.abs(tw1)*0.04;
       }
     }
 
-    // APPLY CALCULATED POSITIONS TO BONES
-    if (bones.hips && this.initialHipsY !== null) {
-      bones.hips.position.y = lerp(bones.hips.position.y, this.initialHipsY + target.hipsY, t);
-      bones.hips.rotation.z = lerp(bones.hips.rotation.z, target.hipsRotationZ, t);
-    }
-    if (bones.spine) {
-      bones.spine.rotation.x = lerp(bones.spine.rotation.x, target.spineX, t);
-      bones.spine.rotation.z = lerp(bones.spine.rotation.z, target.spineZ, t);
-    }
-    if (bones.neck)  bones.neck.rotation.y  = lerp(bones.neck.rotation.y, target.headY, t);
-    if (bones.head) {
-      bones.head.rotation.x  = lerp(bones.head.rotation.x, target.headX, t);
-      bones.head.rotation.z  = lerp(bones.head.rotation.z, target.headZ, t);
+    // Dance blend
+    if (this.danceBlend > 0) {
+      const dt = this._getDanceTargets(elapsed);
+      for (const k in tgt) tgt[k] = lerp(tgt[k]??0, dt[k]??0, this.danceBlend);
     }
 
-    if (bones.leftUpperArm)  bones.leftUpperArm.rotation.x  = lerp(bones.leftUpperArm.rotation.x, target.lArmX, t);
-    if (bones.leftUpperArm)  bones.leftUpperArm.rotation.z  = lerp(bones.leftUpperArm.rotation.z, target.lArmZ, t);
-    if (bones.leftLowerArm) {
-      bones.leftLowerArm.rotation.y  = lerp(bones.leftLowerArm.rotation.y, target.lArmLowerY, t);
-      bones.leftLowerArm.rotation.z  = lerp(bones.leftLowerArm.rotation.z, target.lArmLowerZ, t);
-    }
+    // Mixamo partial blend (fade procedural OUT as mixamo fades IN)
+    const procWeight = 1 - this.mixamoBlend;
+    const bs = delta * 6 * procWeight;
+    if (bs <= 0) return;
 
-    if (bones.rightUpperArm) bones.rightUpperArm.rotation.x = lerp(bones.rightUpperArm.rotation.x, target.rArmX, t);
-    if (bones.rightUpperArm) bones.rightUpperArm.rotation.z = lerp(bones.rightUpperArm.rotation.z, target.rArmZ, t);
-    if (bones.rightLowerArm) {
-      bones.rightLowerArm.rotation.y = lerp(bones.rightLowerArm.rotation.y, target.rArmLowerY, t);
-      bones.rightLowerArm.rotation.z = lerp(bones.rightLowerArm.rotation.z, target.rArmLowerZ, t);
-    }
+    const b = this.bones;
+    const al = (bone, prop, val) => { if(bone) bone.rotation[prop]=lerp(bone.rotation[prop], val, bs); };
 
-    if (bones.leftUpperLeg)  bones.leftUpperLeg.rotation.x  = lerp(bones.leftUpperLeg.rotation.x, target.lLegX, t);
-    if (bones.leftLowerLeg)  bones.leftLowerLeg.rotation.x  = lerp(bones.leftLowerLeg.rotation.x, target.lLegLowerX, t);
-    if (bones.rightUpperLeg) bones.rightUpperLeg.rotation.x = lerp(bones.rightUpperLeg.rotation.x, target.rLegX, t);
-    if (bones.rightLowerLeg) bones.rightLowerLeg.rotation.x = lerp(bones.rightLowerLeg.rotation.x, target.rLegLowerX, t);
+    if (b.hips && this.initialHipsY!==null) {
+      b.hips.position.y = lerp(b.hips.position.y, this.initialHipsY+(tgt.hipsY??0), bs);
+      al(b.hips,'z',tgt.hipsZ??0);
+    }
+    al(b.spine,'x',tgt.spineX??0); al(b.spine,'z',tgt.spineZ??0);
+    al(b.chest,'x',tgt.chestX??0);
+    al(b.neck,'x',tgt.neckX??0); al(b.neck,'y',tgt.neckY??0); al(b.neck,'z',tgt.neckZ??0);
+    al(b.head,'x',tgt.headX??0); al(b.head,'y',tgt.headY??0); al(b.head,'z',tgt.headZ??0);
+    al(b.leftUpperArm,'x',tgt.lArmX??0);  al(b.leftUpperArm,'z',tgt.lArmZ??1.1);
+    al(b.leftLowerArm,'y',tgt.lArmLowerY??0); al(b.leftLowerArm,'z',tgt.lArmLowerZ??0);
+    al(b.rightUpperArm,'x',tgt.rArmX??0); al(b.rightUpperArm,'z',tgt.rArmZ??-1.1);
+    al(b.rightLowerArm,'y',tgt.rArmLowerY??0); al(b.rightLowerArm,'z',tgt.rArmLowerZ??0);
+    al(b.leftUpperLeg,'x',tgt.lLegX??0);  al(b.leftLowerLeg,'x',tgt.lLegLowerX??0);
+    al(b.rightUpperLeg,'x',tgt.rLegX??0); al(b.rightLowerLeg,'x',tgt.rLegLowerX??0);
   }
 
-  // 4. Automatic Mood & Gesture Detector (Upgraded Context Analyzer)
+  // ── Mood analyzer ─────────────────────────────────────────
   analyzeTextAndSetMood(vrm, text) {
-    if (!vrm || !vrm.expressionManager || vrm.scene.userData?.isPlaceholder) return;
-    const lowerText = text.toLowerCase();
-    
-    // Reset all facial expressions first
-    const standardMoods = ['happy', 'sad', 'angry', 'relaxed', 'surprised'];
-    standardMoods.forEach(m => vrm.expressionManager.setValue(m, 0.0));
+    if (!vrm?.expressionManager) return;
+    const t = text.toLowerCase();
+    Object.keys(this.targetExpressions).forEach(k => this.targetExpressions[k]=0);
+    if (t.match(/sorry|error|fail|wrong|sad|miss|cry/))           { this.targetExpressions.sad=0.65; }
+    else if (t.match(/wow|amazing|omg|what!|shock|incredib/))     { this.targetExpressions.surprised=0.7; }
+    else if (t.match(/hello|hi |hey|great|happy|super|yay|love/)) { this.targetExpressions.happy=0.8; }
+    else if (t.match(/angry|frustrat|stop|enough|worst/))         { this.targetExpressions.angry=0.5; }
+    else                                                           { this.targetExpressions.relaxed=0.4; }
 
-    // Determine facial mood
-    if (lowerText.includes('sorry') || lowerText.includes('error') || lowerText.includes('failed')) {
-      vrm.expressionManager.setValue('sad', 0.7);
-      this.currentMood = 'sad';
-    } else if (lowerText.includes('wow') || lowerText.includes('amazing') || lowerText.includes('what')) {
-      vrm.expressionManager.setValue('surprised', 0.6);
-      this.currentMood = 'surprised';
-    } else if (lowerText.includes('hello') || lowerText.includes('ready') || lowerText.includes('happy') || lowerText.includes('super')) {
-      vrm.expressionManager.setValue('happy', 0.8);
-      this.currentMood = 'happy';
-    } else {
-      vrm.expressionManager.setValue('relaxed', 0.5);
-      this.currentMood = 'relaxed';
-    }
-
-    // 🔥 Determine Body Gesture Intent based on Keywords
-    if (lowerText.includes('hello') || lowerText.includes('hi ') || lowerText.includes('welcome')) {
-      this.activeGesture = 'greeting';
-    } else if (lowerText.includes('solve') || lowerText.includes('think') || lowerText.includes('hmm') || lowerText.includes('question')) {
-      this.activeGesture = 'thinking';
-    } else if (lowerText.includes('super') || lowerText.includes('wow') || lowerText.includes('amazing') || lowerText.includes('hurray')) {
-      this.activeGesture = 'celebrating';
-    } else if (lowerText.includes('code') || lowerText.includes('step') || lowerText.includes('easy') || lowerText.includes('first')) {
-      this.activeGesture = 'explaining';
-    } else {
-      this.activeGesture = 'neutral'; // Defaults to normal talking hands
-    }
+    if (t.match(/hello|hi |hey|welcome/))           this.activeGesture='greeting';
+    else if (t.match(/think|hmm|question|wonder/))  this.activeGesture='thinking';
+    else if (t.match(/super|wow|amaz|hurray|yay/))  this.activeGesture='celebrating';
+    else if (t.match(/code|step|first|second/))     this.activeGesture='explaining';
+    else                                             this.activeGesture='neutral';
   }
+
+  setDanceMode(mode) { this.danceMode=mode; this.danceTime=0; this.danceBlend=0; }
 
   resetMood(vrm) {
-    if (!vrm || !vrm.expressionManager) return;
-    const standardMoods = ['happy', 'sad', 'angry', 'relaxed', 'surprised'];
-    standardMoods.forEach(m => vrm.expressionManager.setValue(m, 0.0));
-    vrm.expressionManager.setValue('relaxed', 0.3); 
-    this.activeGesture = 'neutral'; // Reset hands to normal when done speaking
+    Object.keys(this.targetExpressions).forEach(k => this.targetExpressions[k]=0);
+    this.targetExpressions.relaxed=0.3; this.activeGesture='neutral';
+  }
+
+  // ── Master update tick ────────────────────────────────────
+  update(vrm, isSpeaking, elapsed, delta) {
+    if (!vrm) return;
+    this.handleAutoBlink(vrm, delta);
+    this.handleLipSync(vrm, isSpeaking, elapsed, delta);
+    this._updateExpressions(vrm, delta);
+    this.handleLocomotionAndGestures(vrm, 'idle', isSpeaking, elapsed, delta);
   }
 }

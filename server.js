@@ -1,31 +1,57 @@
-const express = require('express');
+const express  = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');
+const cors     = require('cors');
+const path     = require('path');
+const fs       = require('fs');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Ikkada nee exact MongoDB link pettu (Brackets < > lekunda)
-// Example: "mongodb+srv://subbareddy:Subbareddy@123@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority"
-const mongoURI = "mongodb+srv://subbareddy:Subbareddy%40123@cluster0.qazsltp.mongodb.net/?appName=Cluster0";
+// ── Static files serve (HTML, VRM, FBX, JS అన్నీ) ──────────
+app.use(express.static(__dirname));
 
-mongoose.connect(mongoURI)
-  .then(() => console.log('🔥 MongoDB Atlas Connected !'))
-  .catch(err => console.error(err));
+// ── FBX Auto-Scanner API ────────────────────────────────────
+// app.html ఇది call చేస్తుంది → folder లో అన్ని FBX files list ఇస్తుంది
+function scanFBX(dir, baseDir, results = []) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+    if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
+      scanFBX(fullPath, baseDir, results);
+    } else if (entry.isFile() && entry.name.toLowerCase().endsWith('.fbx')) {
+      // Browser కి relative path ఇవ్వాలి
+      const relativePath = fullPath.replace(baseDir + path.sep, '').replace(/\\/g, '/');
+      const name = entry.name.replace('.fbx','').replace(/_/g,' ');
+      results.push({ name, path: relativePath });
+    }
+  }
+  return results;
+}
 
-const ChatSchema = new mongoose.Schema({
-  sessionId: String,
-  title: String,
-  history: Array
+app.get('/api/animations', (req, res) => {
+  try {
+    const list = scanFBX(__dirname, __dirname);
+    res.json(list);
+  } catch(e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
-const Chat = mongoose.model('Chat', ChatSchema);
+// ── MongoDB (existing chat history) ────────────────────────
+const mongoURI = "mongodb+srv://subbareddy:Subbareddy%40123@cluster0.qazsltp.mongodb.net/?appName=Cluster0";
+mongoose.connect(mongoURI)
+  .then(() => console.log('🔥 MongoDB Connected!'))
+  .catch(err  => console.warn('⚠️  MongoDB skip:', err.message));
+
+const Chat = mongoose.model('Chat', new mongoose.Schema({
+  sessionId: String, title: String, history: Array
+}));
 
 app.post('/api/chats', async (req, res) => {
   await Chat.findOneAndUpdate(
-    { sessionId: req.body.sessionId }, 
-    { title: req.body.title, history: req.body.history }, 
+    { sessionId: req.body.sessionId },
+    { title: req.body.title, history: req.body.history },
     { upsert: true, new: true }
   );
   res.json({ success: true });
@@ -36,4 +62,8 @@ app.get('/api/chats', async (req, res) => {
   res.json(chats);
 });
 
-app.listen(5000, () => console.log('🚀 Server running on port 5000'));
+// ── Start ───────────────────────────────────────────────────
+app.listen(3000, '0.0.0.0', () => {
+  console.log('🚀 Server: http://0.0.0.0:3000 (External Access Enabled)');
+  console.log('🎬 Open:   http://localhost:3000/app.html');
+});
