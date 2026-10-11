@@ -8,7 +8,7 @@ const { MsEdgeTTS, OUTPUT_FORMAT } = require('msedge-tts');
 async function testNeuralAudioPipeline() {
   console.log('=== [UNIN TEST] Neural Voice Ear & Multimodal Audio Verification ===\n');
 
-  const key = 'AIzaSyCmE7zhOdNavelzMq6GF1Zg2X1eaE2dt94';
+  const key = process.env.GEMINI_API_KEY || '';
 
   // 1. Synthesize a mixed Tenglish audio sample with EdgeTTS
   console.log('[1/3] Synthesizing acoustic test sample in Tenglish with EdgeTTS (Shruti Telugu)...');

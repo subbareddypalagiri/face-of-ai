@@ -120,13 +120,17 @@ function matchVenarSkills(userIntent, topN = 3) {
 }
 
 function getGeminiConfig() {
+  let cfg = {};
   try {
     const cfgPath = path.join(__dirname, 'config.json');
     if (fs.existsSync(cfgPath)) {
-      return JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+      cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
     }
   } catch (e) {}
-  return null;
+  if (!cfg.gemini_key && (process.env.GEMINI_API_KEY || process.env.GEMINI_KEY)) {
+    cfg.gemini_key = process.env.GEMINI_API_KEY || process.env.GEMINI_KEY;
+  }
+  return cfg;
 }
 
 async function callGeminiFast(prompt, systemInstruction, timeoutMs = 7000) {

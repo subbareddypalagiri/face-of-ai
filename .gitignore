@@ -4,6 +4,10 @@ node_modules/
 # WhatsApp session data & secrets
 unin_whatsapp_session/
 *.session
+.env
+.env.*
+*.env
+!.env.example
 
 # Blender temporary files & render outputs
 *.blend

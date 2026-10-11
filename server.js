@@ -38,11 +38,15 @@ app.get('/api/animations', (req, res) => {
   }
 });
 
-// ── MongoDB (existing chat history) ────────────────────────
-const mongoURI = "mongodb+srv://subbareddy:Subbareddy%40123@cluster0.qazsltp.mongodb.net/?appName=Cluster0";
-mongoose.connect(mongoURI)
-  .then(() => console.log('🔥 MongoDB Connected!'))
-  .catch(err  => console.warn('⚠️  MongoDB skip:', err.message));
+// ── MongoDB (chat history persistence) ──────────────────────
+const mongoURI = process.env.MONGODB_URI || "";
+if (mongoURI) {
+  mongoose.connect(mongoURI)
+    .then(() => console.log('🔥 MongoDB Connected!'))
+    .catch(err  => console.warn('⚠️  MongoDB skip:', err.message));
+} else {
+  console.log('ℹ️  MongoDB URI not configured (set MONGODB_URI in .env). Skipping DB connection.');
+}
 
 const Chat = mongoose.model('Chat', new mongoose.Schema({
   sessionId: String, title: String, history: Array

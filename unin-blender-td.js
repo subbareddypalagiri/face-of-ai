@@ -32,11 +32,16 @@ class BlenderTechnicalDirector {
     // 1. First attempt: Dynamic Oscar-Winning Hollywood Director Synthesis via Gemini
     try {
       const configPath = path.join(__dirname, 'config.json');
+      let geminiKey = process.env.GEMINI_API_KEY || process.env.GEMINI_KEY || '';
       if (fs.existsSync(configPath)) {
-        const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-        if (cfg.gemini_key) {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 2800);
+        try {
+          const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+          if (cfg.gemini_key) geminiKey = cfg.gemini_key;
+        } catch (e) {}
+      }
+      if (geminiKey) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 2800);
 
           const systemPrompt = `You are an Oscar-winning Hollywood VFX Technical Director & Cinematographer (ILM / Weta FX / Unreal Engine 5). 
 A user wants to create a 3D scene in Blender with this vision: "${rawPrompt}".

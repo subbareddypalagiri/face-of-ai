@@ -14,14 +14,18 @@ class UnifiedAILayer {
   }
 
   getConfig() {
+    let cfg = {};
     try {
       if (fs.existsSync(this.configPath)) {
-        return JSON.parse(fs.readFileSync(this.configPath, 'utf8'));
+        cfg = JSON.parse(fs.readFileSync(this.configPath, 'utf8'));
       }
     } catch (e) {
       logger.warn(`[UnifiedAILayer] Could not read config from ${this.configPath}: ${e.message}`);
     }
-    return null;
+    if (!cfg.gemini_key && (process.env.GEMINI_API_KEY || process.env.GEMINI_KEY)) {
+      cfg.gemini_key = process.env.GEMINI_API_KEY || process.env.GEMINI_KEY;
+    }
+    return cfg;
   }
 
   /**

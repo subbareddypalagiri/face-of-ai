@@ -1,4 +1,4 @@
-const key = 'AIzaSyCmE7zhOdNavelzMq6GF1Zg2X1eaE2dt94';
+const key = process.env.GEMINI_API_KEY || '';
 const prompt = 'open whatsapp and send a message to nikki';
 const systemPrompt = `You are UNIN, the embodied 3D AI desktop companion.
 * RULE 4 - WHATSAPP & DIRECT MESSAGING (CRITICAL):

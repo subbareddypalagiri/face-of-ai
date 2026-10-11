@@ -147,6 +147,9 @@ function createDesktopWindow() {
       config = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
     }
   } catch (e) {}
+  if (!config.gemini_key && (process.env.GEMINI_API_KEY || process.env.GEMINI_KEY)) {
+    config.gemini_key = process.env.GEMINI_API_KEY || process.env.GEMINI_KEY;
+  }
 
   ipcMain.handle('get-app-config', () => config);
 
