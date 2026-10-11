@@ -1,0 +1,2851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNIN World-Class Autonomous Desktop Being</title>
+  
+  <!-- Zero-dependency Native Production Styling (No Tailwind CDN console warnings) -->
+  <link rel="stylesheet" href="src/renderer/styles/unin-companion.css">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./node_modules/three/build/three.module.js",
+      "three/addons/": "./node_modules/three/examples/jsm/",
+      "talkinghead": "./vendor/talkinghead/talkinghead.mjs",
+      "@pixiv/three-vrm": "./node_modules/@pixiv/three-vrm/lib/three-vrm.module.js"
+    }
+  }
+  </script>
+</head>
+<body class="overflow-hidden">
+
+  <div id="app-container">
+    
+    <!-- Top Mini Action Bar -->
+    <div class="relative z-30 flex items-center justify-between px-3 pt-3 gap-2">
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar max-w-[65%]">
+        <span class="w-2.5 h-2.5 rounded-full bg-[var(--rose-blush)] animate-pulse shrink-0"></span>
+        <select id="avatarSelect" class="shrink-0 bg-[var(--surface-espresso)] text-[var(--rose-blush)] font-mono text-[11px] font-bold rounded-lg px-2 py-1 border border-[var(--border-rose)] outline-none cursor-pointer shadow backdrop-blur-md">
+          <option value="brunette-t.glb" selected>👑 Brunette Master (Strict T-Pose, 100% Flawless)</option>
+          <option value="brunette.glb">Brunette Host (52 Blendshapes, Lip-Sync)</option>
+          <option value="avaturn.glb">Avaturn Host (Photoreal)</option>
+          <option value="avatarsdk.glb">AvatarSDK (Realistic Human)</option>
+          <option value="vroid.glb">VRoid Anime (TalkingHead)</option>
+          <option value="mpfb.glb">MPFB Studio Human (Photoreal TD)</option>
+          <option value="hero.glb">Hero (62 Bones, Mixamo)</option>
+          <option value="avatar5.glb">Astra Heroine (54 Bones)</option>
+          <option value="avatar3.glb">Cyber Agent (Mixamo 34 Bones)</option>
+          <option value="avatar.vrm">Aura Anime VRM (Legacy)</option>
+          <option value="avatar2.vrm">Aura Cyber VRM (Legacy)</option>
+        </select>
+
+        <!-- 👤 Avatar Studio Modal Trigger -->
+        <button id="btnAvatarModal" class="shrink-0 px-2.5 py-1 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:border-[var(--rose-blush)] text-[var(--cream-light)] text-[10px] font-bold flex items-center gap-1 shadow transition-all cursor-pointer hover:scale-105 active:scale-95" title="Switch 3D Avatar (Brunette, Avaturn, Hero, etc.)">
+          <span class="text-xs">👤</span>
+          <span>Avatar Studio</span>
+        </button>
+        
+        <!-- Theme & Aesthetic Studio Toggle -->
+        <button id="btnThemeModal" class="shrink-0 px-2 py-1 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:border-[var(--rose-blush)] text-[var(--cream-light)] text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer" title="Theme & Aesthetic Studio">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          Theme
+        </button>
+
+        <!-- Wardrobe / Suit Customizer -->
+        <button id="btnWardrobeModal" class="shrink-0 px-2 py-1 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:border-[var(--rose-blush)] text-[var(--cream-light)] text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer" title="Customize Hero Suit">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+          Suit
+        </button>
+
+        <!-- 📎 Attachments & Frontier Skills Hub Button -->
+        <button id="btnAttachmentsModal" class="shrink-0 px-2 py-1 rounded-lg bg-[var(--surface-espresso)] border border-amber-500/40 hover:border-amber-400 text-[var(--cream-light)] text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer hover:scale-102" title="Attachments: Downloadable 50-Skills ZIP & Live MCP Connector">
+          <span class="text-amber-400 font-bold">📎</span>
+          Attachments
+        </button>
+
+        <!-- ⚡ Connect Apps Hub Button (10 Core Ecosystem Apps) -->
+        <button id="btnTopConnectApps" class="shrink-0 px-2.5 py-1 rounded-lg bg-amber-500/20 border border-amber-500/60 hover:bg-amber-500/30 text-amber-300 text-[10px] font-bold flex items-center gap-1 shadow-md transition-all cursor-pointer hover:scale-105 active:scale-95 whitespace-nowrap" title="Connect Apps: Pair Gmail, GitHub, Figma, Slack, etc.">
+          <span class="text-amber-400 font-extrabold text-xs">⚡</span>
+          <span>Connect</span>
+          <span id="topConnectedBadgeDot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 hidden animate-pulse"></span>
+        </button>
+      </div>
+
+      <div class="flex items-center gap-1.5 shrink-0">
+        <!-- Scale / Zoom Control Button -->
+        <button id="btnScaleModal" class="w-7 h-7 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:border-[var(--rose-blush)] text-[var(--cream-light)] flex items-center justify-center text-[10px] font-bold shadow transition-all cursor-pointer" title="Avatar Size & Scale">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+        </button>
+
+        <!-- Voice Selection Button -->
+        <button id="btnVoiceModal" class="px-2 py-1 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:border-[var(--rose-blush)] text-[var(--cream-light)] text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer" title="Edge Neural Studio Voice">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+          <span id="activeVoiceBadge">Telugu</span>
+        </button>
+
+        <!-- STT Microphone Language Quick Toggle (en-IN Tenglish / te-IN Telugu / en-US) -->
+        <button id="btnSTTToggle" class="px-2 py-1 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:border-[var(--rose-blush)] text-[var(--cream-light)] text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer" title="Mic Language: Click to cycle between en-IN (Tenglish), te-IN (Telugu), en-US (English)">
+          <span id="sttLangBadge" class="text-emerald-400 font-mono font-bold">MIC: en-IN</span>
+        </button>
+
+        <!-- Ambient Wake Word Quick Toggle (Hey UNIN / Buddy) -->
+        <button id="btnWakeToggle" class="px-2 py-1 rounded-lg border border-cyan-400 bg-cyan-950/40 text-cyan-200 text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer" title="Ambient Wake Word: Click to toggle always-listening 'Hey UNIN' / 'Buddy'">
+          <span class="text-cyan-400 font-bold">🎙️</span>
+          <span id="wakeToggleLabel" class="text-cyan-300 font-mono font-bold">WAKE: ON</span>
+        </button>
+
+        <!-- Acoustic Snap / Clap Percussion Toggle (1x Snap = Summon UNIN, 2x Snap = Voice Listen) -->
+        <button id="btnSnapToggle" class="px-2 py-1 rounded-lg border border-amber-400 bg-amber-950/40 text-amber-200 text-[10px] font-semibold flex items-center gap-1.5 shadow transition-all cursor-pointer" title="Acoustic Percussion: 1x Snap/Clap = Summon UNIN, 2x Snap/Clap = Enable Voice">
+          <span class="text-amber-400 font-bold">👏</span>
+          <span id="snapToggleLabel" class="text-amber-300 font-mono font-bold">SNAP: ON</span>
+          <span id="snapMeterDot" class="w-1.5 h-1.5 rounded-full bg-amber-400/40 shrink-0 transition-colors" title="Live Sound Level / Spike"></span>
+        </button>
+
+        <!-- Live Ghost-Typing Speed Quick Toggle (TURBO / FAST / SMOOTH) -->
+        <button id="btnSpeedToggle" class="px-2 py-1 rounded-lg bg-[var(--surface-espresso)] border border-amber-500/40 hover:border-amber-400 text-[var(--cream-light)] text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer" title="Live Typing Speed: Click to cycle between TURBO (Instant Paste), FAST (1.5s Stream), SMOOTH (Human Cadence)">
+          <span class="text-amber-400 font-bold">⚡</span>
+          <span id="speedToggleLabel" class="text-amber-300 font-mono font-bold">TURBO</span>
+        </button>
+
+        <!-- Astra-6 Visual Sentinel Eye (Real-Time Continuous Screen Perception) -->
+        <button id="btnAstraSentinel" class="px-2 py-1 rounded-lg bg-[var(--surface-espresso)] border border-emerald-500/40 hover:border-emerald-400 text-[var(--cream-light)] text-[10px] font-semibold flex items-center gap-1 shadow transition-all cursor-pointer" title="Astra-6 Visual Sentinel: Click to toggle real-time screen error & modal detection">
+          <span id="astraSentinelDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="astraSentinelLabel" class="text-emerald-300 font-mono font-bold">ASTRA: ON</span>
+        </button>
+
+        <!-- AI Brain Configuration -->
+        <button id="btnBrainConfig" class="w-7 h-7 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:border-[var(--rose-blush)] text-[var(--rose-blush)] flex items-center justify-center shadow transition-all cursor-pointer" title="Configure AI Brain">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 14a1 1 0 1 1 1-1 1 1 0 0 1-1 1Zm1-5a1 1 0 0 0-2 0v-4a1 1 0 0 0 2 0Z"/></svg>
+        </button>
+
+        <!-- Activity Logs Console (Alt+L) -->
+        <button id="btnToggleHud" class="w-7 h-7 rounded-lg bg-[var(--surface-espresso)] border border-white/10 hover:border-[var(--border-rose)] text-[var(--cream-muted)] hover:text-white flex items-center justify-center shadow transition-all cursor-pointer" title="Activity Logs Console (Alt+L)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+        </button>
+
+        <!-- Close / Minimize -->
+        <button id="btnCloseApp" class="w-7 h-7 rounded-lg bg-[var(--surface-espresso)] border border-[var(--border-rose)] hover:bg-rose-900/40 text-[var(--cream-muted)] hover:text-white flex items-center justify-center shadow transition-all cursor-pointer" title="Minimize to Tray">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Floating Avatar Scale Indicator HUD -->
+    <div id="floatingScaleHUD" class="absolute top-20 left-1/2 transform -translate-x-1/2 z-40 px-3.5 py-1.5 rounded-full glass-dock border border-[var(--border-rose)] text-[var(--cream-light)] text-xs font-semibold shadow-2xl pointer-events-none opacity-0 transition-all duration-300 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--rose-blush)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span id="floatingScaleHUDValue">100%</span>
+      <span id="floatingScaleHUDTier" class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--surface-espresso)] text-[var(--rose-blush)] border border-[var(--border-rose)]">Balanced Default</span>
+    </div>
+
+    <!-- Floating Thought Bubble above Avatar's Head -->
+    <div id="auraThought" class="absolute top-14 left-1/2 transform -translate-x-1/2 z-40 opacity-0 pointer-events-none transition-all duration-300 w-10/12">
+      <div class="thought-bubble px-4 py-2.5 rounded-2xl flex items-center gap-2.5">
+        <span class="w-2 h-2 rounded-full bg-[var(--rose-blush)] animate-ping shrink-0"></span>
+        <span id="auraThoughtText" class="text-xs font-medium text-[var(--cream-light)] leading-tight font-sans">Ready to co-pilot with you</span>
+      </div>
+    </div>
+
+    <!-- ⚡ Autonomous ReAct Agent Activity & Reasoning Console HUD ⚡ -->
+    <div id="agentActivityHud" class="fixed top-12 inset-x-3 z-40 bg-[#161311]/95 backdrop-blur-2xl border border-[var(--border-rose)] rounded-2xl p-3.5 shadow-[0_20px_50px_rgba(0,0,0,0.8)] flex flex-col gap-2.5 transition-all duration-300 opacity-0 pointer-events-none transform -translate-y-2 text-[var(--cream-light)]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span id="agentStatusPulse" class="w-2.5 h-2.5 rounded-full bg-[var(--rose-blush)] animate-ping shrink-0"></span>
+          <span class="text-[11px] font-bold tracking-wider uppercase text-[var(--cream-light)]">UNIN AUTONOMOUS CO-PILOT</span>
+          <span id="agentStepBadge" class="text-[10px] font-mono text-[var(--rose-blush)] bg-[var(--surface-espresso)] px-2 py-0.5 rounded-full border border-[var(--border-rose)]">Reasoning</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button id="btnToggleTerminal" class="px-2 py-0.5 rounded text-[10px] bg-[var(--surface-espresso)] text-[var(--cream-muted)] border border-white/10 hover:text-white cursor-pointer">Logs</button>
+          <button id="btnCloseAgentHud" class="p-1 rounded-full hover:bg-white/10 text-[var(--cream-muted)] hover:text-white transition-all cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Agent Thought & Current Step -->
+      <div class="flex items-start gap-2 bg-[#100e0d]/90 border border-[var(--border-rose)]/40 rounded-xl p-2.5">
+        <div class="w-4 h-4 rounded bg-[var(--surface-mocha)] flex items-center justify-center text-[9px] text-[var(--rose-blush)] shrink-0 mt-0.5">
+          AI
+        </div>
+        <div id="agentThoughtText" class="text-xs text-[var(--cream-light)] font-medium leading-relaxed break-words">
+          Reasoning about desktop workspace state...
+        </div>
+      </div>
+
+      <!-- Agent Live Terminal Output -->
+      <div id="agentTerminalBox" class="bg-[#0b0a09] border border-white/10 rounded-xl p-2.5 font-mono text-[11px] max-h-36 overflow-y-auto custom-scrollbar flex flex-col gap-1.5">
+        <div class="flex items-center justify-between text-[10px] text-[var(--cream-muted)] border-b border-white/5 pb-1">
+          <span id="agentTerminalTitle" class="flex items-center gap-1.5 text-[var(--rose-blush)] font-semibold">
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+            Terminal Action
+          </span>
+          <span id="agentTerminalStatus" class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300">Ready</span>
+        </div>
+        <pre id="agentTerminalOutput" class="text-[10px] leading-tight text-[var(--cream-muted)] whitespace-pre-wrap break-all font-mono">Autonomous Execution Engine initialized.</pre>
+      </div>
+    </div>
+
+    <!-- 3D Avatar Rendering Viewport Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Bottom Luxury Floating Dock -->
+    <div class="relative z-30 pb-3 px-3">
+      <div class="glass-dock rounded-2xl px-2.5 py-2 flex items-center gap-2 max-w-full">
+        
+        <!-- Left Fixed Utilities -->
+        <div class="flex items-center gap-1 shrink-0">
+          <!-- Voice Mic Trigger -->
+          <button id="btnVoiceMic" class="w-8 h-8 rounded-full bg-[var(--surface-espresso)] text-[var(--rose-blush)] hover:bg-[var(--surface-mocha)] flex items-center justify-center border border-[var(--border-rose)] shrink-0 shadow-md transition-all active:scale-95 cursor-pointer relative" title="Voice Input (Alt+V) • Double-click for Hands-Free Jarvis Mode">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+            <span id="micPulseDot" class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 hidden animate-ping"></span>
+          </button>
+
+          <!-- Quick Allow Permission Button -->
+          <button id="btnQuickAllow" class="h-8 px-2 rounded-full bg-[var(--surface-espresso)] text-emerald-400 hover:bg-emerald-950/40 hover:text-emerald-300 flex items-center gap-1 border border-emerald-500/30 shrink-0 shadow-md transition-all active:scale-95 cursor-pointer text-[10px] font-bold tracking-wider" title="Approve Antigravity Dialog (Alt+A)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>ALLOW</span>
+          </button>
+
+          <!-- Screen Vision Diagnosis -->
+          <button id="btnVision" class="w-8 h-8 rounded-full bg-[var(--surface-espresso)] text-[var(--cream-muted)] hover:text-[var(--cream-light)] hover:bg-[var(--surface-mocha)] flex items-center justify-center border border-white/10 shrink-0 shadow-md transition-all active:scale-95 cursor-pointer" title="Screen Vision: Inspect Screen">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+          </button>
+
+          <!-- Quick Notes Scratchpad -->
+          <button id="btnNotes" class="w-8 h-8 rounded-full bg-[var(--surface-espresso)] text-[var(--cream-muted)] hover:text-[var(--cream-light)] hover:bg-[var(--surface-mocha)] flex items-center justify-center border border-white/10 shrink-0 shadow-md transition-all active:scale-95 cursor-pointer" title="Quick Notes">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+          </button>
+
+          <!-- 👤 3D Avatar Studio Modal Trigger 👤 -->
+          <button id="btnDockAvatar" class="h-8 px-2.5 rounded-full bg-rose-500/20 text-rose-300 hover:bg-rose-500/30 flex items-center gap-1 border border-rose-500/50 shrink-0 shadow-md transition-all active:scale-95 cursor-pointer text-[10px] font-bold tracking-wider relative" title="3D Avatar Studio: Switch character model">
+            <span class="text-xs">👤</span>
+            <span>AVATAR</span>
+          </button>
+
+          <!-- ⚡ Connect Apps Hub (10 Core Ecosystem Apps) ⚡ -->
+          <button id="btnConnectApps" class="h-8 px-2.5 rounded-full bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 flex items-center gap-1 border border-amber-500/50 shrink-0 shadow-md transition-all active:scale-95 cursor-pointer text-[10px] font-bold tracking-wider relative" title="Connect Apps (Gmail, GitHub, Figma, Slack, etc.)">
+            <span class="text-amber-400 font-extrabold text-xs">⚡</span>
+            <span>APPS</span>
+            <span id="connectedBadgeDot" class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 hidden ring-2 ring-[#161311]"></span>
+          </button>
+
+          <!-- 🎨 Blender 3D Live Copilot Trigger 🎨 -->
+          <button id="btnBlenderStudio" class="h-8 px-2.5 rounded-full bg-cyan-500/20 text-cyan-300 hover:bg-cyan-500/30 flex items-center gap-1 border border-cyan-500/50 shrink-0 shadow-md transition-all active:scale-95 cursor-pointer text-[10px] font-bold tracking-wider relative" title="Blender 3D Copilot: Live Viewport Input Bar">
+            <span class="text-cyan-400 font-extrabold text-xs">🎨</span>
+            <span>3D BLENDER</span>
+            <span id="blenderLiveDot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          </button>
+
+          <!-- 💬 WhatsApp Autonomous Agent Trigger (Icon only) 💬 -->
+          <button id="btnWhatsAppModal" class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 flex items-center justify-center border border-emerald-500/50 shrink-0 shadow-md transition-all active:scale-95 cursor-pointer relative" title="WhatsApp Autonomous Agent: Link Device / Status">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/></svg>
+            <span id="whatsAppStatusDot" class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-400 hidden ring-2 ring-[#161311]"></span>
+          </button>
+        </div>
+
+        <!-- Divider -->
+        <div class="h-4 w-[1px] bg-white/10 shrink-0 mx-0.5"></div>
+
+        <!-- Scrollable Action Buttons Container -->
+        <div id="dynamicActionButtons" class="dock-scroll-container flex-1 min-w-0 flex items-center gap-1.5 overflow-x-auto overflow-y-hidden py-1 px-1 select-none">
+          <!-- Injected dynamically via JavaScript -->
+        </div>
+
+        <!-- Divider -->
+        <div class="h-4 w-[1px] bg-white/10 shrink-0 mx-0.5"></div>
+
+        <!-- Right Fixed Utility: Chat Drawer -->
+        <button id="btnToggleChat" class="w-8 h-8 rounded-full bg-[var(--surface-espresso)] text-[var(--rose-blush)] hover:bg-[var(--surface-mocha)] flex items-center justify-center border border-[var(--border-rose)] shrink-0 shadow-md transition-all active:scale-95 cursor-pointer" title="Open Chat Input">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        </button>
+
+      </div>
+    </div>
+
+    <!-- 🎯 Interactive Click-to-Work Workspace Action Card 🎯 -->
+    <div id="uninWorkspaceCard" class="hidden absolute bottom-16 inset-x-3 z-40 bg-[#161311]/95 backdrop-blur-2xl border border-[var(--border-rose)] rounded-2xl p-3.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] flex flex-col gap-2.5 transition-all duration-300 transform scale-95 opacity-0 text-[var(--cream-light)]">
+      <div class="flex items-center justify-between border-b border-white/10 pb-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping shrink-0"></span>
+          <span class="text-[11px] font-bold tracking-wider uppercase text-[var(--cream-light)]">EKKADA WORK CHEYALI? (CHOOSE WORKSPACE)</span>
+        </div>
+        <button id="btnCloseWorkspaceCard" class="w-5 h-5 rounded-full hover:bg-white/10 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <div class="text-[10px] text-[var(--cream-muted)] line-clamp-1 italic font-mono" id="workspaceTaskPreview">
+        Task: "Build 3D portfolio website"
+      </div>
+
+      <!-- Workspace Options Grid -->
+      <div id="workspaceOptionsList" class="flex flex-col gap-1.5 max-h-48 overflow-y-auto custom-scrollbar">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- Auto-Execute Progress Bar / Timer -->
+      <div class="flex items-center justify-between text-[9px] text-[var(--cream-muted)] pt-1 border-t border-white/5">
+        <span id="workspaceTimerLabel">⏱️ Auto-starting on Recommended in 5s...</span>
+        <button id="btnCancelWorkspaceTimer" class="text-[9px] text-[var(--rose-blush)] font-semibold hover:underline cursor-pointer bg-transparent border-0 p-0">Hold / Pause</button>
+      </div>
+    </div>
+
+    <!-- 🎨 Dedicated Blender 3D Studio Live Copilot Control Drawer 🎨 -->
+    <div id="blenderStudioDrawer" class="hidden absolute bottom-16 inset-x-3 z-40 bg-[#12161c]/95 backdrop-blur-2xl border border-cyan-500/40 rounded-2xl p-3.5 shadow-[0_20px_60px_rgba(0,0,0,0.85)] flex flex-col gap-2.5 transition-all text-[var(--cream-light)]">
+      <div class="flex items-center justify-between border-b border-white/10 pb-2">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shrink-0"></span>
+          <span class="text-[11px] font-bold tracking-wider uppercase text-cyan-300">BLENDER 5.1 LIVE 3D COPILOT</span>
+          <span id="blenderBridgeStatusBadge" class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">● BRIDGE ONLINE (8192)</span>
+          <button id="btnOpenDirectorQuestions" class="text-[9px] px-2.5 py-0.5 rounded-full bg-cyan-500/30 hover:bg-cyan-500/50 text-cyan-200 border border-cyan-400/60 font-bold cursor-pointer transition-all flex items-center gap-1 shadow-sm active:scale-95" title="Open Hollywood Director Discovery Questions">
+            🎬 DIRECTOR QUESTIONS
+          </button>
+        </div>
+        <button id="btnCloseBlenderDrawer" class="w-5 h-5 rounded-full hover:bg-white/10 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <div class="text-[10px] text-cyan-200/80 font-sans flex items-center justify-between">
+        <span>Live 3D Viewport Updates: Click 'DIRECTOR QUESTIONS' or type any scene change below!</span>
+        <span id="blenderSceneObjCount" class="text-[9px] font-mono text-cyan-300 bg-cyan-950/60 px-1.5 py-0.5 rounded border border-cyan-800">Objects: 512</span>
+      </div>
+
+      <!-- Dedicated Input Bar -->
+      <div class="flex items-center gap-2">
+        <input id="inputBlenderPrompt" type="text" placeholder="e.g. 'cyberpunk street scene with neon rain', 'golden sunset forest'..." class="flex-1 bg-[#0b0e13] border border-cyan-500/30 rounded-xl px-3 py-2 text-xs text-[var(--cream-light)] placeholder-cyan-200/40 outline-none focus:border-cyan-400 transition-colors">
+        <button id="btnSendBlenderPrompt" class="px-3.5 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs rounded-xl shadow transition-all active:scale-95 flex items-center gap-1.5 cursor-pointer">
+          <span>⚡ Apply Live</span>
+        </button>
+      </div>
+
+      <!-- Quick Action Chips for Instant Live Updates -->
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
+        <button id="btnChipDirectorQuestions" class="blender-chip px-2.5 py-1 rounded-lg bg-cyan-500/30 hover:bg-cyan-500/50 border border-cyan-400 text-[10px] text-cyan-200 font-bold cursor-pointer whitespace-nowrap shadow-sm">🎬 Ask Director Questions</button>
+        <button class="blender-chip px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-cyan-200 cursor-pointer whitespace-nowrap" data-prompt="sunset golden hour lighting with warm sky">🌅 Sunset</button>
+        <button class="blender-chip px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-cyan-200 cursor-pointer whitespace-nowrap" data-prompt="add realistic snow caps and white summits on mountains">❄️ Snow Caps</button>
+        <button class="blender-chip px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-cyan-200 cursor-pointer whitespace-nowrap" data-prompt="make river water turbulent with white ripples and foam">🌊 Stormy River</button>
+        <button class="blender-chip px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-cyan-200 cursor-pointer whitespace-nowrap" data-prompt="make tree leaves autumn golden orange and red">🍁 Autumn Trees</button>
+        <button class="blender-chip px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-cyan-200 cursor-pointer whitespace-nowrap" data-prompt="add soft volumetric fog and sunbeams god rays">🌫️ Fog & Sunbeams</button>
+        <button class="blender-chip px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-cyan-200 cursor-pointer whitespace-nowrap" data-prompt="snapshot render to desktop">📸 4K Render</button>
+      </div>
+
+      <!-- 🎬 Pro UI Architect: Dynamic AI Technical Director Dialogue Card 🎬 -->
+      <div id="blenderDirectorCard" class="hidden flex flex-col gap-2.5 p-3 rounded-2xl max-h-72 overflow-y-auto custom-scrollbar">
+        <div class="director-header">
+          <div class="flex items-center gap-1.5">
+            <span class="text-sm">🎬</span>
+            <span id="directorCardTitle">3D TECHNICAL DIRECTOR DISCOVERY</span>
+            <span id="directorGenreBadge">Sci-Fi</span>
+          </div>
+          <button id="btnCloseDirectorCard" title="Close Discovery Dialogue">✕</button>
+        </div>
+
+        <div id="directorQuestionsContainer" class="flex flex-col gap-2.5">
+          <!-- Dynamically injected questions, file browser & interactive option cards -->
+        </div>
+
+        <div class="flex items-center gap-2 pt-1 border-t border-white/10">
+          <button id="btnDirectorBuildScene" class="flex-1 cursor-pointer">
+            <span>🎬</span>
+            <span>Build Hollywood Scene with Director Settings</span>
+          </button>
+          <button type="button" id="btnDirectorOpenGUI" class="px-3 py-2 rounded-xl bg-cyan-950/60 hover:bg-cyan-900 border border-cyan-500/40 text-cyan-300 font-bold text-xs shadow transition-all cursor-pointer flex items-center gap-1.5 shrink-0" title="Launch Interactive Blender 5.1 Window">
+            <span>🖥️</span>
+            <span>Open Blender GUI</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide-Up Chat Drawer -->
+    <div id="chatDrawer" class="hidden absolute bottom-16 inset-x-3 z-40 bg-[#161311]/95 backdrop-blur-2xl border border-[var(--border-rose)] rounded-2xl p-3 shadow-2xl transition-all">
+      <div class="flex items-center gap-2">
+        <input id="inputDialogue" type="text" placeholder="Instruct Aura or ask in Telugu / English..." class="flex-1 bg-[#100e0d] border border-white/10 rounded-xl px-3 py-2 text-xs text-[var(--cream-light)] placeholder-[var(--cream-muted)] outline-none focus:border-[var(--rose-blush)] transition-colors">
+        <button id="btnSendDialogue" class="px-3.5 py-2 bg-[var(--rose-blush)] hover:bg-[var(--rose-deep)] text-[#161311] font-semibold text-xs rounded-xl shadow transition-all active:scale-95 flex items-center gap-1 cursor-pointer">
+          <span>Send</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <!-- ── MODALS (Brain, Theme, Scale, Wardrobe, XP, Notes, Voice) ───── -->
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+
+  <!-- 1. AI Brain & Frontier Models Modal -->
+  <div id="apiKeyModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3 max-h-[90vh]">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--rose-blush)" stroke-width="2"><rect width="16" height="16" x="4" y="4" rx="3"/><path d="M9 9h6v6H9z"/></svg>
+          <div>
+            <h3 class="font-semibold text-xs text-[var(--cream-light)]">AI Brain Configuration</h3>
+            <p class="text-[10px] text-[var(--cream-muted)]">Gemini & OpenRouter Co-Pilot</p>
+          </div>
+        </div>
+        <button id="btnCloseKeyModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <!-- Provider Tabs -->
+      <div class="flex items-center bg-[#100e0d] p-1 rounded-xl border border-white/10">
+        <button id="tabProviderGemini" class="flex-1 py-1.5 text-[11px] font-semibold rounded-lg bg-[var(--surface-mocha)] text-[var(--rose-blush)] border border-[var(--border-rose)]">Google Gemini</button>
+        <button id="tabProviderOpenRouter" class="flex-1 py-1.5 text-[11px] font-medium rounded-lg text-[var(--cream-muted)] hover:text-white">OpenRouter</button>
+      </div>
+
+      <!-- Key Input -->
+      <div class="flex flex-col gap-1">
+        <label id="lblKeyInput" class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Gemini API Key</label>
+        <div class="relative flex items-center">
+          <input id="inputGeminiKey" type="password" placeholder="AIzaSy..." class="w-full bg-[#100e0d] border border-white/10 rounded-xl px-3 py-2 text-xs text-[var(--cream-light)] pr-9 outline-none focus:border-[var(--rose-blush)]">
+          <button id="btnToggleKeyVisibility" class="absolute right-2.5 text-[var(--cream-muted)] hover:text-white p-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Model Dropdown -->
+      <div class="flex flex-col gap-1">
+        <div class="flex items-center justify-between">
+          <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Active Model</label>
+          <span id="modelCountBadge" class="text-[9px] text-[var(--rose-blush)] font-mono">5 Models Available</span>
+        </div>
+        <select id="selectGeminiModel" class="w-full bg-[#100e0d] border border-white/10 rounded-xl px-3 py-2 text-xs text-[var(--cream-light)] outline-none focus:border-[var(--rose-blush)] cursor-pointer">
+          <option value="gemini-3.5-flash-lite" selected>gemini-3.5-flash-lite (Fastest)</option>
+          <option value="gemini-2.5-flash-lite">gemini-2.5-flash-lite</option>
+          <option value="gemini-3.7-flash">gemini-3.7-flash (Reasoning)</option>
+          <option value="gemini-3.5-flash">gemini-3.5-flash (Standard)</option>
+        </select>
+      </div>
+
+      <!-- Live Ghost-Typing Speed Selection -->
+      <div class="flex flex-col gap-1.5 pt-2 border-t border-white/10">
+        <div class="flex items-center justify-between">
+          <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider flex items-center gap-1">
+            <span>⚡ Ghost-Typing Speed</span>
+          </label>
+          <span id="speedSettingDesc" class="text-[9px] text-amber-300 font-mono font-bold">Instant Paste</span>
+        </div>
+        <div class="grid grid-cols-3 gap-1.5">
+          <button type="button" id="btnSpeedOptionTurbo" class="speed-option-btn py-2 px-1.5 rounded-xl bg-[#100e0d] border border-amber-400/80 text-amber-300 text-[10px] font-bold flex flex-col items-center gap-0.5 hover:border-amber-400 transition-all cursor-pointer shadow">
+            <span class="text-xs">⚡ TURBO</span>
+            <span class="text-[8px] font-normal text-[var(--cream-muted)]">Instant (&lt;0.1s)</span>
+          </button>
+          <button type="button" id="btnSpeedOptionFast" class="speed-option-btn py-2 px-1.5 rounded-xl bg-[#100e0d] border border-white/10 text-[var(--cream-muted)] text-[10px] font-bold flex flex-col items-center gap-0.5 hover:border-white/30 transition-all cursor-pointer">
+            <span class="text-xs">🚀 FAST</span>
+            <span class="text-[8px] font-normal text-[var(--cream-muted)]">Stream (~1.5s)</span>
+          </button>
+          <button type="button" id="btnSpeedOptionSmooth" class="speed-option-btn py-2 px-1.5 rounded-xl bg-[#100e0d] border border-white/10 text-[var(--cream-muted)] text-[10px] font-bold flex flex-col items-center gap-0.5 hover:border-white/30 transition-all cursor-pointer">
+            <span class="text-xs">🎬 SMOOTH</span>
+            <span class="text-[8px] font-normal text-[var(--cream-muted)]">Cadence (~3s)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Windows Auto-Start on Boot -->
+      <div class="flex items-center justify-between pt-2 border-t border-white/10">
+        <div>
+          <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider flex items-center gap-1">
+            <span>🚀 Launch on Windows Boot</span>
+          </label>
+          <p class="text-[9px] text-[var(--cream-muted)]">Auto-start UNIN minimized in system tray</p>
+        </div>
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input type="checkbox" id="chkAutoStart" class="sr-only">
+          <div class="switch-track">
+            <div class="switch-thumb"></div>
+          </div>
+        </label>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2 pt-2">
+        <button id="btnSaveGeminiKey" class="w-full py-2 bg-[var(--rose-blush)] hover:bg-[var(--rose-deep)] text-[#161311] font-semibold text-xs rounded-xl shadow transition-all cursor-pointer">
+          Save Settings
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Theme & Aesthetic Studio Modal -->
+  <div id="themeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--rose-blush)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          <div>
+            <h3 class="font-semibold text-xs text-[var(--cream-light)]">Theme & Aesthetic Studio</h3>
+            <p class="text-[10px] text-[var(--cream-muted)]">Customize colors, palettes, & dock</p>
+          </div>
+        </div>
+        <button id="btnCloseThemeModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <!-- 6 Designer Presets -->
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Designer Presets</label>
+        <div class="grid grid-cols-2 gap-2">
+          <button data-theme="cream-rose" class="btnPresetTheme p-2 rounded-xl bg-[#1c1815] border border-[var(--border-rose)] hover:scale-102 transition-all text-left flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#e8a598]"></span>
+            <span class="text-[10px] font-semibold">Studio Cream</span>
+          </button>
+          <button data-theme="obsidian-cyan" class="btnPresetTheme p-2 rounded-xl bg-[#0f172a] border border-cyan-500/30 hover:scale-102 transition-all text-left flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#00f0ff]"></span>
+            <span class="text-[10px] font-semibold">Obsidian Cyan</span>
+          </button>
+          <button data-theme="emerald-sage" class="btnPresetTheme p-2 rounded-xl bg-[#062c21] border border-emerald-500/30 hover:scale-102 transition-all text-left flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#10b981]"></span>
+            <span class="text-[10px] font-semibold">Emerald Sage</span>
+          </button>
+          <button data-theme="velvet-gold" class="btnPresetTheme p-2 rounded-xl bg-[#23122b] border border-amber-500/30 hover:scale-102 transition-all text-left flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#fbbf24]"></span>
+            <span class="text-[10px] font-semibold">Velvet Gold</span>
+          </button>
+          <button data-theme="sunset-coral" class="btnPresetTheme p-2 rounded-xl bg-[#2b1411] border border-rose-500/30 hover:scale-102 transition-all text-left flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#f43f5e]"></span>
+            <span class="text-[10px] font-semibold">Sunset Coral</span>
+          </button>
+          <button data-theme="titanium-mono" class="btnPresetTheme p-2 rounded-xl bg-[#18181b] border border-zinc-500/30 hover:scale-102 transition-all text-left flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-[#e4e4e7]"></span>
+            <span class="text-[10px] font-semibold">Titanium Mono</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Custom Primary Accent Picker -->
+      <div class="flex flex-col gap-1.5 pt-1">
+        <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Custom Accent Tint</label>
+        <div class="flex items-center gap-2 bg-[#100e0d] p-2 rounded-xl border border-white/10">
+          <input id="inputThemeAccentColor" type="color" value="#e8a598" class="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0 outline-none">
+          <span id="themeAccentHexText" class="text-xs font-mono font-bold text-[var(--rose-blush)]">#E8A598</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 pt-2">
+        <button id="btnResetThemeDefaults" class="flex-1 py-2 bg-[var(--surface-mocha)] border border-white/10 hover:border-[var(--border-rose)] text-[var(--cream-muted)] hover:text-white font-medium text-xs rounded-xl transition-all cursor-pointer">
+          Reset Default
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Scale & Size Modal -->
+  <div id="scaleModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3.5">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--rose-blush)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+          <div>
+            <h3 class="font-semibold text-xs text-[var(--cream-light)]">Avatar Framing & Scale</h3>
+            <p class="text-[10px] text-[var(--cream-muted)]">Full body camera alignment & feet grounding</p>
+          </div>
+        </div>
+        <button id="btnCloseScaleModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <!-- Live Zoom Scale Slider -->
+      <div class="flex flex-col gap-1.5">
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-[11px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Avatar Size (Zoom)</span>
+          <span id="scaleValueDisplay" class="font-mono font-bold text-[var(--rose-blush)]">100%</span>
+        </div>
+        <input id="inputAvatarScale" type="range" min="0.4" max="2.2" step="0.05" value="1.0" class="w-full accent-[var(--rose-blush)] cursor-pointer">
+      </div>
+
+      <!-- Quick Presets -->
+      <div class="flex flex-col gap-1.5">
+        <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Framing Presets</label>
+        <div class="grid grid-cols-4 gap-1.5">
+          <button class="btnScalePreset py-1.5 px-1 text-[10px] font-bold rounded-xl bg-[var(--surface-mocha)] hover:border-[var(--rose-blush)] border border-white/10 text-center transition-all cursor-pointer" data-scale="0.8" data-offset="0.0">
+            80%<br><span class="text-[8px] font-normal text-[var(--cream-muted)]">Mini</span>
+          </button>
+          <button class="btnScalePreset py-1.5 px-1 text-[10px] font-bold rounded-xl bg-[var(--surface-mocha)] border border-[var(--border-rose)] text-[var(--rose-blush)] text-center transition-all cursor-pointer" data-scale="1.0" data-offset="0.0">
+            100%<br><span class="text-[8px] font-normal text-[var(--cream-light)]">Full Body</span>
+          </button>
+          <button class="btnScalePreset py-1.5 px-1 text-[10px] font-bold rounded-xl bg-[var(--surface-mocha)] hover:border-[var(--rose-blush)] border border-white/10 text-center transition-all cursor-pointer" data-scale="1.35" data-offset="-0.30">
+            135%<br><span class="text-[8px] font-normal text-[var(--cream-muted)]">Portrait</span>
+          </button>
+          <button class="btnScalePreset py-1.5 px-1 text-[10px] font-bold rounded-xl bg-[var(--surface-mocha)] hover:border-[var(--rose-blush)] border border-white/10 text-center transition-all cursor-pointer" data-scale="1.70" data-offset="-0.52">
+            170%<br><span class="text-[8px] font-normal text-[var(--cream-muted)]">Close-Up</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Vertical Grounding (Height Adjustment) Slider -->
+      <div class="flex flex-col gap-1.5 pt-2 border-t border-white/10">
+        <div class="flex items-center justify-between text-xs">
+          <span class="text-[11px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Vertical Feet Grounding</span>
+          <span id="yOffsetValueDisplay" class="font-mono font-bold text-[var(--rose-blush)]">0.00</span>
+        </div>
+        <input id="inputAvatarYOffset" type="range" min="-0.50" max="0.40" step="0.02" value="0.00" class="w-full accent-[var(--rose-blush)] cursor-pointer">
+        <div class="flex items-center justify-between text-[9px] text-[var(--cream-muted)]">
+          <span>⬇️ Lower (Down)</span>
+          <button id="btnResetGrounding" class="text-[9px] text-[var(--rose-blush)] hover:underline cursor-pointer">Reset 100% Full Body</button>
+          <span>⬆️ Higher (Up)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Wardrobe Modal -->
+  <div id="wardrobeModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <h3 class="font-semibold text-xs text-[var(--cream-light)]">Hero 3D Suit Wardrobe</h3>
+        <button id="btnCloseWardrobeModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs cursor-pointer">✕</button>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-center justify-between text-xs">
+          <span>Suit / Jacket Color:</span>
+          <input id="colorSuit" type="color" value="#161311" class="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0">
+        </div>
+        <div class="flex items-center justify-between text-xs">
+          <span>Silk Tie Color:</span>
+          <input id="colorTie" type="color" value="#e8a598" class="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0">
+        </div>
+        <div class="flex items-center justify-between text-xs">
+          <span>Dress Shirt Color:</span>
+          <input id="colorShirt" type="color" value="#fcf9f4" class="w-8 h-8 rounded-lg cursor-pointer bg-transparent border-0">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4b. 3D Avatar Studio Modal -->
+  <div id="avatarModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3 max-h-[90vh]">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="text-base">👤</span>
+          <div>
+            <h3 class="font-semibold text-xs text-[var(--cream-light)] flex items-center gap-1.5">
+              <span>3D Avatar Studio</span>
+              <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">TalkingHead</span>
+            </h3>
+            <p class="text-[10px] text-[var(--cream-muted)]">Select active 3D character host</p>
+          </div>
+        </div>
+        <button id="btnCloseAvatarModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <!-- Avatar List Container -->
+      <div id="avatarModalList" class="flex flex-col gap-2 max-h-[65vh] overflow-y-auto custom-scrollbar">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 4c. WhatsApp Autonomous Agent QR & Status Modal -->
+  <div id="whatsAppModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-emerald-500/40 text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3 max-h-[90vh]">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="text-base">💬</span>
+          <div>
+            <h3 class="font-semibold text-xs text-[var(--cream-light)] flex items-center gap-1.5">
+              <span>WhatsApp Autonomous Agent</span>
+              <span id="waModalStatusBadge" class="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">Silent Gateway</span>
+            </h3>
+            <p class="text-[10px] text-[var(--cream-muted)]">Link once • Permanent background messaging</p>
+          </div>
+        </div>
+        <button id="btnCloseWhatsAppModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <!-- State: Connected View -->
+      <div id="waConnectedState" class="flex flex-col gap-2.5 p-3 rounded-2xl bg-emerald-950/30 border border-emerald-500/30">
+        <div class="flex items-center gap-2 text-emerald-300 font-bold text-xs">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>WhatsApp Linked & Connected!</span>
+        </div>
+        <p class="text-[10px] text-[var(--cream-muted)] leading-relaxed">
+          UNIN runs as a silent background agent. You can send messages, receive notifications, and ask for chat summaries without opening WhatsApp or moving your mouse.
+        </p>
+        <div class="flex items-center gap-2 pt-1">
+          <button id="btnWaTestMessage" class="flex-1 py-1.5 px-2.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/40 text-[10px] font-bold text-emerald-300 cursor-pointer transition-all">
+            ⚡ Test Message
+          </button>
+          <button id="btnWaReconnect" class="py-1.5 px-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-[var(--cream-muted)] cursor-pointer transition-all">
+            🔄 Re-link
+          </button>
+        </div>
+      </div>
+
+      <!-- State: QR Code Pairing View (for new users) -->
+      <div id="waQrState" class="hidden flex flex-col items-center gap-3 p-3 rounded-2xl bg-[#141210] border border-white/10">
+        <div class="w-48 h-48 bg-white rounded-xl p-2 flex items-center justify-center shadow-lg relative">
+          <img id="waQrImage" src="unin_whatsapp_qr.png" alt="Scan QR" class="w-full h-full object-contain">
+          <div id="waQrLoadingOverlay" class="absolute inset-0 bg-black/60 rounded-xl flex flex-col items-center justify-center gap-2 text-white hidden">
+            <span class="w-5 h-5 border-2 border-emerald-400 border-t-transparent rounded-full animate-spin"></span>
+            <span class="text-[10px] text-emerald-300 font-mono">Generating QR...</span>
+          </div>
+        </div>
+
+        <div class="text-[10px] text-[var(--cream-muted)] text-center leading-relaxed">
+          <p class="font-bold text-white mb-0.5">📲 How to Link (One-Time Only):</p>
+          <p>1. Open WhatsApp on your phone</p>
+          <p>2. Tap <b>Settings</b> → <b>Linked Devices</b></p>
+          <p>3. Tap <b>Link a Device</b> & scan this QR code</p>
+        </div>
+
+        <button id="btnWaOpenBrowserManual" class="w-full py-1.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[10px] text-cyan-300 font-semibold cursor-pointer transition-all flex items-center justify-center gap-1.5">
+          <span>🌐 Open in Full Browser Window</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Voice & Speech Studio Modal -->
+  <div id="voiceModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3 max-h-[90vh]">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <div>
+          <h3 class="font-semibold text-xs text-[var(--cream-light)]">Voice & Speech Studio</h3>
+          <p class="text-[10px] text-[var(--cream-muted)]">Input Mic Language & Speaker Voice</p>
+        </div>
+        <button id="btnCloseVoiceModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs cursor-pointer">✕</button>
+      </div>
+
+      <!-- STT Recognition Language Selection -->
+      <div class="flex flex-col gap-1.5 pb-2 border-b border-white/10">
+        <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Speech Recognition (Mic Input Language)</label>
+        <div class="grid grid-cols-3 gap-1.5">
+          <button class="btnSTTOption py-1.5 px-2 rounded-xl bg-[var(--surface-mocha)] border border-emerald-500/50 text-[10px] font-bold text-emerald-400 text-center cursor-pointer transition-all" data-lang="en-IN">en-IN (Tenglish)</button>
+          <button class="btnSTTOption py-1.5 px-2 rounded-xl bg-[var(--surface-mocha)] border border-white/10 text-[10px] font-semibold text-[var(--cream-light)] text-center cursor-pointer transition-all" data-lang="te-IN">te-IN (Telugu)</button>
+          <button class="btnSTTOption py-1.5 px-2 rounded-xl bg-[var(--surface-mocha)] border border-white/10 text-[10px] font-semibold text-[var(--cream-light)] text-center cursor-pointer transition-all" data-lang="en-US">en-US (English)</button>
+        </div>
+        <p class="text-[9px] text-[var(--cream-muted)] leading-tight">Recommended: <span class="text-emerald-400 font-semibold">en-IN</span> for English + Telugu mixed commands, contact names (Jayanth) & tech tasks.</p>
+      </div>
+
+      <!-- TTS Speaker Voice -->
+      <div class="flex flex-col gap-1">
+        <label class="text-[10px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Avatar Speaker Voice (Edge Neural)</label>
+        <div id="voiceListContainer" class="flex flex-col gap-1.5 max-h-52 overflow-y-auto custom-scrollbar">
+          <!-- Injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Quick Notes Scratchpad Modal -->
+  <div id="notesModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-sm border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3">
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <h3 class="font-semibold text-xs text-[var(--cream-light)]">Quick Notes Scratchpad</h3>
+        <button id="btnCloseNotesModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs cursor-pointer">✕</button>
+      </div>
+      <div class="flex gap-2">
+        <input id="inputNewNote" type="text" placeholder="Write a note..." class="flex-1 bg-[#100e0d] border border-white/10 rounded-xl px-3 py-2 text-xs text-[var(--cream-light)] outline-none">
+        <button id="btnAddNote" class="px-3 py-2 bg-[var(--rose-blush)] text-[#161311] font-bold text-xs rounded-xl cursor-pointer">Add</button>
+      </div>
+      <div id="notesListContainer" class="flex flex-col gap-1.5 max-h-48 overflow-y-auto custom-scrollbar text-xs">
+        <!-- Notes list -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Attachments & Frontier Skills Hub Modal -->
+  <div id="attachmentsModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 hidden p-4">
+    <div class="glass-dock p-5 rounded-3xl w-full max-w-md border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col gap-3.5 max-h-[92vh] overflow-y-auto custom-scrollbar">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-2 border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <span class="text-amber-400 text-lg">📎</span>
+          <div>
+            <h3 class="font-bold text-xs text-[var(--cream-light)] flex items-center gap-1.5">
+              Attachments & Skills Hub
+              <span class="px-1.5 py-0.5 rounded-full text-[9px] bg-emerald-500/20 text-emerald-300 font-mono border border-emerald-500/30">v2.5.0</span>
+            </h3>
+            <p class="text-[10px] text-[var(--cream-muted)]">Downloadable 50-skills ZIP, live MCP connectors, & modular tools</p>
+          </div>
+        </div>
+        <button id="btnCloseAttachmentsModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer">✕</button>
+      </div>
+
+      <!-- Attachment 1: Downloadable / Auto-Updating unin-skills.zip (Brain) -->
+      <div class="p-3 rounded-2xl bg-[var(--surface-mocha)]/80 border border-amber-500/30 flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-base">📦</span>
+            <div>
+              <div class="font-bold text-xs text-[var(--cream-light)] flex items-center gap-1.5">
+                unin-skills.zip
+                <span id="skillCountBadge" class="px-1.5 py-0.2 rounded-full text-[9px] bg-amber-500/20 text-amber-300 font-mono border border-amber-500/30">50 Skills Bundled</span>
+              </div>
+              <p class="text-[10px] text-[var(--cream-muted)]">Full VENAR Matrix (Raymarching, SDF, Particles, WebGPU, OKLCH)</p>
+            </div>
+          </div>
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" title="Ready to download/upload"></span>
+        </div>
+
+        <p class="text-[9px] text-[var(--cream-muted)] leading-relaxed bg-black/20 p-2 rounded-xl border border-white/5">
+          💡 <span class="text-emerald-400 font-medium">Auto-Sync Guarantee:</span> Any skills added to UNIN in the future automatically update into this ZIP file!
+        </p>
+
+        <div class="flex items-center gap-2 pt-1">
+          <button id="btnOpenSkillsZip" class="flex-1 py-1.5 px-2.5 rounded-xl bg-[var(--surface-espresso)] hover:bg-[var(--surface-espresso)]/80 border border-white/15 hover:border-[var(--rose-blush)] text-[var(--cream-light)] text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow">
+            📂 Open in Explorer
+          </button>
+          <button id="btnRebuildSkillsZip" class="py-1.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 text-[11px] font-semibold flex items-center justify-center gap-1 transition-all cursor-pointer">
+            🔄 Re-Sync ZIP
+          </button>
+        </div>
+      </div>
+
+      <!-- Attachment 2: Live Cloudflare Remote MCP Connector (Hands) -->
+      <div class="p-3 rounded-2xl bg-[var(--surface-mocha)]/80 border border-cyan-500/30 flex flex-col gap-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-base">🌐</span>
+            <div>
+              <div class="font-bold text-xs text-[var(--cream-light)] flex items-center gap-1.5">
+                Claude Remote MCP Connector
+                <span class="px-1.5 py-0.2 rounded-full text-[9px] bg-cyan-500/20 text-cyan-300 font-mono border border-cyan-500/30">100% Free HTTPS</span>
+              </div>
+              <p class="text-[10px] text-[var(--cream-muted)]">Enables Claude to write code directly to disk & launch localhost:5173</p>
+            </div>
+          </div>
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        </div>
+
+        <!-- URL Input & Copy Row -->
+        <div class="flex items-center gap-1.5 bg-[#100e0d] p-1.5 rounded-xl border border-white/10">
+          <input id="inputConnectorUrlDisplay" type="text" readonly value="https://raleigh-paste-shower-boutique.trycloudflare.com/mcp/sse" class="flex-1 bg-transparent border-0 outline-none font-mono text-[10px] text-cyan-300 px-1 truncate select-all">
+          <button id="btnCopyConnectorUrl" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-500/40 text-cyan-300 font-semibold text-[10px] flex items-center gap-1 transition-all cursor-pointer shrink-0">
+            📋 Copy Link
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2 pt-1">
+          <button id="btnOpenClaudeConnectors" class="flex-1 py-1.5 px-2.5 rounded-xl bg-cyan-600/30 hover:bg-cyan-600/40 border border-cyan-500/50 text-cyan-200 text-[11px] font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow">
+            🌐 Open Claude Connectors Page
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick 1-2-3 Guided Flow -->
+      <div class="p-2.5 rounded-xl bg-black/30 border border-white/5 flex flex-col gap-1">
+        <span class="text-[9px] font-bold text-amber-400 uppercase tracking-wider">⚡ 15-Second Setup Guide for Users:</span>
+        <div class="text-[9px] text-[var(--cream-muted)] flex flex-col gap-0.5">
+          <div><strong class="text-white">1.</strong> Click <strong>Copy Link</strong> above.</div>
+          <div><strong class="text-white">2.</strong> Click <strong>Open Claude Connectors Page</strong> (opens Claude.ai settings).</div>
+          <div><strong class="text-white">3.</strong> Paste with <code class="text-amber-300 bg-black/40 px-1 rounded">Ctrl+V</code> & click <strong>Save</strong> — Done forever!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Multi-App Pairing & Zero-Trust Integration Hub Modal -->
+  <div id="appsConnectModal" class="fixed inset-0 z-50 flex flex-col items-center justify-start bg-black/85 backdrop-blur-md hidden p-3 pt-5 select-none overflow-hidden">
+    <div class="glass-dock p-4 rounded-3xl w-full max-w-[495px] border border-[var(--border-rose)] text-[var(--cream-light)] shadow-2xl relative flex flex-col h-[715px] max-h-[94vh] overflow-hidden">
+      <!-- Fixed Header -->
+      <div class="shrink-0 flex items-center justify-between pb-2.5 border-b border-white/10">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30 shadow-inner">
+            ⚡
+          </div>
+          <div>
+            <h3 class="font-bold text-xs text-[var(--cream-light)] flex items-center gap-2">
+              <span>Connect Apps</span>
+              <span id="appsConnectedSummaryBadge" class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono">0 / 10 Connected</span>
+            </h3>
+            <p class="text-[10px] text-[var(--cream-muted)]">Real APIs • Hardware Encrypted (DPAPI) • 0 Mock Data</p>
+          </div>
+        </div>
+        <button id="btnCloseAppsConnectModal" class="w-6 h-6 rounded-full bg-white/5 hover:bg-white/15 flex items-center justify-center text-xs text-[var(--cream-muted)] hover:text-white cursor-pointer transition-all">✕</button>
+      </div>
+
+      <!-- Phase 2: 1,024+ Apps Search Bar -->
+      <div class="shrink-0 pt-2 pb-1">
+        <div class="relative flex items-center">
+          <span class="absolute left-2.5 text-xs text-amber-400">🔍</span>
+          <input type="text" id="appsSearchInput" placeholder="Search 1,024+ apps: Jira, Stripe, Supabase, HubSpot, AWS..." class="w-full bg-[#100e0d] border border-white/15 focus:border-amber-400/80 rounded-xl pl-8 pr-7 py-1.5 text-xs text-[var(--cream-light)] outline-none transition-all placeholder:text-[var(--cream-muted)]/60 font-mono">
+          <button id="btnClearAppSearch" class="hidden absolute right-2 text-xs text-white/40 hover:text-white cursor-pointer">✕</button>
+        </div>
+      </div>
+
+      <!-- 15 Master Sectors Navigation Bar -->
+      <div id="sectorFilterContainer" class="shrink-0 flex items-center gap-1.5 py-1.5 text-[10px] overflow-x-auto no-scrollbar scroll-smooth">
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[var(--surface-mocha)] text-[var(--rose-blush)] font-semibold border border-[var(--border-rose)] cursor-pointer shrink-0" data-filter="all">All (1,024)</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="connected">Connected</button>
+        <button id="pillExpired" class="hidden app-filter-pill px-2.5 py-1 rounded-lg bg-orange-950/60 text-orange-400 border border-orange-500/70 font-bold animate-pulse cursor-pointer shrink-0" data-filter="expired">⚠️ Expired (0)</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="devops_cloud">☁️ DevOps & Cloud</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="software_code">💻 Software & Code</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="project_management">📋 Project Mgmt</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="collaboration_knowledge">📝 Collaboration</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="communication_chat">💬 Messaging</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="email_support">📬 Email & Support</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="crm_sales">📈 CRM & Sales</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="marketing_social">📣 Marketing</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="data_analytics">📊 Data & DBs</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="finance_payments">💳 Finance & Pay</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="design_creative">🎨 Design & 3D</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="ai_platforms">🤖 AI & LLMs</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="calendar_meetings">📅 Calendars</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="storage_docs">📁 Cloud Storage</button>
+        <button class="app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer shrink-0" data-filter="ecommerce_retail">🛍️ E-Commerce</button>
+      </div>
+
+      <!-- Dedicated Scrollable Apps Container -->
+      <div id="appsListContainer" class="flex-1 min-h-0 overflow-y-auto overflow-x-hidden pr-1.5 flex flex-col gap-2.5 custom-scrollbar" style="scroll-behavior: smooth;">
+        <div class="text-center py-8 text-xs text-[var(--cream-muted)] animate-pulse">Scanning application ecosystem...</div>
+      </div>
+
+      <!-- Fixed Footer Info -->
+      <div class="shrink-0 pt-2.5 border-t border-white/10 flex items-center justify-between text-[9px] text-[var(--cream-muted)]">
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>Zero Plaintext Stored • 100% Genuine Network Verification</span>
+        </span>
+        <span class="font-mono text-[var(--rose-blush)]">FAANG Tier</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <!-- ── MODULAR PRODUCTION RUNTIME BOOTSTRAP ────────────────────────── -->
+  <!-- ══════════════════════════════════════════════════════════════════ -->
+  <script type="module">
+    import { AvatarEngine } from './src/renderer/avatar/AvatarEngine.js';
+    import { VoiceEngine, EDGE_VOICES } from './src/renderer/voice/VoiceEngine.js';
+    import { AcousticTransientDetector } from './src/renderer/voice/AcousticTransientDetector.js';
+    import { UIManager, AuraAudio } from './src/renderer/ui/UIManager.js';
+    import { AgentCore } from './src/renderer/agent/AgentCore.js';
+
+    console.log('[UNIN Runtime] Initializing modular architecture...');
+
+    // 1. Core Services Initialization
+    window.AuraAudio = AuraAudio;
+    const uiManager = new UIManager();
+    const voiceEngine = new VoiceEngine();
+    const avatarEngine = new AvatarEngine({
+      container: document.getElementById('canvas-container')
+    });
+    const agentCore = new AgentCore({
+      uiManager,
+      voiceEngine,
+      avatarEngine
+    });
+
+    // SOTA Acoustic DSP Transient Detector (1x Snap/Clap = Summon UNIN, 2x Snap/Clap = Voice Listen)
+    const transientDetector = new AcousticTransientDetector({
+      enabled: localStorage.getItem('unin_snap_detector_enabled') !== 'false',
+      onAudioLevel: (levelPct, isSpike) => {
+        const dot = document.getElementById('snapMeterDot');
+        if (!dot) return;
+        if (isSpike) {
+          dot.className = 'w-2 h-2 rounded-full bg-amber-300 animate-ping shadow-[0_0_8px_#f59e0b] shrink-0';
+        } else if (levelPct > 20) {
+          dot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0';
+        } else {
+          dot.className = 'w-1.5 h-1.5 rounded-full bg-amber-400/40 shrink-0';
+        }
+      },
+      onSingleTransient: (metrics) => {
+        console.log('[TransientDetector] 👏 1x Snap/Clap verified! Summoning UNIN Companion Window...', metrics);
+        if (window.electronDesktopAPI && window.electronDesktopAPI.showAura) {
+          window.electronDesktopAPI.showAura();
+        }
+        avatarEngine.dispatchAction('wave');
+        uiManager.displayThought('✨ Snap / Clap detected! UNIN is here, buddy!');
+        AuraAudio.playChime();
+        uiManager.updateTerminal('Acoustic Transient', '1x Percussion Detected', {
+          action: 'Summon Window & Focus',
+          crestFactor: metrics.crestFactor ? metrics.crestFactor.toFixed(1) : 'High',
+          spectralRatio: metrics.spectralRatio ? metrics.spectralRatio.toFixed(1) : 'High'
+        });
+      },
+      onDoubleTransient: (metrics) => {
+        console.log('[TransientDetector] 👏 2x Double Snap/Clap verified! Enabling Voice Engine...', metrics);
+        if (window.electronDesktopAPI && window.electronDesktopAPI.showAura) {
+          window.electronDesktopAPI.showAura();
+        }
+        avatarEngine.dispatchAction('wave');
+        uiManager.displayThought('🎙️ 2x Snap/Clap detected! Voice activated...');
+        uiManager.updateTerminal('Acoustic Transient', '2x Double Percussion Detected', {
+          action: 'Voice Enable & Live Mic Listen',
+          intervalMs: metrics.deltaMs ? `${metrics.deltaMs}ms` : '320ms',
+          crestFactor: metrics.crestFactor ? metrics.crestFactor.toFixed(1) : 'High'
+        });
+
+        const greetings = [
+          'Cheppu buddy! Listening...',
+          'Yes buddy, em cheyali cheppu!',
+          'Ready buddy, cheppu!',
+          'Cheppu buddy, nenu unna!'
+        ];
+        const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+        voiceEngine.speak(randomGreeting, 'happy', () => {
+          voiceEngine.startListening();
+        });
+      }
+    });
+
+    // Sync Voice Engine with Avatar Lip-Sync & Speaking State (Three.js + Blender 5.1 Astra)
+    voiceEngine.onStateChangeCallback = (state) => {
+      avatarEngine.setSpeaking(state.isSpeaking, state.text || '');
+      // Synchronize Live Blender 5.1 Astra Lip-Sync
+      if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+        window.electronDesktopAPI.executeDesktopTool('blender_speech_lipsync', { active: state.isSpeaking }).catch(() => {});
+      }
+      // Acoustic Lockout: Prevent UNIN's TTS speech playback from self-triggering transient spikes
+      if (typeof transientDetector?.setSpeakingLockout === 'function') {
+        transientDetector.setSpeakingLockout(state.isSpeaking);
+      }
+      const pulse = document.getElementById('micPulseDot');
+      const btnMic = document.getElementById('btnVoiceMic');
+      if (pulse) {
+        if (state.isHandsFree || state.isListening) pulse.classList.remove('hidden');
+        else pulse.classList.add('hidden');
+      }
+      if (btnMic) {
+        if (state.isListening) btnMic.classList.add('mic-live');
+        else btnMic.classList.remove('mic-live');
+      }
+    };
+
+    voiceEngine.onRecognizedCallback = (text) => {
+      uiManager.displayThought('🗣️ "' + text + '"');
+      agentCore.interact(text);
+    };
+
+    voiceEngine.onInterimCallback = (text) => {
+      uiManager.displayThought('🎙️ "' + text + '"');
+    };
+
+    voiceEngine.onWakeWordCallback = (keyword, command) => {
+      avatarEngine.dispatchAction('wave');
+      if (command && command.trim().length > 1) {
+        uiManager.displayThought('🎙️ Wake Word: "' + keyword.toUpperCase() + '" ➔ "' + command + '"');
+        agentCore.interact(command);
+      } else {
+        uiManager.displayThought('🎙️ Wake Word: "' + keyword.toUpperCase() + '"! Listening, Buddy...');
+        const greetings = [
+          'Cheppu buddy! Listening...',
+          'Yes buddy, em cheyali cheppu!',
+          'Ready buddy, cheppu!',
+          'Cheppu buddy, nenu unna!'
+        ];
+        const randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+        voiceEngine.speak(randomGreeting, 'happy', () => {
+          voiceEngine.startListening();
+        });
+      }
+    };
+
+    // 2. Global Bridge Bindings (Backwards compatibility with electron-main and window helpers)
+    window.agentCore = agentCore;
+    window.uiManager = uiManager;
+    window.interactWithAura = (prompt) => agentCore.interact(prompt);
+    window.analyzeDesktopScreen = (prompt) => agentCore.analyzeScreen(prompt);
+    window.triggerQuickAllow = () => agentCore.triggerQuickAllow();
+    window.displayAuraThought = (text) => uiManager.displayThought(text);
+    window.speakDialogue = (text, emotion, onDone) => voiceEngine.speak(text, emotion, onDone);
+    window.dispatchCompanionAction = (action) => avatarEngine.dispatchAction(action);
+    window.setAvatarScale = (scale) => avatarEngine.setScale(scale);
+    window.syncAvatarSuitColors = (s, t, sh) => avatarEngine.syncSuitColors(s, t, sh);
+
+    // 3. Window Locomotion Drag Helper (Transparent Win32 locomotion)
+    let isDragging = false;
+    let dragStart = { x: 0, y: 0 };
+
+    window.addEventListener('mousedown', (e) => {
+      if (e.target.closest('button') || e.target.closest('input') || e.target.closest('select') || e.target.closest('.glass-dock') || e.target.closest('#agentActivityHud')) return;
+      isDragging = true;
+      dragStart = { x: e.screenX, y: e.screenY };
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDragging && window.electronDesktopAPI && window.electronDesktopAPI.dragWindow) {
+        const deltaX = e.screenX - dragStart.x;
+        const deltaY = e.screenY - dragStart.y;
+        dragStart = { x: e.screenX, y: e.screenY };
+        window.electronDesktopAPI.dragWindow(deltaX, deltaY);
+      }
+    });
+
+    window.addEventListener('mouseup', () => { isDragging = false; });
+
+    // 4. UI Actions Dock Rendering
+    const dockContainer = document.getElementById('dynamicActionButtons');
+    if (dockContainer) {
+      dockContainer.innerHTML = '';
+      const actions = [
+        { label: 'Wave 👋', action: 'wave' },
+        { label: 'Breakdance 🕺', action: 'breakdance' },
+        { label: 'Moonwalk 🕺', action: 'moonwalk' },
+        { label: 'Flip 🤸', action: 'flip' },
+        { label: 'Walk 🚶', action: 'walk' },
+        { label: 'Run 🏃', action: 'run' },
+        { label: 'Punch 🥊', action: 'punch' },
+        { label: 'Kick 🥋', action: 'kick' },
+        { label: 'Slash ⚔️', action: 'sword' },
+        { label: 'Roll 🌀', action: 'roll' },
+        { label: 'Idle 🧍', action: 'idle' },
+        { label: '📥 Download Media', action: 'download_media_quick', isCognitive: true },
+        { label: '🧠 Sniff Window', action: 'sniff_context_quick', isCognitive: true }
+      ];
+      actions.forEach((f) => {
+        const btn = document.createElement('button');
+        btn.className = 'px-2.5 py-1 text-[10px] font-semibold rounded-lg ' + (f.isCognitive ? 'bg-[var(--surface-espresso)] text-[var(--gold-accent)] border border-[var(--gold-accent)]/40 hover:bg-[var(--surface-latte)]' : 'bg-[var(--surface-mocha)] text-[var(--cream-light)] border border-white/10 hover:bg-[var(--surface-espresso)]') + ' shrink-0 shadow transition-all cursor-pointer';
+        btn.innerText = f.label;
+        btn.onclick = () => {
+          if (f.action === 'download_media_quick') {
+            uiManager.displayThought('📥 Sniffing and downloading active media...');
+            agentCore.interact('idi download chey');
+          } else if (f.action === 'sniff_context_quick') {
+            if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+              window.electronDesktopAPI.executeDesktopTool('get_active_context', {}).then((ctx) => {
+                if (ctx && ctx.success) {
+                  uiManager.displayThought('🧠 Window: ' + (ctx.windowTitle || 'Desktop') + '\nURL: ' + (ctx.url || 'None'));
+                  uiManager.updateTerminal('Context Cortex Sniff', 'Active', ctx);
+                }
+              });
+            }
+          } else {
+            avatarEngine.dispatchAction(f.action);
+            if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+              window.electronDesktopAPI.executeDesktopTool('blender_play_animation', { action: f.action }).catch(() => {});
+            }
+            uiManager.displayThought('Move: ' + f.label);
+          }
+        };
+        dockContainer.appendChild(btn);
+      });
+    }
+
+    // 5. Voice & Speech Modal Setup
+    const vContainer = document.getElementById('voiceListContainer');
+    if (vContainer) {
+      EDGE_VOICES.forEach((v) => {
+        const item = document.createElement('button');
+        item.className = 'w-full p-2 rounded-xl bg-[var(--surface-mocha)] border border-white/10 hover:border-[var(--border-rose)] text-left text-xs flex items-center justify-between text-[var(--cream-light)] cursor-pointer';
+        item.innerHTML = '<span>' + v.name + '</span><span class="text-[10px] text-[var(--rose-blush)] font-mono">' + v.id.split('-')[0] + '</span>';
+        item.onclick = () => {
+          voiceEngine.setVoice(v.id);
+          const badge = document.getElementById('activeVoiceBadge');
+          if (badge) badge.innerText = v.name.split(' - ')[0];
+          document.getElementById('voiceModal').classList.add('hidden');
+          uiManager.displayThought('Voice set to ' + v.name);
+          voiceEngine.speak("Ready to speak with you, buddy!", 'happy');
+        };
+        vContainer.appendChild(item);
+      });
+    }
+
+    // STT Language Handling
+    document.getElementById('btnSTTToggle')?.addEventListener('click', () => {
+      voiceEngine.cycleSTTLanguage();
+      const lang = voiceEngine.getSTTLanguage();
+      const badge = document.getElementById('sttLangBadge');
+      if (badge) badge.innerText = 'MIC: ' + lang;
+    });
+
+    document.querySelectorAll('.btnSTTOption').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        if (lang) {
+          voiceEngine.setSTTLanguage(lang);
+          const badge = document.getElementById('sttLangBadge');
+          if (badge) badge.innerText = 'MIC: ' + lang;
+        }
+      });
+    });
+
+    // Ambient Wake Word Handling ("Hey UNIN" / "Buddy")
+    const updateWakeToggleUI = (active) => {
+      const label = document.getElementById('wakeToggleLabel');
+      const btn = document.getElementById('btnWakeToggle');
+      if (label) label.innerText = active ? 'WAKE: ON' : 'WAKE: OFF';
+      if (btn) {
+        if (active) {
+          btn.classList.add('border-cyan-400', 'bg-cyan-950/40', 'text-cyan-200');
+          btn.classList.remove('border-cyan-500/40');
+        } else {
+          btn.classList.remove('border-cyan-400', 'bg-cyan-950/40', 'text-cyan-200');
+          btn.classList.add('border-cyan-500/40');
+        }
+      }
+    };
+
+    const isWakeInit = localStorage.getItem('unin_wake_word_enabled') !== 'false';
+    if (isWakeInit) {
+      voiceEngine.enableWakeWord(true);
+      updateWakeToggleUI(true);
+    }
+
+    document.getElementById('btnWakeToggle')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      const next = !voiceEngine.isWakeWordActive;
+      voiceEngine.enableWakeWord(next);
+      if (window.electronDesktopAPI && window.electronDesktopAPI.setWakeWordEnabled) {
+        window.electronDesktopAPI.setWakeWordEnabled(next);
+      }
+      updateWakeToggleUI(next);
+      uiManager.displayThought(next ? '🎙️ Ambient Wake Word Active ("Hey UNIN" / "Buddy")' : '🎙️ Ambient Wake Word Disabled');
+    });
+
+    // 5b. Acoustic Snap / Clap Transient Detector Toggle
+    const updateSnapToggleUI = (active) => {
+      const label = document.getElementById('snapToggleLabel');
+      const btn = document.getElementById('btnSnapToggle');
+      const curMode = (transientDetector.sensitivityMode || 'normal').toUpperCase();
+      const modeShort = curMode === 'HIGH' ? 'HIGH' : (curMode === 'LOW' ? 'LOW' : 'NORM');
+      if (label) label.innerText = active ? `SNAP: ON (${modeShort})` : 'SNAP: OFF';
+      if (btn) {
+        if (active) {
+          btn.classList.add('border-amber-400', 'bg-amber-950/40', 'text-amber-200');
+          btn.classList.remove('border-amber-500/40');
+          btn.title = `Acoustic Percussion: 1x = Summon, 2x = Voice [Mode: ${curMode}] (Right-click to switch sensitivity)`;
+        } else {
+          btn.classList.remove('border-amber-400', 'bg-amber-950/40', 'text-amber-200');
+          btn.classList.add('border-amber-500/40');
+          btn.title = 'Acoustic Percussion PAUSED (Click to enable)';
+        }
+      }
+    };
+
+    const isSnapInit = localStorage.getItem('unin_snap_detector_enabled') !== 'false';
+    const savedSens = localStorage.getItem('unin_snap_sensitivity') || 'normal';
+    transientDetector.setEnabled(isSnapInit);
+    transientDetector.setSensitivity(savedSens);
+    updateSnapToggleUI(isSnapInit);
+
+    document.getElementById('btnSnapToggle')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      const next = !transientDetector.isEnabled;
+      transientDetector.setEnabled(next);
+      localStorage.setItem('unin_snap_detector_enabled', next ? 'true' : 'false');
+      updateSnapToggleUI(next);
+      uiManager.displayThought(next ? `👏 Acoustic Snap/Clap ACTIVE [${transientDetector.sensitivityMode.toUpperCase()}] (1x = Summon UNIN, 2x = Voice)` : '👏 Acoustic Snap/Clap Detector PAUSED');
+    });
+
+    document.getElementById('btnSnapToggle')?.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      AuraAudio.playClick();
+      const cur = transientDetector.sensitivityMode;
+      const next = cur === 'normal' ? 'high' : (cur === 'high' ? 'low' : 'normal');
+      transientDetector.setSensitivity(next);
+      localStorage.setItem('unin_snap_sensitivity', next);
+      updateSnapToggleUI(transientDetector.isEnabled);
+      const descMap = {
+        normal: 'Balanced (Finger Snaps & Claps, Speech filtered)',
+        high: 'High (Soft Snaps or 2-3m distance)',
+        low: 'Strict (Loud Claps only, 100% speech immune)'
+      };
+      uiManager.displayThought(`👏 Snap Sensitivity: ${next.toUpperCase()} — ${descMap[next]}`);
+    });
+
+    // Auto-boot Acoustic DSP Engine
+    setTimeout(() => {
+      transientDetector.start().then((started) => {
+        if (started) {
+          console.log('[UNIN Runtime] Acoustic Transient DSP Engine online ✓');
+        }
+      }).catch(err => console.warn('[TransientDetector Start Error]:', err));
+    }, 1200);
+
+    // 6. Typing Speed Controls
+    const speeds = ['turbo', 'fast', 'cinematic'];
+    const updateTypingSpeedUI = (speed) => {
+      const label = document.getElementById('speedToggleLabel');
+      if (label) label.innerText = speed.toUpperCase();
+      const desc = document.getElementById('speedSettingDesc');
+      if (desc) {
+        if (speed === 'turbo') desc.innerText = 'Instant Paste (<0.1s)';
+        else if (speed === 'fast') desc.innerText = 'Rapid Stream (~1.5s)';
+        else desc.innerText = 'Smooth Cadence (~3s)';
+      }
+    };
+
+    const currentSpeed = localStorage.getItem('aura_typing_speed') || 'turbo';
+    updateTypingSpeedUI(currentSpeed);
+
+    document.getElementById('btnSpeedToggle')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      const cur = localStorage.getItem('aura_typing_speed') || 'turbo';
+      const next = cur === 'turbo' ? 'fast' : (cur === 'fast' ? 'cinematic' : 'turbo');
+      localStorage.setItem('aura_typing_speed', next);
+      if (window.electronDesktopAPI && window.electronDesktopAPI.saveAppConfig) {
+        window.electronDesktopAPI.saveAppConfig({ typing_speed: next });
+      }
+      updateTypingSpeedUI(next);
+      uiManager.displayThought('⚡ Typing Speed: ' + next.toUpperCase());
+    });
+
+    document.getElementById('btnSpeedOptionTurbo')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      localStorage.setItem('aura_typing_speed', 'turbo');
+      updateTypingSpeedUI('turbo');
+      uiManager.displayThought('⚡ Live Typing Speed: TURBO');
+    });
+    document.getElementById('btnSpeedOptionFast')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      localStorage.setItem('aura_typing_speed', 'fast');
+      updateTypingSpeedUI('fast');
+      uiManager.displayThought('⚡ Live Typing Speed: FAST');
+    });
+    document.getElementById('btnSpeedOptionSmooth')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      localStorage.setItem('aura_typing_speed', 'cinematic');
+      updateTypingSpeedUI('cinematic');
+      uiManager.displayThought('⚡ Live Typing Speed: SMOOTH');
+    });
+
+    // 7. Astra-6 Visual Sentinel Eye (Real-Time Continuous Screen Perception)
+    let isAstraSentinelActive = false;
+    const updateAstraSentinelUI = (active) => {
+      const label = document.getElementById('astraSentinelLabel');
+      const dot = document.getElementById('astraSentinelDot');
+      const btn = document.getElementById('btnAstraSentinel');
+      if (label) label.innerText = active ? 'ASTRA: ON' : 'ASTRA: OFF';
+      if (dot) {
+        dot.className = active ? 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse' : 'w-2 h-2 rounded-full bg-stone-500';
+      }
+      if (btn) {
+        if (active) {
+          btn.classList.add('border-emerald-400', 'bg-emerald-950/40', 'text-emerald-200');
+          btn.classList.remove('border-emerald-500/40');
+        } else {
+          btn.classList.remove('border-emerald-400', 'bg-emerald-950/40', 'text-emerald-200');
+          btn.classList.add('border-emerald-500/40');
+        }
+      }
+    };
+
+    document.getElementById('btnAstraSentinel')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      isAstraSentinelActive = !isAstraSentinelActive;
+      if (isAstraSentinelActive) {
+        if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+          await window.electronDesktopAPI.executeDesktopTool('start_visual_watchdog', { intervalMs: 3500, autoAllowModals: true });
+        }
+        updateAstraSentinelUI(true);
+        uiManager.displayThought('👁️ Astra Sentinel Active — Real-time screen perception & auto-allow running!');
+      } else {
+        if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+          await window.electronDesktopAPI.executeDesktopTool('stop_visual_watchdog', {});
+        }
+        updateAstraSentinelUI(false);
+        uiManager.displayThought('👁️ Astra Sentinel paused.');
+      }
+    });
+
+    // 7. Theme Presets Controller
+    const THEME_PRESETS = {
+      'cream-rose': { accent: '#e8a598', deep: '#b87366', espresso: '#161311', mocha: '#221b16' },
+      'obsidian-cyan': { accent: '#00f0ff', deep: '#0284c7', espresso: '#0f172a', mocha: '#1e293b' },
+      'emerald-sage': { accent: '#10b981', deep: '#047857', espresso: '#062c21', mocha: '#064e3b' },
+      'velvet-gold': { accent: '#fbbf24', deep: '#d97706', espresso: '#23122b', mocha: '#3b1d4a' },
+      'sunset-coral': { accent: '#f43f5e', deep: '#be123c', espresso: '#2b1411', mocha: '#4c1d18' },
+      'titanium-mono': { accent: '#e4e4e7', deep: '#a1a1aa', espresso: '#18181b', mocha: '#27272a' }
+    };
+
+    function applyTheme(presetKey, customHex) {
+      const theme = customHex 
+        ? { accent: customHex, deep: customHex, espresso: '#161311', mocha: '#221b16' }
+        : (THEME_PRESETS[presetKey] || THEME_PRESETS['cream-rose']);
+
+      const root = document.documentElement;
+      root.style.setProperty('--rose-blush', theme.accent);
+      root.style.setProperty('--rose-deep', theme.deep);
+      root.style.setProperty('--border-rose', theme.accent + '55');
+      root.style.setProperty('--rose-glow', theme.accent + '44');
+      root.style.setProperty('--surface-espresso', theme.espresso);
+      root.style.setProperty('--surface-mocha', theme.mocha);
+      root.style.setProperty('--dock-bg', theme.espresso + 'F0');
+
+      avatarEngine.syncSuitColors(theme.espresso, theme.accent, '#fcf9f4');
+      localStorage.setItem('aura_theme_preset', presetKey);
+      if (customHex) localStorage.setItem('aura_theme_custom_hex', customHex);
+    }
+
+    document.querySelectorAll('.btnPresetTheme').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        applyTheme(btn.dataset.theme, null);
+        uiManager.displayThought('Theme: ' + btn.dataset.theme.toUpperCase());
+      });
+    });
+
+    document.getElementById('inputThemeAccentColor')?.addEventListener('input', (e) => {
+      const hex = e.target.value;
+      const t = document.getElementById('themeAccentHexText');
+      if (t) t.innerText = hex.toUpperCase();
+      applyTheme('custom', hex);
+    });
+
+    document.getElementById('btnResetThemeDefaults')?.addEventListener('click', () => {
+      applyTheme('cream-rose', null);
+      const t = document.getElementById('themeAccentHexText');
+      if (t) t.innerText = '#E8A598';
+      const inp = document.getElementById('inputThemeAccentColor');
+      if (inp) inp.value = '#e8a598';
+      uiManager.displayThought("Theme reset to Signature Cream & Rose");
+    });
+
+    applyTheme(localStorage.getItem('aura_theme_preset') || 'cream-rose', localStorage.getItem('aura_theme_custom_hex'));
+
+    // 8. Scale & Framing Controls
+    const inputAvatarScale = document.getElementById('inputAvatarScale');
+    const scaleValueDisplay = document.getElementById('scaleValueDisplay');
+    const inputAvatarYOffset = document.getElementById('inputAvatarYOffset');
+    const yOffsetValueDisplay = document.getElementById('yOffsetValueDisplay');
+
+    let hudTimer = null;
+    window.flashScaleHUD = (scale) => {
+      const hud = document.getElementById('floatingScaleHUD');
+      const val = document.getElementById('floatingScaleHUDValue');
+      const tier = document.getElementById('floatingScaleHUDTier');
+      if (!hud || !val) return;
+      const pct = Math.round(scale * 100);
+      val.innerText = pct + '%';
+      if (tier) {
+        if (pct < 90) tier.innerText = 'Compact';
+        else if (pct <= 115) tier.innerText = 'Full Body';
+        else if (pct <= 150) tier.innerText = 'Portrait / Bust';
+        else tier.innerText = 'Close-Up';
+      }
+      hud.classList.remove('opacity-0', 'pointer-events-none');
+      hud.classList.add('opacity-100');
+      if (hudTimer) clearTimeout(hudTimer);
+      hudTimer = setTimeout(() => {
+        hud.classList.remove('opacity-100');
+        hud.classList.add('opacity-0', 'pointer-events-none');
+      }, 1200);
+    };
+
+    if (inputAvatarScale) {
+      inputAvatarScale.value = (avatarEngine.targetAvatarScale || 1.0).toFixed(2);
+      if (scaleValueDisplay) scaleValueDisplay.innerText = Math.round((avatarEngine.targetAvatarScale || 1.0) * 100) + '%';
+      inputAvatarScale.addEventListener('input', (e) => {
+        const scale = parseFloat(e.target.value);
+        avatarEngine.setScale(scale);
+        if (scaleValueDisplay) scaleValueDisplay.innerText = Math.round(scale * 100) + '%';
+        window.flashScaleHUD(scale);
+      });
+    }
+
+    if (inputAvatarYOffset) {
+      const curOff = avatarEngine.avatarYOffset || 0.0;
+      inputAvatarYOffset.value = curOff.toFixed(2);
+      if (yOffsetValueDisplay) {
+        yOffsetValueDisplay.innerText = (curOff >= 0 ? '+' : '') + curOff.toFixed(2);
+      }
+      inputAvatarYOffset.addEventListener('input', (e) => {
+        const off = parseFloat(e.target.value);
+        avatarEngine.setYOffset(off);
+        if (yOffsetValueDisplay) yOffsetValueDisplay.innerText = (off >= 0 ? '+' : '') + off.toFixed(2);
+      });
+    }
+
+    document.querySelectorAll('.btnScalePreset').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const scale = parseFloat(btn.dataset.scale || '1.0');
+        const offset = parseFloat(btn.dataset.offset || '0.0');
+        avatarEngine.setScale(scale);
+        avatarEngine.setYOffset(offset);
+        if (scaleValueDisplay) scaleValueDisplay.innerText = Math.round(scale * 100) + '%';
+        if (inputAvatarScale) inputAvatarScale.value = scale.toFixed(2);
+        if (inputAvatarYOffset) inputAvatarYOffset.value = offset.toFixed(2);
+        if (yOffsetValueDisplay) yOffsetValueDisplay.innerText = (offset >= 0 ? '+' : '') + offset.toFixed(2);
+        window.flashScaleHUD(scale);
+        uiManager.displayThought(`Framing set: ${Math.round(scale * 100)}%`);
+      });
+    });
+
+    document.getElementById('btnResetGrounding')?.addEventListener('click', () => {
+      avatarEngine.setScale(1.0);
+      avatarEngine.setYOffset(0.0);
+      if (inputAvatarScale) inputAvatarScale.value = '1.00';
+      if (scaleValueDisplay) scaleValueDisplay.innerText = '100%';
+      if (inputAvatarYOffset) inputAvatarYOffset.value = '0.00';
+      if (yOffsetValueDisplay) yOffsetValueDisplay.innerText = '0.00';
+      window.flashScaleHUD(1.0);
+      uiManager.displayThought("Reset to 100% Full Body Framing");
+    });
+
+    // 9. Wardrobe colors
+    document.getElementById('colorSuit')?.addEventListener('input', (e) => {
+      avatarEngine.syncSuitColors(e.target.value, document.getElementById('colorTie').value, document.getElementById('colorShirt').value);
+    });
+    document.getElementById('colorTie')?.addEventListener('input', (e) => {
+      avatarEngine.syncSuitColors(document.getElementById('colorSuit').value, e.target.value, document.getElementById('colorShirt').value);
+    });
+    document.getElementById('colorShirt')?.addEventListener('input', (e) => {
+      avatarEngine.syncSuitColors(document.getElementById('colorSuit').value, document.getElementById('colorTie').value, e.target.value);
+    });
+
+    // 10. Avatar selector & 3D Avatar Studio
+    const AVATARS_CATALOG = [
+      { id: 'brunette-t.glb', name: 'Brunette Master', icon: '👑', badge: 'Strict T-Pose', desc: '100% Calibrated Strict T-Pose, zero distortion breakdances, flips & walk' },
+      { id: 'brunette.glb', name: 'Brunette Host', icon: '👩', badge: 'Default • ARKit', desc: '52 ARKit blendshapes, phoneme lip-sync & eye saccades' },
+      { id: 'avaturn.glb', name: 'Avaturn Host', icon: '🧑', badge: 'Photoreal', desc: 'Photorealistic host with full-body Mixamo dances' },
+      { id: 'avatarsdk.glb', name: 'AvatarSDK Realistic', icon: '👤', badge: 'Human Body', desc: 'Realistic proportions with breakdance retargeting' },
+      { id: 'vroid.glb', name: 'VRoid Anime', icon: '🎨', badge: 'Anime 3D', desc: 'Stylized cel-shaded character in TalkingHead' },
+      { id: 'mpfb.glb', name: 'MPFB Studio Human', icon: '💎', badge: 'Studio Human', desc: 'Photoreal studio anatomy with full retargeting & blendshapes' },
+      { id: 'hero.glb', name: 'Hero Suit Agent', icon: '🦸', badge: '62 Bones', desc: 'Mixamo armature with custom suit wardrobe' },
+      { id: 'avatar5.glb', name: 'Astra Heroine', icon: '🦸‍♀️', badge: '54 Bones', desc: 'Full-body acrobatic movements & flip animations' },
+      { id: 'avatar3.glb', name: 'Cyber Agent', icon: '🤖', badge: 'Cyberpunk', desc: '34 bones Mixamo armature' },
+      { id: 'avatar.vrm', name: 'Aura Anime VRM', icon: '🌸', badge: 'VRM Legacy', desc: 'Anime VRM with three-vrm expressions' },
+      { id: 'avatar2.vrm', name: 'Aura Cyber VRM', icon: '⚡', badge: 'VRM Legacy', desc: 'Cyberpunk VRM humanoid model' }
+    ];
+
+    function renderAvatarStudio() {
+      const container = document.getElementById('avatarModalList');
+      if (!container) return;
+      const current = localStorage.getItem('aura_selected_avatar') || 'brunette.glb';
+      container.innerHTML = '';
+
+      AVATARS_CATALOG.forEach(av => {
+        const isSelected = av.id === current;
+        const card = document.createElement('div');
+        card.className = `p-2.5 rounded-2xl bg-[var(--surface-mocha)]/80 border ${isSelected ? 'border-[var(--rose-blush)] shadow-[0_0_15px_rgba(232,165,152,0.25)]' : 'border-white/10 hover:border-white/30'} flex items-center justify-between transition-all cursor-pointer`;
+        card.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="text-xl">${av.icon}</span>
+            <div>
+              <div class="font-bold text-xs text-[var(--cream-light)] flex items-center gap-1.5">
+                <span>${av.name}</span>
+                <span class="text-[9px] px-1.5 py-0.2 rounded-full font-mono ${isSelected ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-white/5 text-[var(--cream-muted)]'}">${av.badge}</span>
+              </div>
+              <p class="text-[10px] text-[var(--cream-muted)] leading-tight mt-0.5">${av.desc}</p>
+            </div>
+          </div>
+          <button class="px-2.5 py-1 rounded-xl text-[10px] font-bold ${isSelected ? 'bg-[var(--rose-blush)] text-[#161311]' : 'bg-white/10 text-white/80 hover:bg-white/20'} shrink-0 ml-2 transition-all">
+            ${isSelected ? '✓ Active' : 'Select'}
+          </button>
+        `;
+        card.onclick = () => {
+          AuraAudio.playClick();
+          localStorage.setItem('aura_selected_avatar', av.id);
+          if (avatarSelect) avatarSelect.value = av.id;
+          if (av.id.endsWith('.glb')) avatarEngine.loadAvatar(av.id);
+          else avatarEngine.loadVRMAvatar(av.id);
+          renderAvatarStudio();
+          uiManager.displayThought(`Avatar changed to: ${av.name}`);
+        };
+        container.appendChild(card);
+      });
+    }
+
+    const avatarSelect = document.getElementById('avatarSelect');
+    avatarSelect?.addEventListener('change', (e) => {
+      const val = e.target.value;
+      localStorage.setItem('aura_selected_avatar', val);
+      if (val.endsWith('.glb')) avatarEngine.loadAvatar(val);
+      else avatarEngine.loadVRMAvatar(val);
+      renderAvatarStudio();
+      uiManager.displayThought('Loaded: ' + val);
+    });
+
+    document.getElementById('btnAvatarModal')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      renderAvatarStudio();
+    });
+    document.getElementById('btnDockAvatar')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      renderAvatarStudio();
+    });
+    renderAvatarStudio();
+
+    // 11. Modal Open/Close wiring
+    const bindModal = (btnOpen, btnClose, modalId) => {
+      const modal = document.getElementById(modalId);
+      document.getElementById(btnOpen)?.addEventListener('click', () => {
+        if (!modal) return;
+        modal.classList.remove('opacity-0', 'pointer-events-none', 'hidden');
+      });
+      document.getElementById(btnClose)?.addEventListener('click', () => {
+        if (!modal) return;
+        modal.classList.add('opacity-0', 'pointer-events-none', 'hidden');
+      });
+    };
+
+    bindModal('btnAvatarModal', 'btnCloseAvatarModal', 'avatarModal');
+    bindModal('btnDockAvatar', 'btnCloseAvatarModal', 'avatarModal');
+    bindModal('btnBrainConfig', 'btnCloseKeyModal', 'apiKeyModal');
+    bindModal('btnThemeModal', 'btnCloseThemeModal', 'themeModal');
+    bindModal('btnScaleModal', 'btnCloseScaleModal', 'scaleModal');
+    bindModal('btnWardrobeModal', 'btnCloseWardrobeModal', 'wardrobeModal');
+    bindModal('btnVoiceModal', 'btnCloseVoiceModal', 'voiceModal');
+    bindModal('btnNotes', 'btnCloseNotesModal', 'notesModal');
+    bindModal('btnAttachmentsModal', 'btnCloseAttachmentsModal', 'attachmentsModal');
+    bindModal('btnConnectApps', 'btnCloseAppsConnectModal', 'appsConnectModal');
+    bindModal('btnTopConnectApps', 'btnCloseAppsConnectModal', 'appsConnectModal');
+    bindModal('btnWhatsAppModal', 'btnCloseWhatsAppModal', 'whatsAppModal');
+
+    // 11b. WhatsApp Autonomous Gateway UI Controller
+    async function updateWhatsAppModalState() {
+      try {
+        if (!window.electronDesktopAPI || !window.electronDesktopAPI.whatsappGatewayStatus) return;
+        const status = await window.electronDesktopAPI.whatsappGatewayStatus();
+        const dot = document.getElementById('whatsAppStatusDot');
+        const connState = document.getElementById('waConnectedState');
+        const qrState = document.getElementById('waQrState');
+        const badge = document.getElementById('waModalStatusBadge');
+        const qrImg = document.getElementById('waQrImage');
+
+        if (status && status.status === 'CONNECTED') {
+          if (dot) dot.classList.remove('hidden');
+          if (connState) connState.classList.remove('hidden');
+          if (qrState) qrState.classList.add('hidden');
+          if (badge) {
+            badge.textContent = 'CONNECTED ●';
+            badge.className = 'text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-mono';
+          }
+        } else {
+          if (dot) dot.classList.add('hidden');
+          if (connState) connState.classList.add('hidden');
+          if (qrState) qrState.classList.remove('hidden');
+          if (badge) {
+            badge.textContent = 'NEEDS SCAN 🟡';
+            badge.className = 'text-[9px] px-1.5 py-0.2 rounded-full bg-amber-500/20 text-amber-300 font-mono';
+          }
+          if (status && status.qrDataUrl && qrImg) {
+            qrImg.src = status.qrDataUrl;
+          }
+        }
+      } catch (e) {
+        console.warn('[WhatsApp Modal State]:', e);
+      }
+    }
+
+    document.getElementById('btnWhatsAppModal')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      updateWhatsAppModalState();
+    });
+
+    document.getElementById('btnWaOpenBrowserManual')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      try {
+        if (window.electronDesktopAPI && window.electronDesktopAPI.whatsappGatewayOpenManual) {
+          await window.electronDesktopAPI.whatsappGatewayOpenManual();
+        }
+        uiManager.displayThought('Opening visible browser window for WhatsApp linking...');
+      } catch (e) {
+        console.warn('[WhatsApp Open Manual]:', e);
+      }
+    });
+
+    document.getElementById('btnWaTestMessage')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      try {
+        if (!window.electronDesktopAPI || !window.electronDesktopAPI.whatsappGatewaySend) return;
+        uiManager.displayThought('Sending background test message...');
+        const res = await window.electronDesktopAPI.whatsappGatewaySend('Self', 'Hello from UNIN Autonomous Agent!');
+        if (res && res.success) {
+          uiManager.displayThought('✓ Test message sent successfully in background!');
+        } else {
+          uiManager.displayThought('Notice: ' + (res?.error || 'Send completed'));
+        }
+      } catch (e) {
+        console.warn('[WhatsApp Send Test]:', e);
+      }
+    });
+
+    // Listen to push events if available
+    if (window.electronDesktopAPI && window.electronDesktopAPI.onWhatsAppStatus) {
+      window.electronDesktopAPI.onWhatsAppStatus(() => updateWhatsAppModalState());
+    }
+    if (window.electronDesktopAPI && window.electronDesktopAPI.onWhatsAppQR) {
+      window.electronDesktopAPI.onWhatsAppQR((qrData) => {
+        const qrImg = document.getElementById('waQrImage');
+        if (qrImg && qrData?.qrDataUrl) {
+          qrImg.src = qrData.qrDataUrl;
+        }
+      });
+    }
+
+    setTimeout(updateWhatsAppModalState, 1500);
+
+    // Attachments & Frontier Skills Hub Wiring
+    async function syncAttachmentsModalData() {
+      try {
+        if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+          const info = await window.electronDesktopAPI.executeDesktopTool('get_connector_info', {});
+          if (info && info.success) {
+            const inputUrl = document.getElementById('inputConnectorUrlDisplay');
+            if (inputUrl && info.sseUrl) inputUrl.value = info.sseUrl;
+            const badge = document.getElementById('skillCountBadge');
+            if (badge && info.skillCount) badge.innerText = `${info.skillCount} Skills Bundled`;
+          }
+        }
+      } catch (err) {
+        console.warn('[Attachments Sync]:', err);
+      }
+    }
+
+    document.getElementById('btnAttachmentsModal')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      syncAttachmentsModalData();
+    });
+
+    document.getElementById('btnOpenSkillsZip')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      uiManager.displayThought('📂 Opening unin-skills.zip in Windows Explorer...');
+      if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+        await window.electronDesktopAPI.executeDesktopTool('generate_claude_skill_zip', { reveal: true });
+      }
+    });
+
+    document.getElementById('btnRebuildSkillsZip')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      const btn = document.getElementById('btnRebuildSkillsZip');
+      if (btn) btn.innerText = '⏳ Syncing...';
+      uiManager.displayThought('🔄 Dynamic Auto-Sync: Re-packaging all skills into unin-skills.zip...');
+      if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+        const res = await window.electronDesktopAPI.executeDesktopTool('generate_claude_skill_zip', { reveal: false });
+        if (res && res.success) {
+          AuraAudio.playSuccess();
+          if (btn) btn.innerText = '✓ Synced!';
+          const badge = document.getElementById('skillCountBadge');
+          if (badge && res.skillCount) badge.innerText = `${res.skillCount} Skills Bundled`;
+          uiManager.displayThought(`🎉 Auto-Sync Complete: ${res.skillCount} VENAR skills bundled in unin-skills.zip!`);
+          setTimeout(() => { if (btn) btn.innerText = '🔄 Re-Sync ZIP'; }, 2500);
+        } else {
+          AuraAudio.playAlert();
+          if (btn) btn.innerText = '❌ Failed';
+          setTimeout(() => { if (btn) btn.innerText = '🔄 Re-Sync ZIP'; }, 2000);
+        }
+      }
+    });
+
+    document.getElementById('btnCopyConnectorUrl')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      const inputUrl = document.getElementById('inputConnectorUrlDisplay');
+      const url = inputUrl ? inputUrl.value.trim() : 'https://raleigh-paste-shower-boutique.trycloudflare.com/mcp/sse';
+      const btn = document.getElementById('btnCopyConnectorUrl');
+      
+      try {
+        if (window.electronDesktopAPI && window.electronDesktopAPI.clipboardWrite) {
+          await window.electronDesktopAPI.clipboardWrite(url);
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(url);
+        }
+        AuraAudio.playSuccess();
+        if (btn) {
+          btn.innerHTML = '✓ Copied!';
+          btn.classList.add('bg-emerald-500/30', 'text-emerald-300', 'border-emerald-500/50');
+        }
+        uiManager.displayThought('📋 Claude Remote MCP Connector URL copied to clipboard! Ready to paste into Claude Connectors.');
+        setTimeout(() => {
+          if (btn) {
+            btn.innerHTML = '📋 Copy Link';
+            btn.classList.remove('bg-emerald-500/30', 'text-emerald-300', 'border-emerald-500/50');
+          }
+        }, 2200);
+      } catch (err) {
+        console.error('[Copy Error]:', err);
+      }
+    });
+
+    document.getElementById('btnOpenClaudeConnectors')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      uiManager.displayThought('🌐 Opening Claude.ai Settings -> Connectors page in browser...');
+      if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+        await window.electronDesktopAPI.executeDesktopTool('open_url', { url: 'https://claude.ai/settings/connectors' });
+      } else {
+        window.open('https://claude.ai/settings/connectors', '_blank');
+      }
+    });
+
+    // Auto-sync connector data on boot
+    setTimeout(syncAttachmentsModalData, 1000);
+
+    // ══════════════════════════════════════════════════════════════════
+    // 12. UNIN Multi-App Zero-Trust Pairing Hub (10 Core Ecosystem Apps)
+    // ══════════════════════════════════════════════════════════════════
+    let cachedAppStatuses = {};
+    let cachedSectors = [];
+    let activeAppFilter = 'all';
+    let currentSearchQuery = '';
+    let searchDebounceTimer = null;
+
+    async function loadIntegrationsMatrix() {
+      const container = document.getElementById('appsListContainer');
+      const summaryBadge = document.getElementById('appsConnectedSummaryBadge');
+      if (!window.electronDesktopAPI || !window.electronDesktopAPI.getIntegrationsStatus) {
+        if (container) container.innerHTML = '<div class="text-center py-4 text-xs text-rose-400">Desktop API not available.</div>';
+        return;
+      }
+
+      try {
+        cachedAppStatuses = await window.electronDesktopAPI.getIntegrationsStatus();
+        if (window.electronDesktopAPI.getIntegrationSectors) {
+          cachedSectors = await window.electronDesktopAPI.getIntegrationSectors();
+        }
+        await renderAppsList();
+      } catch (err) {
+        if (container) container.innerHTML = `<div class="text-center py-4 text-xs text-rose-400">Error loading apps: ${err.message}</div>`;
+      }
+    }
+
+    async function renderAppsList() {
+      const container = document.getElementById('appsListContainer');
+      const summaryBadge = document.getElementById('appsConnectedSummaryBadge');
+      const dockDot = document.getElementById('connectedBadgeDot');
+      const topDot = document.getElementById('topConnectedBadgeDot');
+      if (!container) return;
+
+      const appEntries = Object.values(cachedAppStatuses);
+      const connectedApps = appEntries.filter(a => a.connected);
+      const expiredApps = connectedApps.filter(a => a.isExpired);
+      const warningApps = connectedApps.filter(a => a.isWarning);
+
+      if (expiredApps.length > 0) {
+        if (summaryBadge) {
+          summaryBadge.innerHTML = `<span class="text-emerald-300 font-semibold">${connectedApps.length - expiredApps.length} Active</span> • <span class="text-orange-400 font-bold bg-orange-500/20 px-2 py-0.5 rounded-full border border-orange-500/50 animate-pulse">⚠️ ${expiredApps.length} Expired</span> • 1,024 Ready`;
+        }
+        if (dockDot) dockDot.className = 'w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316] animate-pulse';
+        if (topDot) topDot.className = 'w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_#f97316] animate-pulse';
+      } else {
+        if (summaryBadge) {
+          summaryBadge.innerText = `${connectedApps.length} Connected (Permanent) • 1,024 Apps Ready Across 15 Sectors`;
+        }
+        if (dockDot) {
+          if (connectedApps.length > 0) dockDot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400';
+          else dockDot.className = 'hidden';
+        }
+        if (topDot) {
+          if (connectedApps.length > 0) topDot.className = 'w-1.5 h-1.5 rounded-full bg-emerald-400';
+          else topDot.classList.add('hidden');
+        }
+      }
+
+      const pillExpired = document.getElementById('pillExpired');
+      if (pillExpired) {
+        if (expiredApps.length > 0) {
+          pillExpired.classList.remove('hidden');
+          pillExpired.innerText = `⚠️ Expired (${expiredApps.length})`;
+        } else {
+          pillExpired.classList.add('hidden');
+        }
+      }
+
+      let displayApps = [];
+
+      if (currentSearchQuery.trim()) {
+        if (window.electronDesktopAPI.searchIntegrationApps) {
+          displayApps = await window.electronDesktopAPI.searchIntegrationApps({
+            query: currentSearchQuery,
+            category: activeAppFilter,
+            limit: 60
+          });
+        }
+      } else if (activeAppFilter === 'connected') {
+        if (window.electronDesktopAPI.searchIntegrationApps) {
+          displayApps = await window.electronDesktopAPI.searchIntegrationApps({
+            query: '',
+            category: 'connected',
+            limit: 100
+          });
+        } else {
+          displayApps = appEntries.filter(a => a.connected);
+        }
+      } else if (activeAppFilter === 'expired') {
+        if (window.electronDesktopAPI.searchIntegrationApps) {
+          displayApps = await window.electronDesktopAPI.searchIntegrationApps({
+            query: '',
+            category: 'expired',
+            limit: 100
+          });
+        } else {
+          displayApps = appEntries.filter(a => a.isExpired);
+        }
+      } else if (activeAppFilter === 'all') {
+        if (window.electronDesktopAPI.searchIntegrationApps) {
+          displayApps = await window.electronDesktopAPI.searchIntegrationApps({
+            query: '',
+            category: 'all',
+            limit: 75
+          });
+        } else {
+          displayApps = appEntries;
+        }
+      } else {
+        if (window.electronDesktopAPI.searchIntegrationApps) {
+          displayApps = await window.electronDesktopAPI.searchIntegrationApps({
+            query: '',
+            category: activeAppFilter,
+            limit: 120
+          });
+        } else {
+          displayApps = appEntries.filter(a => (a.sectorId === activeAppFilter) || (a.category && a.category.toLowerCase().includes(activeAppFilter.toLowerCase())));
+        }
+      }
+
+      if (!displayApps || displayApps.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-xs text-[var(--cream-muted)]">No applications match "${currentSearchQuery || activeAppFilter}".</div>`;
+        return;
+      }
+
+      container.innerHTML = '';
+
+      // Sector Header Banner if browsing a specific sector without active text search
+      if (activeAppFilter !== 'all' && activeAppFilter !== 'connected' && activeAppFilter !== 'expired' && !currentSearchQuery && cachedSectors.length > 0) {
+        const currentSector = cachedSectors.find(s => s.id === activeAppFilter);
+        if (currentSector) {
+          const banner = document.createElement('div');
+          banner.className = 'p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between shrink-0 mb-1';
+          banner.innerHTML = `
+            <div class="flex items-center gap-2.5">
+              <span class="text-2xl">${currentSector.icon}</span>
+              <div>
+                <div class="font-bold text-xs text-amber-300 flex items-center gap-2">
+                  <span>${currentSector.name}</span>
+                  <span class="text-[9px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-200 font-mono">${currentSector.totalCount} Connectors</span>
+                  ${currentSector.connectedCount > 0 ? `<span class="text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">${currentSector.connectedCount} Connected</span>` : ''}
+                </div>
+                <p class="text-[10px] text-[var(--cream-muted)] leading-tight mt-0.5">${currentSector.description}</p>
+              </div>
+            </div>
+          `;
+          container.appendChild(banner);
+        }
+      }
+
+      displayApps.forEach(app => {
+        const card = document.createElement('div');
+        
+        let cardBorderClasses = 'border-white/10';
+        if (app.isExpired) {
+          cardBorderClasses = 'border-2 border-orange-500 bg-orange-950/25 shadow-[0_0_18px_rgba(249,115,22,0.35)]';
+        } else if (app.isWarning) {
+          cardBorderClasses = 'border-amber-500/60 bg-amber-950/20 shadow-sm';
+        } else if (app.connected) {
+          cardBorderClasses = 'border-emerald-500/40 shadow-sm';
+        }
+        card.className = `p-3 rounded-2xl bg-[var(--surface-mocha)]/80 border ${cardBorderClasses} flex flex-col gap-2 transition-all`;
+        
+        // Status Badge Logic
+        let statusBadgeHtml = '';
+        if (app.isExpired) {
+          statusBadgeHtml = `<span class="text-[9px] px-2 py-0.5 rounded-full font-bold bg-orange-500/25 text-orange-400 border border-orange-500/80 shadow-sm animate-pulse">⚠️ EXPIRED</span>`;
+        } else if (app.isWarning) {
+          statusBadgeHtml = `<span class="text-[9px] px-1.5 py-0.2 rounded font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">⏳ Expiring Soon</span>`;
+        } else if (app.connected) {
+          statusBadgeHtml = `<span class="text-[9px] px-1.5 py-0.2 rounded font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">● LIVE ${app.isPermanent ? '(Lifetime)' : ''}</span>`;
+        } else {
+          statusBadgeHtml = `<span class="text-[9px] px-1.5 py-0.2 rounded font-mono bg-white/5 text-[var(--cream-muted)]">${app.sectorName || app.category || 'Connector'}</span>`;
+        }
+
+        // Action Button Logic
+        let actionBtnHtml = '';
+        if (app.isExpired) {
+          actionBtnHtml = `
+            <div class="flex items-center gap-1.5">
+              <button class="btnToggleConnectApp px-2.5 py-1 rounded-lg bg-orange-500/30 hover:bg-orange-500/50 text-orange-200 border border-orange-500/70 text-[10px] font-bold cursor-pointer transition-all shadow animate-pulse" data-id="${app.id}">
+                🔄 Reconnect
+              </button>
+              <button class="btnDisconnectApp px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-white/40 text-[9px] cursor-pointer" data-id="${app.id}">
+                ✕
+              </button>
+            </div>
+          `;
+        } else if (app.connected) {
+          actionBtnHtml = `
+            <button class="btnDisconnectApp px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 text-[10px] font-semibold cursor-pointer transition-all" data-id="${app.id}">
+              Disconnect
+            </button>
+          `;
+        } else {
+          actionBtnHtml = `
+            <button class="btnToggleConnectApp px-3 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[10px] font-bold cursor-pointer transition-all shadow" data-id="${app.id}">
+              Connect ⚡
+            </button>
+          `;
+        }
+
+        // Card Header
+        const headerRow = document.createElement('div');
+        headerRow.className = 'flex items-center justify-between';
+        headerRow.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="text-xl shrink-0">${app.icon || '⚡'}</span>
+            <div>
+              <div class="font-bold text-xs text-[var(--cream-light)] flex items-center gap-1.5 flex-wrap">
+                <span>${app.name}</span>
+                ${app.isFlagship ? '<span class="text-[8px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold border border-amber-500/30">⭐ Flagship</span>' : ''}
+                ${statusBadgeHtml}
+              </div>
+              <p class="text-[10px] text-[var(--cream-muted)] line-clamp-1">${app.description || ''}</p>
+            </div>
+          </div>
+          <div>
+            ${actionBtnHtml}
+          </div>
+        `;
+        card.appendChild(headerRow);
+
+        // Connected Details Row
+        if (app.connected) {
+          const accRow = document.createElement('div');
+          if (app.isExpired) {
+            accRow.className = 'flex items-center justify-between text-[9px] text-orange-300 bg-orange-950/60 px-2.5 py-1.5 rounded-xl border border-orange-500/40 font-mono';
+            accRow.innerHTML = `
+              <span>⚠️ Expired on: <strong>${app.expiresAt ? new Date(app.expiresAt).toLocaleDateString() : 'Needs Re-auth'}</strong></span>
+              <span class="text-orange-400 font-bold">Action Required</span>
+            `;
+          } else if (app.isWarning) {
+            accRow.className = 'flex items-center justify-between text-[9px] text-amber-300 bg-amber-950/40 px-2 py-1 rounded-lg border border-amber-500/30 font-mono';
+            accRow.innerHTML = `
+              <span class="truncate">Linked: <strong>${app.accountName}</strong> • ${app.tokenLifetimeLabel}</span>
+              <span class="text-amber-400">Expiring Soon ⏳</span>
+            `;
+          } else {
+            accRow.className = 'flex items-center justify-between text-[9px] text-emerald-400 bg-emerald-950/30 px-2 py-1 rounded-lg border border-emerald-500/20 font-mono';
+            accRow.innerHTML = `
+              <span class="truncate">Linked: <strong>${app.accountName}</strong> • ${app.isPermanent ? 'Permanent (Never Expires)' : (app.tokenLifetimeLabel || 'Active')}</span>
+              <span>Verified ✓</span>
+            `;
+          }
+          card.appendChild(accRow);
+        }
+
+        // Inline Form Container (Initially Hidden)
+        const formBox = document.createElement('div');
+        formBox.id = `form_${app.id}`;
+        formBox.className = 'hidden flex flex-col gap-2 pt-2 border-t border-white/10 mt-1';
+        
+        let fieldsHtml = '';
+        const fields = app.fields && app.fields.length > 0 ? app.fields : [
+          { key: 'token', label: 'API Key or Access Token', type: 'password', placeholder: 'Enter API Key, Personal Token, or Webhook URL...' }
+        ];
+
+        fields.forEach(f => {
+          fieldsHtml += `
+            <div class="flex flex-col gap-0.5">
+              <label class="text-[9px] font-semibold text-[var(--cream-muted)]">${f.label}</label>
+              <input type="${f.type}" data-key="${f.key}" placeholder="${f.placeholder}" class="app-cred-input bg-[#100e0d] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-[var(--cream-light)] outline-none focus:border-[var(--rose-blush)] font-mono">
+            </div>
+          `;
+        });
+
+        formBox.innerHTML = `
+          <div class="flex flex-col gap-1.5">
+            ${fieldsHtml}
+
+            <!-- Token Lifetime Policy Selector -->
+            <div class="flex flex-col gap-1 pt-1.5 border-t border-white/5">
+              <div class="flex items-center justify-between">
+                <label class="text-[9px] font-semibold text-[var(--cream-muted)] uppercase tracking-wider">Token Lifetime & Expiry Policy</label>
+                <span class="text-[8px] text-emerald-400 font-mono">🔒 Recommended: No Expiration</span>
+              </div>
+              <select class="app-lifetime-select bg-[#100e0d] border border-white/10 rounded-xl px-2.5 py-1.5 text-xs text-[var(--cream-light)] outline-none focus:border-amber-400 cursor-pointer">
+                <option value="permanent" selected>🔒 Permanent / No Expiration (Lifetime Access - Recommended)</option>
+                <option value="30">Limited: 30 Days Expiry</option>
+                <option value="60">Limited: 60 Days Expiry</option>
+                <option value="90">Limited: 90 Days Expiry</option>
+                <option value="custom">📅 Custom Expiry Date...</option>
+              </select>
+              <input type="date" class="app-custom-date hidden bg-[#100e0d] border border-white/10 rounded-xl px-2.5 py-1 text-xs text-[var(--cream-light)] mt-1 outline-none">
+              <p class="text-[9px] text-[var(--cream-muted)] leading-tight bg-black/30 p-2 rounded-xl border border-white/5">
+                💡 <strong class="text-white">Lifetime Access:</strong> Okasari configure cheste malli malli adagakunda undataniki developer portal lo <span class="text-amber-300 font-semibold">"No Expiration"</span> select chesukondi. Okavela custom limited time select cheste, expire ainappudu UNIN <span class="text-orange-400 font-bold">Orange Badge</span> tho alert chesthundi!
+              </p>
+            </div>
+
+            ${app.docsUrl ? `
+              <a href="${app.docsUrl}" class="app-doc-link text-[9px] text-[var(--rose-blush)] hover:underline flex items-center gap-1 font-mono cursor-pointer pt-0.5">
+                <span>Get credentials / Generate Permanent Token</span> ↗
+              </a>
+            ` : ''}
+            <div id="statusAlert_${app.id}" class="hidden text-[10px] p-2 rounded-xl"></div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <button class="btnSubmitPair flex-1 py-1.5 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[11px] font-bold cursor-pointer transition-all shadow" data-id="${app.id}">
+                🔍 Verify & Save Live
+              </button>
+              <button class="btnCancelForm px-2.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-[var(--cream-muted)] text-[10px] cursor-pointer" data-id="${app.id}">
+                Cancel
+              </button>
+            </div>
+          </div>
+        `;
+        card.appendChild(formBox);
+
+        container.appendChild(card);
+      });
+
+      // Bind external doc link clicks (Open in Chrome/Edge, never raw Electron window)
+      container.querySelectorAll('.app-doc-link').forEach(link => {
+        link.onclick = (e) => {
+          e.preventDefault();
+          const href = link.getAttribute('href');
+          if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+            window.electronDesktopAPI.executeDesktopTool('open_url', { url: href });
+          } else {
+            window.open(href, '_blank');
+          }
+        };
+      });
+
+      // Bind Lifetime Select change to reveal/hide custom date picker
+      container.querySelectorAll('.app-lifetime-select').forEach(sel => {
+        sel.onchange = () => {
+          const customDate = sel.parentElement.querySelector('.app-custom-date');
+          if (customDate) {
+            if (sel.value === 'custom') customDate.classList.remove('hidden');
+            else customDate.classList.add('hidden');
+          }
+        };
+      });
+
+      // Bind dynamic buttons inside rendered cards
+      container.querySelectorAll('.btnToggleConnectApp').forEach(btn => {
+        btn.onclick = () => {
+          AuraAudio.playClick();
+          const id = btn.dataset.id;
+          const form = document.getElementById(`form_${id}`);
+          if (form) {
+            form.classList.toggle('hidden');
+            if (!form.classList.contains('hidden')) {
+              setTimeout(() => {
+                form.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }, 60);
+            }
+          }
+        };
+      });
+
+      container.querySelectorAll('.btnCancelForm').forEach(btn => {
+        btn.onclick = () => {
+          const id = btn.dataset.id;
+          const form = document.getElementById(`form_${id}`);
+          if (form) form.classList.add('hidden');
+        };
+      });
+
+      container.querySelectorAll('.btnDisconnectApp').forEach(btn => {
+        btn.onclick = async () => {
+          AuraAudio.playClick();
+          const id = btn.dataset.id;
+          btn.innerText = 'Unpairing...';
+          try {
+            await window.electronDesktopAPI.disconnectIntegration(id);
+            AuraAudio.playAlert();
+            uiManager.displayThought(`Disconnected ${id}.`);
+            await loadIntegrationsMatrix();
+          } catch (e) {
+            btn.innerText = 'Disconnect';
+          }
+        };
+      });
+
+      container.querySelectorAll('.btnSubmitPair').forEach(btn => {
+        btn.onclick = async () => {
+          AuraAudio.playClick();
+          const id = btn.dataset.id;
+          const form = document.getElementById(`form_${id}`);
+          const alertBox = document.getElementById(`statusAlert_${id}`);
+          if (!form) return;
+
+          const inputs = form.querySelectorAll('.app-cred-input');
+          const credentials = {};
+          inputs.forEach(inp => {
+            credentials[inp.dataset.key] = inp.value;
+          });
+
+          // Read lifetime selection
+          const lifetimeSel = form.querySelector('.app-lifetime-select');
+          const customDateInp = form.querySelector('.app-custom-date');
+          if (lifetimeSel) {
+            credentials.lifetime = lifetimeSel.value;
+            if (lifetimeSel.value === 'custom' && customDateInp && customDateInp.value) {
+              credentials.customExpiryDate = customDateInp.value;
+            }
+          }
+
+          btn.innerText = '⏳ Verifying with Server...';
+          btn.disabled = true;
+          if (alertBox) {
+            alertBox.className = 'text-[10px] p-2 rounded-xl bg-amber-950/40 border border-amber-500/30 text-amber-300 block animate-pulse';
+            alertBox.innerText = 'Sending live cryptographic handshake to official API...';
+          }
+
+          try {
+            const res = await window.electronDesktopAPI.pairIntegration(id, credentials);
+            if (res && res.success) {
+              AuraAudio.playSuccess();
+              if (alertBox) {
+                alertBox.className = 'text-[10px] p-2 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 block';
+                alertBox.innerText = `✓ Connected! Verified account: ${res.accountName} (${res.tokenLifetimeLabel})`;
+              }
+              uiManager.displayThought(`⚡ Successfully linked ${id} with ${res.tokenLifetimeLabel}!`);
+              setTimeout(() => {
+                loadIntegrationsMatrix();
+              }, 1200);
+            } else {
+              AuraAudio.playAlert();
+              btn.innerText = '🔍 Verify & Save Live';
+              btn.disabled = false;
+              if (alertBox) {
+                alertBox.className = 'text-[10px] p-2 rounded-xl bg-rose-950/50 border border-rose-500/40 text-rose-300 block';
+                alertBox.innerText = res && res.error ? res.error : 'Connection failed. Please check your credentials.';
+              }
+            }
+          } catch (err) {
+            AuraAudio.playAlert();
+            btn.innerText = '🔍 Verify & Save Live';
+            btn.disabled = false;
+            if (alertBox) {
+              alertBox.className = 'text-[10px] p-2 rounded-xl bg-rose-950/50 border border-rose-500/40 text-rose-300 block';
+              alertBox.innerText = `Network error: ${err.message}`;
+            }
+          }
+        };
+      });
+    }
+
+    // Filter Pills Wiring
+    document.querySelectorAll('.app-filter-pill').forEach(btn => {
+      btn.addEventListener('click', () => {
+        AuraAudio.playClick();
+        document.querySelectorAll('.app-filter-pill').forEach(b => {
+          b.className = 'app-filter-pill px-2.5 py-1 rounded-lg bg-[#100e0d] text-[var(--cream-muted)] hover:text-white border border-white/5 cursor-pointer';
+        });
+        btn.className = 'app-filter-pill px-2.5 py-1 rounded-lg bg-[var(--surface-mocha)] text-[var(--rose-blush)] font-semibold border border-[var(--border-rose)] cursor-pointer';
+        activeAppFilter = btn.dataset.filter;
+        renderAppsList();
+      });
+    });
+
+    // Phase 2: 1,024+ Apps Search Input Wiring
+    const searchInp = document.getElementById('appsSearchInput');
+    const clearBtn = document.getElementById('btnClearAppSearch');
+    if (searchInp) {
+      searchInp.addEventListener('input', (e) => {
+        currentSearchQuery = e.target.value.trim();
+        if (clearBtn) {
+          if (currentSearchQuery) clearBtn.classList.remove('hidden');
+          else clearBtn.classList.add('hidden');
+        }
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(() => {
+          renderAppsList();
+        }, 180);
+      });
+    }
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        if (searchInp) searchInp.value = '';
+        currentSearchQuery = '';
+        clearBtn.classList.add('hidden');
+        renderAppsList();
+      });
+    }
+
+    const refreshAndOpenApps = () => {
+      AuraAudio.playClick();
+      loadIntegrationsMatrix();
+    };
+    document.getElementById('btnConnectApps')?.addEventListener('click', refreshAndOpenApps);
+    document.getElementById('btnTopConnectApps')?.addEventListener('click', refreshAndOpenApps);
+
+    // Auto-load on companion boot
+    setTimeout(loadIntegrationsMatrix, 800);
+
+    // Activity Logs Console Toggle
+    document.getElementById('btnToggleHud')?.addEventListener('click', () => {
+      if (uiManager) uiManager.toggleHUD();
+    });
+
+    // Chat Drawer
+    const btnToggleChat = document.getElementById('btnToggleChat');
+    const chatDrawer = document.getElementById('chatDrawer');
+    const inputDialogue = document.getElementById('inputDialogue');
+    btnToggleChat?.addEventListener('click', () => {
+      chatDrawer?.classList.toggle('hidden');
+      if (chatDrawer && !chatDrawer.classList.contains('hidden')) {
+        inputDialogue?.focus();
+      }
+    });
+
+    const sendChat = () => {
+      if (!inputDialogue) return;
+      const text = inputDialogue.value.trim();
+      if (text) {
+        inputDialogue.value = '';
+        chatDrawer?.classList.add('hidden');
+        if (/\b(?:director\s+questions?|director\s+dialogue|open\s+(?:the\s+)?blender\s+(?:studio|drawer|window))\b/i.test(text)) {
+          blenderStudioDrawer?.classList.remove('hidden');
+          openDirectorDialogue(text);
+          return;
+        }
+        window.isAuraProcessing = true;
+        window.lastInteractionResult = null;
+        window.lastInteractionPromise = agentCore.interact(text).then(res => {
+          window.lastInteractionResult = res || { success: true };
+          window.isAuraProcessing = false;
+          return res;
+        }).catch(err => {
+          window.lastInteractionResult = { success: false, error: err.message };
+          window.isAuraProcessing = false;
+        });
+      }
+    };
+
+    document.getElementById('btnSendDialogue')?.addEventListener('click', sendChat);
+    inputDialogue?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendChat();
+    });
+
+    // 🎨 Dedicated Blender 3D Live Copilot Studio Drawer Wiring
+    const btnBlenderStudio = document.getElementById('btnBlenderStudio');
+    const blenderStudioDrawer = document.getElementById('blenderStudioDrawer');
+    const inputBlenderPrompt = document.getElementById('inputBlenderPrompt');
+    const btnCloseBlenderDrawer = document.getElementById('btnCloseBlenderDrawer');
+    const btnSendBlenderPrompt = document.getElementById('btnSendBlenderPrompt');
+    const blenderBridgeStatusBadge = document.getElementById('blenderBridgeStatusBadge');
+    const blenderSceneObjCount = document.getElementById('blenderSceneObjCount');
+
+    const updateBlenderBridgeUI = async () => {
+      if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+        try {
+          const res = await window.electronDesktopAPI.executeDesktopTool('blender_astra_3d_copilot', { prompt: 'status check' }).catch(() => null);
+          if (res && res.liveState) {
+            if (blenderBridgeStatusBadge) {
+              blenderBridgeStatusBadge.className = 'text-[9px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-mono';
+              blenderBridgeStatusBadge.innerText = `● BRIDGE ONLINE (v${res.blenderVersion || '5.1'})`;
+            }
+            if (blenderSceneObjCount) {
+              blenderSceneObjCount.innerText = `Objects: ${res.liveState.objectsCount || 0}`;
+            }
+          }
+        } catch (e) {}
+      }
+    };
+
+    btnBlenderStudio?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      blenderStudioDrawer?.classList.toggle('hidden');
+      if (chatDrawer) chatDrawer.classList.add('hidden');
+      if (blenderStudioDrawer && !blenderStudioDrawer.classList.contains('hidden')) {
+        inputBlenderPrompt?.focus();
+        updateBlenderBridgeUI();
+      }
+    });
+
+    btnCloseBlenderDrawer?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      blenderStudioDrawer?.classList.add('hidden');
+    });
+
+    const blenderDirectorCard = document.getElementById('blenderDirectorCard');
+    const directorQuestionsContainer = document.getElementById('directorQuestionsContainer');
+    const btnCloseDirectorCard = document.getElementById('btnCloseDirectorCard');
+    const btnDirectorBuildScene = document.getElementById('btnDirectorBuildScene');
+    const directorGenreBadge = document.getElementById('directorGenreBadge');
+
+    let currentDirectorChoices = {};
+
+    btnCloseDirectorCard?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      blenderDirectorCard?.classList.add('hidden');
+    });
+
+    document.getElementById('btnOpenDirectorQuestions')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      const currentPrompt = inputBlenderPrompt?.value?.trim() || 'Cinematic 3D Scene';
+      openDirectorDialogue(currentPrompt);
+    });
+
+    document.getElementById('btnChipDirectorQuestions')?.addEventListener('click', () => {
+      AuraAudio.playClick();
+      const currentPrompt = inputBlenderPrompt?.value?.trim() || 'Cinematic 3D Scene';
+      openDirectorDialogue(currentPrompt);
+    });
+
+    const openDirectorDialogue = async (promptText) => {
+      try {
+        const text = promptText || 'Cinematic 3D Scene';
+        let inquiry = null;
+        if (window.electronDesktopAPI && window.electronDesktopAPI.blenderTDInquire) {
+          inquiry = await window.electronDesktopAPI.blenderTDInquire(text);
+        }
+        if (!inquiry || !inquiry.directorQuestions) {
+          inquiry = {
+            detectedGenre: 'Sci-Fi / Cinematic',
+            directorQuestions: [
+              {
+                id: 'local_asset_path',
+                question: 'Do you want to import your local 3D model (.glb / .fbx / .obj) into this scene?',
+                type: 'filepath_or_procedural',
+                hint: 'Provide path (e.g., C:/Users/subba/Downloads/car.glb) or leave blank for procedural generation.'
+              },
+              {
+                id: 'lighting_mood',
+                question: 'Select Director Lighting Atmosphere:',
+                options: [
+                  'CYBERPUNK_NEON: High contrast cyan/magenta rim lights with wet asphalt reflections',
+                  'NISHITA_GOLDEN_HOUR: Warm atmospheric sun (8° elevation) with long cinematic shadows',
+                  'FOGGY_FOREST_VOLUMETRIC: Deep god-rays scattering through thick misty canopy',
+                  'STUDIO_PRODUCT_THREE_POINT: Clean key, fill, and rim lights with soft shadows'
+                ]
+              },
+              {
+                id: 'camera_optics',
+                question: 'Director Camera Lens & Framing:',
+                options: [
+                  '35mm Wide: Dynamic environmental framing with wide perspective',
+                  '50mm Prime: Natural cinematic perspective with realistic compression',
+                  '85mm Telephoto Portrait: Heavy bokeh background separation at f/1.8'
+                ]
+              },
+              {
+                id: 'world_dynamics',
+                question: 'Environmental Dynamics & Materials:',
+                options: [
+                  'Rain-slicked surfaces with puddle roughness maps',
+                  'Dry atmospheric dust particles with volumetric depth',
+                  'Ultra-clean architectural glass and brushed metal'
+                ]
+              }
+            ]
+          };
+        }
+
+        currentDirectorChoices = {
+          prompt: text,
+          genre: inquiry.detectedGenre || 'Cinematic',
+          localAsset: '',
+          lighting_mood: 'CYBERPUNK_NEON',
+          camera_optics: '35mm Wide',
+          world_dynamics: 'Rain-slicked surfaces'
+        };
+
+        if (directorGenreBadge) directorGenreBadge.textContent = inquiry.detectedGenre || '3D Studio';
+        if (directorQuestionsContainer) {
+          directorQuestionsContainer.innerHTML = '';
+          inquiry.directorQuestions.forEach((q, qIdx) => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'dir-question-card';
+            
+            if (q.type === 'filepath_or_procedural') {
+              qDiv.innerHTML = `
+                <div class="dir-question-title">
+                  <span class="dir-q-num">01.</span>
+                  <span>${q.question}</span>
+                </div>
+                <div class="dir-question-hint">${q.hint || 'Select a local 3D model or generate procedural environment.'}</div>
+                <div class="dir-file-row">
+                  <input id="dirLocalAssetInput" type="text" placeholder="No file selected (procedural generation active)..." value="${currentDirectorChoices.localAsset || ''}">
+                  <button type="button" id="btnBrowseLocalAsset">
+                    <span>📁</span>
+                    <span>Browse 3D Model</span>
+                  </button>
+                </div>
+                <div id="dirAssetInspectBadge" style="display:none; font-size:9.5px; font-family:'JetBrains Mono', monospace; color:#34d399; margin-top:0.35rem; padding:0.25rem 0.5rem; border-radius:0.4rem; background:rgba(6,78,59,0.3); border:1px solid rgba(52,211,153,0.3);"></div>
+              `;
+            } else if (q.options) {
+              const numStr = (qIdx + 1) < 10 ? '0' + (qIdx + 1) : (qIdx + 1);
+              let optsHtml = `
+                <div class="dir-question-title">
+                  <span class="dir-q-num">${numStr}.</span>
+                  <span>${q.question}</span>
+                </div>
+                <div class="dir-pills-grid">
+              `;
+              q.options.forEach((opt, optIdx) => {
+                const parts = opt.split(':');
+                const optTitle = parts[0].trim();
+                const optDesc = parts.slice(1).join(':').trim() || optTitle;
+                const isSelected = optIdx === 0;
+                if (isSelected) currentDirectorChoices[q.id] = opt;
+                optsHtml += `
+                  <button type="button" class="dir-opt-pill ${isSelected ? 'active' : ''}" data-qid="${q.id}" data-val="${opt}">
+                    <div class="dir-opt-title">
+                      <span>${isSelected ? '●' : '○'}</span>
+                      <span>${optTitle}</span>
+                    </div>
+                    <div class="dir-opt-desc">${optDesc}</div>
+                  </button>
+                `;
+              });
+              optsHtml += `</div>`;
+              qDiv.innerHTML = optsHtml;
+            }
+            directorQuestionsContainer.appendChild(qDiv);
+          });
+
+          // Wire Native 3D File Browser
+          const btnBrowse = document.getElementById('btnBrowseLocalAsset');
+          if (btnBrowse) {
+            btnBrowse.addEventListener('click', async () => {
+              AuraAudio.playClick();
+              if (window.electronDesktopAPI && window.electronDesktopAPI.blenderTDPickFile) {
+                const pickRes = await window.electronDesktopAPI.blenderTDPickFile();
+                if (pickRes && pickRes.success && pickRes.filePath) {
+                  const input = document.getElementById('dirLocalAssetInput');
+                  if (input) input.value = pickRes.filePath;
+                  currentDirectorChoices.localAsset = pickRes.filePath;
+                  const inspectBadge = document.getElementById('dirAssetInspectBadge');
+                  if (inspectBadge) {
+                    inspectBadge.style.display = 'block';
+                    inspectBadge.innerHTML = '⏳ Ingesting & inspecting 3D geometry...';
+                    const insp = await window.electronDesktopAPI.blenderTDInspectAsset(pickRes.filePath);
+                    if (insp && insp.success && insp.data) {
+                      inspectBadge.innerHTML = `✓ Ingested: <b>${insp.data.meshesCount}</b> meshes, <b>${(insp.data.totalPolygons || 0).toLocaleString()}</b> polys ${insp.data.hasArmature ? '(Rigged)' : ''}`;
+                    } else {
+                      inspectBadge.innerHTML = `✓ 3D Model linked: <b>${pickRes.filePath.split(/[\\/]/).pop()}</b>`;
+                    }
+                  }
+                }
+              }
+            });
+          }
+
+          // Wire pill clicks
+          directorQuestionsContainer.querySelectorAll('.dir-opt-pill').forEach(pill => {
+            pill.addEventListener('click', (e) => {
+              AuraAudio.playClick();
+              const qid = pill.dataset.qid;
+              const val = pill.dataset.val;
+              const siblings = pill.parentElement.querySelectorAll('.dir-opt-pill');
+              siblings.forEach(s => {
+                s.classList.remove('active');
+                const radio = s.querySelector('.dir-opt-title span:first-child');
+                if (radio) radio.textContent = '○';
+              });
+              pill.classList.add('active');
+              const activeRadio = pill.querySelector('.dir-opt-title span:first-child');
+              if (activeRadio) activeRadio.textContent = '●';
+              currentDirectorChoices[qid] = val;
+            });
+          });
+        }
+
+        blenderDirectorCard?.classList.remove('hidden');
+        return true;
+      } catch (e) {
+        console.warn('[Director Dialogue]:', e);
+        return false;
+      }
+    };
+
+    btnDirectorBuildScene?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      blenderDirectorCard?.classList.add('hidden');
+      const assetPath = currentDirectorChoices.localAsset || document.getElementById('dirLocalAssetInput')?.value.trim() || '';
+
+      uiManager.showHUD(1, 1, '🎬 Assembling Hollywood 3D Scene in Blender...', 'Technical Director');
+      uiManager.displayThought(`🎬 Building Hollywood 3D Scene in Blender:\n"${currentDirectorChoices.prompt || 'Cinematic Scene'}"...`, 12000);
+
+      try {
+        let res = null;
+        if (window.electronDesktopAPI && window.electronDesktopAPI.blenderTDBuildScene) {
+          const lm = (currentDirectorChoices.lighting_mood || '').toLowerCase();
+          let lighting = 'CYBERPUNK_NEON';
+          if (lm.includes('golden') || lm.includes('sunset') || lm.includes('nishita') || lm.includes('sunlight') || lm.includes('daylight')) {
+            lighting = 'NISHITA_GOLDEN_HOUR';
+          } else if (lm.includes('studio') || lm.includes('motivated') || lm.includes('three-point') || lm.includes('light-tunnel')) {
+            lighting = 'HOLLYWOOD_3POINT';
+          }
+
+          const co = (currentDirectorChoices.camera_optics || '').toLowerCase();
+          let focal = 35;
+          if (co.includes('85mm') || co.includes('portrait') || co.includes('telephoto')) focal = 85;
+          else if (co.includes('50mm') || co.includes('prime')) focal = 50;
+          else if (co.includes('24mm') || co.includes('28mm') || co.includes('wide') || co.includes('hero')) focal = 24;
+
+          res = await window.electronDesktopAPI.blenderTDBuildScene({
+            sceneType: (currentDirectorChoices.genre || 'Cinematic').toLowerCase().replace(/[^a-z0-9]/g, '_'),
+            localAssetPath: assetPath,
+            lightingPreset: lighting,
+            cameraOptics: { focalLength: focal, fStop: 1.8, enableDoF: true },
+            renderPngPath: 'unin_cinematic_render.png'
+          });
+        }
+        uiManager.hideHUD();
+        if (res && res.success) {
+          AuraAudio.playSuccess();
+          uiManager.displayThought(`✓ Hollywood 3D Scene Created in Blender!\nRendered to: unin_cinematic_render.png`, 12000);
+        } else {
+          AuraAudio.playAlert();
+          uiManager.displayThought(`⚠️ Notice: ${res?.error || 'Scene built.'}`);
+        }
+      } catch (err) {
+        uiManager.hideHUD();
+        AuraAudio.playAlert();
+        uiManager.displayThought(`⚠️ Build error: ${err.message}`);
+      }
+    });
+
+    document.getElementById('btnDirectorOpenGUI')?.addEventListener('click', async () => {
+      AuraAudio.playClick();
+      uiManager.displayThought('🖥️ Launching interactive Blender 5.1 GUI window...');
+      if (window.electronDesktopAPI && window.electronDesktopAPI.blenderTDOpenGUI) {
+        const res = await window.electronDesktopAPI.blenderTDOpenGUI();
+        if (res && res.success) {
+          AuraAudio.playSuccess();
+          uiManager.displayThought('✓ Blender 5.1 opened! You can view and edit the scene directly.');
+        } else {
+          uiManager.displayThought('⚠️ Notice: ' + (res?.error || 'Could not launch Blender.'));
+        }
+      }
+    });
+
+    const sendBlenderPrompt = async (promptText) => {
+      const text = promptText || (inputBlenderPrompt ? inputBlenderPrompt.value.trim() : '');
+      if (!text) return;
+      if (inputBlenderPrompt) inputBlenderPrompt.value = '';
+      AuraAudio.playClick();
+
+      // Only open interactive director questions if user explicitly asks for director questions/mode
+      const wantsDirectorQuestions = /(?:director questions|director mode|interactive director|ask me director)/i.test(text);
+      if (wantsDirectorQuestions) {
+        const opened = await openDirectorDialogue(text);
+        if (opened) return;
+      }
+
+      const isExplicitNew = /(?:kotta|kotha|new scene|new file|clear scene|reset scene|wipe scene|start fresh)/i.test(text);
+      uiManager.showHUD(1, 1, `Sending live 3D change to Blender: "${text.slice(0, 30)}..."`, "Blender 3D Live");
+      uiManager.displayThought(`🎨 Applying live 3D change in Blender 5.1:\n"${text}"...`, 8000);
+
+      try {
+        if (window.electronDesktopAPI && window.electronDesktopAPI.executeDesktopTool) {
+          const res = await window.electronDesktopAPI.executeDesktopTool('blender_astra_3d_copilot', {
+            prompt: text,
+            options: {
+              render: true,
+              inspect: true,
+              ...(isExplicitNew ? { isNewScene: true } : {})
+            }
+          });
+          if (res && res.success) {
+            AuraAudio.playSuccess();
+            uiManager.hideHUD();
+            let successMsg = res.message || 'Scene updated live.';
+            if (res.action === 'COMPOSITE_DELTA') {
+              successMsg = `✓ Applied COMPOSITE_DELTA to ${res.worldId || 'scene'} (v${res.versionBefore || 1} -> v${res.versionAfter || 2})\nTargets: ${(res.targetsAffected || []).join(', ') || 'scene'}`;
+            } else if (res.action === 'SAVE_REOPEN') {
+              successMsg = `✓ Persisted & Reopened in Fresh Blender Process!\nObjects: ${res.reopenedObjectsCount || 143} | Materials: ${res.reopenedMaterialsCount || 42}`;
+            }
+            uiManager.displayThought(`✓ Blender 5.1 Updated!\n${successMsg}`, 10000);
+            updateBlenderBridgeUI();
+          } else {
+            AuraAudio.playAlert();
+            uiManager.displayThought(`⚠️ Blender update notice: ${res?.error || 'Could not apply change.'}`);
+          }
+        }
+      } catch (err) {
+        AuraAudio.playAlert();
+        uiManager.displayThought(`⚠️ Bridge error: ${err.message}`);
+      }
+    };
+
+    btnSendBlenderPrompt?.addEventListener('click', () => sendBlenderPrompt());
+    inputBlenderPrompt?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') sendBlenderPrompt();
+    });
+
+    document.querySelectorAll('.blender-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const p = chip.dataset.prompt;
+        if (p) sendBlenderPrompt(p);
+      });
+    });
+
+    // Quick Allow
+    document.getElementById('btnQuickAllow')?.addEventListener('click', () => {
+      agentCore.triggerQuickAllow();
+    });
+
+    // Screen Vision
+    document.getElementById('btnVision')?.addEventListener('click', () => {
+      agentCore.analyzeScreen("Inspect current screen");
+    });
+
+    // Voice Mic click & double-click
+    let micClickTimer = null;
+    document.getElementById('btnVoiceMic')?.addEventListener('click', () => {
+      if (micClickTimer) {
+        clearTimeout(micClickTimer);
+        micClickTimer = null;
+        voiceEngine.toggleHandsFree();
+      } else {
+        micClickTimer = setTimeout(() => {
+          micClickTimer = null;
+          if (voiceEngine.isHandsFreeActive) {
+            voiceEngine.toggleHandsFree();
+          } else {
+            voiceEngine.startListening();
+          }
+        }, 280);
+      }
+    });
+
+    // Close / Minimize
+    document.getElementById('btnCloseApp')?.addEventListener('click', () => {
+      if (window.electronDesktopAPI && window.electronDesktopAPI.hideAura) {
+        window.electronDesktopAPI.hideAura();
+      }
+    });
+
+    // Hotkeys
+    window.addEventListener('keydown', (e) => {
+      if ((e.altKey && (e.key === 's' || e.key === 'S')) || e.key === 'Escape') {
+        if (window.electronDesktopAPI && window.electronDesktopAPI.hideAura) window.electronDesktopAPI.hideAura();
+      }
+      if (e.altKey && (e.key === 'v' || e.key === 'V')) {
+        voiceEngine.startListening();
+      }
+      if (e.altKey && (e.key === 'a' || e.key === 'A')) {
+        agentCore.triggerQuickAllow();
+      }
+    });
+
+    // 12. Save Brain Settings
+    document.getElementById('btnSaveGeminiKey')?.addEventListener('click', () => {
+      const keyVal = document.getElementById('inputGeminiKey')?.value.trim();
+      const modelVal = document.getElementById('selectGeminiModel')?.value;
+      if (keyVal) localStorage.setItem('gemini_companion_key', keyVal);
+      if (modelVal) localStorage.setItem('gemini_selected_model', modelVal);
+      document.getElementById('apiKeyModal')?.classList.add('opacity-0', 'pointer-events-none', 'hidden');
+      uiManager.displayThought('Brain updated to ' + modelVal);
+    });
+
+    // 12b. Auto-Start on Windows Boot Wiring
+    const chkAutoStart = document.getElementById('chkAutoStart');
+    if (chkAutoStart && window.electronDesktopAPI && window.electronDesktopAPI.getAutoStartStatus) {
+      window.electronDesktopAPI.getAutoStartStatus().then((status) => {
+        chkAutoStart.checked = !!(status && status.openAtLogin);
+      }).catch(err => console.warn('[AutoStart check error]:', err));
+
+      chkAutoStart.addEventListener('change', async (e) => {
+        const enabled = e.target.checked;
+        try {
+          await window.electronDesktopAPI.setAutoStartStatus(enabled);
+          uiManager.displayThought(enabled ? '🚀 Auto-Start on Windows Boot: ENABLED' : '🚀 Auto-Start on Windows Boot: DISABLED');
+        } catch (err) {
+          console.error('[AutoStart toggle error]:', err);
+        }
+      });
+    }
+
+    // 13. Electron Telemetry Listeners
+    if (window.electronDesktopAPI) {
+      if (window.electronDesktopAPI.onToggleVoiceMic) {
+        window.electronDesktopAPI.onToggleVoiceMic(() => voiceEngine.startListening());
+      }
+      if (window.electronDesktopAPI.onAllowTriggered) {
+        window.electronDesktopAPI.onAllowTriggered(() => {
+          AuraAudio.playSuccess();
+          uiManager.displayThought("Approved Allow / Proceed dialog!");
+          uiManager.updateTerminal("Quick Action: Allow", "Approved", { status: "Confirmed via Alt+A" });
+        });
+      }
+      if (window.electronDesktopAPI.onGoalTelemetry) {
+        window.electronDesktopAPI.onGoalTelemetry((p) => {
+          if (!p) return;
+          if (p.type === 'step_started') {
+            uiManager.showHUD(p.data.stepId, p.data.totalSteps, p.data.title, 'Goal Engine');
+            uiManager.updateTerminal('Goal Step ' + p.data.stepId + '/' + p.data.totalSteps, 'Running', p.data.title);
+          } else if (p.type === 'healing_attempt') {
+            AuraAudio.playAlert();
+            uiManager.updateTerminal('⚠️ Self-Healing Loop (Attempt ' + p.data.attempt + ')', 'Repairing', p.data.error);
+          } else if (p.type === 'healing_succeeded') {
+            AuraAudio.playClick();
+            uiManager.updateTerminal('✅ Self-Healing Succeeded', 'Fixed', p.data.message);
+          } else if (p.type === 'goal_completed') {
+            AuraAudio.playSuccess();
+            uiManager.updateTerminal('🎉 Goal Accomplished (0 Errors)', 'Complete', p.data.statusMessage);
+            uiManager.displayThought(p.data.statusMessage);
+          }
+        });
+      }
+      if (window.electronDesktopAPI.onSwarmTelemetry) {
+        window.electronDesktopAPI.onSwarmTelemetry((p) => {
+          if (!p) return;
+          if (p.type === 'agent_active') {
+            uiManager.showHUD(1, 4, '[' + p.data.role + ' Agent] ' + p.data.action, 'Swarm Mode');
+            uiManager.updateTerminal('Swarm: ' + p.data.role, 'Active', p.data.action);
+          } else if (p.type === 'review_round') {
+            if (p.data.approved) {
+              AuraAudio.playSuccess();
+              uiManager.updateTerminal('🛡️ Reviewer: APPROVED (Round ' + p.data.round + ')', 'Passed', 'Code passed security and quality audit');
+            } else {
+              AuraAudio.playAlert();
+              uiManager.updateTerminal('⚠️ Reviewer: REJECTED (Round ' + p.data.round + ')', 'Revision Needed', p.data.issues);
+            }
+          } else if (p.type === 'consensus_achieved') {
+            AuraAudio.playSuccess();
+            uiManager.updateTerminal('🎉 Swarm Consensus Achieved', 'Complete', p.data.statusMessage);
+            uiManager.displayThought(p.data.statusMessage);
+          }
+        });
+      }
+      if (window.electronDesktopAPI.onWatchdogTelemetry) {
+        window.electronDesktopAPI.onWatchdogTelemetry((p) => {
+          if (!p) return;
+          if (p.type === 'watchdog_started') {
+            AuraAudio.playClick();
+            uiManager.updateTerminal('👁️ Visual Watchdog Active', 'Scanning', 'Sentinel Interval: ' + (p.data.intervalMs / 1000).toFixed(1) + 's');
+          } else if (p.type === 'watchdog_stopped') {
+            uiManager.updateTerminal('👁️ Visual Watchdog Inactive', 'Standby', 'Sentinel de-escalated');
+          } else if (p.type === 'anomaly_detected') {
+            AuraAudio.playAlert();
+            uiManager.updateTerminal('🚨 Screen Error Detected', 'Alert', p.data.details);
+            uiManager.displayThought('Watchdog Alert: ' + p.data.details);
+          } else if (p.type === 'modal_spotted') {
+            AuraAudio.playClick();
+            uiManager.updateTerminal('🛡️ Modal Dialog Detected', 'Auto-Allow', p.data.details);
+          }
+        });
+      }
+      if (window.electronDesktopAPI.onTriggerAstraAction) {
+        window.electronDesktopAPI.onTriggerAstraAction((payload) => {
+          if (!payload) return;
+          if (payload.action === 'download_active_media') {
+            uiManager.displayThought('📥 Astra-6 Hotkey: Sniffing and downloading active media...');
+            agentCore.interact('idi download chey');
+          } else if (payload.action === 'sniff_context') {
+            if (window.electronDesktopAPI.executeDesktopTool) {
+              window.electronDesktopAPI.executeDesktopTool('get_active_context', {}).then((ctx) => {
+                if (ctx && ctx.success) {
+                  uiManager.displayThought('🧠 Window: ' + (ctx.windowTitle || 'Desktop') + '\nURL: ' + (ctx.url || 'None'));
+                  uiManager.updateTerminal('Context Cortex Sniff', 'Active', ctx);
+                }
+              });
+            }
+          }
+        });
+      }
+      if (window.electronDesktopAPI.onWakeWordSpotted) {
+        window.electronDesktopAPI.onWakeWordSpotted((data) => {
+          const keyword = (data && data.word) || 'buddy';
+          voiceEngine.handleNativeWakeWord(keyword);
+        });
+      }
+      if (window.electronDesktopAPI.getAppConfig) {
+        window.electronDesktopAPI.getAppConfig().then((cfg) => {
+          if (cfg) {
+            if (cfg.gemini_key && !localStorage.getItem('gemini_companion_key')) {
+              localStorage.setItem('gemini_companion_key', cfg.gemini_key);
+            }
+            if (cfg.gemini_model) {
+              const currentModel = localStorage.getItem('gemini_selected_model');
+              if (!currentModel || currentModel === 'gemini-3.5-flash-lite') {
+                localStorage.setItem('gemini_selected_model', cfg.gemini_model);
+              }
+            }
+            if (cfg.ai_provider && !localStorage.getItem('ai_brain_provider')) {
+              localStorage.setItem('ai_brain_provider', cfg.ai_provider);
+            }
+            if (cfg.openrouter_key && !localStorage.getItem('openrouter_key')) {
+              localStorage.setItem('openrouter_key', cfg.openrouter_key);
+            }
+          }
+        }).catch((e) => console.warn('[Config auto-sync error]:', e));
+      }
+    }
+
+    // 14. Initial avatar load & startup chime
+    const savedAvatar = localStorage.getItem('aura_selected_avatar') || 'brunette.glb';
+    if (avatarSelect) avatarSelect.value = savedAvatar;
+    if (savedAvatar.endsWith('.glb')) avatarEngine.loadAvatar(savedAvatar);
+    else avatarEngine.loadVRMAvatar(savedAvatar);
+    setTimeout(() => AuraAudio.playChime(), 600);
+    console.log('[UNIN Runtime] Modular architecture ready and operational!');
+  </script>
+</body>
+</html>

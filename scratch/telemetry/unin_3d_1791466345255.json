@@ -1,0 +1,347 @@
+{
+  "taskId": "unin_3d_1791466345255",
+  "prompt": "Create a photorealistic Harley Davidson motorcycle on a wet Indian street at night, with rain, puddles, reflections, traffic lights, atmospheric fog and cinematic camera composition",
+  "timestamp": "2026-10-08T13:32:25.255Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "A photorealistic Harley Davidson motorcycle parked on a wet Indian urban street at night, featuring heavy rain, reflective puddles, atmospheric fog, and cinematic lighting.",
+      "heroEntities": [
+        {
+          "id": "hero_motorcycle",
+          "name": "Harley Davidson Motorcycle",
+          "category": "vehicle",
+          "description": "A classic American cruiser motorcycle, highly detailed with chrome accents, dark metallic paint, and realistic wear. Parked on the street.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            0.9,
+            2.2,
+            1.2
+          ],
+          "materials": [
+            "metallic_paint",
+            "chrome",
+            "rubber",
+            "leather",
+            "glass",
+            "wet_surface"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "traffic_lights",
+          "curbs",
+          "puddles",
+          "street_lamps",
+          "road_markings",
+          "distant_buildings"
+        ]
+      },
+      "weather": {
+        "precipitation": "rain",
+        "puddles": true,
+        "wetReflections": true,
+        "fogDensity": 0.5
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "amber",
+          "cyan",
+          "deep_midnight",
+          "red_green_traffic"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "constraints": [
+        "wet asphalt mirror reflections",
+        "accurate ground contact",
+        "high-poly bevels on motorcycle",
+        "realistic rain streaks and splashes",
+        "volumetric fog interaction with lights"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791466353190",
+      "version": "2.0.0",
+      "summary": "A photorealistic Harley Davidson motorcycle parked on a wet Indian urban street at night, featuring heavy rain, reflective puddles, atmospheric fog, and cinematic lighting.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "traffic_lights",
+          "curbs",
+          "puddles",
+          "street_lamps",
+          "road_markings",
+          "distant_buildings"
+        ]
+      },
+      "weather": {
+        "precipitation": "rain",
+        "puddles": true,
+        "wetReflections": true,
+        "fogDensity": 0.5
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "amber",
+          "cyan",
+          "deep_midnight",
+          "red_green_traffic"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "entities": [
+        {
+          "id": "hero_motorcycle",
+          "name": "Harley Davidson Motorcycle",
+          "category": "vehicle",
+          "role": "hero",
+          "description": "A classic American cruiser motorcycle, highly detailed with chrome accents, dark metallic paint, and realistic wear. Parked on the street.",
+          "estimatedDimensions": [
+            0.9,
+            2.2,
+            1.2
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "metallic_paint",
+            "chrome",
+            "rubber",
+            "leather",
+            "glass",
+            "wet_surface"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "LOCAL_CATALOG",
+            "path": "C:/Users/subba/Downloads/prime -ps/face of me/tree.glb",
+            "format": "GLB",
+            "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+            "reason": "Matched verified local repository asset \"tree\"",
+            "limitations": "Static pre-authored geometry",
+            "sanitizationRequired": true
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_wet_asphalt",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with wet_asphalt PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "wet_asphalt"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "urban_street",
+              "baseSurface": "wet_asphalt",
+              "secondaryProps": [
+                "traffic_lights",
+                "curbs",
+                "puddles",
+                "street_lamps",
+                "road_markings",
+                "distant_buildings"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 35,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 1.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "wet asphalt mirror reflections",
+        "accurate ground contact",
+        "high-poly bevels on motorcycle",
+        "realistic rain streaks and splashes",
+        "volumetric fog interaction with lights"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Harley Davidson Motorcycle",
+      "strategy": "LOCAL_CATALOG",
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "reason": "Matched verified local repository asset \"tree\"",
+      "limitations": "Static pre-authored geometry",
+      "timestamp": 1791466353190
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791466353745
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Harley Davidson Motorcycle)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791466354765
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791466355282
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791466355819
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791466356348
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 1,
+      "flaws": [
+        {
+          "code": "DIMENSION_TOO_SMALL",
+          "severity": "HIGH",
+          "target": "hero_motorcycle",
+          "actualMax": 0,
+          "targetMax": 2.2,
+          "message": "Hero entity scale is too small (0.00m vs target 2.20m)."
+        }
+      ],
+      "metrics": {
+        "objectsCount": 20,
+        "totalTriangles": 14505,
+        "totalVertices": 13111,
+        "lightsCount": 5,
+        "camerasCount": 2,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -3.6,
+            -4.8,
+            1.35
+          ],
+          "focalLength": 35,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 1.8,
+          "focusDistance": 6.14
+        }
+      },
+      "timestamp": 1791466356834
+    }
+  ],
+  "corrections": [
+    {
+      "appliedCount": 1,
+      "fixes": [
+        {
+          "flaw": "DIMENSION_TOO_SMALL",
+          "target": "hero_motorcycle",
+          "action": "Upscale by 22.00x"
+        }
+      ],
+      "timestamp": 1791466357025
+    }
+  ],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 16916,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png"
+  }
+}

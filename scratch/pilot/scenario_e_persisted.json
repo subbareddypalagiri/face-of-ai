@@ -1,0 +1,575 @@
+{
+  "worldId": "unin_world_1791728128767_ep8p2",
+  "version": 7,
+  "createdAt": "2026-10-11T14:15:28.767Z",
+  "updatedAt": "2026-10-11T14:16:55.435Z",
+  "activeCheckpoint": "C:/Users/subba/Downloads/prime -ps/face of me/scratch/checkpoints/checkpoint_1791728209896_post_op_1791728207923_804c.blend",
+  "blendFilePath": null,
+  "lastSavedBlendPath": "C:/Users/subba/Downloads/prime -ps/face of me/scratch/checkpoints/checkpoint_1791728209896_post_op_1791728207923_804c.blend",
+  "currentTask": {
+    "taskId": "unin_3d_1791728128766",
+    "prompt": "Create a motorcycle scene on a coastal highway."
+  },
+  "environmentState": {
+    "baseSurface": "wet_asphalt",
+    "weather": "clear",
+    "fogDensity": 0.02,
+    "puddles": false,
+    "timeOfDay": "sunset"
+  },
+  "lightingState": {
+    "mood": "cinematic_contrast",
+    "timeOfDay": "sunset",
+    "keyColor": [
+      1,
+      0.95,
+      0.88
+    ],
+    "rimColor": [
+      0.2,
+      0.85,
+      1
+    ],
+    "fillColor": [
+      0.4,
+      0.6,
+      0.9
+    ]
+  },
+  "cameraState": {
+    "lensFocalLength": 40,
+    "apertureFStop": 3.2,
+    "targetEntityId": null
+  },
+  "visualPlan": {
+    "visualIntent": {
+      "style": "cinematic_realism",
+      "mood": "moody_contemplative_power",
+      "timeOfDay": "night",
+      "weather": "clear"
+    },
+    "camera": {
+      "shotType": "HERO_MEDIUM",
+      "focalLength": 40,
+      "aperture": 2.8,
+      "sensorWidth": 36,
+      "subject": "harley_davidson_motorcycle",
+      "composition": "RULE_OF_THIRDS",
+      "cameraHeight": 0.85,
+      "cameraDistance": 3.6,
+      "cameraAngle": "LOW_ANGLE_HERO",
+      "dofEnabled": true
+    },
+    "lighting": {
+      "strategy": "MOTIVATED_COASTAL_NIGHT",
+      "key": {
+        "type": "AREA",
+        "energy": 1250,
+        "color": [
+          0.85,
+          0.92,
+          1
+        ],
+        "size": 2.2,
+        "location": [
+          2.8,
+          -3.2,
+          4.2
+        ]
+      },
+      "fill": {
+        "type": "AREA",
+        "energy": 320,
+        "color": [
+          0.08,
+          0.14,
+          0.28
+        ],
+        "size": 5,
+        "location": [
+          -4,
+          -2,
+          2.5
+        ]
+      },
+      "rim": {
+        "type": "SPOT",
+        "energy": 2600,
+        "color": [
+          0.65,
+          0.82,
+          1
+        ],
+        "size": 0.6,
+        "location": [
+          -1.2,
+          4.5,
+          2.8
+        ]
+      },
+      "practicals": [
+        {
+          "type": "SPOT",
+          "description": "motorcycle_headlamp_beam",
+          "energy": 1850,
+          "color": [
+            1,
+            0.95,
+            0.88
+          ],
+          "size": 0.15,
+          "location": [
+            0,
+            -1.8,
+            0.95
+          ]
+        },
+        {
+          "type": "POINT",
+          "description": "rear_taillight_spill",
+          "energy": 140,
+          "color": [
+            1,
+            0.04,
+            0.01
+          ],
+          "size": 0.08,
+          "location": [
+            0,
+            1.4,
+            0.8
+          ]
+        }
+      ]
+    },
+    "environment": {
+      "fog": {
+        "enabled": true,
+        "density": 0.0009,
+        "color": [
+          0.05,
+          0.08,
+          0.14
+        ]
+      },
+      "rain": {
+        "active": false,
+        "puddleCoverage": 0.15
+      },
+      "surfaceWetness": 0.4
+    },
+    "lookDev": {
+      "contrast": "High Contrast",
+      "viewTransform": "AgX",
+      "exposure": -0.5,
+      "materialVariation": true
+    },
+    "qualityProfile": "CINEMATIC"
+  },
+  "animationState": {
+    "timeline": {
+      "start": 1,
+      "end": 120,
+      "fps": 24
+    },
+    "activeTracks": []
+  },
+  "physicsState": {
+    "activeSimulations": []
+  },
+  "vfxState": {
+    "activeVFX": [],
+    "rain": {
+      "enabled": false
+    },
+    "weather": "clear"
+  },
+  "entities": {
+    "unin.environment.foundation": {
+      "uninId": "unin.environment.foundation",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.environment.foundation",
+      "category": "environment",
+      "role": "foundation",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.478Z",
+      "updatedAt": "2026-10-11T14:16:00.478Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": [
+          "wet_asphalt"
+        ]
+      }
+    },
+    "hero_motorcycle": {
+      "uninId": "hero_motorcycle",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "hero_motorcycle",
+      "category": "vehicle",
+      "role": "hero",
+      "assetId": "HERO_MOTORCYCLE_ASSEMBLY",
+      "version": 2,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:39.374Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "dimensions": [
+          0.9,
+          2.2,
+          1.25
+        ],
+        "location": [
+          0,
+          0,
+          0
+        ],
+        "strategy": "PROCEDURAL_ASSEMBLY",
+        "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": [],
+        "primaryColor": "red"
+      }
+    },
+    "unin.lighting.key": {
+      "uninId": "unin.lighting.key",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.lighting.key",
+      "category": "light",
+      "role": "lighting",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.lighting.rim": {
+      "uninId": "unin.lighting.rim",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.lighting.rim",
+      "category": "light",
+      "role": "lighting",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.lighting.fill": {
+      "uninId": "unin.lighting.fill",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.lighting.fill",
+      "category": "light",
+      "role": "lighting",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.camera.primary": {
+      "uninId": "unin.camera.primary",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.camera.primary",
+      "category": "camera",
+      "role": "camera",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.camera.look_target": {
+      "uninId": "unin.camera.look_target",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.camera.look_target",
+      "category": "camera",
+      "role": "target",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.prop.curb_L": {
+      "uninId": "unin.prop.curb_L",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.prop.curb_L",
+      "category": "prop",
+      "role": "prop",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.prop.curb_R": {
+      "uninId": "unin.prop.curb_R",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.prop.curb_R",
+      "category": "prop",
+      "role": "prop",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.light.streetlamp_1": {
+      "uninId": "unin.light.streetlamp_1",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.light.streetlamp_1",
+      "category": "light",
+      "role": "prop",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    },
+    "unin.light.streetlamp_2": {
+      "uninId": "unin.light.streetlamp_2",
+      "worldId": "unin_world_1791728128767_ep8p2",
+      "blenderName": "unin.light.streetlamp_2",
+      "category": "light",
+      "role": "prop",
+      "assetId": null,
+      "version": 1,
+      "createdAt": "2026-10-11T14:16:00.479Z",
+      "updatedAt": "2026-10-11T14:16:00.479Z",
+      "status": "ACTIVE",
+      "metadata": {
+        "estimatedDimensions": [
+          1,
+          1,
+          1
+        ],
+        "targetLocation": [
+          0,
+          0,
+          0
+        ],
+        "materials": []
+      }
+    }
+  },
+  "mutationHistory": [
+    {
+      "operationId": "op_1791728128768_0ieo",
+      "versionBefore": 1,
+      "versionAfter": 2,
+      "action": "CREATE_WORLD",
+      "entityIds": [],
+      "timestamp": "2026-10-11T14:15:28.767Z",
+      "status": "SUCCEEDED",
+      "details": {
+        "prompt": "Create a motorcycle scene on a coastal highway.",
+        "taskId": "unin_3d_1791728128766"
+      }
+    },
+    {
+      "operationId": "op_1791728199374_zcrk",
+      "versionBefore": 2,
+      "versionAfter": 3,
+      "action": "VFX_CHANGE",
+      "entityIds": [
+        "unin.vfx.rain_emitter"
+      ],
+      "timestamp": "2026-10-11T14:16:39.374Z",
+      "status": "SUCCEEDED",
+      "details": {
+        "rainActive": true,
+        "action": "START",
+        "weather": "rain"
+      }
+    },
+    {
+      "operationId": "op_1791728199374_q2pk",
+      "versionBefore": 3,
+      "versionAfter": 4,
+      "action": "ENVIRONMENT_CHANGE",
+      "entityIds": [
+        "unin.environment.foundation"
+      ],
+      "timestamp": "2026-10-11T14:16:39.374Z",
+      "status": "SUCCEEDED",
+      "details": {
+        "timeOfDay": "sunset"
+      }
+    },
+    {
+      "operationId": "op_1791728199374_pqla",
+      "versionBefore": 4,
+      "versionAfter": 5,
+      "action": "MATERIAL_CHANGE",
+      "entityIds": [
+        "hero_motorcycle"
+      ],
+      "timestamp": "2026-10-11T14:16:39.374Z",
+      "status": "SUCCEEDED",
+      "details": {
+        "color": [
+          0.85,
+          0.04,
+          0.04,
+          1
+        ],
+        "colorName": "red",
+        "subTarget": "body"
+      }
+    },
+    {
+      "operationId": "op_1791728210866_dl6j",
+      "versionBefore": 5,
+      "versionAfter": 6,
+      "action": "VFX_CHANGE",
+      "entityIds": [
+        "unin.vfx.rain_emitter"
+      ],
+      "timestamp": "2026-10-11T14:16:50.866Z",
+      "status": "SUCCEEDED",
+      "details": {
+        "rainActive": false,
+        "action": "STOP",
+        "weather": "clear"
+      }
+    },
+    {
+      "operationId": "op_1791728210867_377o",
+      "versionBefore": 6,
+      "versionAfter": 7,
+      "action": "ENVIRONMENT_CHANGE",
+      "entityIds": [
+        "unin.environment.foundation"
+      ],
+      "timestamp": "2026-10-11T14:16:50.867Z",
+      "status": "SUCCEEDED",
+      "details": {
+        "timeOfDay": "sunset"
+      }
+    }
+  ]
+}

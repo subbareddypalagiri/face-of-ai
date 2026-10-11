@@ -1,0 +1,19 @@
+{
+  "center": [
+    0.0,
+    0.022,
+    1.403
+  ],
+  "dims": [
+    1.465,
+    1.471,
+    2.85
+  ],
+  "fit_dist": 6.65,
+  "cam_loc": [
+    -3.667,
+    -5.215,
+    3.236
+  ],
+  "render": "C:/Users/subba/Downloads/prime -ps/face of me/scratch/test_framed_render.png"
+}

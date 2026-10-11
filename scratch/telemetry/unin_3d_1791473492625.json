@@ -1,0 +1,405 @@
+{
+  "taskId": "unin_3d_1791473492625",
+  "prompt": "Create a cinematic cyberpunk city with wet asphalt road and neon lights",
+  "timestamp": "2026-10-08T15:31:32.626Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "Autonomous 3D build for: Create a cinematic cyberpunk city with wet asphalt road and neon lights",
+      "heroEntities": [
+        {
+          "id": "hero_subject",
+          "name": "Custom 3D Subject",
+          "category": "prop",
+          "description": "Create a cinematic cyberpunk city with wet asphalt road and neon lights",
+          "importance": "hero",
+          "estimatedDimensions": [
+            1.5,
+            2,
+            1.5
+          ],
+          "materials": [
+            "principled_pbr"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "curbs",
+          "street_lights",
+          "puddles"
+        ]
+      },
+      "weather": {
+        "precipitation": "rain",
+        "puddles": true,
+        "wetReflections": true,
+        "fogDensity": 0.015
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "cyan",
+          "amber",
+          "deep_navy"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791473494245",
+      "version": "2.0.0",
+      "summary": "Autonomous 3D build for: Create a cinematic cyberpunk city with wet asphalt road and neon lights",
+      "style": "photorealistic",
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "curbs",
+          "street_lights",
+          "puddles"
+        ]
+      },
+      "weather": {
+        "precipitation": "rain",
+        "puddles": true,
+        "wetReflections": true,
+        "fogDensity": 0.015
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "cyan",
+          "amber",
+          "deep_navy"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "entities": [
+        {
+          "id": "hero_subject",
+          "name": "Custom 3D Subject",
+          "category": "prop",
+          "role": "hero",
+          "description": "Create a cinematic cyberpunk city with wet asphalt road and neon lights",
+          "estimatedDimensions": [
+            1.5,
+            2,
+            1.5
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "principled_pbr"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "PROCEDURAL_ASSEMBLY",
+            "provider": "ProceduralAssetProvider",
+            "assemblyType": "PROCEDURAL_FOCAL_HERO",
+            "path": null,
+            "format": "PROCEDURAL",
+            "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+            "confidence": 0.65,
+            "reason": "Generating tailored procedural PBR focal mesh with micro-bevels for \"Custom 3D Subject\"",
+            "limitations": "Procedural component geometry",
+            "targetDimensions": [
+              1.5,
+              2,
+              1.5
+            ],
+            "sanitizationRequired": false,
+            "validation": {
+              "valid": true
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "No verified local asset matches \"Custom 3D Subject\" (prop)"
+              },
+              {
+                "provider": "CachedAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CACHE",
+                "reason": "No cached asset found for \"Custom 3D Subject\""
+              },
+              {
+                "provider": "RemoteAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "REMOTE_CATALOG",
+                "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+              },
+              {
+                "provider": "AI3DAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "AI_GENERATION",
+                "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+              },
+              {
+                "provider": "ProceduralAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 0.65,
+                "strategy": "PROCEDURAL_ASSEMBLY",
+                "reason": "Generating tailored procedural PBR focal mesh with micro-bevels for \"Custom 3D Subject\""
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_wet_asphalt",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with wet_asphalt PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "wet_asphalt"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "urban_street",
+              "baseSurface": "wet_asphalt",
+              "secondaryProps": [
+                "curbs",
+                "street_lights",
+                "puddles"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 35,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 1.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Custom 3D Subject",
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "PROCEDURAL_FOCAL_HERO",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "reason": "Generating tailored procedural PBR focal mesh with micro-bevels for \"Custom 3D Subject\"",
+      "limitations": "Procedural component geometry",
+      "path": null,
+      "format": "PROCEDURAL",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Custom 3D Subject\" (prop)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Custom 3D Subject\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.65,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Generating tailored procedural PBR focal mesh with micro-bevels for \"Custom 3D Subject\""
+        }
+      ],
+      "validation": {
+        "valid": true
+      },
+      "timestamp": 1791473494252
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791473494869
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Custom 3D Subject)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791473495343
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791473496143
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791473496705
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791473497261
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 0,
+      "flaws": [],
+      "metrics": {
+        "objectsCount": 16,
+        "totalTriangles": 8500,
+        "totalVertices": 4393,
+        "lightsCount": 6,
+        "camerasCount": 2,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -2.2,
+            -3.2,
+            1.1
+          ],
+          "focalLength": 35,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 1.8,
+          "focusDistance": 3.91
+        }
+      },
+      "timestamp": 1791473497739
+    }
+  ],
+  "corrections": [],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 10786,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png"
+  }
+}

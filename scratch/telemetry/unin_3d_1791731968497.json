@@ -1,0 +1,418 @@
+{
+  "taskId": "unin_3d_1791731968497",
+  "prompt": "Create a detailed chair.",
+  "timestamp": "2026-10-11T15:19:28.498Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "Autonomous 3D build for: Create a detailed chair.",
+      "heroEntities": [
+        {
+          "id": "hero_chair",
+          "name": "Ergonomic Wooden Chair",
+          "category": "furniture",
+          "description": "Timber frame chair with upholstered seat cushion, curved backrest and tapered legs",
+          "importance": "hero",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            0.95
+          ],
+          "materials": [
+            "oak_wood",
+            "fabric_cushion",
+            "dark_steel"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "curbs",
+          "street_lights",
+          "puddles"
+        ]
+      },
+      "weather": {
+        "precipitation": "none",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.015
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "cyan",
+          "amber",
+          "deep_navy"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791731970194",
+      "version": "2.0.0",
+      "summary": "Autonomous 3D build for: Create a detailed chair.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "curbs",
+          "street_lights",
+          "puddles"
+        ]
+      },
+      "weather": {
+        "precipitation": "none",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.015
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "cyan",
+          "amber",
+          "deep_navy"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "entities": [
+        {
+          "id": "hero_chair",
+          "name": "Ergonomic Wooden Chair",
+          "category": "furniture",
+          "role": "hero",
+          "description": "Timber frame chair with upholstered seat cushion, curved backrest and tapered legs",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            0.95
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "oak_wood",
+            "fabric_cushion",
+            "dark_steel"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "LOCAL_CATALOG",
+            "provider": "LocalAssetProvider",
+            "assemblyType": null,
+            "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+            "format": "GLB",
+            "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+            "confidence": 1,
+            "reason": "Exact name match for verified asset \"Ergonomic Office Chair\"",
+            "limitations": "Static pre-authored geometry",
+            "targetDimensions": [
+              0.6,
+              0.6,
+              0.95
+            ],
+            "sanitizationRequired": true,
+            "validation": {
+              "valid": true,
+              "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+              "errors": [],
+              "warnings": [],
+              "metrics": {
+                "format": "GLB",
+                "sizeBytes": 154880,
+                "estimatedTriangles": 2248,
+                "vertexCount": 4194,
+                "meshCount": 11,
+                "materialCount": 3,
+                "hasTextures": false,
+                "checksum": "e73c7a7b1750bc670bc9ef6761947cabb5b4a69d46408be8ad10a65cc8b7d1d3"
+              }
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 1,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "Exact name match for verified asset \"Ergonomic Office Chair\""
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_wet_asphalt",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with wet_asphalt PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "wet_asphalt"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "urban_street",
+              "baseSurface": "wet_asphalt",
+              "secondaryProps": [
+                "curbs",
+                "street_lights",
+                "puddles"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 35,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 1.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Ergonomic Wooden Chair",
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "reason": "Exact name match for verified asset \"Ergonomic Office Chair\"",
+      "limitations": "Static pre-authored geometry",
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+      "format": "GLB",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Ergonomic Office Chair\""
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 154880,
+          "estimatedTriangles": 2248,
+          "vertexCount": 4194,
+          "meshCount": 11,
+          "materialCount": 3,
+          "hasTextures": false,
+          "checksum": "e73c7a7b1750bc670bc9ef6761947cabb5b4a69d46408be8ad10a65cc8b7d1d3"
+        }
+      },
+      "timestamp": 1791731970206
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791731974431
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Ergonomic Wooden Chair)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791731975213
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791731975813
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791731976507
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791731977179
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 1,
+      "flaws": [
+        {
+          "code": "DIMENSION_TOO_SMALL",
+          "severity": "HIGH",
+          "target": "hero_chair",
+          "actualMax": 0,
+          "targetMax": 0.95,
+          "message": "Hero entity scale is too small (0.00m vs target 0.95m)."
+        }
+      ],
+      "metrics": {
+        "objectsCount": 27,
+        "totalTriangles": 10736,
+        "totalVertices": 8579,
+        "lightsCount": 84,
+        "camerasCount": 19,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -2.76,
+            -3.91,
+            1.49
+          ],
+          "focalLength": 35,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 1.8,
+          "focusDistance": 4.9
+        }
+      },
+      "timestamp": 1791731977877
+    }
+  ],
+  "corrections": [
+    {
+      "appliedCount": 1,
+      "fixes": [
+        {
+          "flaw": "DIMENSION_TOO_SMALL",
+          "target": "hero_chair",
+          "action": "Upscale by 3.00x"
+        }
+      ],
+      "timestamp": 1791731977979
+    }
+  ],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 25552,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 6,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.88,
+      "defects": [
+        {
+          "id": "defect_geom_floating",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "Object \"hero_chair\" is floating 0.01m above the ground plane.",
+          "confidence": 0.95,
+          "target": "hero_chair",
+          "recommendedAction": "GROUND_OBJECT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0.0112
+          }
+        }
+      ],
+      "criticalCount": 1,
+      "highCount": 0,
+      "mediumCount": 0,
+      "lowCount": 0,
+      "critiqueSummary": "Telemetry inspection: 1 defects identified, score 6.0/10"
+    }
+  }
+}

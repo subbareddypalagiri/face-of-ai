@@ -1,0 +1,506 @@
+{
+  "taskId": "unin_3d_1791725419480",
+  "prompt": "Create a detailed chair in a realistic studio.",
+  "timestamp": "2026-10-11T13:30:19.480Z",
+  "stages": {
+    "intent": {
+      "taskType": "add_entity",
+      "visualFidelity": "photorealistic",
+      "summary": "A detailed chair placed in a realistic studio environment.",
+      "heroEntities": [
+        {
+          "id": "hero_chair",
+          "name": "Detailed Chair",
+          "category": "prop",
+          "description": "A highly detailed chair, rendered with photorealistic materials and textures.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            1
+          ],
+          "materials": [
+            "wood",
+            "fabric",
+            "metal"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "scifi_interior",
+        "baseSurface": "concrete",
+        "secondaryProps": [
+          "studio_lights",
+          "backdrops",
+          "camera_equipment"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "noon",
+      "lighting": {
+        "primaryType": "studio_3point",
+        "mood": "bright_natural",
+        "colors": [
+          "white",
+          "soft_grey"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "eye_level",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "constraints": [
+        "high-poly",
+        "accurate material definition",
+        "studio lighting setup"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791725421542",
+      "version": "2.0.0",
+      "summary": "A detailed chair placed in a realistic studio environment.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "scifi_interior",
+        "baseSurface": "concrete",
+        "secondaryProps": [
+          "studio_lights",
+          "backdrops",
+          "camera_equipment"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "noon",
+      "lighting": {
+        "primaryType": "studio_3point",
+        "mood": "bright_natural",
+        "colors": [
+          "white",
+          "soft_grey"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "eye_level",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "entities": [
+        {
+          "id": "hero_chair",
+          "name": "Detailed Chair",
+          "category": "prop",
+          "role": "hero",
+          "description": "A highly detailed chair, rendered with photorealistic materials and textures.",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "wood",
+            "fabric",
+            "metal"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "LOCAL_CATALOG",
+            "provider": "LocalAssetProvider",
+            "assemblyType": null,
+            "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+            "format": "GLB",
+            "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+            "confidence": 1,
+            "reason": "Exact name match for verified asset \"Ergonomic Office Chair\"",
+            "limitations": "Static pre-authored geometry",
+            "targetDimensions": [
+              0.6,
+              0.6,
+              1
+            ],
+            "sanitizationRequired": true,
+            "validation": {
+              "valid": true,
+              "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+              "errors": [],
+              "warnings": [],
+              "metrics": {
+                "format": "GLB",
+                "sizeBytes": 154880,
+                "estimatedTriangles": 2248,
+                "vertexCount": 4194,
+                "meshCount": 11,
+                "materialCount": 3,
+                "hasTextures": false,
+                "checksum": "e73c7a7b1750bc670bc9ef6761947cabb5b4a69d46408be8ad10a65cc8b7d1d3"
+              }
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 1,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "Exact name match for verified asset \"Ergonomic Office Chair\""
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_concrete",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with concrete PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "concrete"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "scifi_interior",
+              "baseSurface": "concrete",
+              "secondaryProps": [
+                "studio_lights",
+                "backdrops",
+                "camera_equipment"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 50,
+            "cameraAngle": "eye_level",
+            "enableDoF": true,
+            "apertureFStop": 2.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "high-poly",
+        "accurate material definition",
+        "studio lighting setup"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Detailed Chair",
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "reason": "Exact name match for verified asset \"Ergonomic Office Chair\"",
+      "limitations": "Static pre-authored geometry",
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+      "format": "GLB",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Ergonomic Office Chair\""
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 154880,
+          "estimatedTriangles": 2248,
+          "vertexCount": 4194,
+          "meshCount": 11,
+          "materialCount": 3,
+          "hasTextures": false,
+          "checksum": "e73c7a7b1750bc670bc9ef6761947cabb5b4a69d46408be8ad10a65cc8b7d1d3"
+        }
+      },
+      "timestamp": 1791725421548
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725424187
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Detailed Chair)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725425259
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725425793
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725426328
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725426798
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 1,
+      "flaws": [
+        {
+          "code": "DIMENSION_TOO_SMALL",
+          "severity": "HIGH",
+          "target": "hero_chair",
+          "actualMax": 0,
+          "targetMax": 1,
+          "message": "Hero entity scale is too small (0.00m vs target 1.00m)."
+        }
+      ],
+      "metrics": {
+        "objectsCount": 22,
+        "totalTriangles": 11400,
+        "totalVertices": 8905,
+        "lightsCount": 4,
+        "camerasCount": 2,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -1.43,
+            -2.08,
+            0.75
+          ],
+          "focalLength": 50,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 2.8,
+          "focusDistance": 2.53
+        }
+      },
+      "timestamp": 1791725427340
+    }
+  ],
+  "corrections": [
+    {
+      "appliedCount": 1,
+      "fixes": [
+        {
+          "flaw": "DIMENSION_TOO_SMALL",
+          "target": "hero_chair",
+          "action": "Upscale by 3.00x"
+        }
+      ],
+      "timestamp": 1791725427460
+    }
+  ],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 23214,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 1,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.95,
+      "defects": [
+        {
+          "id": "defect_1_semantic",
+          "dimension": "SEMANTIC",
+          "severity": "CRITICAL",
+          "description": "The primary subject requested was a detailed chair, but the image displays abstract cylindrical shapes and intersecting rods, not a chair.",
+          "confidence": 0.99,
+          "target": "hero_chair",
+          "recommendedAction": "REPLACE_ASSET",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_2_silhouette",
+          "dimension": "SILHOUETTE",
+          "severity": "CRITICAL",
+          "description": "The rendered objects do not resemble a chair in any form; they appear to be primitive shapes or placeholders.",
+          "confidence": 0.98,
+          "target": "hero_chair",
+          "recommendedAction": "REPLACE_ASSET",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_3_composition",
+          "dimension": "COMPOSITION",
+          "severity": "MEDIUM",
+          "description": "The composition is unbalanced, with the main elements clustered in the center and obscured by foreground elements. The rule of thirds is not applied.",
+          "confidence": 0.85,
+          "target": "scene",
+          "recommendedAction": "MOVE_CAMERA",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_4_scale",
+          "dimension": "SCALE",
+          "severity": "LOW",
+          "description": "It is difficult to assess scale accurately due to the abstract nature of the objects and lack of context, but the proportions of the cylindrical elements seem arbitrary.",
+          "confidence": 0.7,
+          "target": "scene",
+          "recommendedAction": "RESCALE_HERO",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_5_spatial",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "The objects appear to be grounded, but the overall scene lacks a clear sense of depth or spatial arrangement that would be expected in a studio setting.",
+          "confidence": 0.98,
+          "target": "scene",
+          "recommendedAction": "ADJUST_SPATIAL_LAYOUT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0.0118
+          }
+        },
+        {
+          "id": "defect_6_material",
+          "dimension": "MATERIAL",
+          "severity": "LOW",
+          "description": "The materials appear somewhat flat and lack detailed PBR properties. Reflections are present but not convincing, and roughness is not clearly defined.",
+          "confidence": 0.7,
+          "target": "scene",
+          "recommendedAction": "RECOLOR_MATERIAL",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_7_lighting",
+          "dimension": "LIGHTING",
+          "severity": "MEDIUM",
+          "description": "The lighting is harsh and creates strong, unmotivated highlights and shadows. The background gradient suggests a studio setup, but the lighting on the objects themselves is not balanced or realistic.",
+          "confidence": 0.8,
+          "target": "scene",
+          "recommendedAction": "ADJUST_LIGHTING",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_8_camera",
+          "dimension": "CAMERA",
+          "severity": "MEDIUM",
+          "description": "The focal length appears wide, leading to some distortion. The depth of field is minimal, which is acceptable for a studio shot, but the overall camera angle does not present the subject effectively.",
+          "confidence": 0.75,
+          "target": "scene",
+          "recommendedAction": "ADJUST_CAMERA_SETTINGS",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_9_completeness",
+          "dimension": "COMPLETENESS",
+          "severity": "HIGH",
+          "description": "The scene is missing essential elements of a studio environment, such as a backdrop, floor texture, or any indication of studio equipment. The primary subject itself is also incomplete as it's not a chair.",
+          "confidence": 0.9,
+          "target": "scene",
+          "recommendedAction": "ADD_ENVIRONMENT_ELEMENTS",
+          "actionParams": {}
+        },
+        {
+          "id": "defect_10_visual_hierarchy",
+          "dimension": "VISUAL_HIERARCHY",
+          "severity": "CRITICAL",
+          "description": "There is no clear visual hierarchy. The abstract elements do not establish dominance, and the viewer's attention is not drawn to a specific subject.",
+          "confidence": 0.95,
+          "target": "scene",
+          "recommendedAction": "RESTRUCTURE_SCENE",
+          "actionParams": {}
+        }
+      ],
+      "criticalCount": 4,
+      "highCount": 1,
+      "mediumCount": 3,
+      "lowCount": 2,
+      "critiqueSummary": "The render fails to meet the user's request for a detailed chair in a realistic studio. The scene lacks the primary subject, exhibits poor composition, unconvincing materials and lighting, and a general absence of studio context. Significant rework is needed to introduce the chair and establish a believable environment."
+    }
+  }
+}

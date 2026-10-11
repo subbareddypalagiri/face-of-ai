@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNIN Central Unit — Neural Beam Network</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #030303;
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .font-hud { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono-hud { font-family: 'JetBrains Mono', monospace; }
+
+    /* Node circular styling */
+    .neural-node {
+      position: relative;
+      width: 72px;
+      height: 72px;
+      border-radius: 9999px;
+      background: #0d0f17;
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 20;
+    }
+    .neural-node:hover {
+      transform: scale(1.1);
+      border-color: rgba(0, 240, 255, 0.7);
+      box-shadow: 0 0 35px rgba(0, 240, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    }
+    .neural-node.active-node {
+      border-color: #00f0ff;
+      box-shadow: 0 0 40px rgba(0, 240, 255, 0.55);
+    }
+
+    /* Central Master Nexus */
+    .center-nexus {
+      width: 104px;
+      height: 104px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 50% 50%, #151b2e 0%, #060913 100%);
+      border: 2px solid rgba(0, 240, 255, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 60px rgba(0, 240, 255, 0.35), inset 0 0 20px rgba(0, 240, 255, 0.2);
+      position: relative;
+      cursor: pointer;
+      z-index: 30;
+      transition: all 0.4s ease;
+    }
+    .center-nexus:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 80px rgba(0, 240, 255, 0.6), inset 0 0 30px rgba(0, 240, 255, 0.3);
+      border-color: #00f0ff;
+    }
+
+    /* Rotating outer halo */
+    .nexus-halo {
+      position: absolute;
+      inset: -8px;
+      border-radius: 9999px;
+      border: 1px dashed rgba(0, 240, 255, 0.35);
+      animation: rotateHalo 24s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes rotateHalo {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Modal / Detail Drawer */
+    .drawer-card {
+      background: rgba(10, 15, 28, 0.92);
+      backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.15);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-4 md:p-8 select-none">
+
+  <!-- Top Ambient Navigation Bar -->
+  <header class="flex items-center justify-between pb-4 border-b border-white/5 relative z-40 max-w-7xl mx-auto w-full">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-xl bg-cyan-500/10 border border-cyan-400/40 flex items-center justify-center text-cyan-300 font-hud font-bold text-sm shadow-lg shadow-cyan-500/20">
+        U
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-sm font-bold tracking-wider font-hud text-white uppercase">UNIN CENTRAL UNIT</h1>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono-hud bg-cyan-950 text-cyan-300 border border-cyan-500/30">
+            NEURAL BEAM MESH
+          </span>
+        </div>
+        <p class="text-[11px] text-slate-400 font-mono-hud">
+          Composio Inboxes ⇄ UNIN Core ⇄ 202-Agent Swarm & MCP Arsenal
+        </p>
+      </div>
+    </div>
+
+    <!-- Telemetry Pills -->
+    <div class="flex items-center gap-3 font-mono-hud text-xs">
+      <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900/80 border border-white/10 text-slate-300">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>10 PILLARS CONNECTED</span>
+      </div>
+      <div class="px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-500/40 text-cyan-300 font-bold" id="liveTime">
+        13:20:00 UTC
+      </div>
+    </div>
+  </header>
+
+  <!-- The Main Beam Canvas Stage -->
+  <main class="flex-1 flex items-center justify-center my-6 relative max-w-6xl mx-auto w-full min-h-[580px]" id="beamContainer">
+    
+    <!-- SVG Vector Overlay for Animated Beams -->
+    <svg id="beamSvg" class="pointer-events-none absolute inset-0 w-full h-full z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Dynamic Animated Gradients (Exact Magic UI linearGradient Animation) -->
+        <linearGradient id="beamGrad-left1" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#3b82f6" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#00f0ff" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"></stop>
+          <animate attributeName="x1" from="-100%" to="200%" dur="3.2s" repeatCount="indefinite" />
+          <animate attributeName="x2" from="0%" to="300%" dur="3.2s" repeatCount="indefinite" />
+        </linearGradient>
+
+        <linearGradient id="beamGrad-left2" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#10b981" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#34d399" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#10b981" stop-opacity="0"></stop>
+          <animate attributeName="x1" from="-100%" to="200%" dur="2.8s" repeatCount="indefinite" />
+          <animate attributeName="x2" from="0%" to="300%" dur="2.8s" repeatCount="indefinite" />
+        </linearGradient>
+
+        <linearGradient id="beamGrad-left3" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#f59e0b" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#fbbf24" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"></stop>
+          <animate attributeName="x1" from="-100%" to="200%" dur="3.6s" repeatCount="indefinite" />
+          <animate attributeName="x2" from="0%" to="300%" dur="3.6s" repeatCount="indefinite" />
+        </linearGradient>
+
+        <linearGradient id="beamGrad-right1" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#ec4899" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#f43f5e" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#ec4899" stop-opacity="0"></stop>
+          <animate attributeName="x1" from="-100%" to="200%" dur="2.6s" repeatCount="indefinite" />
+          <animate attributeName="x2" from="0%" to="300%" dur="2.6s" repeatCount="indefinite" />
+        </linearGradient>
+
+        <linearGradient id="beamGrad-right2" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#a855f7" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"></stop>
+          <animate attributeName="x1" from="-100%" to="200%" dur="3.4s" repeatCount="indefinite" />
+          <animate attributeName="x2" from="0%" to="300%" dur="3.4s" repeatCount="indefinite" />
+        </linearGradient>
+
+        <linearGradient id="beamGrad-right3" gradientUnits="userSpaceOnUse" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#06b6d4" stop-opacity="0"></stop>
+          <stop offset="50%" stop-color="#38bdf8" stop-opacity="1"></stop>
+          <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"></stop>
+          <animate attributeName="x1" from="-100%" to="200%" dur="3.0s" repeatCount="indefinite" />
+          <animate attributeName="x2" from="0%" to="300%" dur="3.0s" repeatCount="indefinite" />
+        </linearGradient>
+      </defs>
+
+      <!-- Path Elements will be drawn dynamically via JS matching AnimatedBeam.tsx math -->
+      <g id="pathsGroup"></g>
+    </svg>
+
+    <!-- Node Grid Layout -->
+    <div class="w-full flex items-center justify-between px-4 sm:px-16 z-20 relative">
+      
+      <!-- LEFT WING: Real Inboxes & Life Apps (Pillar 2: Composio) -->
+      <div class="flex flex-col gap-10 md:gap-14">
+        
+        <!-- Node 1: Google Drive (Official 3-Color SVG) -->
+        <div id="node-gdrive" onclick="openNodeDrawer('gdrive')" class="neural-node group" title="Google Drive (Files & Cloud Sync)">
+          <svg class="w-8 h-8 transition-transform group-hover:scale-110" viewBox="0 0 87.3 78" xmlns="http://www.w3.org/2000/svg">
+            <path d="m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z" fill="#0066da"/>
+            <path d="m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44c-.8 1.4-1.2 2.95-1.2 4.5h27.5z" fill="#00ac47"/>
+            <path d="m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z" fill="#ea4335"/>
+            <path d="m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z" fill="#00832d"/>
+            <path d="m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z" fill="#2684fc"/>
+            <path d="m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z" fill="#ffba00"/>
+          </svg>
+        </div>
+
+        <!-- Node 2: Notion (Official Brand SVG) -->
+        <div id="node-notion" onclick="openNodeDrawer('notion')" class="neural-node group" title="Notion Workspace & Knowledge">
+          <svg class="w-8 h-8 transition-transform group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.333 13.889c3.111 2.333 4.222 2.444 10.334 2l49.222-3.889c2.333-.222 3.889.889 3.889 3.222v62.444c0 3.667-1.333 5.444-6.333 5.889l-51.556 3.111c-4 .222-5.778-1-5.778-4.667V17c0-2.333-1.111-3.222-3.222-4.333l3.444 1.222z" fill="#fff"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M29.667 15.889l49.222-3.889c2.333-.222 3.889.889 3.889 3.222v62.444c0 3.667-1.333 5.444-6.333 5.889l-51.556 3.111c-4 .222-5.778-1-5.778-4.667V17c0-2.333-1.111-3.222-3.222-4.333L19.333 14c3.111 2.333 4.222 2.444 10.334 1.889zm6.666 12.333c-3.111.222-4 .444-5.666-.889l-2.778-2.111v46.111c2.111 1.222 4.444 1.889 7 1.667l25.334-1.556c4-.222 5.333-2.111 5.333-5.222V28.222l-29.223 1.778v-1.778zm19.889 3.778l-15.445.889v29.444l15.445-.889V32zm8.778-.556l-5.445.333v29.444l5.445-.333V31.444z" fill="#000"/>
+          </svg>
+        </div>
+
+        <!-- Node 3: WhatsApp (Official Green SVG) -->
+        <div id="node-whatsapp" onclick="openNodeDrawer('whatsapp')" class="neural-node group" title="WhatsApp Business & Personal Messaging">
+          <svg class="w-8 h-8 transition-transform group-hover:scale-110" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 2.5C8.544 2.5 2.5 8.544 2.5 16c0 2.656.772 5.132 2.1 7.228L3 29.5l6.504-1.57A13.435 13.435 0 0 0 16 29.5c7.456 0 13.5-6.044 13.5-13.5S23.456 2.5 16 2.5z" fill="#25D366"/>
+            <path d="M22.84 19.38c-.376-.188-2.224-1.096-2.57-1.22-.344-.128-.596-.188-.848.188s-.976 1.22-1.196 1.472c-.22.25-.44.28-.816.094-.376-.188-1.588-.584-3.024-1.864-1.116-.996-1.87-2.228-2.09-2.604-.22-.376-.024-.58.164-.768.168-.168.376-.44.564-.66.188-.22.25-.376.376-.628.124-.25.064-.47-.032-.66-.094-.188-.848-2.044-1.16-2.796-.304-.734-.616-.634-.848-.646-.22-.012-.472-.012-.724-.012-.25 0-.66.094-1.004.47-.344.376-1.316 1.284-1.316 3.13 0 1.848 1.348 3.632 1.536 3.884.188.25 2.65 4.048 6.42 5.676.896.388 1.596.62 2.14.794.9.288 1.72.248 2.368.15.724-.108 2.224-.91 2.536-1.788.316-.88.316-1.632.22-1.788-.092-.16-.344-.25-.72-.438z" fill="#fff"/>
+          </svg>
+        </div>
+
+      </div>
+
+      <!-- CENTER HUB: UNIN Autonomous Quantum Nexus -->
+      <div class="relative flex items-center justify-center">
+        <div class="nexus-halo"></div>
+        <div id="node-center" onclick="openNodeDrawer('unin')" class="center-nexus group" title="UNIN Supreme Mind Core">
+          <!-- Animated OpenAI/UNIN Geometric Nexus Vector -->
+          <svg class="w-12 h-12 text-cyan-300 transition-transform group-hover:scale-110" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M83.4 46.5c-.7-5.5-3.8-10.4-8.5-13.4.5-3.5-.2-7.1-2-10.2-2.8-4.8-7.7-7.9-13.2-8.5-2.8-2.2-6.3-3.4-10-3.4-6.3 0-12.2 3.6-15 9.3-3.6.4-7 2.1-9.5 4.9-3.9 4.3-5.5 10.1-4.3 15.8-2.8 2.2-4.7 5.4-5.3 9-.9 5.5.7 11.2 4.4 15.4-.5 3.5.2 7.1 2 10.2 2.8 4.8 7.7 7.9 13.2 8.5 2.8 2.2 6.3 3.4 10 3.4 6.3 0 12.2-3.6 15-9.3 3.6-.4 7-2.1 9.5-4.9 3.9-4.3 5.5-10.1 4.3-15.8 2.8-2.2 4.7-5.4 5.3-9 .9-5.5-.7-11.2-4.4-15.4zM50 63c-7.2 0-13-5.8-13-13s5.8-13 13-13 13 5.8 13 13-5.8 13-13 13z"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- RIGHT WING: Real Execution & Tools (Pillars 1 & 3: Swarm & MCP) -->
+      <div class="flex flex-col gap-10 md:gap-14">
+        
+        <!-- Node 4: Google Docs (Official Blue Sheet SVG) -->
+        <div id="node-gdocs" onclick="openNodeDrawer('gdocs')" class="neural-node group" title="Google Docs & Autonomous Writing">
+          <svg class="w-8 h-8 transition-transform group-hover:scale-110" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H8a2 2 0 0 0-2 2v24a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-6-6z" fill="#4285F4"/>
+            <path d="M20 2v6h6L20 2z" fill="#A1C2FA"/>
+            <path d="M11 14h10v2H11v-2zm0 4h10v2H11v-2zm0 4h7v2H11v-2z" fill="#fff"/>
+          </svg>
+        </div>
+
+        <!-- Node 5: Zapier / Composio (Official Brand SVG) -->
+        <div id="node-zapier" onclick="openNodeDrawer('zapier')" class="neural-node group" title="Zapier & Composio 1000+ App Gateway">
+          <svg class="w-8 h-8 transition-transform group-hover:scale-110" viewBox="0 0 24 24" fill="#FF4A00" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 0a12 12 0 1 0 12 12A12 12 0 0 0 12 0zm1.75 6.75h3.5v3.5h-3.5zm-7 0h3.5v3.5h-3.5zm0 7h3.5v3.5h-3.5zm7 0h3.5v3.5h-3.5z"/>
+            <path d="M13.5 4.5h-3v15h3v-15zM4.5 10.5h15v3h-15z" fill="#fff"/>
+          </svg>
+        </div>
+
+        <!-- Node 6: Blender 5.1 (Official 3D Mocap Engine SVG) -->
+        <div id="node-blender" onclick="openNodeDrawer('blender')" class="neural-node group" title="Blender 5.1 (Live Port 8192 & Audio2Face)">
+          <svg class="w-8 h-8 transition-transform group-hover:scale-110" viewBox="0 0 256 208" xmlns="http://www.w3.org/2000/svg">
+            <path d="M111.4 79.7c-5.7-10.4-1.9-23.5 8.5-29.2L199 6c10.4-5.7 23.5-1.9 29.2 8.5 5.7 10.4 1.9 23.5-8.5 29.2l-79.1 44.5c-10.4 5.7-23.5 1.9-29.2-8.5z" fill="#225785"/>
+            <path d="M128 64c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64z" fill="#e87d0d"/>
+            <circle cx="128" cy="128" r="32" fill="#fff"/>
+            <circle cx="128" cy="128" r="18" fill="#225785"/>
+          </svg>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Interactive Drawer / Action Card (Pops up when clicking any node) -->
+  <div id="drawerOverlay" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="drawer-card max-w-lg w-full rounded-3xl p-6 relative border border-cyan-500/40 space-y-4 animate-scale-in">
+      <button onclick="closeNodeDrawer()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg font-mono-hud">✕</button>
+      
+      <div class="flex items-center gap-3">
+        <div id="drawerIconBox" class="w-12 h-12 rounded-2xl bg-slate-900 border border-white/10 flex items-center justify-center"></div>
+        <div>
+          <h2 id="drawerTitle" class="text-lg font-bold font-hud text-white">Node Details</h2>
+          <span id="drawerStatus" class="text-xs font-mono-hud text-emerald-400 font-semibold">STATUS: CONNECTED</span>
+        </div>
+      </div>
+
+      <div id="drawerBody" class="text-xs text-slate-300 leading-relaxed font-mono-hud bg-slate-950/60 p-4 rounded-xl border border-white/5 space-y-2">
+        <!-- Injected Content -->
+      </div>
+
+      <div id="drawerActions" class="flex items-center gap-2 pt-2">
+        <!-- Injected Action Buttons -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Jarvis Status Bar -->
+  <footer class="flex items-center justify-between pt-4 border-t border-white/5 text-xs font-mono-hud text-slate-500 max-w-7xl mx-auto w-full">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      <span class="text-slate-400">ANIMATED BEAM CONSTELLATION • FAANG-TIER ZERO-LATENCY REAL-TIME MESH</span>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-slate-400">CLICK ANY NODE TO INSPECT OR DISPATCH</span>
+    </div>
+  </footer>
+
+  <script>
+    // Live Clock
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('liveTime').innerText = now.toTimeString().split(' ')[0] + ' UTC';
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Exact AnimatedBeam Math Implementation from React Framer Component
+    const container = document.getElementById('beamContainer');
+    const centerNode = document.getElementById('node-center');
+    const pathsGroup = document.getElementById('pathsGroup');
+
+    // Define connection pairs and their beam gradient styling
+    const connections = [
+      { from: 'node-gdrive', to: 'node-center', grad: 'beamGrad-left1', curvature: 60, reverse: false },
+      { from: 'node-notion', to: 'node-center', grad: 'beamGrad-left2', curvature: 0, reverse: false },
+      { from: 'node-whatsapp', to: 'node-center', grad: 'beamGrad-left3', curvature: -60, reverse: false },
+      { from: 'node-center', to: 'node-gdocs', grad: 'beamGrad-right1', curvature: -60, reverse: false },
+      { from: 'node-center', to: 'node-zapier', grad: 'beamGrad-right2', curvature: 0, reverse: false },
+      { from: 'node-center', to: 'node-blender', grad: 'beamGrad-right3', curvature: 60, reverse: false },
+    ];
+
+    function renderBeams() {
+      if (!container || !centerNode) return;
+      const cRect = container.getBoundingClientRect();
+      pathsGroup.innerHTML = '';
+
+      connections.forEach((conn, index) => {
+        const fromEl = document.getElementById(conn.from);
+        const toEl = document.getElementById(conn.to);
+        if (!fromEl || !toEl) return;
+
+        const rectA = fromEl.getBoundingClientRect();
+        const rectB = toEl.getBoundingClientRect();
+
+        const startX = rectA.left - cRect.left + rectA.width / 2;
+        const startY = rectA.top - cRect.top + rectA.height / 2;
+        const endX = rectB.left - cRect.left + rectB.width / 2;
+        const endY = rectB.top - cRect.top + rectB.height / 2;
+
+        // Quadratic bezier with curvature control
+        const controlX = (startX + endX) / 2;
+        const controlY = ((startY + endY) / 2) - conn.curvature;
+        const d = `M ${startX},${startY} Q ${controlX},${controlY} ${endX},${endY}`;
+
+        // 1. Static Dark Base Path
+        const basePath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        basePath.setAttribute('d', d);
+        basePath.setAttribute('stroke', '#1e293b');
+        basePath.setAttribute('stroke-width', '2.5');
+        basePath.setAttribute('stroke-opacity', '0.45');
+        basePath.setAttribute('stroke-linecap', 'round');
+        basePath.setAttribute('fill', 'none');
+        pathsGroup.appendChild(basePath);
+
+        // 2. Animated Radiant Beam Path
+        const beamPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        beamPath.setAttribute('d', d);
+        beamPath.setAttribute('stroke', `url(#${conn.grad})`);
+        beamPath.setAttribute('stroke-width', '3');
+        beamPath.setAttribute('stroke-linecap', 'round');
+        beamPath.setAttribute('stroke-opacity', '1');
+        beamPath.setAttribute('fill', 'none');
+        beamPath.style.filter = 'drop-shadow(0 0 8px rgba(0, 240, 255, 0.4))';
+        pathsGroup.appendChild(beamPath);
+      });
+    }
+
+    // ResizeObserver ensures mathematical curves update dynamically on window resize
+    const ro = new ResizeObserver(() => renderBeams());
+    ro.observe(container);
+    window.addEventListener('resize', renderBeams);
+    setTimeout(renderBeams, 100);
+
+    // Interactive Node Click Logic
+    const nodeData = {
+      gdrive: {
+        title: 'Google Drive & Cloud Sync',
+        status: '● COMPOSIO OAUTH HEALTHY (14.2 GB Sync)',
+        iconHtml: '<span class="text-2xl">📁</span>',
+        body: '<p>Direct cloud sync active. 14 files indexed today for UNIN context.</p><p class="text-slate-400">Last synchronized: 12 minutes ago.</p>',
+        actions: '<button class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs">Browse Documents</button>'
+      },
+      notion: {
+        title: 'Notion Knowledge Base',
+        status: '● LIVE KNOWLEDGE PIPELINE (4 Pages Updated)',
+        iconHtml: '<span class="text-2xl">⬛</span>',
+        body: '<p>Notion workspace connected via official Composio token. Daily standup notes and project roadmap pages in memory cache.</p>',
+        actions: '<button class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs">Append Quick Note</button>'
+      },
+      whatsapp: {
+        title: 'WhatsApp Communications',
+        status: '● LIVE WHATSAPP WEB RPA ACTIVE',
+        iconHtml: '<span class="text-2xl">🟢</span>',
+        body: '<p>Voice note transcription and automated message scheduler ready. 2 pending incoming chats waiting for response.</p>',
+        actions: '<button class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs">View Unread Chats</button>'
+      },
+      unin: {
+        title: 'UNIN Supreme Mind Core',
+        status: '● NOMINAL • 3 WARM DAEMONS • ZERO TOKEN DRIFT',
+        iconHtml: '<span class="text-2xl text-cyan-300">⚡</span>',
+        body: '<p>Tri-Pillar Master Router active. Coordinating 202 Swarm agents with Composio 1000+ app mesh and local Blender 5.1 session.</p>',
+        actions: '<button class="px-3 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs">Run System Diagnostics</button>'
+      },
+      gdocs: {
+        title: 'Google Docs Autonomous Drafter',
+        status: '● STAGED DRAFT READY',
+        iconHtml: '<span class="text-2xl">📄</span>',
+        body: '<p>Autonomous report drafter. "Q3 Architecture Review" ready for one-click export into your Google Docs drive.</p>',
+        actions: '<button class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs">Export to Docs</button>'
+      },
+      zapier: {
+        title: 'Zapier & Composio Gateway',
+        status: '● 1,000+ TOOLS INVENTORY LOADED',
+        iconHtml: '<span class="text-2xl text-amber-500">⚡</span>',
+        body: '<p>Unified tool gateway. Dynamic schema validation ready for Gmail, Linear, Jira, Slack, and Discord integrations.</p>',
+        actions: '<button class="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs">Open Composio Hub</button>'
+      },
+      blender: {
+        title: 'Blender 5.1 Studio (Port 8192)',
+        status: '● LIVE BRIDGE CONNECTED (hero.glb - 62 Bones)',
+        iconHtml: '<span class="text-2xl text-orange-500">🎨</span>',
+        body: '<p>Live 3D viewport active. Audio2Face microsecond phoneme sync and Cascadeur auto-physics filter engaged.</p>',
+        actions: '<button onclick="alert(\'Action dispatched to Blender Port 8192: Roundhouse Kick + Grounding.\')" class="px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs">⚡ Dispatch Martial Kick</button>'
+      }
+    };
+
+    function openNodeDrawer(id) {
+      const data = nodeData[id];
+      if (!data) return;
+      document.getElementById('drawerTitle').innerText = data.title;
+      document.getElementById('drawerStatus').innerText = data.status;
+      document.getElementById('drawerIconBox').innerHTML = data.iconHtml;
+      document.getElementById('drawerBody').innerHTML = data.body;
+      document.getElementById('drawerActions').innerHTML = data.actions;
+      document.getElementById('drawerOverlay').classList.remove('hidden');
+    }
+
+    function closeNodeDrawer() {
+      document.getElementById('drawerOverlay').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

@@ -1,24 +1,54 @@
 {
-  "name": "vrm-avatar-extension",
-  "version": "1.0.0",
+  "name": "unin-desktop-being",
+  "version": "2.0.0",
+  "description": "UNIN - Universal Neural Intelligence Network Autonomous Desktop Being",
+  "main": "electron-main.js",
   "private": true,
   "scripts": {
-    "build": "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --minify",
-    "dev": "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --watch",
-    "start": "node server.js"
+    "start": "electron electron-main.js",
+    "desktop": "electron electron-main.js",
+    "build:avatar": "esbuild src/avatar.js --bundle --outfile=dist/avatar.bundle.js --format=iife --platform=browser --target=chrome112 --minify",
+    "server": "node server.js",
+    "test": "node scratch/test-tool-registry.js",
+    "test:tools": "node scratch/test-tool-registry.js",
+    "test:goal": "node scratch/test-goal-engine.js",
+    "test:swarm": "node scratch/test-swarm-orchestrator.js",
+    "test:watchdog": "node scratch/test-visual-watchdog.js",
+    "test:voice": "node scratch/test-voice-normalizer.js",
+    "test:scheduler": "node scratch/test-scheduler.js",
+    "test:master": "node scratch/test-unin-3-master.js",
+    "test:neural-audio": "node scratch/test-neural-audio.js",
+    "test:all": "node scratch/test-tool-registry.js && node scratch/test-scheduler.js && node scratch/test-goal-engine.js && node scratch/test-swarm-orchestrator.js && node scratch/test-visual-watchdog.js && node scratch/test-wake-word.js && node scratch/test-unin-3-master.js && node scratch/test-neural-audio.js",
+    "package:dir": "electron-builder --dir",
+    "package:win": "electron-builder --win",
+    "package:portable": "electron-builder --win portable"
   },
-  "dependencies": {
-    "@pixiv/three-vrm": "^2.1.0",
-    "cors": "^2.8.6",
-    "express": "^5.2.1",
-    "mongoose": "^9.6.2",
-    "three": "^0.169.0"
+  "build": {
+    "appId": "com.unin.desktop",
+    "productName": "UNIN",
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "UNIN"
+    },
+    "files": [
+      "**/*",
+      "!release/**/*",
+      "!scratch/**/*",
+      "!**/*.test.js"
+    ]
   },
-  "devDependencies": {
-    "esbuild": "^0.28.0"
-  },
-  "description": "",
-  "main": "content.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/subbareddypalagiri/face-of-ai.git"
@@ -30,5 +60,16 @@
   "bugs": {
     "url": "https://github.com/subbareddypalagiri/face-of-ai/issues"
   },
-  "homepage": "https://github.com/subbareddypalagiri/face-of-ai#readme"
+  "homepage": "https://github.com/subbareddypalagiri/face-of-ai#readme",
+  "dependencies": {
+    "@composio/core": "^0.22.0",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@pixiv/three-vrm": "^3.5.5",
+    "msedge-tts": "^2.0.9",
+    "playwright": "^1.63.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1"
+  }
 }

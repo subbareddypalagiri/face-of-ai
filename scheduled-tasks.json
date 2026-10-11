@@ -1,0 +1,1313 @@
+[
+  {
+    "id": "task_1789900484768_j1xf8a",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1789900486768,
+    "scheduledTime": "04:04:46 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:34:44.856Z",
+    "cancelledAt": "2026-09-20T10:34:44.859Z"
+  },
+  {
+    "id": "task_1789900501951_zbugtl",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1789900503951,
+    "scheduledTime": "04:05:03 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:01.972Z",
+    "cancelledAt": "2026-09-20T10:35:01.976Z"
+  },
+  {
+    "id": "task_1789900501981_xz8p68",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1789901101981,
+    "scheduledTime": "04:15:01 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:01.981Z",
+    "cancelledAt": "2026-09-20T10:35:01.984Z"
+  },
+  {
+    "id": "task_1789900501986_un1sxa",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 04:05:31 pm",
+    "dueEpoch": 1789900531986,
+    "scheduledTime": "04:05:31 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:01.986Z",
+    "cancelledAt": "2026-09-20T10:35:01.987Z"
+  },
+  {
+    "id": "task_1789900501989_bhnf51",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 05:05:01 pm",
+    "dueEpoch": 1789904101988,
+    "scheduledTime": "05:05:01 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:01.989Z",
+    "cancelledAt": "2026-09-20T10:35:01.990Z"
+  },
+  {
+    "id": "task_1789900537334_bjy9np",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1789900539334,
+    "scheduledTime": "04:05:39 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:37.357Z",
+    "cancelledAt": "2026-09-20T10:35:37.360Z"
+  },
+  {
+    "id": "task_1789900537364_kr6t0n",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1789901137363,
+    "scheduledTime": "04:15:37 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:37.364Z",
+    "cancelledAt": "2026-09-20T10:35:37.366Z"
+  },
+  {
+    "id": "task_1789900537368_mnl51j",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 04:06:07 pm",
+    "dueEpoch": 1789900567368,
+    "scheduledTime": "04:06:07 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:37.368Z",
+    "cancelledAt": "2026-09-20T10:35:37.370Z"
+  },
+  {
+    "id": "task_1789900537371_llz6bp",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 05:05:37 pm",
+    "dueEpoch": 1789904137371,
+    "scheduledTime": "05:05:37 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T10:35:37.371Z",
+    "cancelledAt": "2026-09-20T10:35:37.373Z"
+  },
+  {
+    "id": "task_1789917437976_xq0x3k",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1789917439975,
+    "scheduledTime": "08:47:19 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T15:17:18.032Z",
+    "cancelledAt": "2026-09-20T15:17:18.037Z"
+  },
+  {
+    "id": "task_1789917438045_rgp7ca",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1789918038044,
+    "scheduledTime": "08:57:18 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T15:17:18.046Z",
+    "cancelledAt": "2026-09-20T15:17:18.053Z"
+  },
+  {
+    "id": "task_1789917438060_ksreu2",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 08:47:48 pm",
+    "dueEpoch": 1789917468060,
+    "scheduledTime": "08:47:48 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T15:17:18.060Z",
+    "cancelledAt": "2026-09-20T15:17:18.064Z"
+  },
+  {
+    "id": "task_1789917438068_kep6vr",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 09:47:18 pm",
+    "dueEpoch": 1789921038067,
+    "scheduledTime": "09:47:18 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T15:17:18.068Z",
+    "cancelledAt": "2026-09-20T15:17:18.072Z"
+  },
+  {
+    "id": "task_1789920054429_x5i1v9",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1789920056428,
+    "scheduledTime": "09:30:56 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:00:54.471Z",
+    "cancelledAt": "2026-09-20T16:00:54.474Z"
+  },
+  {
+    "id": "task_1789920054482_2n0gkb",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1789920654481,
+    "scheduledTime": "09:40:54 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:00:54.483Z",
+    "cancelledAt": "2026-09-20T16:00:54.487Z"
+  },
+  {
+    "id": "task_1789920054489_16jqkz",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 09:31:24 pm",
+    "dueEpoch": 1789920084489,
+    "scheduledTime": "09:31:24 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:00:54.490Z",
+    "cancelledAt": "2026-09-20T16:00:54.492Z"
+  },
+  {
+    "id": "task_1789920054494_n26gfw",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 10:30:54 pm",
+    "dueEpoch": 1789923654494,
+    "scheduledTime": "10:30:54 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:00:54.494Z",
+    "cancelledAt": "2026-09-20T16:00:54.496Z"
+  },
+  {
+    "id": "task_1789920721325_z63tag",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1789920723325,
+    "scheduledTime": "09:42:03 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:12:01.338Z",
+    "cancelledAt": "2026-09-20T16:12:01.341Z"
+  },
+  {
+    "id": "task_1789920721345_k72vp8",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1789921321344,
+    "scheduledTime": "09:52:01 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:12:01.345Z",
+    "cancelledAt": "2026-09-20T16:12:01.347Z"
+  },
+  {
+    "id": "task_1789920721349_81h5sn",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 09:42:31 pm",
+    "dueEpoch": 1789920751349,
+    "scheduledTime": "09:42:31 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:12:01.349Z",
+    "cancelledAt": "2026-09-20T16:12:01.350Z"
+  },
+  {
+    "id": "task_1789920721352_c4v75m",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 10:42:01 pm",
+    "dueEpoch": 1789924321352,
+    "scheduledTime": "10:42:01 pm",
+    "scheduledDate": "20/9/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-09-20T16:12:01.352Z",
+    "cancelledAt": "2026-09-20T16:12:01.353Z"
+  },
+  {
+    "id": "task_1790923433947_whqpac",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790923435947,
+    "scheduledTime": "12:13:55 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T06:43:54.020Z",
+    "cancelledAt": "2026-10-02T06:43:54.025Z"
+  },
+  {
+    "id": "task_1790923434029_u1y0ay",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790924034029,
+    "scheduledTime": "12:23:54 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T06:43:54.030Z",
+    "cancelledAt": "2026-10-02T06:43:54.032Z"
+  },
+  {
+    "id": "task_1790923434034_sr2yeo",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 12:14:24 pm",
+    "dueEpoch": 1790923464034,
+    "scheduledTime": "12:14:24 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T06:43:54.034Z",
+    "cancelledAt": "2026-10-02T06:43:54.036Z"
+  },
+  {
+    "id": "task_1790923434038_p3agar",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 01:13:54 pm",
+    "dueEpoch": 1790927034038,
+    "scheduledTime": "01:13:54 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T06:43:54.038Z",
+    "cancelledAt": "2026-10-02T06:43:54.039Z"
+  },
+  {
+    "id": "task_1790950653274_sbsk20",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790950655274,
+    "scheduledTime": "07:47:35 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T14:17:33.349Z",
+    "cancelledAt": "2026-10-02T14:17:33.353Z"
+  },
+  {
+    "id": "task_1790950653357_e08ttg",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790951253356,
+    "scheduledTime": "07:57:33 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T14:17:33.357Z",
+    "cancelledAt": "2026-10-02T14:17:33.360Z"
+  },
+  {
+    "id": "task_1790950653362_87alcp",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 07:48:03 pm",
+    "dueEpoch": 1790950683362,
+    "scheduledTime": "07:48:03 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T14:17:33.362Z",
+    "cancelledAt": "2026-10-02T14:17:33.364Z"
+  },
+  {
+    "id": "task_1790950653367_usuoxy",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 08:47:33 pm",
+    "dueEpoch": 1790954253367,
+    "scheduledTime": "08:47:33 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T14:17:33.367Z",
+    "cancelledAt": "2026-10-02T14:17:33.368Z"
+  },
+  {
+    "id": "task_1790961544645_mt5glh",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790961546645,
+    "scheduledTime": "10:49:06 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:19:04.697Z",
+    "cancelledAt": "2026-10-02T17:19:04.700Z"
+  },
+  {
+    "id": "task_1790961544705_hd1ru0",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790962144705,
+    "scheduledTime": "10:59:04 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:19:04.706Z",
+    "cancelledAt": "2026-10-02T17:19:04.710Z"
+  },
+  {
+    "id": "task_1790961544713_3xzt40",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 10:49:34 pm",
+    "dueEpoch": 1790961574713,
+    "scheduledTime": "10:49:34 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:19:04.713Z",
+    "cancelledAt": "2026-10-02T17:19:04.718Z"
+  },
+  {
+    "id": "task_1790961544720_kr25zn",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 11:49:04 pm",
+    "dueEpoch": 1790965144720,
+    "scheduledTime": "11:49:04 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:19:04.721Z",
+    "cancelledAt": "2026-10-02T17:19:04.723Z"
+  },
+  {
+    "id": "task_1790962062624_0hadsm",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790962064624,
+    "scheduledTime": "10:57:44 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:27:42.699Z",
+    "cancelledAt": "2026-10-02T17:27:42.703Z"
+  },
+  {
+    "id": "task_1790962062709_1dyl43",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790962662708,
+    "scheduledTime": "11:07:42 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:27:42.709Z",
+    "cancelledAt": "2026-10-02T17:27:42.714Z"
+  },
+  {
+    "id": "task_1790962062719_zpkjjq",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 10:58:12 pm",
+    "dueEpoch": 1790962092719,
+    "scheduledTime": "10:58:12 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:27:42.719Z",
+    "cancelledAt": "2026-10-02T17:27:42.722Z"
+  },
+  {
+    "id": "task_1790962062724_rw1bv9",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 11:57:42 pm",
+    "dueEpoch": 1790965662724,
+    "scheduledTime": "11:57:42 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:27:42.724Z",
+    "cancelledAt": "2026-10-02T17:27:42.726Z"
+  },
+  {
+    "id": "task_1790962137709_aqfqw9",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790962139709,
+    "scheduledTime": "10:58:59 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:28:57.723Z",
+    "cancelledAt": "2026-10-02T17:28:57.728Z"
+  },
+  {
+    "id": "task_1790962137733_0k8jw6",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790962737733,
+    "scheduledTime": "11:08:57 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:28:57.734Z",
+    "cancelledAt": "2026-10-02T17:28:57.740Z"
+  },
+  {
+    "id": "task_1790962137742_44qyht",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 10:59:27 pm",
+    "dueEpoch": 1790962167742,
+    "scheduledTime": "10:59:27 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:28:57.742Z",
+    "cancelledAt": "2026-10-02T17:28:57.744Z"
+  },
+  {
+    "id": "task_1790962137745_6x8u5z",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 11:58:57 pm",
+    "dueEpoch": 1790965737745,
+    "scheduledTime": "11:58:57 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:28:57.745Z",
+    "cancelledAt": "2026-10-02T17:28:57.747Z"
+  },
+  {
+    "id": "task_1790962813907_2l7880",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790962815907,
+    "scheduledTime": "11:10:15 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:40:13.926Z",
+    "cancelledAt": "2026-10-02T17:40:13.929Z"
+  },
+  {
+    "id": "task_1790962813933_y94bqp",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790963413933,
+    "scheduledTime": "11:20:13 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:40:13.934Z",
+    "cancelledAt": "2026-10-02T17:40:13.938Z"
+  },
+  {
+    "id": "task_1790962813939_wtj7or",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 11:10:43 pm",
+    "dueEpoch": 1790962843939,
+    "scheduledTime": "11:10:43 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:40:13.939Z",
+    "cancelledAt": "2026-10-02T17:40:13.940Z"
+  },
+  {
+    "id": "task_1790962813942_4mtd31",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 12:10:13 am",
+    "dueEpoch": 1790966413942,
+    "scheduledTime": "12:10:13 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T17:40:13.942Z",
+    "cancelledAt": "2026-10-02T17:40:13.943Z"
+  },
+  {
+    "id": "task_1790964192079_mig80c",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790964194079,
+    "scheduledTime": "11:33:14 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:03:12.700Z",
+    "cancelledAt": "2026-10-02T18:03:12.709Z"
+  },
+  {
+    "id": "task_1790964192715_xnqvw4",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790964792715,
+    "scheduledTime": "11:43:12 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:03:12.716Z",
+    "cancelledAt": "2026-10-02T18:03:12.724Z"
+  },
+  {
+    "id": "task_1790964192727_l1md09",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 11:33:42 pm",
+    "dueEpoch": 1790964222727,
+    "scheduledTime": "11:33:42 pm",
+    "scheduledDate": "2/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:03:12.728Z",
+    "cancelledAt": "2026-10-02T18:03:12.731Z"
+  },
+  {
+    "id": "task_1790964192735_h9hx27",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 12:33:12 am",
+    "dueEpoch": 1790967792735,
+    "scheduledTime": "12:33:12 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:03:12.736Z",
+    "cancelledAt": "2026-10-02T18:03:12.740Z"
+  },
+  {
+    "id": "task_1790967531739_ae955k",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790967533738,
+    "scheduledTime": "12:28:53 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:58:51.806Z",
+    "cancelledAt": "2026-10-02T18:58:51.810Z"
+  },
+  {
+    "id": "task_1790967531814_63ck2f",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790968131814,
+    "scheduledTime": "12:38:51 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:58:51.815Z",
+    "cancelledAt": "2026-10-02T18:58:51.817Z"
+  },
+  {
+    "id": "task_1790967531819_bzhmyp",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 12:29:21 am",
+    "dueEpoch": 1790967561819,
+    "scheduledTime": "12:29:21 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:58:51.819Z",
+    "cancelledAt": "2026-10-02T18:58:51.821Z"
+  },
+  {
+    "id": "task_1790967531822_bnupcf",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 01:28:51 am",
+    "dueEpoch": 1790971131822,
+    "scheduledTime": "01:28:51 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:58:51.822Z",
+    "cancelledAt": "2026-10-02T18:58:51.823Z"
+  },
+  {
+    "id": "task_1790967596398_5aiemd",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1790967598397,
+    "scheduledTime": "12:29:58 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:59:56.415Z",
+    "cancelledAt": "2026-10-02T18:59:56.419Z"
+  },
+  {
+    "id": "task_1790967596424_8ubzos",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1790968196424,
+    "scheduledTime": "12:39:56 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:59:56.425Z",
+    "cancelledAt": "2026-10-02T18:59:56.428Z"
+  },
+  {
+    "id": "task_1790967596430_hce8yz",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 12:30:26 am",
+    "dueEpoch": 1790967626430,
+    "scheduledTime": "12:30:26 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:59:56.430Z",
+    "cancelledAt": "2026-10-02T18:59:56.431Z"
+  },
+  {
+    "id": "task_1790967596433_l3qwwr",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 01:29:56 am",
+    "dueEpoch": 1790971196433,
+    "scheduledTime": "01:29:56 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-02T18:59:56.433Z",
+    "cancelledAt": "2026-10-02T18:59:56.434Z"
+  },
+  {
+    "id": "task_1791000052929_pivbsl",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1791000054929,
+    "scheduledTime": "09:30:54 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:00:52.953Z",
+    "cancelledAt": "2026-10-03T04:00:52.958Z"
+  },
+  {
+    "id": "task_1791000052966_3ph4b9",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1791000652966,
+    "scheduledTime": "09:40:52 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:00:52.967Z",
+    "cancelledAt": "2026-10-03T04:00:52.971Z"
+  },
+  {
+    "id": "task_1791000052973_8ywyiz",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 09:31:22 am",
+    "dueEpoch": 1791000082973,
+    "scheduledTime": "09:31:22 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:00:52.973Z",
+    "cancelledAt": "2026-10-03T04:00:52.975Z"
+  },
+  {
+    "id": "task_1791000052976_cj2q1p",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 10:30:52 am",
+    "dueEpoch": 1791003652976,
+    "scheduledTime": "10:30:52 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:00:52.977Z",
+    "cancelledAt": "2026-10-03T04:00:52.979Z"
+  },
+  {
+    "id": "task_1791002243226_uayp8f",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1791002245225,
+    "scheduledTime": "10:07:25 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:37:23.284Z",
+    "cancelledAt": "2026-10-03T04:37:23.293Z"
+  },
+  {
+    "id": "task_1791002243308_vdwt8g",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1791002843307,
+    "scheduledTime": "10:17:23 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:37:23.308Z",
+    "cancelledAt": "2026-10-03T04:37:23.315Z"
+  },
+  {
+    "id": "task_1791002243320_v4fdbq",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 10:07:53 am",
+    "dueEpoch": 1791002273320,
+    "scheduledTime": "10:07:53 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:37:23.321Z",
+    "cancelledAt": "2026-10-03T04:37:23.325Z"
+  },
+  {
+    "id": "task_1791002243328_80j2eb",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 11:07:23 am",
+    "dueEpoch": 1791005843328,
+    "scheduledTime": "11:07:23 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T04:37:23.329Z",
+    "cancelledAt": "2026-10-03T04:37:23.333Z"
+  },
+  {
+    "id": "task_1791007630960_o02j2l",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1791007632960,
+    "scheduledTime": "11:37:12 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T06:07:11.096Z",
+    "cancelledAt": "2026-10-03T06:07:11.110Z"
+  },
+  {
+    "id": "task_1791007631119_wxzbp6",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1791008231119,
+    "scheduledTime": "11:47:11 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T06:07:11.120Z",
+    "cancelledAt": "2026-10-03T06:07:11.128Z"
+  },
+  {
+    "id": "task_1791007631133_jbzc3d",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 11:37:41 am",
+    "dueEpoch": 1791007661133,
+    "scheduledTime": "11:37:41 am",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T06:07:11.133Z",
+    "cancelledAt": "2026-10-03T06:07:11.143Z"
+  },
+  {
+    "id": "task_1791007631148_38y6fs",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 12:37:11 pm",
+    "dueEpoch": 1791011231147,
+    "scheduledTime": "12:37:11 pm",
+    "scheduledDate": "3/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-03T06:07:11.148Z",
+    "cancelledAt": "2026-10-03T06:07:11.152Z"
+  },
+  {
+    "id": "task_1791732366056_xeubka",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1791732368055,
+    "scheduledTime": "08:56:08 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T15:26:06.159Z",
+    "cancelledAt": "2026-10-11T15:26:06.163Z"
+  },
+  {
+    "id": "task_1791732366167_aw11zs",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1791732966167,
+    "scheduledTime": "09:06:06 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T15:26:06.167Z",
+    "cancelledAt": "2026-10-11T15:26:06.170Z"
+  },
+  {
+    "id": "task_1791732366171_23baf9",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 08:56:36 pm",
+    "dueEpoch": 1791732396171,
+    "scheduledTime": "08:56:36 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T15:26:06.172Z",
+    "cancelledAt": "2026-10-11T15:26:06.173Z"
+  },
+  {
+    "id": "task_1791732366174_e8d765",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 09:56:06 pm",
+    "dueEpoch": 1791735966174,
+    "scheduledTime": "09:56:06 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T15:26:06.174Z",
+    "cancelledAt": "2026-10-11T15:26:06.176Z"
+  },
+  {
+    "id": "task_1791737778618_yqpfwv",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "to": "TestUser",
+      "text": "Persistent test message",
+      "contact": "TestUser",
+      "message": "Persistent test message",
+      "phone": ""
+    },
+    "description": "Automated Verification Task",
+    "dueEpoch": 1791737780618,
+    "scheduledTime": "10:26:20 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 2,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T16:56:18.642Z",
+    "cancelledAt": "2026-10-11T16:56:18.647Z"
+  },
+  {
+    "id": "task_1791737778652_ntrqb1",
+    "actionType": "send_whatsapp_message",
+    "params": {
+      "contact": "Jayanth",
+      "message": "Hey Jayanth, build succeeded!",
+      "phone": "+919988776655"
+    },
+    "description": "Auto-resolve phone test",
+    "dueEpoch": 1791738378652,
+    "scheduledTime": "10:36:18 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T16:56:18.653Z",
+    "cancelledAt": "2026-10-11T16:56:18.659Z"
+  },
+  {
+    "id": "task_1791737778663_j45yvq",
+    "actionType": "open_app",
+    "params": {
+      "app": "calc",
+      "appName": "calc"
+    },
+    "description": "open_app for 10:26:48 pm",
+    "dueEpoch": 1791737808663,
+    "scheduledTime": "10:26:48 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 30,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T16:56:18.663Z",
+    "cancelledAt": "2026-10-11T16:56:18.667Z"
+  },
+  {
+    "id": "task_1791737778670_f0ek6e",
+    "actionType": "open_app",
+    "params": {
+      "app": "notepad",
+      "appName": "notepad"
+    },
+    "description": "open_app for 11:26:18 pm",
+    "dueEpoch": 1791741378670,
+    "scheduledTime": "11:26:18 pm",
+    "scheduledDate": "11/10/2026",
+    "delaySeconds": 3600,
+    "status": "CANCELLED",
+    "createdAt": "2026-10-11T16:56:18.670Z",
+    "cancelledAt": "2026-10-11T16:56:18.673Z"
+  }
+]

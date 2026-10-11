@@ -1,0 +1,450 @@
+{
+  "taskId": "unin_3d_1791727129710",
+  "prompt": "Create a motorcycle scene on a coastal highway.",
+  "timestamp": "2026-10-11T13:58:49.710Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "A high-performance motorcycle positioned on a scenic coastal highway during golden hour.",
+      "heroEntities": [
+        {
+          "id": "hero_motorcycle",
+          "name": "Motorcycle",
+          "category": "vehicle",
+          "description": "A sleek, modern sport motorcycle with a metallic paint finish, chrome accents, and high-performance tires.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            0.9,
+            2.2,
+            1.2
+          ],
+          "materials": [
+            "metallic_paint",
+            "chrome",
+            "rubber",
+            "glass",
+            "carbon_fiber"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "coastal_ocean",
+        "baseSurface": "concrete",
+        "secondaryProps": [
+          "guard_rails",
+          "road_markings",
+          "rock_formations",
+          "ocean_waves",
+          "distant_horizon",
+          "sparse_coastal_vegetation"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "golden_hour",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "bright_natural",
+        "colors": [
+          "warm_orange",
+          "sky_blue",
+          "soft_yellow"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "constraints": [
+        "accurate ground contact",
+        "high-poly bevels",
+        "realistic material shaders",
+        "dynamic ocean simulation"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791727138441",
+      "version": "2.0.0",
+      "summary": "A high-performance motorcycle positioned on a scenic coastal highway during golden hour.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "coastal_ocean",
+        "baseSurface": "concrete",
+        "secondaryProps": [
+          "guard_rails",
+          "road_markings",
+          "rock_formations",
+          "ocean_waves",
+          "distant_horizon",
+          "sparse_coastal_vegetation"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "golden_hour",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "bright_natural",
+        "colors": [
+          "warm_orange",
+          "sky_blue",
+          "soft_yellow"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "entities": [
+        {
+          "id": "hero_motorcycle",
+          "name": "Motorcycle",
+          "category": "vehicle",
+          "role": "hero",
+          "description": "A sleek, modern sport motorcycle with a metallic paint finish, chrome accents, and high-performance tires.",
+          "estimatedDimensions": [
+            0.9,
+            2.2,
+            1.2
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "metallic_paint",
+            "chrome",
+            "rubber",
+            "glass",
+            "carbon_fiber"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "PROCEDURAL_ASSEMBLY",
+            "provider": "ProceduralAssetProvider",
+            "assemblyType": "HERO_MOTORCYCLE_ASSEMBLY",
+            "path": null,
+            "format": "PROCEDURAL",
+            "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+            "confidence": 0.85,
+            "reason": "Synthesizing multi-component procedural geometric assembly for Cruiser Motorcycle",
+            "limitations": "Procedural component geometry",
+            "targetDimensions": [
+              0.9,
+              2.2,
+              1.2
+            ],
+            "sanitizationRequired": false,
+            "validation": {
+              "valid": true
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "No verified local asset matches \"Motorcycle\" (vehicle)"
+              },
+              {
+                "provider": "CachedAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CACHE",
+                "reason": "No cached asset found for \"Motorcycle\""
+              },
+              {
+                "provider": "RemoteAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "REMOTE_CATALOG",
+                "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+              },
+              {
+                "provider": "AI3DAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "AI_GENERATION",
+                "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+              },
+              {
+                "provider": "ProceduralAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 0.85,
+                "strategy": "PROCEDURAL_ASSEMBLY",
+                "reason": "Synthesizing multi-component procedural geometric assembly for Cruiser Motorcycle"
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_concrete",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with concrete PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "concrete"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "coastal_ocean",
+              "baseSurface": "concrete",
+              "secondaryProps": [
+                "guard_rails",
+                "road_markings",
+                "rock_formations",
+                "ocean_waves",
+                "distant_horizon",
+                "sparse_coastal_vegetation"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 50,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 2.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "accurate ground contact",
+        "high-poly bevels",
+        "realistic material shaders",
+        "dynamic ocean simulation"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Motorcycle",
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_MOTORCYCLE_ASSEMBLY",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "reason": "Synthesizing multi-component procedural geometric assembly for Cruiser Motorcycle",
+      "limitations": "Procedural component geometry",
+      "path": null,
+      "format": "PROCEDURAL",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Motorcycle\" (vehicle)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Motorcycle\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing multi-component procedural geometric assembly for Cruiser Motorcycle"
+        }
+      ],
+      "validation": {
+        "valid": true
+      },
+      "timestamp": 1791727138448
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791727153976
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Motorcycle)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791727155516
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791727156166
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791727156739
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791727157254
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 0,
+      "flaws": [],
+      "metrics": {
+        "objectsCount": 139,
+        "totalTriangles": 25072,
+        "totalVertices": 13124,
+        "lightsCount": 14,
+        "camerasCount": 4,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -4.8,
+            -6.8,
+            2.6
+          ],
+          "focalLength": 50,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 2.8,
+          "focusDistance": 8.57
+        }
+      },
+      "timestamp": 1791727157797
+    }
+  ],
+  "corrections": [],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 40604,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 6,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.88,
+      "defects": [
+        {
+          "id": "defect_geom_floating",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "Object \"hero_motorcycle\" is floating 0.00m above the ground plane.",
+          "confidence": 0.95,
+          "target": "hero_motorcycle",
+          "recommendedAction": "GROUND_OBJECT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0
+          }
+        }
+      ],
+      "criticalCount": 1,
+      "highCount": 0,
+      "mediumCount": 0,
+      "lowCount": 0,
+      "critiqueSummary": "Telemetry inspection: 1 defects identified, score 6.0/10"
+    }
+  }
+}

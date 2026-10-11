@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNIN Central Unit — 200+ Neural Synapse Mesh</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #020408;
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+    .font-hud { font-family: 'Space Grotesk', sans-serif; }
+    .font-mono-hud { font-family: 'JetBrains Mono', monospace; }
+
+    /* Canvas background */
+    #neuralCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+    }
+
+    /* Glass UI overlay */
+    .glass-hud {
+      background: rgba(8, 12, 22, 0.85);
+      backdrop-filter: blur(24px) saturate(200%);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+    }
+    .hud-chip {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.2s ease;
+    }
+    .hud-chip:hover, .hud-chip.active {
+      border-color: #00f0ff;
+      background: rgba(0, 240, 255, 0.15);
+      color: #00f0ff;
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    /* Central Quantum Reactor */
+    #centerCore {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 88px;
+      height: 88px;
+      border-radius: 9999px;
+      background: radial-gradient(circle at 50% 50%, #172554 0%, #030712 100%);
+      border: 2px solid rgba(0, 240, 255, 0.7);
+      box-shadow: 0 0 60px rgba(0, 240, 255, 0.5), inset 0 0 20px rgba(0, 240, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 30;
+      transition: all 0.3s ease;
+    }
+    #centerCore:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      box-shadow: 0 0 90px rgba(0, 240, 255, 0.8);
+    }
+    .core-ring {
+      position: absolute;
+      inset: -10px;
+      border-radius: 9999px;
+      border: 1px dashed rgba(0, 240, 255, 0.4);
+      animation: spinRing 20s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes spinRing {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="relative flex flex-col justify-between p-4 md:p-6 select-none">
+
+  <!-- Top Floating Command Bar -->
+  <header class="relative z-40 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 max-w-7xl mx-auto w-full glass-hud p-3.5 md:p-4 rounded-2xl">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 to-blue-600 flex items-center justify-center text-white font-hud font-extrabold text-base shadow-lg shadow-cyan-500/30">
+        ⚡
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-base font-extrabold tracking-tight font-hud text-white uppercase">UNIN CENTRAL UNIT</h1>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono-hud font-bold bg-cyan-950 text-cyan-300 border border-cyan-500/40">
+            224 NEURAL SYNAPSE NODES
+          </span>
+        </div>
+        <p class="text-xs text-slate-400 font-mono-hud">
+          202 Swarm Agents • Composio 1000+ Apps • MCP Core Mesh
+        </p>
+      </div>
+    </div>
+
+    <!-- Live Synapse Search & Filters -->
+    <div class="flex flex-wrap items-center gap-2 font-mono-hud text-xs w-full md:w-auto">
+      <div class="relative flex-1 md:w-64">
+        <input id="nodeSearch" type="text" placeholder="Search 200+ agents & apps..." oninput="onSearchNodes(this.value)" class="w-full px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-700/80 text-xs text-slate-100 placeholder-slate-500 outline-none focus:border-cyan-400">
+        <span class="absolute right-2.5 top-2 text-slate-500 text-xs">🔍</span>
+      </div>
+      <button onclick="fireSimulatedTask()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-cyan-500/25 transition-transform active:scale-95">
+        <span>⚡</span> Fire Live Task
+      </button>
+    </div>
+  </header>
+
+  <!-- Lobe Category Quick Filters Ribbon -->
+  <div class="relative z-40 flex items-center gap-2 my-2 max-w-7xl mx-auto w-full overflow-x-auto pb-1 text-xs font-mono-hud">
+    <button onclick="filterLobe('all')" id="btn-all" class="hud-chip active px-3 py-1 rounded-xl font-bold flex items-center gap-1.5 whitespace-nowrap">
+      <span>🌐</span> ALL NODES (224)
+    </button>
+    <button onclick="filterLobe('security')" id="btn-security" class="hud-chip px-3 py-1 rounded-xl flex items-center gap-1.5 whitespace-nowrap">
+      <span>🛡️</span> Security & Audit (28)
+    </button>
+    <button onclick="filterLobe('engineering')" id="btn-engineering" class="hud-chip px-3 py-1 rounded-xl flex items-center gap-1.5 whitespace-nowrap">
+      <span>💻</span> Engineering Swarm (64)
+    </button>
+    <button onclick="filterLobe('devops')" id="btn-devops" class="hud-chip px-3 py-1 rounded-xl flex items-center gap-1.5 whitespace-nowrap">
+      <span>🚀</span> DevOps & Cloud (32)
+    </button>
+    <button onclick="filterLobe('database')" id="btn-database" class="hud-chip px-3 py-1 rounded-xl flex items-center gap-1.5 whitespace-nowrap">
+      <span>🗄️</span> Architecture & DB (36)
+    </button>
+    <button onclick="filterLobe('apps')" id="btn-apps" class="hud-chip px-3 py-1 rounded-xl flex items-center gap-1.5 whitespace-nowrap">
+      <span>📫</span> Composio Apps (42)
+    </button>
+    <button onclick="filterLobe('mcp')" id="btn-mcp" class="hud-chip px-3 py-1 rounded-xl flex items-center gap-1.5 whitespace-nowrap">
+      <span>🔌</span> MCP Tools (22)
+    </button>
+  </div>
+
+  <!-- Central Canvas Viewport -->
+  <div class="flex-1 relative w-full h-full overflow-hidden" id="viewport">
+    <canvas id="neuralCanvas"></canvas>
+
+    <!-- Center Master Nexus Element -->
+    <div id="centerCore" onclick="openCoreInspector()" title="UNIN Supreme Autonomous Core">
+      <div class="core-ring"></div>
+      <svg class="w-10 h-10 text-cyan-300 animate-pulse" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M83.4 46.5c-.7-5.5-3.8-10.4-8.5-13.4.5-3.5-.2-7.1-2-10.2-2.8-4.8-7.7-7.9-13.2-8.5-2.8-2.2-6.3-3.4-10-3.4-6.3 0-12.2 3.6-15 9.3-3.6.4-7 2.1-9.5 4.9-3.9 4.3-5.5 10.1-4.3 15.8-2.8 2.2-4.7 5.4-5.3 9-.9 5.5.7 11.2 4.4 15.4-.5 3.5.2 7.1 2 10.2 2.8 4.8 7.7 7.9 13.2 8.5 2.8 2.2 6.3 3.4 10 3.4 6.3 0 12.2-3.6 15-9.3 3.6-.4 7-2.1 9.5-4.9 3.9-4.3 5.5-10.1 4.3-15.8 2.8-2.2 4.7-5.4 5.3-9 .9-5.5-.7-11.2-4.4-15.4zM50 63c-7.2 0-13-5.8-13-13s5.8-13 13-13 13 5.8 13 13-5.8 13-13 13z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Interactive Node Detail Drawer (Pops up on clicking any node) -->
+  <div id="nodeDrawer" class="fixed inset-y-0 right-0 w-full sm:w-96 glass-hud border-l border-cyan-500/30 z-50 transform translate-x-full transition-transform duration-300 p-6 flex flex-col justify-between">
+    <div class="space-y-4">
+      <div class="flex items-center justify-between pb-3 border-b border-white/10">
+        <div class="flex items-center gap-3">
+          <div id="drawerBadge" class="w-10 h-10 rounded-xl bg-cyan-950 border border-cyan-500/40 flex items-center justify-center text-xl">
+            ⚡
+          </div>
+          <div>
+            <h2 id="drawerNodeName" class="text-base font-bold font-hud text-white">SecurityAuditor</h2>
+            <span id="drawerNodeCategory" class="text-xs font-mono-hud text-cyan-300">SWARM AGENT • SECURITY</span>
+          </div>
+        </div>
+        <button onclick="closeDrawer()" class="text-slate-400 hover:text-white font-mono-hud text-lg">✕</button>
+      </div>
+
+      <div class="space-y-3 font-mono-hud text-xs">
+        <div>
+          <span class="text-slate-400 block text-[10px] uppercase">STATUS & HEALTH:</span>
+          <span id="drawerNodeStatus" class="text-emerald-400 font-bold">● ACTIVE & WARM (12ms IPC)</span>
+        </div>
+        <div>
+          <span class="text-slate-400 block text-[10px] uppercase">DOMAIN DIRECTIVE:</span>
+          <p id="drawerNodeDesc" class="text-slate-300 leading-relaxed bg-slate-900/60 p-3 rounded-xl border border-white/5">
+            AST-level token scanning, SQL injection detection, and secret leakage prevention across all active Git branches.
+          </p>
+        </div>
+        <div>
+          <span class="text-slate-400 block text-[10px] uppercase">PERMITTED TOOL ARSENAL:</span>
+          <div id="drawerNodeTools" class="flex flex-wrap gap-1.5 pt-1">
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px]">ast_scanner</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px]">git_diff</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px]">secrets_vault</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pt-4 border-t border-white/10 space-y-2">
+      <button onclick="dispatchNodeTask()" id="drawerDispatchBtn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-hud font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/30">
+        <span>⚡</span> Dispatch Live Execution
+      </button>
+      <button onclick="closeDrawer()" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono-hud">
+        Dismiss
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Telemetry Footer -->
+  <footer class="relative z-40 flex items-center justify-between pt-3 border-t border-white/10 text-xs font-mono-hud text-slate-400 max-w-7xl mx-auto w-full">
+    <div class="flex items-center gap-2">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      <span>224 SYNAPTIC FILAMENTS ACTIVE • 60 FPS GPU ACCELERATED MESH</span>
+    </div>
+    <div class="hidden sm:flex items-center gap-4">
+      <span>CLICK ANY NODE TO INSPECT / DRAG CANVAS TO PAN</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── 200+ Node Data Model Generation (Real Specialized Agents, Apps & MCP) ──
+    const LOBES = [
+      { id: 'security', name: 'Security & Audit', color: '#f43f5e', count: 28, icon: '🛡️' },
+      { id: 'engineering', name: 'Engineering Swarm', color: '#00f0ff', count: 64, icon: '💻' },
+      { id: 'devops', name: 'DevOps & Cloud', color: '#eab308', count: 32, icon: '🚀' },
+      { id: 'database', name: 'Architecture & DB', color: '#a855f7', count: 36, icon: '🗄️' },
+      { id: 'apps', name: 'Composio Apps', color: '#10b981', count: 42, icon: '📫' },
+      { id: 'mcp', name: 'MCP Tools', color: '#ec4899', count: 22, icon: '🔌' },
+    ];
+
+    const SPECIAL_NODES = [
+      // Crucial App Nodes
+      { name: 'Gmail', lobe: 'apps', icon: 'M', desc: 'Real-time inbox sync, priority triage, and draft approvals.', color: '#ea4335', tools: ['gmail_search', 'gmail_send', 'gmail_draft'] },
+      { name: 'Google Drive', lobe: 'apps', icon: '▲', desc: 'Cloud file indexing, OCR document parsing, and file sync.', color: '#ffba00', tools: ['drive_search', 'drive_download'] },
+      { name: 'WhatsApp', lobe: 'apps', icon: 'W', desc: 'Desktop messaging RPA and voice note audio transcription.', color: '#25d366', tools: ['whatsapp_send', 'voice_transcribe'] },
+      { name: 'Slack', lobe: 'apps', icon: '#', desc: 'Workspace unread catchup, mention alerts, and status sync.', color: '#4a154b', tools: ['slack_post', 'slack_read'] },
+      { name: 'Notion', lobe: 'apps', icon: 'N', desc: 'Knowledge base synchronization and standup notes writer.', color: '#ffffff', tools: ['notion_append', 'notion_query'] },
+      { name: 'Google Calendar', lobe: 'apps', icon: '📅', desc: 'Automated meeting scheduling and conflict avoidance.', color: '#4285f4', tools: ['calendar_list', 'calendar_create'] },
+      
+      // Crucial MCP & Tool Nodes
+      { name: 'Blender 5.1', lobe: 'mcp', icon: '🎨', desc: 'Live Port 8192 viewport: Audio2Face phoneme lip-sync & Cascadeur physics.', color: '#e87d0d', tools: ['bpy_execute', 'audio2face_sync', 'mocap_bake'] },
+      { name: 'GitHub', lobe: 'mcp', icon: '🐙', desc: 'PR creation, CI/CD automated test monitoring, and branch sync.', color: '#ffffff', tools: ['gh_pr_create', 'gh_ci_watch'] },
+      { name: 'Puppeteer', lobe: 'mcp', icon: '🌐', desc: 'Headless browser web scraper and dynamic form submitter.', color: '#00d8ff', tools: ['browser_nav', 'browser_click'] },
+      { name: 'Filesystem', lobe: 'mcp', icon: '📁', desc: 'Local project workspace AST file read and atomic edit driver.', color: '#38bdf8', tools: ['fs_read', 'fs_write'] },
+      { name: 'PostgreSQL', lobe: 'mcp', icon: '🐘', desc: 'Direct relational database query runner and schema analyzer.', color: '#336791', tools: ['pg_query', 'pg_explain'] },
+
+      // Crucial Swarm Agents
+      { name: 'SecurityAuditor', lobe: 'security', icon: '🛡️', desc: 'AST code vulnerability auditor, credential hunter, and OWASP scanner.', color: '#f43f5e', tools: ['ast_scanner', 'git_diff', 'secrets_vault'] },
+      { name: 'CodeReviewer', lobe: 'engineering', icon: '👀', desc: 'FAANG-tier diff reviewer checking memory leaks, concurrency, and style.', color: '#00f0ff', tools: ['code_review', 'ast_lint'] },
+      { name: 'DBArchitect', lobe: 'database', icon: '🗄️', desc: 'Entity-relationship designer and query execution optimizer.', color: '#a855f7', tools: ['schema_plan', 'index_optimizer'] },
+      { name: 'DevOpsInfra', lobe: 'devops', icon: '🐳', desc: 'Docker containerization and GitHub Actions workflow compiler.', color: '#eab308', tools: ['docker_build', 'ci_generate'] },
+    ];
+
+    // Generate the full 224 nodes array
+    const nodes = [];
+    let currentId = 0;
+
+    // Add designated special nodes first
+    SPECIAL_NODES.forEach(sn => {
+      nodes.push({
+        id: currentId++,
+        name: sn.name,
+        lobe: sn.lobe,
+        icon: sn.icon,
+        desc: sn.desc,
+        color: sn.color,
+        tools: sn.tools,
+        isKey: true,
+        x: 0, y: 0,
+        vx: 0, vy: 0,
+        radius: 18,
+        pulseOffset: Math.random() * Math.PI * 2
+      });
+    });
+
+    // Fill remaining up to 224 with specialized agent names
+    const AGENT_PREFIXES = ['Senior', 'Lead', 'Staff', 'Autonomous', 'Deep', 'Fast', 'Principal'];
+    const AGENT_DOMAINS = [
+      { lobe: 'security', roles: ['Pentest', 'VulnerabilityPatch', 'CryptoAudit', 'ZeroTrust', 'ThreatModel'] },
+      { lobe: 'engineering', roles: ['Fullstack', 'FrontendReact', 'BackendNode', 'PythonFastAPI', 'RustCore', 'WebGLThreeJS', 'AsyncWorker'] },
+      { lobe: 'devops', roles: ['K8sCluster', 'TerraformInfra', 'GrafanaMetrics', 'LoadBalancer', 'AnsiblePlaybook'] },
+      { lobe: 'database', roles: ['SQLiteLocal', 'RedisCache', 'VectorEmbedding', 'PrismaORM', 'ElasticSearch'] },
+      { lobe: 'apps', roles: ['LinearTracker', 'JiraTickets', 'DiscordBot', 'StripePayments', 'TwitterDispatcher', 'ZoomBridge'] },
+      { lobe: 'mcp', roles: ['TerminalShell', 'PythonExec', 'SQLiteDriver', 'WgetFetcher', 'GitGraph'] }
+    ];
+
+    while (nodes.length < 224) {
+      const dom = AGENT_DOMAINS[Math.floor(Math.random() * AGENT_DOMAINS.length)];
+      const prefix = AGENT_PREFIXES[Math.floor(Math.random() * AGENT_PREFIXES.length)];
+      const role = dom.roles[Math.floor(Math.random() * dom.roles.length)];
+      const lobeConfig = LOBES.find(l => l.id === dom.lobe);
+
+      nodes.push({
+        id: currentId++,
+        name: `${prefix}${role}`,
+        lobe: dom.lobe,
+        icon: lobeConfig.icon,
+        desc: `Autonomous ${role} executor operating under strict ${lobeConfig.name} guidelines.`,
+        color: lobeConfig.color,
+        tools: [`${role.toLowerCase()}_action`, 'context_read'],
+        isKey: false,
+        x: 0, y: 0,
+        vx: 0, vy: 0,
+        radius: 9,
+        pulseOffset: Math.random() * Math.PI * 2
+      });
+    }
+
+    // ── Canvas Setup & Responsive Layout ──
+    const canvas = document.getElementById('neuralCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = 0, height = 0;
+    let centerX = 0, centerY = 0;
+    let activeFilter = 'all';
+    let searchQuery = '';
+    let selectedNode = null;
+    let activeBeams = []; // Active photon beams traveling
+
+    function resizeCanvas() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      width = canvas.width = rect.width;
+      height = canvas.height = rect.height;
+      centerX = width / 2;
+      centerY = height / 2;
+      layoutNodes();
+    }
+
+    // Layout 224 nodes in 6 distinct orbital lobes around UNIN
+    function layoutNodes() {
+      const lobeAngles = {
+        apps: { start: Math.PI * 0.7, span: Math.PI * 0.6 },        // Left-ish
+        security: { start: Math.PI * 1.35, span: Math.PI * 0.4 },    // Top-left
+        engineering: { start: Math.PI * 1.75, span: Math.PI * 0.5 }, // Top-right
+        mcp: { start: Math.PI * 0.1, span: Math.PI * 0.55 },        // Right-ish
+        database: { start: Math.PI * 0.55, span: Math.PI * 0.4 },   // Bottom-right
+        devops: { start: Math.PI * 0.95, span: Math.PI * 0.4 }      // Bottom-left
+      };
+
+      const lobeCounts = {};
+      nodes.forEach(n => lobeCounts[n.lobe] = (lobeCounts[n.lobe] || 0) + 1);
+      const lobeIndex = {};
+
+      nodes.forEach(node => {
+        const la = lobeAngles[node.lobe] || { start: 0, span: Math.PI * 2 };
+        const idx = (lobeIndex[node.lobe] || 0);
+        lobeIndex[node.lobe] = idx + 1;
+        const totalInLobe = lobeCounts[node.lobe] || 1;
+
+        // Spread nodes out radially in layers
+        const angle = la.start + (idx / totalInLobe) * la.span + (Math.random() * 0.08 - 0.04);
+        
+        // Multi-tier radial orbits
+        let dist = 0;
+        if (node.isKey) {
+          dist = Math.min(width, height) * 0.28 + (idx % 2) * 35;
+        } else {
+          dist = Math.min(width, height) * 0.38 + (idx % 3) * 60 + Math.random() * 25;
+        }
+
+        node.x = centerX + Math.cos(angle) * dist;
+        node.y = centerY + Math.sin(angle) * dist;
+        node.origX = node.x;
+        node.origY = node.y;
+      });
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    setTimeout(resizeCanvas, 50);
+
+    // ── Animation Loop: Neural Beams, Particles & Synapses ──
+    let time = 0;
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      time += 0.02;
+
+      // 1. Draw Synaptic Bezier Filaments to Center & within Lobes
+      nodes.forEach(node => {
+        // Filter visibility check
+        const visible = (activeFilter === 'all' || node.lobe === activeFilter) &&
+                        (!searchQuery || node.name.toLowerCase().includes(searchQuery));
+        if (!visible) return;
+
+        // Quadratic Bezier from Node to Center Core
+        const controlX = (node.x + centerX) / 2 + (node.y - centerY) * 0.12;
+        const controlY = (node.y + centerY) / 2 - (node.x - centerX) * 0.12;
+
+        ctx.beginPath();
+        ctx.moveTo(node.x, node.y);
+        ctx.quadraticCurveTo(controlX, controlY, centerX, centerY);
+        ctx.strokeStyle = node.isKey ? 'rgba(0, 240, 255, 0.22)' : 'rgba(255, 255, 255, 0.04)';
+        ctx.lineWidth = node.isKey ? 1.5 : 0.8;
+        ctx.stroke();
+
+        // Ambient traveling photon pulses
+        if (node.isKey || Math.random() < 0.005) {
+          const t = (time * 0.5 + node.pulseOffset) % 1;
+          // Calculate quadratic bezier point at t
+          const bx = (1 - t) * (1 - t) * node.x + 2 * (1 - t) * t * controlX + t * t * centerX;
+          const by = (1 - t) * (1 - t) * node.y + 2 * (1 - t) * t * controlY + t * t * centerY;
+
+          ctx.beginPath();
+          ctx.arc(bx, by, node.isKey ? 2.5 : 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = node.color;
+          ctx.shadowColor = node.color;
+          ctx.shadowBlur = 10;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
+      });
+
+      // 2. Draw Active Dispatched Beams (Chain reaction simulation)
+      activeBeams.forEach((beam, idx) => {
+        beam.progress += 0.025;
+        if (beam.progress >= 1) {
+          activeBeams.splice(idx, 1);
+          return;
+        }
+        const t = beam.progress;
+        const cx = (beam.from.x + beam.to.x) / 2;
+        const cy = (beam.from.y + beam.to.y) / 2;
+        const px = (1 - t) * (1 - t) * beam.from.x + 2 * (1 - t) * t * cx + t * t * beam.to.x;
+        const py = (1 - t) * (1 - t) * beam.from.y + 2 * (1 - t) * t * cy + t * t * beam.to.y;
+
+        ctx.beginPath();
+        ctx.arc(px, py, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#00f0ff';
+        ctx.shadowBlur = 25;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      // 3. Draw All 224 Nodes
+      nodes.forEach(node => {
+        const visible = (activeFilter === 'all' || node.lobe === activeFilter) &&
+                        (!searchQuery || node.name.toLowerCase().includes(searchQuery));
+
+        const isHovered = (hoveredNode === node);
+        const isSelected = (selectedNode === node);
+
+        // Breathing micro-motion
+        const floatY = Math.sin(time * 2 + node.pulseOffset) * 1.5;
+        const drawX = node.x;
+        const drawY = node.y + floatY;
+
+        // Node circle
+        ctx.beginPath();
+        const r = isSelected ? node.radius * 1.4 : (isHovered ? node.radius * 1.25 : node.radius);
+        ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
+
+        if (!visible) {
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.2)';
+          ctx.fill();
+          return;
+        }
+
+        // Fill & Border
+        ctx.fillStyle = '#0b0f19';
+        ctx.fill();
+        ctx.strokeStyle = isSelected ? '#00f0ff' : (isHovered ? '#ffffff' : (node.isKey ? node.color : 'rgba(255, 255, 255, 0.2)'));
+        ctx.lineWidth = node.isKey ? 2 : 1;
+        if (isSelected || isHovered) {
+          ctx.shadowColor = node.color;
+          ctx.shadowBlur = 18;
+        }
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Key Node Labels & Badges
+        if (node.isKey || isHovered || isSelected || searchQuery) {
+          ctx.fillStyle = '#ffffff';
+          ctx.font = node.isKey ? 'bold 11px Inter, sans-serif' : '9px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(node.name, drawX, drawY + r + 14);
+
+          // Icon in center of key nodes
+          ctx.font = '10px JetBrains Mono, monospace';
+          ctx.fillStyle = node.color;
+          ctx.fillText(node.icon, drawX, drawY + 3);
+        }
+      });
+
+      requestAnimationFrame(animate);
+    }
+    requestAnimationFrame(animate);
+
+    // ── Interaction: Hover & Click Hit Detection ──
+    let hoveredNode = null;
+
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const mx = e.clientX - rect.left;
+      const my = e.clientY - rect.top;
+
+      hoveredNode = null;
+      for (let i = nodes.length - 1; i >= 0; i--) {
+        const n = nodes[i];
+        const dist = Math.hypot(n.x - mx, n.y - my);
+        if (dist <= n.radius + 6) {
+          hoveredNode = n;
+          canvas.style.cursor = 'pointer';
+          return;
+        }
+      }
+      canvas.style.cursor = 'default';
+    });
+
+    canvas.addEventListener('click', (e) => {
+      if (hoveredNode) {
+        openDrawer(hoveredNode);
+      }
+    });
+
+    // ── Drawer & Inspection ──
+    function openDrawer(node) {
+      selectedNode = node;
+      document.getElementById('drawerNodeName').innerText = node.name;
+      document.getElementById('drawerNodeCategory').innerText = `SWARM NODE • ${node.lobe.toUpperCase()}`;
+      document.getElementById('drawerBadge').innerText = node.icon;
+      document.getElementById('drawerBadge').style.borderColor = node.color;
+      document.getElementById('drawerNodeDesc').innerText = node.desc;
+      
+      const toolsContainer = document.getElementById('drawerNodeTools');
+      toolsContainer.innerHTML = '';
+      (node.tools || []).forEach(t => {
+        const chip = document.createElement('span');
+        chip.className = 'px-2 py-0.5 rounded bg-slate-800 text-slate-200 text-[10px] font-mono-hud';
+        chip.innerText = t;
+        toolsContainer.appendChild(chip);
+      });
+
+      document.getElementById('nodeDrawer').classList.remove('translate-x-full');
+    }
+
+    function closeDrawer() {
+      document.getElementById('nodeDrawer').classList.add('translate-x-full');
+      selectedNode = null;
+    }
+
+    function openCoreInspector() {
+      openDrawer({
+        name: 'UNIN Quantum Nexus',
+        lobe: 'mind',
+        icon: '⚡',
+        desc: 'Supreme Autonomous Core Router coordinating 202 Swarm Agents, Composio 1000+ App Gateway, and Live Blender 5.1 Viewport.',
+        color: '#00f0ff',
+        tools: ['intent_decompose', 'swarm_dag_dispatch', 'audio2face_speak', 'mcp_multiplex']
+      });
+    }
+
+    function filterLobe(lobeId) {
+      activeFilter = lobeId;
+      document.querySelectorAll('.hud-chip').forEach(c => c.classList.remove('active'));
+      const activeBtn = document.getElementById('btn-' + lobeId);
+      if (activeBtn) activeBtn.classList.add('active');
+    }
+
+    function onSearchNodes(query) {
+      searchQuery = query.trim().toLowerCase();
+    }
+
+    // Trigger chain reaction of neural beams (Simulated Real-World Task)
+    function fireSimulatedTask() {
+      const gmailNode = nodes.find(n => n.name === 'Gmail');
+      const secNode = nodes.find(n => n.name === 'SecurityAuditor');
+      const blenderNode = nodes.find(n => n.name === 'Blender 5.1');
+      const core = { x: centerX, y: centerY };
+
+      if (!gmailNode || !secNode || !blenderNode) return;
+
+      // 1. Gmail -> Core
+      activeBeams.push({ from: gmailNode, to: core, progress: 0 });
+      
+      // 2. Core -> SecurityAuditor
+      setTimeout(() => {
+        activeBeams.push({ from: core, to: secNode, progress: 0 });
+      }, 400);
+
+      // 3. Core -> Blender 5.1
+      setTimeout(() => {
+        activeBeams.push({ from: core, to: blenderNode, progress: 0 });
+      }, 800);
+    }
+
+    function dispatchNodeTask() {
+      if (!selectedNode) return;
+      activeBeams.push({ from: selectedNode, to: { x: centerX, y: centerY }, progress: 0 });
+      alert(`[Central Unit Neural Dispatch] ${selectedNode.name} dispatched! Live telemetry packet streaming to UNIN Core.`);
+    }
+  </script>
+</body>
+</html>

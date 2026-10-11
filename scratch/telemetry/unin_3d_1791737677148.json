@@ -1,0 +1,432 @@
+{
+  "taskId": "unin_3d_1791737677148",
+  "prompt": "Create a realistic wooden chair with a curved backrest, four legs, seat cushion, and appropriate materials. Frame the entire chair in the camera.",
+  "timestamp": "2026-10-11T16:54:37.149Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "Autonomous 3D build for: Create a realistic wooden chair with a curved backrest, four legs, seat cushion, and appropriate materials. Frame the entire chair in the camera.",
+      "heroEntities": [
+        {
+          "id": "hero_chair",
+          "name": "Ergonomic Wooden Chair",
+          "category": "furniture",
+          "description": "Timber frame chair with upholstered seat cushion, curved backrest and tapered legs",
+          "importance": "hero",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            0.95
+          ],
+          "materials": [
+            "oak_wood",
+            "fabric_cushion",
+            "dark_steel"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "studio_interior",
+        "baseSurface": "neutral_charcoal_floor",
+        "secondaryProps": [
+          "studio_cyclorama",
+          "softbox_rig"
+        ]
+      },
+      "weather": {
+        "precipitation": "none",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.0001
+      },
+      "timeOfDay": "studio",
+      "lighting": {
+        "primaryType": "studio_3point",
+        "mood": "studio_commercial",
+        "colors": [
+          "soft_neutral",
+          "warm_accent"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ],
+      "_synthesisSource": "deterministic_fallback",
+      "_aiQuotaExceeded": true
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791737678512",
+      "version": "2.0.0",
+      "summary": "Autonomous 3D build for: Create a realistic wooden chair with a curved backrest, four legs, seat cushion, and appropriate materials. Frame the entire chair in the camera.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "studio_interior",
+        "baseSurface": "neutral_charcoal_floor",
+        "secondaryProps": [
+          "studio_cyclorama",
+          "softbox_rig"
+        ]
+      },
+      "weather": {
+        "precipitation": "none",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.0001
+      },
+      "timeOfDay": "studio",
+      "lighting": {
+        "primaryType": "studio_3point",
+        "mood": "studio_commercial",
+        "colors": [
+          "soft_neutral",
+          "warm_accent"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "entities": [
+        {
+          "id": "hero_chair",
+          "name": "Ergonomic Wooden Chair",
+          "category": "furniture",
+          "role": "hero",
+          "description": "Timber frame chair with upholstered seat cushion, curved backrest and tapered legs",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            0.95
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "oak_wood",
+            "fabric_cushion",
+            "dark_steel"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "PROCEDURAL_ASSEMBLY",
+            "provider": "ProceduralAssetProvider",
+            "assemblyType": "HERO_CHAIR_ASSEMBLY",
+            "path": null,
+            "format": "PROCEDURAL",
+            "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+            "confidence": 0.85,
+            "reason": "Synthesizing ergonomic timber chair assembly with upholstered cushion, backrest and tapered legs",
+            "limitations": "Procedural component geometry",
+            "targetDimensions": [
+              0.6,
+              0.6,
+              0.95
+            ],
+            "sanitizationRequired": false,
+            "validation": {
+              "valid": true
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "No verified local asset matches \"Ergonomic Wooden Chair\" (furniture)"
+              },
+              {
+                "provider": "CachedAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CACHE",
+                "reason": "No cached asset found for \"Ergonomic Wooden Chair\""
+              },
+              {
+                "provider": "RemoteAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "REMOTE_CATALOG",
+                "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+              },
+              {
+                "provider": "AI3DAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "AI_GENERATION",
+                "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+              },
+              {
+                "provider": "ProceduralAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 0.85,
+                "strategy": "PROCEDURAL_ASSEMBLY",
+                "reason": "Synthesizing ergonomic timber chair assembly with upholstered cushion, backrest and tapered legs"
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_neutral_charcoal_floor",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with neutral_charcoal_floor PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "neutral_charcoal_floor"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "studio_interior",
+              "baseSurface": "neutral_charcoal_floor",
+              "secondaryProps": [
+                "studio_cyclorama",
+                "softbox_rig"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 35,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 1.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Ergonomic Wooden Chair",
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_CHAIR_ASSEMBLY",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "reason": "Synthesizing ergonomic timber chair assembly with upholstered cushion, backrest and tapered legs",
+      "limitations": "Procedural component geometry",
+      "path": null,
+      "format": "PROCEDURAL",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Ergonomic Wooden Chair\" (furniture)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Ergonomic Wooden Chair\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing ergonomic timber chair assembly with upholstered cushion, backrest and tapered legs"
+        }
+      ],
+      "validation": {
+        "valid": true
+      },
+      "timestamp": 1791737678518
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791737681799
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Ergonomic Wooden Chair)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791737682408
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791737682946
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791737683444
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791737684016
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 0,
+      "flaws": [],
+      "metrics": {
+        "objectsCount": 20,
+        "totalTriangles": 8722,
+        "totalVertices": 4517,
+        "lightsCount": 153,
+        "camerasCount": 35,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -1.1611,
+            -1.6583,
+            1.0298
+          ],
+          "focalLength": 35,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 1.8,
+          "focusDistance": 2.11
+        }
+      },
+      "timestamp": 1791737684544
+    }
+  ],
+  "corrections": [],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 18881,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 6,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.88,
+      "defects": [
+        {
+          "id": "defect_geom_floating",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "Object \"hero_chair\" is floating 0.00m above the ground plane.",
+          "confidence": 0.95,
+          "target": "hero_chair",
+          "recommendedAction": "GROUND_OBJECT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0
+          }
+        }
+      ],
+      "criticalCount": 1,
+      "highCount": 0,
+      "mediumCount": 0,
+      "lowCount": 0,
+      "critiqueSummary": "Telemetry inspection: 1 defects identified, score 6.0/10"
+    }
+  }
+}

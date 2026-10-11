@@ -1,0 +1,404 @@
+{
+  "taskId": "unin_3d_1791725769276",
+  "prompt": "Create a detailed chair in a realistic studio.",
+  "timestamp": "2026-10-11T13:36:09.276Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "A highly detailed chair rendered within a realistic, controlled studio environment, emphasizing clean lines and material fidelity.",
+      "heroEntities": [
+        {
+          "id": "hero_chair",
+          "name": "Chair",
+          "category": "prop",
+          "description": "A detailed, modern-style chair, suitable for product visualization. Focus on realistic material shaders for upholstery, metal, and plastic components. High-polygon modeling for smooth curves and accurate bevels.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            0.9
+          ],
+          "materials": [
+            "fabric_upholstery",
+            "brushed_metal",
+            "matte_plastic"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "scifi_interior",
+        "baseSurface": "concrete",
+        "secondaryProps": []
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "overcast",
+      "lighting": {
+        "primaryType": "studio_3point",
+        "mood": "bright_natural",
+        "colors": [
+          "white",
+          "neutral_grey"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "eye_level",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "constraints": [
+        "accurate ground contact",
+        "high-poly bevels",
+        "clean studio background"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791725778931",
+      "version": "2.0.0",
+      "summary": "A highly detailed chair rendered within a realistic, controlled studio environment, emphasizing clean lines and material fidelity.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "scifi_interior",
+        "baseSurface": "concrete",
+        "secondaryProps": []
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "overcast",
+      "lighting": {
+        "primaryType": "studio_3point",
+        "mood": "bright_natural",
+        "colors": [
+          "white",
+          "neutral_grey"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "eye_level",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "entities": [
+        {
+          "id": "hero_chair",
+          "name": "Chair",
+          "category": "prop",
+          "role": "hero",
+          "description": "A detailed, modern-style chair, suitable for product visualization. Focus on realistic material shaders for upholstery, metal, and plastic components. High-polygon modeling for smooth curves and accurate bevels.",
+          "estimatedDimensions": [
+            0.6,
+            0.6,
+            0.9
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "fabric_upholstery",
+            "brushed_metal",
+            "matte_plastic"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "LOCAL_CATALOG",
+            "provider": "LocalAssetProvider",
+            "assemblyType": null,
+            "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+            "format": "GLB",
+            "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+            "confidence": 1,
+            "reason": "Exact name match for verified asset \"Ergonomic Office Chair\"",
+            "limitations": "Static pre-authored geometry",
+            "targetDimensions": [
+              0.6,
+              0.6,
+              0.9
+            ],
+            "sanitizationRequired": true,
+            "validation": {
+              "valid": true,
+              "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+              "errors": [],
+              "warnings": [],
+              "metrics": {
+                "format": "GLB",
+                "sizeBytes": 154880,
+                "estimatedTriangles": 2248,
+                "vertexCount": 4194,
+                "meshCount": 11,
+                "materialCount": 3,
+                "hasTextures": false,
+                "checksum": "e73c7a7b1750bc670bc9ef6761947cabb5b4a69d46408be8ad10a65cc8b7d1d3"
+              }
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 1,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "Exact name match for verified asset \"Ergonomic Office Chair\""
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_concrete",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with concrete PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "concrete"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "scifi_interior",
+              "baseSurface": "concrete",
+              "secondaryProps": []
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 50,
+            "cameraAngle": "eye_level",
+            "enableDoF": true,
+            "apertureFStop": 2.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "accurate ground contact",
+        "high-poly bevels",
+        "clean studio background"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Chair",
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "reason": "Exact name match for verified asset \"Ergonomic Office Chair\"",
+      "limitations": "Static pre-authored geometry",
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+      "format": "GLB",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Ergonomic Office Chair\""
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 154880,
+          "estimatedTriangles": 2248,
+          "vertexCount": 4194,
+          "meshCount": 11,
+          "materialCount": 3,
+          "hasTextures": false,
+          "checksum": "e73c7a7b1750bc670bc9ef6761947cabb5b4a69d46408be8ad10a65cc8b7d1d3"
+        }
+      },
+      "timestamp": 1791725778940
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725788666
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Chair)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725789244
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725789722
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725790198
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791725790695
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 1,
+      "flaws": [
+        {
+          "code": "DIMENSION_TOO_SMALL",
+          "severity": "HIGH",
+          "target": "hero_chair",
+          "actualMax": 0,
+          "targetMax": 0.9,
+          "message": "Hero entity scale is too small (0.00m vs target 0.90m)."
+        }
+      ],
+      "metrics": {
+        "objectsCount": 22,
+        "totalTriangles": 11400,
+        "totalVertices": 8905,
+        "lightsCount": 14,
+        "camerasCount": 5,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -1.43,
+            -2.08,
+            0.75
+          ],
+          "focalLength": 50,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 2.8,
+          "focusDistance": 2.53
+        }
+      },
+      "timestamp": 1791725791205
+    }
+  ],
+  "corrections": [
+    {
+      "appliedCount": 1,
+      "fixes": [
+        {
+          "flaw": "DIMENSION_TOO_SMALL",
+          "target": "hero_chair",
+          "action": "Upscale by 3.00x"
+        }
+      ],
+      "timestamp": 1791725791279
+    }
+  ],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 44937,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 6,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.88,
+      "defects": [
+        {
+          "id": "defect_geom_floating",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "Object \"hero_chair\" is floating 0.01m above the ground plane.",
+          "confidence": 0.95,
+          "target": "hero_chair",
+          "recommendedAction": "GROUND_OBJECT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0.0107
+          }
+        }
+      ],
+      "criticalCount": 1,
+      "highCount": 0,
+      "mediumCount": 0,
+      "lowCount": 0,
+      "critiqueSummary": "Telemetry inspection: 1 defects identified, score 6.0/10"
+    }
+  }
+}

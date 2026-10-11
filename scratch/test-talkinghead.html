@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Test TalkingHead</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./node_modules/three/build/three.module.js",
+      "three/addons/": "./node_modules/three/examples/jsm/",
+      "talkinghead": "./vendor/talkinghead/talkinghead.mjs"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="avatar" style="width: 400px; height: 600px;"></div>
+  <script type="module">
+    import * as THREE from 'three';
+    import { TalkingHead } from 'talkinghead';
+    console.log('THREE version:', THREE.REVISION);
+    console.log('TalkingHead class:', typeof TalkingHead);
+    try {
+      const nodeAvatar = document.getElementById('avatar');
+      const head = new TalkingHead(nodeAvatar, {
+        cameraView: 'full',
+        avatarMood: 'neutral',
+        lipsyncModules: ["en"]
+      });
+      console.log('TalkingHead instance created successfully!', !!head);
+    } catch (e) {
+      console.error('TalkingHead instantiation error:', e);
+    }
+  </script>
+</body>
+</html>

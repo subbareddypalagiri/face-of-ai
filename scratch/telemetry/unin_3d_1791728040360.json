@@ -1,0 +1,425 @@
+{
+  "taskId": "unin_3d_1791728040360",
+  "prompt": "Create a realistic house in an open landscape.",
+  "timestamp": "2026-10-11T14:14:00.360Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "A realistic, standalone house situated in an expansive open landscape under clear, natural lighting.",
+      "heroEntities": [
+        {
+          "id": "hero_house",
+          "name": "House",
+          "category": "architecture",
+          "description": "A realistic, standalone residential house, potentially with a modern or traditional architectural style, featuring standard architectural details like windows, doors, and a roof.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            12,
+            15,
+            8
+          ],
+          "materials": [
+            "brick",
+            "wood_siding",
+            "roof_tiles",
+            "glass_windows",
+            "concrete_foundation",
+            "painted_walls"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "open_terrain",
+        "baseSurface": "grass_field",
+        "secondaryProps": [
+          "scattered_rocks",
+          "distant_trees",
+          "shrubs",
+          "wild_grass"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "noon",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "bright_natural",
+        "colors": [
+          "warm_white",
+          "sky_blue"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "wide_establishing",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "constraints": [
+        "accurate ground contact",
+        "high-poly bevels",
+        "realistic material shaders"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791728047004",
+      "version": "2.0.0",
+      "summary": "A realistic, standalone house situated in an expansive open landscape under clear, natural lighting.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "open_terrain",
+        "baseSurface": "grass_field",
+        "secondaryProps": [
+          "scattered_rocks",
+          "distant_trees",
+          "shrubs",
+          "wild_grass"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0
+      },
+      "timeOfDay": "noon",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "bright_natural",
+        "colors": [
+          "warm_white",
+          "sky_blue"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "wide_establishing",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "entities": [
+        {
+          "id": "hero_house",
+          "name": "House",
+          "category": "architecture",
+          "role": "hero",
+          "description": "A realistic, standalone residential house, potentially with a modern or traditional architectural style, featuring standard architectural details like windows, doors, and a roof.",
+          "estimatedDimensions": [
+            12,
+            15,
+            8
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "brick",
+            "wood_siding",
+            "roof_tiles",
+            "glass_windows",
+            "concrete_foundation",
+            "painted_walls"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "LOCAL_CATALOG",
+            "provider": "LocalAssetProvider",
+            "assemblyType": null,
+            "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+            "format": "GLB",
+            "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+            "confidence": 1,
+            "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\"",
+            "limitations": "Static pre-authored geometry",
+            "targetDimensions": [
+              12,
+              15,
+              8
+            ],
+            "sanitizationRequired": true,
+            "validation": {
+              "valid": true,
+              "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+              "errors": [],
+              "warnings": [],
+              "metrics": {
+                "format": "GLB",
+                "sizeBytes": 21416,
+                "estimatedTriangles": 204,
+                "vertexCount": 408,
+                "meshCount": 9,
+                "materialCount": 5,
+                "hasTextures": false,
+                "checksum": "bdc8221a286c82da26849b3cd76f91f9e6f24ecc8a3910a8bf8b3f5d3c3b390f"
+              }
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 1,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\""
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_grass_field",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with grass_field PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "grass_field"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "open_terrain",
+              "baseSurface": "grass_field",
+              "secondaryProps": [
+                "scattered_rocks",
+                "distant_trees",
+                "shrubs",
+                "wild_grass"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 35,
+            "cameraAngle": "wide_establishing",
+            "enableDoF": true,
+            "apertureFStop": 2.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "accurate ground contact",
+        "high-poly bevels",
+        "realistic material shaders"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "House",
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\"",
+      "limitations": "Static pre-authored geometry",
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+      "format": "GLB",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\""
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 21416,
+          "estimatedTriangles": 204,
+          "vertexCount": 408,
+          "meshCount": 9,
+          "materialCount": 5,
+          "hasTextures": false,
+          "checksum": "bdc8221a286c82da26849b3cd76f91f9e6f24ecc8a3910a8bf8b3f5d3c3b390f"
+        }
+      },
+      "timestamp": 1791728047013
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791728073750
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (House)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791728074322
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791728075155
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791728075654
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791728076217
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 1,
+      "flaws": [
+        {
+          "code": "DIMENSION_TOO_SMALL",
+          "severity": "HIGH",
+          "target": "hero_house",
+          "actualMax": 0,
+          "targetMax": 15,
+          "message": "Hero entity scale is too small (0.00m vs target 15.00m)."
+        }
+      ],
+      "metrics": {
+        "objectsCount": 21,
+        "totalTriangles": 9356,
+        "totalVertices": 5119,
+        "lightsCount": 26,
+        "camerasCount": 7,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -32.73,
+            -46.36,
+            17.73
+          ],
+          "focalLength": 35,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 2.8,
+          "focusDistance": 58.48
+        }
+      },
+      "timestamp": 1791728076769
+    }
+  ],
+  "corrections": [
+    {
+      "appliedCount": 1,
+      "fixes": [
+        {
+          "flaw": "DIMENSION_TOO_SMALL",
+          "target": "hero_house",
+          "action": "Upscale by 3.00x"
+        }
+      ],
+      "timestamp": 1791728076864
+    }
+  ],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 72573,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 6,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.88,
+      "defects": [
+        {
+          "id": "defect_geom_floating",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "Object \"hero_house\" is floating 0.00m above the ground plane.",
+          "confidence": 0.95,
+          "target": "hero_house",
+          "recommendedAction": "GROUND_OBJECT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0
+          }
+        }
+      ],
+      "criticalCount": 1,
+      "highCount": 0,
+      "mediumCount": 0,
+      "lowCount": 0,
+      "critiqueSummary": "Telemetry inspection: 1 defects identified, score 6.0/10"
+    }
+  }
+}

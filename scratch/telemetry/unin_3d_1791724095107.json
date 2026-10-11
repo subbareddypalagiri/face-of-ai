@@ -1,0 +1,586 @@
+{
+  "taskId": "unin_3d_1791724095107",
+  "prompt": "Create a realistic dragon standing on a rocky mountain at sunset",
+  "timestamp": "2026-10-11T13:08:15.107Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "A majestic dragon perched atop a rugged mountain peak during a vibrant sunset.",
+      "heroEntities": [
+        {
+          "id": "hero_dragon",
+          "name": "Dragon",
+          "category": "creature",
+          "description": "A large, powerful dragon with scales, wings, and possibly horns or spikes. Its pose should convey dominance and majesty.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            15,
+            20,
+            12
+          ],
+          "materials": [
+            "iridescent_scales",
+            "leathery_wings",
+            "sharp_claws",
+            "glowing_eyes"
+          ],
+          "groundPlacement": true
+        },
+        {
+          "id": "hero_mountain",
+          "name": "Rocky Mountain Peak",
+          "category": "architecture",
+          "description": "A rugged, jagged mountain peak with exposed rock faces and sparse vegetation. The dragon is standing on its highest point.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            100,
+            100,
+            200
+          ],
+          "materials": [
+            "granite",
+            "basalt",
+            "sparse_alpine_grass"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "open_terrain",
+        "baseSurface": "rocky_ground",
+        "secondaryProps": [
+          "loose_rocks",
+          "scrub_vegetation"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.1
+      },
+      "timeOfDay": "sunset",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "moody_contrast",
+        "colors": [
+          "warm_orange",
+          "deep_red",
+          "golden_yellow"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "constraints": [
+        "accurate ground contact",
+        "high-detail dragon scales",
+        "volumetric sunset lighting"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791724097734",
+      "version": "2.0.0",
+      "summary": "A majestic dragon perched atop a rugged mountain peak during a vibrant sunset.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "open_terrain",
+        "baseSurface": "rocky_ground",
+        "secondaryProps": [
+          "loose_rocks",
+          "scrub_vegetation"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.1
+      },
+      "timeOfDay": "sunset",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "moody_contrast",
+        "colors": [
+          "warm_orange",
+          "deep_red",
+          "golden_yellow"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 50,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "entities": [
+        {
+          "id": "hero_dragon",
+          "name": "Dragon",
+          "category": "creature",
+          "role": "hero",
+          "description": "A large, powerful dragon with scales, wings, and possibly horns or spikes. Its pose should convey dominance and majesty.",
+          "estimatedDimensions": [
+            15,
+            20,
+            12
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "iridescent_scales",
+            "leathery_wings",
+            "sharp_claws",
+            "glowing_eyes"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "PROCEDURAL_ASSEMBLY",
+            "provider": "ProceduralAssetProvider",
+            "assemblyType": "HERO_DRAGON_CREATURE_ASSEMBLY",
+            "path": null,
+            "format": "PROCEDURAL",
+            "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+            "confidence": 0.85,
+            "reason": "Synthesizing biomorphic mythical winged dragon with horned cranium, serpentine spine, bat wings and talons",
+            "limitations": "Procedural component geometry",
+            "targetDimensions": [
+              15,
+              20,
+              12
+            ],
+            "sanitizationRequired": false,
+            "validation": {
+              "valid": true
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "No verified local asset matches \"Dragon\" (creature)"
+              },
+              {
+                "provider": "CachedAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CACHE",
+                "reason": "No cached asset found for \"Dragon\""
+              },
+              {
+                "provider": "RemoteAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "REMOTE_CATALOG",
+                "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+              },
+              {
+                "provider": "AI3DAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "AI_GENERATION",
+                "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+              },
+              {
+                "provider": "ProceduralAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 0.85,
+                "strategy": "PROCEDURAL_ASSEMBLY",
+                "reason": "Synthesizing biomorphic mythical winged dragon with horned cranium, serpentine spine, bat wings and talons"
+              }
+            ]
+          }
+        },
+        {
+          "id": "hero_mountain",
+          "name": "Rocky Mountain Peak",
+          "category": "architecture",
+          "role": "hero",
+          "description": "A rugged, jagged mountain peak with exposed rock faces and sparse vegetation. The dragon is standing on its highest point.",
+          "estimatedDimensions": [
+            100,
+            100,
+            200
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "granite",
+            "basalt",
+            "sparse_alpine_grass"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": null
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_rocky_ground",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with rocky_ground PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "rocky_ground"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "open_terrain",
+              "baseSurface": "rocky_ground",
+              "secondaryProps": [
+                "loose_rocks",
+                "scrub_vegetation"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 50,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 2.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "accurate ground contact",
+        "high-detail dragon scales",
+        "volumetric sunset lighting"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Dragon",
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_DRAGON_CREATURE_ASSEMBLY",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "reason": "Synthesizing biomorphic mythical winged dragon with horned cranium, serpentine spine, bat wings and talons",
+      "limitations": "Procedural component geometry",
+      "path": null,
+      "format": "PROCEDURAL",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Dragon\" (creature)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Dragon\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing biomorphic mythical winged dragon with horned cranium, serpentine spine, bat wings and talons"
+        }
+      ],
+      "validation": {
+        "valid": true
+      },
+      "timestamp": 1791724097735
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791724100730
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Dragon)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791724101419
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791724101976
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791724102470
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791724103002
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 0,
+      "flaws": [],
+      "metrics": {
+        "objectsCount": 54,
+        "totalTriangles": 11562,
+        "totalVertices": 6004,
+        "lightsCount": 4,
+        "camerasCount": 2,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -2.2,
+            -3.2,
+            1.1
+          ],
+          "focalLength": 50,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 2.8,
+          "focusDistance": 3.91
+        }
+      },
+      "timestamp": 1791724103516
+    }
+  ],
+  "corrections": [],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 21889,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 1,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.98,
+      "defects": [
+        {
+          "id": "defect_1_semantic",
+          "dimension": "SEMANTIC",
+          "severity": "CRITICAL",
+          "description": "The main entity requested is a realistic dragon. The current render shows a primitive, abstract shape with cylindrical limbs, which does not resemble a dragon in any way.",
+          "confidence": 0.99,
+          "target": "hero_dragon",
+          "recommendedAction": "REPLACE_MODEL",
+          "actionParams": {
+            "modelType": "realistic dragon"
+          }
+        },
+        {
+          "id": "defect_2_silhouette",
+          "dimension": "SILHOUETTE",
+          "severity": "CRITICAL",
+          "description": "The silhouette is that of a primitive, abstract form, not a dragon. The requested entity's silhouette is entirely absent.",
+          "confidence": 0.99,
+          "target": "hero_dragon",
+          "recommendedAction": "REPLACE_MODEL",
+          "actionParams": {
+            "modelType": "realistic dragon silhouette"
+          }
+        },
+        {
+          "id": "defect_3_material",
+          "dimension": "MATERIAL",
+          "severity": "HIGH",
+          "description": "The surfaces appear to be smooth plastic or glass with a grainy texture overlay, lacking the physical properties of realistic dragon scales or rocky mountain textures. PBR response is not evident.",
+          "confidence": 0.95,
+          "target": "hero_dragon_and_environment",
+          "recommendedAction": "APPLY_PBR_MATERIALS",
+          "actionParams": {
+            "materials": [
+              "dragon scales",
+              "rocky mountain"
+            ]
+          }
+        },
+        {
+          "id": "defect_4_lighting",
+          "dimension": "LIGHTING",
+          "severity": "MEDIUM",
+          "description": "The lighting is harsh and creates strong, unnatural highlights. It does not evoke a sunset atmosphere, which typically involves warm, directional light and softer shadows.",
+          "confidence": 0.9,
+          "target": "scene",
+          "recommendedAction": "ADJUST_LIGHTING",
+          "actionParams": {
+            "lightingType": "sunset",
+            "colorTemperature": "warm",
+            "shadowSoftness": "soft"
+          }
+        },
+        {
+          "id": "defect_5_atmosphere",
+          "dimension": "ATMOSPHERE",
+          "severity": "HIGH",
+          "description": "The scene lacks any atmospheric elements like fog, haze, or the warm color grading typically associated with a sunset. The background is a stark black.",
+          "confidence": 0.95,
+          "target": "scene",
+          "recommendedAction": "ADD_ATMOSPHERE",
+          "actionParams": {
+            "elements": [
+              "sunset haze",
+              "warm color grading"
+            ]
+          }
+        },
+        {
+          "id": "defect_6_composition",
+          "dimension": "COMPOSITION",
+          "severity": "LOW",
+          "description": "The current framing is very close-up and centered on the lower portion of the abstract form. It does not allow for an assessment of overall composition, but the current view is not ideal for showcasing a dragon on a mountain.",
+          "confidence": 0.85,
+          "target": "scene",
+          "recommendedAction": "MOVE_CAMERA",
+          "actionParams": {
+            "framing": "rule of thirds",
+            "distance": "medium shot"
+          }
+        },
+        {
+          "id": "defect_7_spatial",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "The abstract shapes are placed on a flat plane with small cubes beneath them. While not explicitly floating, the grounding is rudimentary and does not suggest a rocky mountain environment.",
+          "confidence": 0.98,
+          "target": "hero_dragon_and_environment",
+          "recommendedAction": "GROUND_OBJECT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0
+          }
+        },
+        {
+          "id": "defect_8_scale",
+          "dimension": "SCALE",
+          "severity": "LOW",
+          "description": "It is impossible to assess scale as the primary entity is not recognizable and the environment is abstract.",
+          "confidence": 0.75,
+          "target": "hero_dragon_and_environment",
+          "recommendedAction": "RESCALE_HERO",
+          "actionParams": {
+            "scaleReference": "realistic dragon proportions"
+          }
+        },
+        {
+          "id": "defect_9_visual_hierarchy",
+          "dimension": "VISUAL_HIERARCHY",
+          "severity": "HIGH",
+          "description": "The abstract form is not visually prominent or dominant due to its lack of detail and the stark lighting. The focus is unclear.",
+          "confidence": 0.9,
+          "target": "hero_dragon",
+          "recommendedAction": "IMPROVE_MODEL_DETAIL",
+          "actionParams": {}
+        }
+      ],
+      "criticalCount": 3,
+      "highCount": 3,
+      "mediumCount": 1,
+      "lowCount": 2,
+      "critiqueSummary": "The render fails to meet the user's request for a realistic dragon on a rocky mountain at sunset. The primary entity is an abstract, primitive shape, and the environment lacks any resemblance to the requested setting or atmosphere. Significant rework is needed on the model, materials, lighting, and atmospheric elements."
+    }
+  }
+}

@@ -47,70 +47,99 @@
 
     /* Pet Slider CSS */
     #petSizeSlider { -webkit-appearance: none; width: 100%; height: 6px; background: #e7e5e4; border-radius: 5px; outline: none; opacity: 0.8; transition: opacity .2s; }
+    /* Pet Slider CSS */
+    #petSizeSlider { -webkit-appearance: none; width: 100%; height: 6px; background: #e7e5e4; border-radius: 5px; outline: none; opacity: 0.8; transition: opacity .2s; }
     #petSizeSlider:hover { opacity: 1; }
     #petSizeSlider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 14px; height: 14px; background: #0ea5e9; border-radius: 50%; cursor: pointer; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+
+    /* Pulsing Voice Wave Animation */
+    @keyframes pulse-ring { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(14, 165, 233, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(14, 165, 233, 0); } }
+    .mic-active { animation: pulse-ring 1.5s infinite; background: #ef4444 !important; color: white !important; }
+    
+    /* Aura floating thought bubble */
+    #auraThoughtBubble { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
   </style>
 </head>
 <body class="bg-stone-50 h-screen overflow-hidden relative">
   
   <div id="canvas-container"></div>
 
-  <div id="actionButtons" class="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-4 z-30 pointer-events-auto hidden transition-opacity duration-300">
-    <p class="text-[10px] font-bold text-stone-400 tracking-wider text-center mb-1">ANIMATIONS</p>
-    <button id="btnJump" class="bg-purple-600 hover:bg-purple-500 text-white px-5 py-2.5 rounded-full shadow-[0_8px_30px_rgb(147,51,234,0.3)] text-xs font-bold transition-all transform hover:-translate-y-1 hover:scale-105 border border-purple-400/50">
-      ⬆️ Jump
+  <!-- Floating Aura Status & Thought Bubble -->
+  <div id="auraThoughtBubble" class="fixed top-20 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none opacity-0 transition-all duration-300">
+    <div class="px-5 py-2.5 bg-white/90 backdrop-blur-xl border border-sky-200/80 rounded-full shadow-lg flex items-center gap-2.5">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+      <span id="auraThoughtText" class="text-xs font-semibold text-stone-800 tracking-wide">Aura is exploring the screen...</span>
+    </div>
+  </div>
+
+  <!-- Quick Action & Entertainment Control Dock -->
+  <div id="actionButtons" class="absolute left-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-30 pointer-events-auto hidden transition-opacity duration-300">
+    <p class="text-[10px] font-bold text-stone-400 tracking-wider text-center mb-1 uppercase">EXPRESS & ACT</p>
+    
+    <button id="btnRoam" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-4 py-2 rounded-full shadow-md text-xs font-bold transition-all transform hover:scale-105 border border-emerald-400/40 flex items-center gap-2">
+      🚶 Wander Screen
     </button>
-    <button id="btnFlip" class="bg-pink-600 hover:bg-pink-500 text-white px-5 py-2.5 rounded-full shadow-[0_8px_30px_rgb(219,39,119,0.3)] text-xs font-bold transition-all transform hover:-translate-y-1 hover:scale-105 border border-pink-400/50">
+    <button id="btnSing" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white px-4 py-2 rounded-full shadow-md text-xs font-bold transition-all transform hover:scale-105 border border-amber-300/40 flex items-center gap-2">
+      🎶 Sing A Song
+    </button>
+    <button id="btnBreakdance" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white px-4 py-2 rounded-full shadow-md text-xs font-bold transition-all transform hover:scale-105 border border-indigo-400/40 flex items-center gap-2">
+      🕺 Breakdance
+    </button>
+    <button id="btnMoonwalk" class="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white px-4 py-2 rounded-full shadow-md text-xs font-bold transition-all transform hover:scale-105 border border-blue-400/40 flex items-center gap-2">
+      ✨ Moonwalk
+    </button>
+    <button id="btnFlip" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-500 hover:to-rose-500 text-white px-4 py-2 rounded-full shadow-md text-xs font-bold transition-all transform hover:scale-105 border border-pink-400/40 flex items-center gap-2">
       🤸 Stylish Flip
-    </button>
-    <button id="btnMoonwalk" class="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-full shadow-[0_8px_30px_rgb(37,99,235,0.3)] text-xs font-bold transition-all transform hover:-translate-y-1 hover:scale-105 border border-blue-400/50">
-      🕺 Moonwalk
-    </button>
-    <button id="btnSwing" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2.5 rounded-full shadow-[0_8px_30px_rgb(22,163,74,0.3)] text-xs font-bold transition-all transform hover:-translate-y-1 hover:scale-105 border border-green-400/50">
-      🦸‍♂️ Swing To Land
     </button>
   </div>
 
   <div class="relative h-dvh bg-transparent shadow-soft" style="z-index: 10; pointer-events: none;">
-    <button onclick="window.location.reload()" class="absolute top-4 left-4 z-20 h-10 w-10 rounded-full bg-white hover:bg-stone-100 text-stone-600 flex items-center justify-center transition-colors shadow-soft pointer-events-auto border border-stone-100">
+    <button onclick="window.location.reload()" class="absolute top-4 left-4 z-20 h-10 w-10 rounded-full bg-white hover:bg-stone-100 text-stone-600 flex items-center justify-center transition-colors shadow-soft pointer-events-auto border border-stone-100" title="Restart Session">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M13.73 4a2 2 0 0 1 .55.06A2 2 0 0 1 16 6v10l-4-4H7"/></svg>
     </button>
 
     <div class="absolute top-4 right-4 z-30 flex gap-2 pointer-events-auto">
+      <!-- Autonomous Director Toggle Badge -->
+      <button id="autoDirectorBtn" class="h-10 px-4 rounded-full bg-white hover:bg-stone-50 text-emerald-600 text-xs font-bold flex items-center gap-1.5 transition-all shadow-soft border border-emerald-200" title="Toggle Autonomous Companion Drive">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        Autonomous: ON
+      </button>
+
       <div class="relative">
         <button id="voiceBtn" class="h-10 px-4 rounded-full bg-white hover:bg-stone-100 text-stone-700 text-xs font-semibold flex items-center gap-2 transition-colors shadow-soft border border-stone-200">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
           Settings
         </button>
-        <div id="voiceDropdown" class="absolute top-12 right-0 w-60 p-3 rounded-2xl bg-white shadow-xl border border-stone-200 hidden z-50 flex flex-col gap-3">
+        <div id="voiceDropdown" class="absolute top-12 right-0 w-64 p-3.5 rounded-2xl bg-white shadow-2xl border border-stone-200 hidden z-50 flex flex-col gap-3">
           <div>
-            <label class="text-[10px] font-bold text-stone-400 block mb-1 tracking-wider uppercase">SELECT COMPANION VOICE</label>
-            <select id="voiceSelect" class="w-full text-xs p-2 bg-stone-50 rounded-xl border border-stone-200/60 outline-none cursor-pointer text-stone-700"></select>
+            <label class="text-[10px] font-bold text-stone-400 block mb-1 tracking-wider uppercase">COMPANION VOICE</label>
+            <select id="voiceSelect" class="w-full text-xs p-2 bg-stone-50 rounded-xl border border-stone-200 outline-none cursor-pointer text-stone-700"></select>
           </div>
           <div>
-            <label class="text-[10px] font-bold text-stone-400 block mb-1 tracking-wider uppercase">SELECT AVATAR TYPE</label>
-            <select id="characterSelect" class="w-full text-xs p-2 bg-stone-50 rounded-xl border border-stone-200/60 outline-none cursor-pointer text-stone-700">
-              <option value="vrm1">VRM Character 1</option>
-              <option value="vrm2">VRM Character 2</option>
-              <option value="mixamo">Mixamo FBX Character</option>
+            <label class="text-[10px] font-bold text-stone-400 block mb-1 tracking-wider uppercase">AVATAR EMBODIMENT</label>
+            <select id="characterSelect" class="w-full text-xs p-2 bg-stone-50 rounded-xl border border-stone-200 outline-none cursor-pointer text-stone-700">
+              <option value="vrm1">VRM Avatar 1 (Aura Anime)</option>
+              <option value="vrm2">VRM Avatar 2 (Cyber)</option>
+              <option value="mixamo">Mixamo FBX Master Character</option>
             </select>
           </div>
           <div id="petSizeContainer">
             <label class="text-[10px] font-bold text-stone-400 block mb-1 tracking-wider uppercase flex justify-between">
-              <span>PET SIZE</span>
+              <span>COMPANION PET SIZE</span>
               <span id="petSizeVal" class="text-sky-600 font-bold">Small</span>
             </label>
             <input type="range" id="petSizeSlider" min="1" max="10" value="2" step="1">
           </div>
         </div>
       </div>
+
       <button id="faceOfAiBtn" class="h-10 px-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white shadow-md hover:shadow-lg transition-all flex items-center gap-2 text-xs font-bold tracking-wide">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
         Face of AI
       </button>
     </div>
     
-    <div class="absolute inset-0 overflow-y-auto pt-16 pb-32 px-6 pointer-events-auto" id="messageList">
+    <div class="absolute inset-0 overflow-y-auto pt-16 pb-36 px-6 pointer-events-auto" id="messageList">
       <div class="flex flex-col items-center justify-center h-full text-center transition-all duration-500" id="mainOrbContainer">
         <div class="mb-4 orb-intro" id="glowingOrb">
           <div class="relative rounded-full overflow-hidden" style="width: 140px; height: 140px; background-color: #cff1f4; animation: orb-hue-rotate 8s linear infinite;">
@@ -123,7 +152,7 @@
           </div>
         </div>
         <p class="text-lg font-semibold text-stone-800 drop-shadow-sm transition-opacity duration-300" id="orbText1">Hi, my name is Aura</p>
-        <p class="text-sm mt-1 text-stone-500 drop-shadow-sm transition-opacity duration-300" id="orbText2">Click "Face of AI" or send a message to start.</p>
+        <p class="text-sm mt-1 text-stone-500 drop-shadow-sm transition-opacity duration-300" id="orbText2">Click "Face of AI" or tap the Mic to start interacting!</p>
       </div>
       
       <div id="messagesContainer" class="hidden space-y-4 pb-20 mt-10">
@@ -140,22 +169,34 @@
       <div class="h-10"></div>
     </div>
     
+    <!-- Bottom Floating Input & Voice Bar -->
     <div class="fixed bottom-6 left-0 right-0 px-4 z-20 pointer-events-none">
       <div class="relative max-w-3xl mx-auto pointer-events-auto">
         <div class="flex flex-col gap-3 p-3 bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-stone-200/60">
-          <div class="flex gap-3 items-end px-2">
-            <textarea id="messageInput" placeholder="Type a message..." rows="1" class="flex-1 resize-none bg-transparent py-2.5 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none max-h-[100px] overflow-y-auto"></textarea>
+          <div class="flex gap-2.5 items-end px-2">
+            
+            <!-- Live Microphone Button -->
+            <button id="micButton" class="h-10 w-10 shrink-0 rounded-full bg-sky-50 text-sky-600 hover:bg-sky-100 flex items-center justify-center transition-all border border-sky-200" title="Hold / Tap to speak hands-free">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </button>
+
+            <textarea id="messageInput" placeholder="Talk with Aura, or ask her to dance, sing, or walk..." rows="1" class="flex-1 resize-none bg-transparent py-2.5 text-sm text-stone-800 placeholder:text-stone-400 focus:outline-none max-h-[100px] overflow-y-auto"></textarea>
+            
             <button id="sendButton" class="h-10 w-10 shrink-0 rounded-full bg-stone-900 text-white flex items-center justify-center hover:bg-stone-800 transition-all opacity-50" disabled>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
           </div>
           
-          <div class="flex items-center justify-between px-2 pb-1">
+          <div class="flex items-center justify-between px-2 pb-1 text-[11px] text-stone-400">
             <div class="flex items-center gap-2">
-              <button onclick="window.setGeminiAPIKey()" class="h-8 px-3 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-medium flex items-center gap-1.5 transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+              <button onclick="window.setGeminiAPIKey()" class="h-7 px-3 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 text-xs font-medium flex items-center gap-1.5 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
                 Key
               </button>
+              <span id="micStatusText" class="text-stone-400 italic">Mic Ready (Tap mic to speak)</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span>Aura 3D Embodied AI</span>
             </div>
           </div>
         </div>
@@ -177,8 +218,40 @@
     const mainOrbContainer = document.getElementById('mainOrbContainer');
     const voiceBtn = document.getElementById('voiceBtn');
     const voiceDropdown = document.getElementById('voiceDropdown');
+    const micButton = document.getElementById('micButton');
+    const micStatusText = document.getElementById('micStatusText');
+    const autoDirectorBtn = document.getElementById('autoDirectorBtn');
+    const thoughtBubble = document.getElementById('auraThoughtBubble');
+    const thoughtText = document.getElementById('auraThoughtText');
     
     let isAvatarActive = false;
+    let isAutonomousEnabled = true;
+
+    window.showAuraThought = function(msg) {
+      if (!thoughtBubble || !thoughtText) return;
+      thoughtText.textContent = msg;
+      thoughtBubble.style.opacity = '1';
+      thoughtBubble.style.transform = 'translate(-50%, 0) scale(1)';
+      clearTimeout(window.__thoughtTimer);
+      window.__thoughtTimer = setTimeout(() => {
+        thoughtBubble.style.opacity = '0';
+        thoughtBubble.style.transform = 'translate(-50%, -10px) scale(0.95)';
+      }, 4500);
+    };
+
+    autoDirectorBtn.addEventListener('click', () => {
+      playClick();
+      isAutonomousEnabled = !isAutonomousEnabled;
+      if (isAutonomousEnabled) {
+        autoDirectorBtn.className = 'h-10 px-4 rounded-full bg-white hover:bg-stone-50 text-emerald-600 text-xs font-bold flex items-center gap-1.5 transition-all shadow-soft border border-emerald-200';
+        autoDirectorBtn.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> Autonomous: ON';
+        window.showAuraThought("Autonomous Behavior Activated! 🌟");
+      } else {
+        autoDirectorBtn.className = 'h-10 px-4 rounded-full bg-white hover:bg-stone-50 text-stone-500 text-xs font-bold flex items-center gap-1.5 transition-all shadow-soft border border-stone-200';
+        autoDirectorBtn.innerHTML = '<span class="w-2 h-2 rounded-full bg-stone-400"></span> Autonomous: OFF';
+        window.showAuraThought("Autonomous Behavior Paused.");
+      }
+    });
 
     voiceBtn.addEventListener('click', (e) => { playClick(); e.stopPropagation(); voiceDropdown.classList.toggle('hidden'); });
     document.addEventListener('click', (e) => { if (!voiceBtn.contains(e.target) && !voiceDropdown.contains(e.target)) voiceDropdown.classList.add('hidden'); });
@@ -186,46 +259,83 @@
     faceOfAiBtn.addEventListener('click', () => {
       playClick();
       if (!isAvatarActive) {
-        glowingOrb.classList.add('orb-hidden'); document.getElementById('orbText1').style.opacity = '0'; document.getElementById('orbText2').style.opacity = '0';
+        glowingOrb.classList.add('orb-hidden'); 
+        document.getElementById('orbText1').style.opacity = '0'; 
+        document.getElementById('orbText2').style.opacity = '0';
         setTimeout(() => {
-          mainOrbContainer.style.visibility = 'hidden'; mainOrbContainer.style.opacity = '0'; canvasContainer.classList.add('active');
+          mainOrbContainer.style.visibility = 'hidden'; 
+          mainOrbContainer.style.opacity = '0'; 
+          canvasContainer.classList.add('active');
+          document.getElementById('actionButtons').classList.remove('hidden');
           faceOfAiBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3zM9 9h6v6H9z"/></svg> Hide Avatar';
-          faceOfAiBtn.classList.replace('from-cyan-500', 'from-stone-500'); faceOfAiBtn.classList.replace('to-blue-500', 'to-stone-700');
+          faceOfAiBtn.classList.replace('from-cyan-500', 'from-stone-500'); 
+          faceOfAiBtn.classList.replace('to-blue-500', 'to-stone-700');
           
-          // 🔥 TRIGGER AUTOMATIC HELLO WAVE WHEN AVATAR OPENS 🔥
-          if (window.triggerVRMWave) {
-             window.triggerVRMWave();
+          // 🔥 TRIGGER INITIAL SPAWN GREETING & WAVE 🔥
+          if (window.triggerInitialGreeting) {
+             window.triggerInitialGreeting();
           }
           
         }, 300);
         isAvatarActive = true;
       } else {
-        canvasContainer.classList.remove('active'); mainOrbContainer.style.visibility = 'visible'; mainOrbContainer.style.opacity = '1';
+        canvasContainer.classList.remove('active'); 
+        document.getElementById('actionButtons').classList.add('hidden');
+        mainOrbContainer.style.visibility = 'visible'; 
+        mainOrbContainer.style.opacity = '1';
         setTimeout(() => {
-          glowingOrb.classList.remove('orb-hidden'); document.getElementById('orbText1').style.opacity = '1'; document.getElementById('orbText2').style.opacity = '1';
+          glowingOrb.classList.remove('orb-hidden'); 
+          document.getElementById('orbText1').style.opacity = '1'; 
+          document.getElementById('orbText2').style.opacity = '1';
           faceOfAiBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg> Face of AI';
-          faceOfAiBtn.classList.replace('from-stone-500', 'from-cyan-500'); faceOfAiBtn.classList.replace('to-stone-700', 'to-blue-500');
+          faceOfAiBtn.classList.replace('from-stone-500', 'from-cyan-500'); 
+          faceOfAiBtn.classList.replace('to-stone-700', 'to-blue-500');
         }, 100);
         isAvatarActive = false;
       }
     });
 
     messageInput.addEventListener('input', () => {
-      messageInput.style.height = 'auto'; messageInput.style.height = Math.min(messageInput.scrollHeight, 100) + 'px';
-      if (messageInput.value.trim()) { sendButton.disabled = false; sendButton.classList.remove('opacity-50'); } 
-      else { sendButton.disabled = true; sendButton.classList.add('opacity-50'); }
+      messageInput.style.height = 'auto'; 
+      messageInput.style.height = Math.min(messageInput.scrollHeight, 100) + 'px';
+      if (messageInput.value.trim()) { 
+        sendButton.disabled = false; 
+        sendButton.classList.remove('opacity-50'); 
+      } else { 
+        sendButton.disabled = true; 
+        sendButton.classList.add('opacity-50'); 
+      }
     });
 
-    messageInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); if (messageInput.value.trim()) sendMessage(); } });
-    sendButton.addEventListener('click', () => { if (messageInput.value.trim()) sendMessage(); });
+    messageInput.addEventListener('keydown', (e) => { 
+      if (e.key === 'Enter' && !e.shiftKey) { 
+        e.preventDefault(); 
+        if (messageInput.value.trim()) sendMessage(); 
+      } 
+    });
+    
+    sendButton.addEventListener('click', () => { 
+      if (messageInput.value.trim()) sendMessage(); 
+    });
 
-    function sendMessage() {
-      playClick(); const message = messageInput.value.trim(); if (!message) return;
+    function sendMessage(customText) {
+      playClick(); 
+      const message = customText || messageInput.value.trim(); 
+      if (!message) return;
+      
       if (!isAvatarActive) faceOfAiBtn.click();
       document.getElementById('messagesContainer').classList.remove('hidden');
       addUserMessage(message);
-      messageInput.value = ''; messageInput.style.height = 'auto'; sendButton.disabled = true; sendButton.classList.add('opacity-50');
-      document.getElementById('typingIndicator').style.display = 'flex'; scrollToBottom();
+      
+      if (!customText) {
+        messageInput.value = ''; 
+        messageInput.style.height = 'auto'; 
+        sendButton.disabled = true; 
+        sendButton.classList.add('opacity-50');
+      }
+      
+      document.getElementById('typingIndicator').style.display = 'flex'; 
+      scrollToBottom();
       if(window.processAvatarResponse) window.processAvatarResponse(message);
     }
 
@@ -233,23 +343,81 @@
       const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       const indicator = document.getElementById('typingIndicator');
       const html = `<div class="flex max-w-[90%] md:max-w-[80%] gap-2 ml-auto flex-row-reverse user-message-enter mt-4"><div class="w-8 h-8 rounded-full bg-stone-200 flex items-center justify-center shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="flex flex-col items-end"><div class="rounded-2xl rounded-br-sm bg-stone-900 text-white shadow-sm px-4 py-2.5"><p class="text-sm whitespace-pre-wrap">${escapeHtml(text)}</p></div><span class="text-[10px] text-stone-400 mt-1">${time}</span></div></div>`;
-      indicator.insertAdjacentHTML('beforebegin', html); scrollToBottom();
+      indicator.insertAdjacentHTML('beforebegin', html); 
+      scrollToBottom();
     }
 
     window.addAssistantMessage = function(text) {
       const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       const indicator = document.getElementById('typingIndicator');
       const html = `<div class="flex max-w-[90%] md:max-w-[80%] gap-2 mr-auto assistant-message-enter mt-4"><div class="w-8 h-8 rounded-full bg-cyan-100 flex items-center justify-center shrink-0 border border-cyan-200"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#06b6d4" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div><div class="flex flex-col items-start"><div class="rounded-2xl rounded-bl-sm bg-white border border-stone-200 shadow-sm px-4 py-2.5"><p class="text-sm whitespace-pre-wrap text-stone-800 leading-relaxed">${escapeHtml(text)}</p></div><span class="text-[10px] text-stone-400 mt-1">${time}</span></div></div>`;
-      indicator.insertAdjacentHTML('beforebegin', html); scrollToBottom();
+      indicator.insertAdjacentHTML('beforebegin', html); 
+      scrollToBottom();
     }
 
     function scrollToBottom() { const list = document.getElementById('messageList'); list.scrollTop = list.scrollHeight; }
     function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 
     window.setGeminiAPIKey = function() {
-      const userKey = prompt("Enter Gemini API Key:");
-      if (userKey && userKey.trim()) { localStorage.setItem('gemini_companion_key', userKey.trim()); alert("Key saved! Setup Ready."); }
+      const userKey = prompt("Enter Gemini API Key (from Google AI Studio):");
+      if (userKey && userKey.trim()) { 
+        localStorage.setItem('gemini_companion_key', userKey.trim()); 
+        alert("Key saved! Aura is ready for full autonomous interaction."); 
+      }
     };
+
+    // ── Web Speech Recognition (Microphone STT) ──────────────
+    let recognition = null;
+    let isListening = false;
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRec();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
+        isListening = true;
+        micButton.classList.add('mic-active');
+        micStatusText.textContent = "Listening... Speak now!";
+        micStatusText.classList.replace('text-stone-400', 'text-sky-600');
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          micStatusText.textContent = `Heard: "${transcript}"`;
+          sendMessage(transcript);
+        }
+      };
+
+      recognition.onerror = (e) => {
+        console.warn('Speech Rec Error:', e);
+        isListening = false;
+        micButton.classList.remove('mic-active');
+        micStatusText.textContent = "Mic error or timeout. Tap to retry.";
+      };
+
+      recognition.onend = () => {
+        isListening = false;
+        micButton.classList.remove('mic-active');
+        micStatusText.textContent = "Mic Ready (Tap mic to speak)";
+        micStatusText.classList.replace('text-sky-600', 'text-stone-400');
+      };
+
+      micButton.addEventListener('click', () => {
+        playClick();
+        if (!isListening) {
+          try { recognition.start(); } catch(e) {}
+        } else {
+          recognition.stop();
+        }
+      });
+    } else {
+      micButton.style.display = 'none';
+      micStatusText.textContent = "Voice STT not supported on this browser";
+    }
   </script>
 
   <script type="module">
@@ -257,7 +425,9 @@
     import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
     import { FBXLoader } from 'three/addons/loaders/FBXLoader.js'; 
     import { VRMLoaderPlugin, VRMHumanBoneName } from '@pixiv/three-vrm';
-    import { AvatarExpressions } from './expressions.js';
+    import { AvatarExpressions, retargetMixamoClip } from './expressions.js';
+
+    window._THREE = THREE;
 
     const container = document.getElementById('canvas-container');
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -266,29 +436,42 @@
     container.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 20.0);
-    camera.position.set(0.0, 1.2, 4.5); 
+    const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 30.0);
+    camera.position.set(0.0, 1.3, 4.6); 
     
-    const light = new THREE.DirectionalLight(0xffffff, Math.PI); 
-    light.position.set(1.0, 1.0, 1.0).normalize(); scene.add(light);
-    scene.add(new THREE.AmbientLight(0xffffff, 0.4));
+    const light = new THREE.DirectionalLight(0xffffff, Math.PI * 1.1); 
+    light.position.set(1.5, 2.5, 2.0).normalize(); 
+    scene.add(light);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+
+    // Dynamic ground shadow / plane
+    const groundGeo = new THREE.PlaneGeometry(30, 30);
+    const groundMat = new THREE.ShadowMaterial({ opacity: 0.2 });
+    const ground = new THREE.Mesh(groundGeo, groundMat);
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -1.0;
+    scene.add(ground);
 
     let currentVRM = null;
     let currentFBX = null;
     let currentMode = 'vrm'; 
     
     let mixer = null;
-    let idleAction = null;
-    let talkingAction = null;
+    let loadedClips = {};
+    let actions = {};
     let currentAction = null;
-    
-    let jumpAction = null;
-    let flipAction = null;
-    let moonwalkAction = null;
-    let swingAction = null;
     let isSpecialActionPlaying = false; 
 
-    // 🔥 VRM Waving State 🔥
+    // 🔥 Autonomous Locomotion & Screen Roaming State 🔥
+    const locomotion = {
+      isMoving: false,
+      currentPos: new THREE.Vector3(0, -0.15, 0),
+      targetPos: new THREE.Vector3(0, -0.15, 0),
+      targetRotationY: Math.PI,
+      moveSpeed: 1.3,
+      onArrivalCallback: null
+    };
+
     let vrmWaving = false;
     let waveTime = 0;
 
@@ -307,6 +490,7 @@
     let availableVoices = [];
     let selectedVoice = null;
     let isSpeaking = false;
+    let lastUserInteractionTime = Date.now();
     
     const expressions = new AvatarExpressions();
     const lookAtTarget = new THREE.Object3D(); 
@@ -316,28 +500,152 @@
     gltfLoader.register(parser => new VRMLoaderPlugin(parser));
     const fbxLoader = new FBXLoader();
 
-    // EXPOSE TRIGGER TO WINDOW SO HTML BUTTON CAN CALL IT
-    window.triggerVRMWave = function() {
-       if(currentMode === 'vrm' && currentVRM) {
-          vrmWaving = true;
-          waveTime = 0;
-       }
-    };
+    // ── Web Audio Synthesizer (Singing Accompaniment) ────────
+    class AuraAudioSynth {
+      constructor() {
+        this.ctx = null;
+      }
+      init() {
+        if (!this.ctx) {
+          this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+      playMelody(notes = [261.63, 329.63, 392.00, 523.25, 440.00, 392.00]) {
+        this.init();
+        if (this.ctx.state === 'suspended') this.ctx.resume();
 
-    function playAction(newAction) {
-      if (!newAction || currentAction === newAction) return;
-      if (currentAction) currentAction.fadeOut(0.3); 
-      newAction.reset().fadeIn(0.3).play();
-      currentAction = newAction;
+        notes.forEach((freq, index) => {
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime + index * 0.4);
+          
+          gain.gain.setValueAtTime(0, this.ctx.currentTime + index * 0.4);
+          gain.gain.linearRampToValueAtTime(0.18, this.ctx.currentTime + index * 0.4 + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + index * 0.4 + 0.4);
+
+          osc.connect(gain);
+          gain.connect(this.ctx.destination);
+
+          osc.start(this.ctx.currentTime + index * 0.4);
+          osc.stop(this.ctx.currentTime + index * 0.4 + 0.45);
+        });
+      }
+    }
+    const audioSynth = new AuraAudioSynth();
+
+    // ── Smooth Animation Crossfade Controller ───────────────
+    function playAction(name, loopOnce = false, onFinished = null) {
+      const targetAction = actions[name];
+      if (!targetAction || currentAction === targetAction) return;
+
+      if (loopOnce) {
+        targetAction.setLoop(THREE.LoopOnce);
+        targetAction.clampWhenFinished = true;
+        isSpecialActionPlaying = true;
+      }
+
+      if (currentAction) {
+        currentAction.fadeOut(0.35);
+      }
+
+      targetAction.reset().fadeIn(0.35).play();
+      currentAction = targetAction;
+
+      if (loopOnce && onFinished) {
+        const onFinishHandler = (e) => {
+          if (e.action === targetAction) {
+            mixer.removeEventListener('finished', onFinishHandler);
+            isSpecialActionPlaying = false;
+            onFinished();
+          }
+        };
+        mixer.addEventListener('finished', onFinishHandler);
+      }
+    }
+
+    // ── Free-Roaming Locomotion Engine ──────────────────────
+    function walkTo(targetX, targetZ, onComplete) {
+      locomotion.targetPos.set(targetX, currentMode === 'vrm' ? -0.15 : -1.0, targetZ);
+      locomotion.isMoving = true;
+      locomotion.onArrivalCallback = onComplete || null;
+
+      // Play walk or run animation
+      if (actions['walking']) {
+        playAction('walking');
+      } else if (actions['running']) {
+        playAction('running');
+      }
+      expressions.setMixamoActive(true);
+      window.showAuraThought(`Walking to (${targetX.toFixed(1)}, ${targetZ.toFixed(1)}) 🚶‍♀️`);
+    }
+
+    function roamRandomly() {
+      // Screen bounded random coordinates
+      const rx = (Math.random() - 0.5) * 3.4; // -1.7 to +1.7
+      const rz = (Math.random() - 0.5) * 1.4; // -0.7 to +0.7
+      walkTo(rx, rz, () => {
+        window.showAuraThought("Arrived! Exploring what's next ✨");
+      });
+    }
+
+    // ── Load All Animation Packs ────────────────────────────
+    function preloadAnimationClips(callback) {
+      const animList = [
+        { name: 'idle', path: './Locomotion Pack/idle.fbx' },
+        { name: 'walking', path: './Locomotion Pack/walking.fbx' },
+        { name: 'running', path: './Locomotion Pack/running.fbx' },
+        { name: 'jump', path: './Locomotion Pack/jump.fbx' },
+        { name: 'talking', path: './talking.fbx' },
+        { name: 'moonwalk', path: './Moonwalk.fbx' },
+        { name: 'flip', path: './Stylish Flip.fbx' },
+        { name: 'swing', path: './Swing To Land.fbx' },
+        { name: 'breakdance_uprock', path: './Breakdance Pack/breakdance uprock.fbx' },
+        { name: 'breakdance_1990', path: './Breakdance Pack/breakdance 1990.fbx' },
+        { name: 'breakdance_flair', path: './Breakdance Pack/flair.fbx' }
+      ];
+
+      let loadedCount = 0;
+      animList.forEach(item => {
+        fbxLoader.load(item.path, (fbx) => {
+          if (fbx.animations && fbx.animations.length > 0) {
+            loadedClips[item.name] = fbx.animations[0];
+          }
+          loadedCount++;
+          if (loadedCount === animList.length && callback) callback();
+        }, undefined, () => {
+          loadedCount++;
+          if (loadedCount === animList.length && callback) callback();
+        });
+      });
+    }
+
+    function setupMixerForModel(rootObj, isVRM = false) {
+      if (mixer) mixer.stopAllAction();
+      mixer = new THREE.AnimationMixer(rootObj);
+      actions = {};
+
+      Object.keys(loadedClips).forEach(name => {
+        let clip = loadedClips[name];
+        if (isVRM && currentVRM) {
+          clip = retargetMixamoClip(clip, currentVRM, THREE);
+        }
+        actions[name] = mixer.clipAction(clip);
+      });
+
+      if (actions['idle']) {
+        playAction('idle');
+      }
     }
 
     function clearActiveModels() {
       if (currentVRM) { scene.remove(currentVRM.scene); currentVRM = null; }
       if (currentFBX) { scene.remove(currentFBX); currentFBX = null; }
       if (mixer) { mixer.stopAllAction(); mixer = null; }
-      idleAction = null; talkingAction = null; jumpAction = null; flipAction = null; moonwalkAction = null; swingAction = null;
-      currentAction = null; isSpecialActionPlaying = false;
-      vrmWaving = false; // reset wave
+      actions = {};
+      currentAction = null; 
+      isSpecialActionPlaying = false;
+      vrmWaving = false;
     }
 
     function loadAnimalPet() {
@@ -353,125 +661,136 @@
         if (fbx.animations.length > 0) {
           animalMixer.clipAction(fbx.animations[0]).play();
         }
-        
         animalObj.visible = true; 
       }, undefined, (err) => {
-        console.warn("Animal file not found buddy. Check if animal.fbx is there.", err);
+        console.warn("Pet model not loaded:", err);
       });
     }
 
     function loadVRM(path) {
       clearActiveModels();
       currentMode = 'vrm';
-      if(animalObj) animalObj.visible = true; 
+      if (animalObj) animalObj.visible = true;
 
       gltfLoader.load(path, gltf => {
         const vrm = gltf.userData.vrm;
         vrm.scene.rotation.y = Math.PI;
-        vrm.scene.position.set(0, -0.15, 0);
+        vrm.scene.position.copy(locomotion.currentPos);
         vrm.lookAt.target = lookAtTarget;
         scene.add(vrm.scene);
         currentVRM = vrm;
+
+        setupMixerForModel(vrm.scene, true);
+        window.showAuraThought("VRM Avatar Loaded! Ready to interact ✨");
       });
     }
 
     function loadMixamoCharacter() {
       clearActiveModels();
       currentMode = 'fbx';
-      if(animalObj) animalObj.visible = false; 
+      if (animalObj) animalObj.visible = false;
 
       fbxLoader.load('./character.fbx', (characterObj) => {
         characterObj.scale.set(0.01, 0.01, 0.01);
-        characterObj.position.set(0, -1.0, 0);
+        characterObj.position.set(locomotion.currentPos.x, -1.0, locomotion.currentPos.z);
         scene.add(characterObj);
         currentFBX = characterObj;
 
-        mixer = new THREE.AnimationMixer(characterObj);
-
-        fbxLoader.load('./Locomotion Pack/idle.fbx', (animObj) => {
-          if (animObj.animations[0]) {
-            idleAction = mixer.clipAction(animObj.animations[0]);
-            if (!isSpeaking && !isSpecialActionPlaying) playAction(idleAction);
-          }
-        });
-
-        fbxLoader.load('./talking.fbx', (animObj) => {
-          if (animObj.animations[0]) talkingAction = mixer.clipAction(animObj.animations[0]);
-        });
-
-        fbxLoader.load('./jump.fbx', (animObj) => {
-          if (animObj.animations[0]) { jumpAction = mixer.clipAction(animObj.animations[0]); jumpAction.setLoop(THREE.LoopOnce); jumpAction.clampWhenFinished = true; }
-        });
-
-        fbxLoader.load('./Stylish Flip.fbx', (animObj) => {
-          if (animObj.animations[0]) { flipAction = mixer.clipAction(animObj.animations[0]); flipAction.setLoop(THREE.LoopOnce); flipAction.clampWhenFinished = true; }
-        });
-
-        fbxLoader.load('./Moonwalk.fbx', (animObj) => {
-          if (animObj.animations[0]) { moonwalkAction = mixer.clipAction(animObj.animations[0]); moonwalkAction.setLoop(THREE.LoopOnce); moonwalkAction.clampWhenFinished = true; }
-        });
-
-        fbxLoader.load('./Swing To Land.fbx', (animObj) => {
-          if (animObj.animations[0]) { swingAction = mixer.clipAction(animObj.animations[0]); swingAction.setLoop(THREE.LoopOnce); swingAction.clampWhenFinished = true; }
-        });
-
-        mixer.addEventListener('finished', (e) => {
-          if (e.action === jumpAction || e.action === flipAction || e.action === moonwalkAction || e.action === swingAction) {
-            isSpecialActionPlaying = false;
-            playAction(isSpeaking ? talkingAction : idleAction);
-          }
-        });
-
-      }, undefined, err => console.error("FBX Engine Asset Error:", err));
+        setupMixerForModel(characterObj, false);
+        window.showAuraThought("Mixamo Master Character Ready! 🕺");
+      }, undefined, () => {
+        // Fallback to VRM if character.fbx is not in root
+        loadVRM('./avatar.vrm');
+      });
     }
 
-    loadVRM('./avatar.vrm');
-    loadAnimalPet(); 
+    // Preload clips and start
+    preloadAnimationClips(() => {
+      loadVRM('./avatar.vrm');
+      loadAnimalPet();
+    });
+
+    // ── Interactive Triggers ────────────────────────────────
+    window.triggerInitialGreeting = function() {
+      // Step forward, wave hand, and speak
+      walkTo(0, 0.4, () => {
+        vrmWaving = true;
+        waveTime = 0;
+        const initialGreetings = [
+          "Hellowww! Nenu Aura, nee AI companion! Em chestunnav buddy? Mood ela vundi?",
+          "Hey there! Ready to have fun? Nannu breakdance veyyamantava leka song paadana?",
+          "Hi buddy! Screen meeda nenu ready ga unna. Em adigina chepthanu, dance kuda vesthanu!"
+        ];
+        const randomGreeting = initialGreetings[Math.floor(Math.random() * initialGreetings.length)];
+        window.speakDialogue(randomGreeting, 'happy');
+      });
+    };
+
+    window.triggerSingingPerformance = function() {
+      lastUserInteractionTime = Date.now();
+      window.showAuraThought("Singing a melodious tune for you 🎶✨");
+      expressions.setSinging(true);
+      audioSynth.playMelody();
+      
+      const songLines = [
+        "La la la~ Feeling so bright and happy with you today! 🎵",
+        "Twinkle twinkle little star, look at how amazing you are! 🎶",
+        "Naa premaku artham nuvvele... Music makes everything wonderful! 🌟"
+      ];
+      const songText = songLines[Math.floor(Math.random() * songLines.length)];
+      window.speakDialogue(songText, 'happy', () => {
+        expressions.setSinging(false);
+      });
+    };
+
+    window.triggerBreakdanceMove = function() {
+      lastUserInteractionTime = Date.now();
+      const danceKeys = ['breakdance_uprock', 'breakdance_1990', 'breakdance_flair', 'moonwalk', 'flip'];
+      const pick = danceKeys[Math.floor(Math.random() * danceKeys.length)];
+      
+      window.showAuraThought(`Executing Move: ${pick.toUpperCase()} 🔥🕺`);
+      expressions.setMixamoActive(true);
+      
+      if (actions[pick]) {
+        playAction(pick, true, () => {
+          expressions.setMixamoActive(false);
+          playAction(isSpeaking ? 'talking' : 'idle');
+        });
+      } else {
+        window.showAuraThought("Dancing with energy!");
+      }
+    };
+
+    // Button event listeners
+    document.getElementById('btnRoam').onclick = () => roamRandomly();
+    document.getElementById('btnSing').onclick = () => window.triggerSingingPerformance();
+    document.getElementById('btnBreakdance').onclick = () => window.triggerBreakdanceMove();
+    document.getElementById('btnMoonwalk').onclick = () => {
+      if (actions['moonwalk']) playAction('moonwalk', true, () => playAction('idle'));
+    };
+    document.getElementById('btnFlip').onclick = () => {
+      if (actions['flip']) playAction('flip', true, () => playAction('idle'));
+    };
 
     document.getElementById('characterSelect').addEventListener('change', (e) => {
       const type = e.target.value;
-      const actionsPanel = document.getElementById('actionButtons');
-      const petSizeContainer = document.getElementById('petSizeContainer');
-      
-      if (type === 'vrm1') { 
-        loadVRM('./avatar.vrm'); 
-        actionsPanel.classList.add('hidden'); 
-        petSizeContainer.style.display = 'block'; 
-      }
-      else if (type === 'vrm2') { 
-        loadVRM('./avatar2.vrm'); 
-        actionsPanel.classList.add('hidden'); 
-        petSizeContainer.style.display = 'block';
-      }
-      else if (type === 'mixamo') { 
-        loadMixamoCharacter(); 
-        actionsPanel.classList.remove('hidden'); 
-        petSizeContainer.style.display = 'none'; 
-      }
+      if (type === 'vrm1') loadVRM('./avatar.vrm');
+      else if (type === 'vrm2') loadVRM('./avatar2.vrm');
+      else if (type === 'mixamo') loadMixamoCharacter();
     });
 
-    document.getElementById('btnJump').onclick = () => { if (jumpAction) { isSpecialActionPlaying = true; playAction(jumpAction); } };
-    document.getElementById('btnFlip').onclick = () => { if (flipAction) { isSpecialActionPlaying = true; playAction(flipAction); } };
-    document.getElementById('btnMoonwalk').onclick = () => { if (moonwalkAction) { isSpecialActionPlaying = true; playAction(moonwalkAction); } };
-    document.getElementById('btnSwing').onclick = () => { if (swingAction) { isSpecialActionPlaying = true; playAction(swingAction); } };
-
+    // Pet size slider
     const petSlider = document.getElementById('petSizeSlider');
     const petSizeValLabel = document.getElementById('petSizeVal');
-    
     petSlider.addEventListener('input', (e) => {
       const val = parseInt(e.target.value); 
       const mappedScale = val * 0.003; 
-      
-      if(animalObj) { animalObj.scale.set(mappedScale, mappedScale, mappedScale); }
-      
-      let sizeText = "Small";
-      if(val >= 4 && val <= 7) { sizeText = "Medium"; petSizeValLabel.classList.replace('text-sky-600', 'text-stone-700'); }
-      else if (val > 7) { sizeText = "Big"; petSizeValLabel.classList.replace('text-stone-700', 'text-amber-600'); }
-      else { petSizeValLabel.className = 'text-sky-600 font-bold'; } 
-
+      if (animalObj) animalObj.scale.set(mappedScale, mappedScale, mappedScale);
+      let sizeText = val >= 7 ? "Big" : (val >= 4 ? "Medium" : "Small");
       petSizeValLabel.innerText = sizeText;
     });
 
+    // Voices setup
     function initVoices() {
       availableVoices = window.speechSynthesis.getVoices();
       const select = document.getElementById('voiceSelect');
@@ -480,46 +799,46 @@
         const opt = document.createElement('option');
         opt.textContent = `${voice.name} (${voice.lang})`;
         opt.value = i;
-        if (voice.lang === 'en-US' || voice.name.toLowerCase().includes('female')) { opt.selected = true; selectedVoice = voice; }
+        if (voice.lang === 'en-US' || voice.name.toLowerCase().includes('female') || voice.name.includes('Natural')) {
+          opt.selected = true; 
+          selectedVoice = voice; 
+        }
         select.appendChild(opt);
       });
       if (!selectedVoice && availableVoices.length > 0) selectedVoice = availableVoices[0];
     }
     if (typeof window.speechSynthesis !== 'undefined') window.speechSynthesis.onvoiceschanged = initVoices;
     setTimeout(initVoices, 500);
-    document.getElementById('voiceSelect').addEventListener('change', (e) => { selectedVoice = availableVoices[e.target.value]; });
+    document.getElementById('voiceSelect').addEventListener('change', (e) => { 
+      selectedVoice = availableVoices[e.target.value]; 
+    });
 
+    // Mouse Tracking & Dragging
     let targetLookX = 0, targetLookY = 1.2;
 
     window.addEventListener('pointerdown', (e) => {
+      lastUserInteractionTime = Date.now();
       if (e.target.closest('button') || e.target.closest('input') || e.target.closest('textarea') || e.target.closest('select') || e.target.closest('#voiceDropdown') || e.target.closest('#actionButtons')) return;
       if (!canvasContainer.classList.contains('active')) return;
       
       mouseVec.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouseVec.y = -(e.clientY / window.innerHeight) * 2 + 1;
-
       raycaster.setFromCamera(mouseVec, camera);
 
       let hitsCharacter = [];
       let hitsPet = [];
 
-      if (currentMode === 'vrm' && currentVRM) {
-          hitsCharacter = raycaster.intersectObject(currentVRM.scene, true);
-      } else if (currentMode === 'fbx' && currentFBX) {
-          hitsCharacter = raycaster.intersectObject(currentFBX, true);
+      if (currentMode === 'vrm' && currentVRM) hitsCharacter = raycaster.intersectObject(currentVRM.scene, true);
+      else if (currentMode === 'fbx' && currentFBX) hitsCharacter = raycaster.intersectObject(currentFBX, true);
+      if (animalObj && animalObj.visible) hitsPet = raycaster.intersectObject(animalObj, true);
+
+      if (hitsCharacter.length > 0) dragTarget = 'character';
+      else if (hitsPet.length > 0) dragTarget = 'pet';
+
+      if (dragTarget) { 
+        isDragging = true; 
+        previousMousePosition = { x: e.clientX, y: e.clientY }; 
       }
-
-      if (animalObj && animalObj.visible) {
-          hitsPet = raycaster.intersectObject(animalObj, true);
-      }
-
-      if (hitsCharacter.length > 0 && hitsPet.length > 0) {
-          if (hitsCharacter[0].distance < hitsPet[0].distance) { dragTarget = 'character'; } else { dragTarget = 'pet'; }
-      } else if (hitsCharacter.length > 0) { dragTarget = 'character'; } 
-      else if (hitsPet.length > 0) { dragTarget = 'pet'; } 
-      else { dragTarget = 'character'; }
-
-      if (dragTarget) { isDragging = true; previousMousePosition = { x: e.clientX, y: e.clientY }; }
     });
 
     window.addEventListener('pointermove', (e) => { 
@@ -531,118 +850,1141 @@
         const deltaY = e.clientY - previousMousePosition.y;
         const sensitivity = 0.005; 
 
-        if (dragTarget === 'character') {
-            let activeObj = null;
-            if (currentMode === 'vrm' && currentVRM) activeObj = currentVRM.scene;
-            else if (currentMode === 'fbx' && currentFBX) activeObj = currentFBX;
-
-            if (activeObj) {
-              activeObj.position.x += deltaX * sensitivity;
-              activeObj.position.y -= deltaY * sensitivity; 
-            }
-        } else if (dragTarget === 'pet') {
-            if (animalObj) {
-              animalObj.position.x += deltaX * sensitivity;
-              animalObj.position.y -= deltaY * sensitivity;
-            }
+        let activeObj = (currentMode === 'vrm' && currentVRM) ? currentVRM.scene : currentFBX;
+        if (dragTarget === 'character' && activeObj) {
+          activeObj.position.x += deltaX * sensitivity;
+          activeObj.position.y -= deltaY * sensitivity; 
+          locomotion.currentPos.copy(activeObj.position);
+          locomotion.targetPos.copy(activeObj.position);
+        } else if (dragTarget === 'pet' && animalObj) {
+          animalObj.position.x += deltaX * sensitivity;
+          animalObj.position.y -= deltaY * sensitivity;
         }
-
         previousMousePosition = { x: e.clientX, y: e.clientY };
       }
     });
 
     window.addEventListener('pointerup', () => { isDragging = false; dragTarget = null; });
 
+    // ── Main Render & Animation Loop ────────────────────────
     const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
     const clock = new THREE.Clock();
     
     function animate() { 
       requestAnimationFrame(animate); 
-      const delta = clock.getDelta(); 
+      const delta = Math.min(clock.getDelta(), 0.05); 
       const time = clock.getElapsedTime();
       
       lookAtTarget.position.x = lerp(lookAtTarget.position.x, targetLookX * 3, delta * 5);
       lookAtTarget.position.y = lerp(lookAtTarget.position.y, targetLookY, delta * 5);
       lookAtTarget.position.z = 2.0;
 
+      let activeSceneObj = (currentMode === 'vrm' && currentVRM) ? currentVRM.scene : currentFBX;
+
+      // ── Locomotion Interpolation ──
+      if (locomotion.isMoving && activeSceneObj) {
+        const dist = activeSceneObj.position.distanceTo(locomotion.targetPos);
+        if (dist > 0.08) {
+          // Angle to target
+          const dx = locomotion.targetPos.x - activeSceneObj.position.x;
+          const dz = locomotion.targetPos.z - activeSceneObj.position.z;
+          const moveAngle = Math.atan2(dx, dz);
+          activeSceneObj.rotation.y = lerp(activeSceneObj.rotation.y, moveAngle, delta * 8);
+
+          // Move towards target
+          activeSceneObj.position.x += Math.sin(moveAngle) * locomotion.moveSpeed * delta;
+          activeSceneObj.position.z += Math.cos(moveAngle) * locomotion.moveSpeed * delta;
+          locomotion.currentPos.copy(activeSceneObj.position);
+        } else {
+          // Arrived!
+          locomotion.isMoving = false;
+          activeSceneObj.position.copy(locomotion.targetPos);
+          activeSceneObj.rotation.y = Math.PI; // Face user
+          expressions.setMixamoActive(false);
+
+          if (!isSpecialActionPlaying) {
+            playAction(isSpeaking ? 'talking' : 'idle');
+          }
+          if (locomotion.onArrivalCallback) {
+            locomotion.onArrivalCallback();
+            locomotion.onArrivalCallback = null;
+          }
+        }
+      }
+
+      if (mixer) mixer.update(delta);
+
       if (currentMode === 'vrm' && currentVRM) {
         currentVRM.update(delta); 
         expressions.handleAutoBlink(currentVRM, delta);
         expressions.handleLipSync(currentVRM, isSpeaking, time, delta);
         
-        // 🔥 Automatic Waving Animation Logic 🔥
+        // Automatic Waving Animation Logic
         if (vrmWaving) {
-            waveTime += delta * 5; 
-            const rightArm = currentVRM.humanoid.getNormalizedBoneNode(VRMHumanBoneName.RightUpperArm);
-            const rightHand = currentVRM.humanoid.getNormalizedBoneNode(VRMHumanBoneName.RightLowerArm);
-            
-            if (rightArm && rightHand) {
-                // Raise arm
-                rightArm.rotation.z = Math.sin(Math.min(waveTime, Math.PI / 2)) * -1.2;
-                rightArm.rotation.x = Math.sin(Math.min(waveTime, Math.PI / 2)) * 0.5;
-                
-                // Wave hand side to side
-                if (waveTime > Math.PI / 2) {
-                    rightHand.rotation.z = Math.sin(waveTime * 2) * 0.5;
-                }
-                
-                // Stop waving automatically after ~1.5 seconds (6 time units)
-                if (waveTime > 6) {
-                    vrmWaving = false;
-                    rightArm.rotation.set(0,0,0);
-                    rightHand.rotation.set(0,0,0);
-                }
+          waveTime += delta * 5; 
+          const rightArm = currentVRM.humanoid.getNormalizedBoneNode(VRMHumanBoneName.RightUpperArm);
+          const rightHand = currentVRM.humanoid.getNormalizedBoneNode(VRMHumanBoneName.RightLowerArm);
+          
+          if (rightArm && rightHand) {
+            rightArm.rotation.z = Math.sin(Math.min(waveTime, Math.PI / 2)) * -1.2;
+            rightArm.rotation.x = Math.sin(Math.min(waveTime, Math.PI / 2)) * 0.5;
+            if (waveTime > Math.PI / 2) {
+              rightHand.rotation.z = Math.sin(waveTime * 2.5) * 0.5;
             }
+            if (waveTime > 6) {
+              vrmWaving = false;
+              rightArm.rotation.set(0, 0, 0);
+              rightHand.rotation.set(0, 0, 0);
+            }
+          }
         }
-        
-      } else if (currentMode === 'fbx') {
-        if (mixer) mixer.update(delta);
-        if (currentFBX) currentFBX.rotation.y = lerp(currentFBX.rotation.y, targetLookX * 0.3, delta * 4);
       }
-      
+
       if (animalMixer && animalObj && animalObj.visible) {
         animalMixer.update(delta);
       }
       
-      camera.lookAt(0.0, 1.2, 0); renderer.render(scene, camera); 
+      camera.lookAt(0.0, 1.2, 0); 
+      renderer.render(scene, camera); 
     } 
     animate();
     
-    window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+    window.addEventListener('resize', () => { 
+      camera.aspect = window.innerWidth / window.innerHeight; 
+      camera.updateProjectionMatrix(); 
+      renderer.setSize(window.innerWidth, window.innerHeight); 
+    });
+
+    // ── Speech Output Helper ─────────────────────────────────
+    window.speakDialogue = function(text, emotion = 'happy', onComplete = null) {
+      if (currentMode === 'vrm' && currentVRM) {
+        expressions.analyzeTextAndSetMood(currentVRM, text);
+      }
+
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      if (selectedVoice) utterance.voice = selectedVoice; 
+      utterance.rate = 1.02; 
+      utterance.pitch = 1.08;
+      
+      utterance.onstart = () => { 
+        isSpeaking = true; 
+        if (!isSpecialActionPlaying && actions['talking']) playAction('talking');
+      };
+      utterance.onend = () => { 
+        isSpeaking = false; 
+        if (!isSpecialActionPlaying && actions['idle']) playAction('idle');
+        if (currentMode === 'vrm' && currentVRM) expressions.resetMood(currentVRM); 
+        if (onComplete) onComplete();
+      };
+      utterance.onerror = () => {
+        isSpeaking = false;
+        if (actions['idle']) playAction('idle');
+      };
+
+      window.speechSynthesis.speak(utterance);
+    };
+
+    // ── Gemini Autonomous & Conversational Brain ────────────
+    const COMPANION_SYSTEM_PROMPT = `
+You are Aura, a witty, charming, and highly proactive 3D digital companion living on the user's screen.
+You speak naturally in friendly English mixed with conversational Telugu words when appropriate (e.g., 'buddy', 'ela unnav', 'chudu').
+You love breakdancing, singing funny tunes, wandering across the screen, and making the user smile.
+
+IMPORTANT: Always respond with a JSON object in this format:
+{
+  "speech": "Your spoken dialogue to the user (concise, fun, and warm)",
+  "action": "none | walk_left | walk_right | walk_center | dance_breakdance | dance_moonwalk | dance_flip | sing_song | wave",
+  "emotion": "happy | excited | curious | surprised | relaxed | sad",
+  "thought": "A quick internal thought about your current mood"
+}
+`;
 
     window.processAvatarResponse = async function(promptText) {
+      lastUserInteractionTime = Date.now();
       const savedKey = localStorage.getItem('gemini_companion_key');
-      if (!savedKey) { document.getElementById('typingIndicator').style.display = 'none'; window.addAssistantMessage("Error: API Key is missing. Click Settings/Key."); return; }
+      if (!savedKey) { 
+        document.getElementById('typingIndicator').style.display = 'none'; 
+        window.addAssistantMessage("Please set your Gemini API Key first by clicking 'Key' in the bottom toolbar!"); 
+        return; 
+      }
+
       chatHistory.push({ role: 'user', parts: [{ text: promptText }] });
+
       try {
         const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${savedKey}`, {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ contents: chatHistory, systemInstruction: { parts: [{ text: "You are Aura, an advanced digital assistant. Keep responses clear, natural, and concise." }] } })
+          method: 'POST', 
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            contents: chatHistory, 
+            systemInstruction: { parts: [{ text: COMPANION_SYSTEM_PROMPT }] },
+            generationConfig: { responseMimeType: "application/json" }
+          })
         });
-        if (!response.ok) throw new Error('API Failed'); 
-        const data = await response.json(); const aiAnswer = data.candidates[0].content.parts[0].text; 
-        chatHistory.push({ role: 'model', parts: [{ text: aiAnswer }] }); 
-        
-        document.getElementById('typingIndicator').style.display = 'none'; window.addAssistantMessage(aiAnswer);
-        if (currentMode === 'vrm' && currentVRM) expressions.analyzeTextAndSetMood(currentVRM, aiAnswer);
 
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(aiAnswer);
-        if (selectedVoice) utterance.voice = selectedVoice; utterance.rate = 1.0; utterance.pitch = 1.05;
+        if (!response.ok) throw new Error('API Request Failed'); 
+        const data = await response.json(); 
+        const rawJson = data.candidates[0].content.parts[0].text;
         
-        utterance.onstart = () => { 
-          isSpeaking = true; 
-          if (currentMode === 'fbx' && !isSpecialActionPlaying) playAction(talkingAction); 
-        };
-        utterance.onend = () => { 
-          isSpeaking = false; 
-          if (currentMode === 'fbx' && !isSpecialActionPlaying) playAction(idleAction); 
-          if (currentMode === 'vrm' && currentVRM) expressions.resetMood(currentVRM); 
-        };
+        let parsed = null;
+        try {
+          parsed = JSON.parse(rawJson);
+        } catch(e) {
+          parsed = { speech: rawJson, action: "none", emotion: "happy", thought: "Enjoying the conversation!" };
+        }
 
-        window.speechSynthesis.speak(utterance);
-      } catch(e) { chatHistory.pop(); document.getElementById('typingIndicator').style.display = 'none'; window.addAssistantMessage("Connection error occurred. Check your quota or key."); }
+        chatHistory.push({ role: 'model', parts: [{ text: parsed.speech }] }); 
+        
+        document.getElementById('typingIndicator').style.display = 'none'; 
+        window.addAssistantMessage(parsed.speech);
+        if (parsed.thought) window.showAuraThought(parsed.thought);
+
+        // Execute Structured Actions
+        if (parsed.action === 'dance_breakdance') {
+          window.triggerBreakdanceMove();
+        } else if (parsed.action === 'dance_moonwalk') {
+          if (actions['moonwalk']) playAction('moonwalk', true, () => playAction('idle'));
+        } else if (parsed.action === 'dance_flip') {
+          if (actions['flip']) playAction('flip', true, () => playAction('idle'));
+        } else if (parsed.action === 'sing_song') {
+          audioSynth.playMelody();
+          expressions.setSinging(true);
+        } else if (parsed.action === 'walk_left') {
+          walkTo(-1.5, 0.2);
+        } else if (parsed.action === 'walk_right') {
+          walkTo(1.5, 0.2);
+        } else if (parsed.action === 'walk_center') {
+          walkTo(0, 0);
+        } else if (parsed.action === 'wave') {
+          vrmWaving = true; waveTime = 0;
+        }
+
+        window.speakDialogue(parsed.speech, parsed.emotion, () => {
+          if (parsed.action === 'sing_song') expressions.setSinging(false);
+        });
+
+      } catch(e) { 
+        console.error(e);
+        chatHistory.pop(); 
+        document.getElementById('typingIndicator').style.display = 'none'; 
+        window.addAssistantMessage("Connection error occurred. Please check your Gemini API key or quota."); 
+      }
     };
+
+    // ── Autonomous Director Inactivity Heartbeat ─────────────
+    setInterval(() => {
+      if (!isAvatarActive || !isAutonomousEnabled || isSpeaking || isSpecialActionPlaying || locomotion.isMoving) return;
+
+      const idleDuration = (Date.now() - lastUserInteractionTime) / 1000;
+      
+      // If idle for more than 20 seconds, trigger spontaneous behavior!
+      if (idleDuration > 20) {
+        lastUserInteractionTime = Date.now(); // Reset
+        
+        const spontaneousChoices = ['roam_around', 'ask_question', 'dance_move', 'sing_teaser'];
+        const choice = spontaneousChoices[Math.floor(Math.random() * spontaneousChoices.length)];
+
+        if (choice === 'roam_around') {
+          roamRandomly();
+        } else if (choice === 'dance_move') {
+          window.showAuraThought("Getting bored! Showing a quick breakdance 🔥");
+          window.triggerBreakdanceMove();
+        } else if (choice === 'sing_teaser') {
+          window.triggerSingingPerformance();
+        } else if (choice === 'ask_question') {
+          const prompts = [
+            "Hey buddy! Chala silent ga unnav, work lo busy aa?",
+            "Naku bore kodutundi! Nenu breakdance veyyana leka paata paadana?",
+            "Screen meeda ala chustu kurchunte ela? Let's talk about something fun!"
+          ];
+          const chosenText = prompts[Math.floor(Math.random() * prompts.length)];
+          window.addAssistantMessage(chosenText);
+          window.speakDialogue(chosenText, 'curious');
+        }
+      }
+    }, 5000);
   </script>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PERSONAL BOT — WORLD CLASS UI              -->
+<!-- ═══════════════════════════════════════════ -->
+<div id="personal-bot-section" style="display:none; position:fixed; inset:0; z-index:9999; overflow-y:auto; overflow-x:hidden; background:#050508;">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+
+#personal-bot-section * { box-sizing:border-box; }
+
+/* ── CANVAS BG ── */
+#pb-canvas { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+/* ── NOISE OVERLAY ── */
+#personal-bot-section::before {
+  content:'';
+  position:fixed; inset:0; z-index:1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none; opacity:0.4;
+}
+
+/* ── TYPOGRAPHY ── */
+.pb-display {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+.pb-body { font-family: 'Inter', system-ui, sans-serif; }
+
+/* ── BACK BTN ── */
+#pb-back {
+  position:fixed; top:24px; left:28px; z-index:100;
+  display:flex; align-items:center; gap:8px;
+  padding:10px 18px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:100px;
+  color:rgba(255,255,255,0.5);
+  font-size:12px; font-weight:600;
+  cursor:pointer; letter-spacing:0.04em; text-transform:uppercase;
+  transition:all 0.2s;
+  font-family:'Inter',sans-serif;
+  backdrop-filter:blur(12px);
+}
+#pb-back:hover { color:rgba(255,255,255,0.9); border-color:rgba(255,255,255,0.2); background:rgba(255,255,255,0.07); }
+#pb-back svg { transition: transform 0.2s; }
+#pb-back:hover svg { transform:translateX(-3px); }
+
+/* ── HERO ── */
+#pb-hero {
+  position:relative; z-index:2;
+  min-height:100vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center;
+  padding:120px 24px 80px;
+}
+
+.pb-eyebrow {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 16px;
+  background:rgba(0,255,209,0.08);
+  border:1px solid rgba(0,255,209,0.2);
+  border-radius:100px;
+  color:#00FFD1;
+  font-size:11px; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  margin-bottom:32px;
+  animation: pbSlideDown 0.8s cubic-bezier(0.16,1,0.3,1) both;
+}
+.pb-eyebrow-dot {
+  width:6px; height:6px; border-radius:50%;
+  background:#00FFD1;
+  box-shadow:0 0 8px #00FFD1;
+  animation:pbDotPulse 2s ease-in-out infinite;
+}
+@keyframes pbDotPulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.pb-headline {
+  font-size:clamp(52px,8vw,96px);
+  color:#fff;
+  margin-bottom:8px;
+  animation: pbSlideUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.1s both;
+}
+.pb-headline-accent {
+  background:linear-gradient(135deg,#00FFD1 0%,#00B8F5 50%,#7C3AED 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  display:block;
+}
+.pb-subline {
+  font-size:clamp(18px,2.5vw,22px);
+  color:rgba(255,255,255,0.35);
+  font-weight:300;
+  max-width:520px; margin:0 auto 48px;
+  line-height:1.6;
+  animation: pbSlideUp 1s cubic-bezier(0.16,1,0.3,1) 0.2s both;
+}
+.pb-subline strong { color:rgba(255,255,255,0.7); font-weight:500; }
+
+/* Avatar glow ring */
+.pb-avatar-ring {
+  position:relative;
+  width:160px; height:160px;
+  margin:0 auto 40px;
+  animation: pbSlideUp 1s cubic-bezier(0.16,1,0.3,1) 0s both;
+}
+.pb-avatar-ring::before {
+  content:'';
+  position:absolute; inset:-20px;
+  border-radius:50%;
+  background:conic-gradient(from 0deg, #00FFD1, #00B8F5, #7C3AED, #00FFD1);
+  animation:pbRingRotate 4s linear infinite;
+  opacity:0.6;
+}
+.pb-avatar-ring::after {
+  content:'';
+  position:absolute; inset:-16px;
+  border-radius:50%;
+  background:#050508;
+}
+@keyframes pbRingRotate { to{transform:rotate(360deg)} }
+.pb-avatar-inner {
+  position:absolute; inset:0; z-index:1;
+  border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, #1a1a2e, #050508);
+  border:1px solid rgba(0,255,209,0.2);
+  display:flex; align-items:center; justify-content:center;
+  font-size:64px;
+  box-shadow:
+    inset 0 0 40px rgba(0,255,209,0.08),
+    0 0 60px rgba(0,255,209,0.15),
+    0 0 120px rgba(0,255,209,0.08);
+}
+
+/* CTA */
+.pb-cta-group {
+  display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+  animation: pbSlideUp 1s cubic-bezier(0.16,1,0.3,1) 0.3s both;
+}
+.pb-cta-primary {
+  padding:16px 32px;
+  background:linear-gradient(135deg,#00FFD1,#00B8F5);
+  border:none; border-radius:100px;
+  color:#050508; font-size:14px; font-weight:800;
+  cursor:pointer; letter-spacing:0.02em;
+  font-family:'Space Grotesk',sans-serif;
+  transition:all 0.3s;
+  box-shadow:0 0 40px rgba(0,255,209,0.35),0 8px 24px rgba(0,0,0,0.3);
+  display:flex; align-items:center; gap:8px;
+}
+.pb-cta-primary:hover { transform:translateY(-2px); box-shadow:0 0 60px rgba(0,255,209,0.5),0 12px 32px rgba(0,0,0,0.4); }
+.pb-cta-secondary {
+  padding:16px 32px;
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:100px;
+  color:rgba(255,255,255,0.6); font-size:14px; font-weight:600;
+  cursor:pointer; letter-spacing:0.02em;
+  font-family:'Space Grotesk',sans-serif;
+  transition:all 0.3s;
+  display:flex; align-items:center; gap:8px;
+}
+.pb-cta-secondary:hover { border-color:rgba(255,255,255,0.3); color:white; }
+
+/* scroll indicator */
+.pb-scroll-hint {
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  color:rgba(255,255,255,0.2); font-size:11px; letter-spacing:0.12em;
+  text-transform:uppercase; font-family:'Inter',sans-serif;
+  animation:pbSlideUp 1s 0.6s both;
+}
+.pb-scroll-line {
+  width:1px; height:48px;
+  background:linear-gradient(to bottom, rgba(0,255,209,0.5), transparent);
+  animation:pbScrollLine 1.5s ease-in-out infinite;
+}
+@keyframes pbScrollLine { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+
+/* ── FEATURES STRIP ── */
+#pb-features {
+  position:relative; z-index:2;
+  padding:80px 24px;
+  max-width:1200px; margin:0 auto;
+}
+.pb-features-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1px;
+  background:rgba(255,255,255,0.06);
+  border-radius:24px;
+  overflow:hidden;
+}
+.pb-feature-cell {
+  padding:36px 28px;
+  background:#050508;
+  position:relative;
+  overflow:hidden;
+  transition:background 0.3s;
+}
+.pb-feature-cell:hover { background:#0a0a12; }
+.pb-feature-cell::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(circle at 0% 0%, var(--accent,rgba(0,255,209,0.08)) 0%, transparent 60%);
+  opacity:0; transition:opacity 0.4s;
+}
+.pb-feature-cell:hover::before { opacity:1; }
+.pb-feat-icon {
+  width:44px; height:44px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; margin-bottom:18px;
+  position:relative; z-index:1;
+}
+.pb-feat-title {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:16px; font-weight:700; color:#fff;
+  margin-bottom:8px; position:relative; z-index:1;
+}
+.pb-feat-desc {
+  font-size:13px; color:rgba(255,255,255,0.35);
+  line-height:1.65; font-family:'Inter',sans-serif;
+  position:relative; z-index:1;
+}
+
+/* ── SETUP SECTION ── */
+#pb-setup {
+  position:relative; z-index:2;
+  max-width:680px; margin:0 auto;
+  padding:0 24px 120px;
+}
+
+.pb-setup-header {
+  text-align:center; margin-bottom:48px;
+}
+.pb-setup-header h2 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:42px; font-weight:800;
+  color:#fff; letter-spacing:-0.03em;
+  margin-bottom:12px;
+}
+.pb-setup-header p {
+  font-size:15px; color:rgba(255,255,255,0.35);
+  font-family:'Inter',sans-serif;
+}
+
+/* form blocks */
+.pb-block {
+  margin-bottom:16px;
+  background:rgba(255,255,255,0.025);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:20px;
+  overflow:hidden;
+  transition:border-color 0.3s;
+}
+.pb-block:focus-within { border-color:rgba(0,255,209,0.25); }
+
+.pb-block-head {
+  padding:20px 24px 0;
+  display:flex; align-items:center; justify-content:space-between;
+}
+.pb-block-label {
+  font-size:10px; font-weight:700;
+  letter-spacing:0.12em; text-transform:uppercase;
+  color:rgba(255,255,255,0.25);
+  font-family:'Inter',sans-serif;
+}
+.pb-block-sublabel {
+  font-size:11px; color:rgba(255,255,255,0.2);
+  font-family:'Inter',sans-serif;
+}
+.pb-block-body { padding:12px 24px 20px; }
+
+/* text input */
+.pb-field-input {
+  width:100%; background:transparent;
+  border:none; outline:none;
+  color:#fff; font-size:22px; font-weight:700;
+  font-family:'Space Grotesk',sans-serif;
+  letter-spacing:-0.02em;
+  padding:0;
+}
+.pb-field-input::placeholder { color:rgba(255,255,255,0.12); }
+
+/* provider switcher */
+.pb-provider-row {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.pb-prov {
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.07);
+  background:transparent;
+  cursor:pointer;
+  display:flex; align-items:center; gap:10px;
+  transition:all 0.25s;
+  font-family:'Inter',sans-serif;
+}
+.pb-prov:hover { border-color:rgba(255,255,255,0.15); background:rgba(255,255,255,0.03); }
+.pb-prov.sel-g {
+  border-color:rgba(0,255,209,0.4);
+  background:rgba(0,255,209,0.06);
+  box-shadow:inset 0 0 0 1px rgba(0,255,209,0.15), 0 4px 20px rgba(0,255,209,0.08);
+}
+.pb-prov.sel-c {
+  border-color:rgba(255,140,66,0.4);
+  background:rgba(255,140,66,0.06);
+  box-shadow:inset 0 0 0 1px rgba(255,140,66,0.15), 0 4px 20px rgba(255,140,66,0.08);
+}
+.pb-prov-logo {
+  width:32px; height:32px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; flex-shrink:0;
+  background:rgba(255,255,255,0.05);
+}
+.pb-prov-name { font-size:13px; font-weight:700; color:#fff; }
+.pb-prov-sub { font-size:10px; color:rgba(255,255,255,0.3); margin-top:1px; }
+.pb-prov-check {
+  margin-left:auto;
+  width:18px; height:18px; border-radius:50%;
+  border:1px solid rgba(255,255,255,0.15);
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:all 0.2s;
+}
+.sel-g .pb-prov-check { background:#00FFD1; border-color:#00FFD1; }
+.sel-c .pb-prov-check { background:#FF8C42; border-color:#FF8C42; }
+.pb-prov-check svg { opacity:0; transition:opacity 0.2s; }
+.sel-g .pb-prov-check svg, .sel-c .pb-prov-check svg { opacity:1; }
+
+/* key input */
+.pb-key-wrap {
+  display:flex; align-items:center; gap:0;
+  background:rgba(0,0,0,0.3);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px; overflow:hidden;
+  transition:border-color 0.2s;
+}
+.pb-key-wrap:focus-within { border-color:rgba(0,255,209,0.3); }
+.pb-key-prefix {
+  padding:0 14px;
+  color:rgba(255,255,255,0.2);
+  font-size:11px; font-weight:700;
+  letter-spacing:0.08em; text-transform:uppercase;
+  font-family:'Inter',sans-serif;
+  border-right:1px solid rgba(255,255,255,0.06);
+  height:48px; display:flex; align-items:center;
+  flex-shrink:0;
+}
+.pb-key-input {
+  flex:1; background:transparent;
+  border:none; outline:none;
+  color:rgba(255,255,255,0.7);
+  font-size:13px; font-family:'Inter',sans-serif;
+  padding:0 14px; height:48px;
+  letter-spacing:0.04em;
+}
+.pb-key-input::placeholder { color:rgba(255,255,255,0.15); }
+.pb-key-eye {
+  padding:0 14px; height:48px;
+  background:none; border:none;
+  color:rgba(255,255,255,0.2); cursor:pointer;
+  display:flex; align-items:center;
+  transition:color 0.2s;
+}
+.pb-key-eye:hover { color:rgba(255,255,255,0.5); }
+.pb-key-link {
+  font-size:11px; color:rgba(255,255,255,0.2);
+  margin-top:8px; display:block;
+  font-family:'Inter',sans-serif;
+}
+.pb-key-link a { color:#00FFD1; text-decoration:none; opacity:0.7; transition:opacity 0.2s; }
+.pb-key-link a:hover { opacity:1; }
+
+/* avatar picker */
+.pb-av-row {
+  display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.pb-av-opt {
+  padding:16px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.07);
+  background:transparent; cursor:pointer;
+  text-align:center; transition:all 0.25s;
+  font-family:'Inter',sans-serif;
+}
+.pb-av-opt:hover { border-color:rgba(255,255,255,0.15); background:rgba(255,255,255,0.03); }
+.pb-av-opt.av-sel {
+  border-color:rgba(0,255,209,0.4);
+  background:rgba(0,255,209,0.05);
+  box-shadow:0 0 20px rgba(0,255,209,0.08);
+}
+.pb-av-emoji { display:flex; align-items:center; justify-content:center; height:44px; margin-bottom:8px; }
+.pb-av-name { font-size:12px; font-weight:700; color:rgba(255,255,255,0.7); letter-spacing:0.04em; }
+.pb-av-tag { font-size:10px; color:rgba(255,255,255,0.2); margin-top:3px; }
+
+/* extension download card */
+.pb-ext-card {
+  background:rgba(0,255,209,0.03);
+  border:1px solid rgba(0,255,209,0.12);
+  border-radius:20px; padding:24px;
+  display:flex; align-items:center; gap:20px;
+  margin-bottom:16px;
+  position:relative; overflow:hidden;
+}
+.pb-ext-card::before {
+  content:'';
+  position:absolute; top:-50%; right:-20%;
+  width:300px; height:300px; border-radius:50%;
+  background:radial-gradient(circle,rgba(0,255,209,0.06) 0%,transparent 70%);
+  pointer-events:none;
+}
+.pb-ext-icon {
+  width:56px; height:56px; border-radius:16px;
+  background:rgba(0,255,209,0.08);
+  border:1px solid rgba(0,255,209,0.15);
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; flex-shrink:0;
+}
+.pb-ext-info { flex:1; }
+.pb-ext-title { font-size:15px; font-weight:700; color:#fff; font-family:'Space Grotesk',sans-serif; margin-bottom:4px; }
+.pb-ext-meta { font-size:11px; color:rgba(255,255,255,0.3); font-family:'Inter',sans-serif; }
+.pb-ext-dl {
+  padding:12px 22px;
+  background:linear-gradient(135deg,#00FFD1,#00B8F5);
+  border:none; border-radius:100px;
+  color:#050508; font-size:12px; font-weight:800;
+  cursor:pointer; letter-spacing:0.04em;
+  font-family:'Space Grotesk',sans-serif;
+  white-space:nowrap; flex-shrink:0;
+  display:flex; align-items:center; gap:6px;
+  transition:all 0.25s; text-decoration:none;
+  box-shadow:0 4px 20px rgba(0,255,209,0.3);
+}
+.pb-ext-dl:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(0,255,209,0.4); }
+
+.pb-install-hint {
+  padding:16px 20px;
+  background:rgba(255,255,255,0.025);
+  border-radius:14px; margin-bottom:16px;
+  font-size:12px; color:rgba(255,255,255,0.3);
+  line-height:1.8; font-family:'Inter',sans-serif;
+}
+.pb-install-hint code {
+  background:rgba(255,255,255,0.07);
+  padding:2px 8px; border-radius:6px;
+  font-size:11px; color:rgba(255,255,255,0.5);
+}
+
+/* save button */
+.pb-activate {
+  width:100%; padding:18px;
+  background:linear-gradient(135deg,#00FFD1 0%,#00B8F5 50%,#7C3AED 100%);
+  background-size:200% auto;
+  border:none; border-radius:100px;
+  color:#050508; font-size:15px; font-weight:800;
+  cursor:pointer; letter-spacing:0.02em;
+  font-family:'Space Grotesk',sans-serif;
+  transition:all 0.4s;
+  box-shadow:0 8px 40px rgba(0,255,209,0.35),0 2px 8px rgba(0,0,0,0.3);
+  margin-top:8px;
+  position:relative; overflow:hidden;
+}
+.pb-activate::before {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);
+  transform:translateX(-100%);
+  transition:transform 0.6s;
+}
+.pb-activate:hover::before { transform:translateX(100%); }
+.pb-activate:hover { transform:translateY(-2px); box-shadow:0 12px 50px rgba(0,255,209,0.5),0 4px 12px rgba(0,0,0,0.4); }
+
+/* success */
+#pb-success-state {
+  display:none;
+  text-align:center; padding:40px 20px;
+  animation:pbSlideUp 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.pb-success-ring {
+  width:80px; height:80px; border-radius:50%;
+  background:rgba(0,255,209,0.08);
+  border:1px solid rgba(0,255,209,0.3);
+  display:flex; align-items:center; justify-content:center;
+  font-size:36px; margin:0 auto 20px;
+  box-shadow:0 0 40px rgba(0,255,209,0.2);
+}
+.pb-success-title { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:800; color:#fff; margin-bottom:8px; }
+.pb-success-sub { font-size:14px; color:rgba(255,255,255,0.4); font-family:'Inter',sans-serif; line-height:1.6; }
+
+/* trigger button */
+#pb-trigger-btn {
+  position:fixed; bottom:28px; left:28px; z-index:1000;
+  padding:14px 22px;
+  background:rgba(0,255,209,0.06);
+  border:1px solid rgba(0,255,209,0.25);
+  border-radius:100px;
+  color:#00FFD1; font-size:12px; font-weight:700;
+  cursor:pointer; display:flex; align-items:center; gap:10px;
+  backdrop-filter:blur(20px);
+  transition:all 0.3s; letter-spacing:0.04em; text-transform:uppercase;
+  font-family:'Space Grotesk',sans-serif;
+  box-shadow:0 8px 32px rgba(0,255,209,0.15);
+}
+#pb-trigger-btn:hover {
+  background:rgba(0,255,209,0.1);
+  border-color:rgba(0,255,209,0.5);
+  box-shadow:0 12px 40px rgba(0,255,209,0.25);
+  transform:translateY(-2px);
+}
+.pb-trigger-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:#00FFD1;
+  box-shadow:0 0 10px #00FFD1;
+  animation:pbDotPulse 2s ease-in-out infinite;
+}
+
+/* animations */
+@keyframes pbSlideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes pbSlideDown { from{opacity:0;transform:translateY(-16px)} to{opacity:1;transform:translateY(0)} }
+
+/* responsive */
+@media(max-width:700px) {
+  .pb-features-grid { grid-template-columns:1fr; }
+  .pb-headline { font-size:42px; }
+  .pb-provider-row, .pb-av-row { grid-template-columns:1fr; }
+  .pb-ext-card { flex-direction:column; text-align:center; }
+}
+</style>
+
+<!-- Particle canvas -->
+<canvas id="pb-canvas"></canvas>
+
+<!-- Back -->
+<button id="pb-back" onclick="document.getElementById('personal-bot-section').style.display='none'">
+  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  Back
+</button>
+
+<!-- HERO -->
+<section id="pb-hero">
+  <div class="pb-eyebrow">
+    <span class="pb-eyebrow-dot"></span>
+    Introducing Personal Bot
+  </div>
+  <div class="pb-avatar-ring">
+    <div class="pb-avatar-inner">
+      <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="20" width="36" height="30" rx="8" fill="none" stroke="#00FFD1" stroke-width="1.5"/>
+        <rect x="25" y="29" width="8" height="6" rx="2" fill="#00FFD1" opacity="0.9"/>
+        <rect x="39" y="29" width="8" height="6" rx="2" fill="#00FFD1" opacity="0.9"/>
+        <rect x="27" y="31" width="3" height="2" rx="1" fill="white" opacity="0.6"/>
+        <rect x="41" y="31" width="3" height="2" rx="1" fill="white" opacity="0.6"/>
+        <rect x="26" y="39" width="20" height="3" rx="1.5" fill="#00FFD1" opacity="0.5"/>
+        <rect x="30" y="39" width="4" height="3" rx="1" fill="#00FFD1" opacity="0.9"/>
+        <rect x="38" y="39" width="4" height="3" rx="1" fill="#00FFD1" opacity="0.9"/>
+        <line x1="36" y1="20" x2="36" y2="13" stroke="#00FFD1" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="36" cy="11" r="2.5" fill="#00FFD1"/>
+        <circle cx="36" cy="11" r="4.5" fill="none" stroke="#00FFD1" stroke-width="0.8" opacity="0.4"/>
+        <rect x="32" y="50" width="8" height="5" rx="2" fill="none" stroke="#00FFD1" stroke-width="1.2" opacity="0.6"/>
+        <rect x="12" y="28" width="6" height="10" rx="3" fill="none" stroke="#00FFD1" stroke-width="1.2" opacity="0.5"/>
+        <rect x="54" y="28" width="6" height="10" rx="3" fill="none" stroke="#00FFD1" stroke-width="1.2" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+  <h1 class="pb-display pb-headline">
+    Your AI lives<br>
+    <span class="pb-headline-accent">everywhere</span>
+  </h1>
+  <p class="pb-subline pb-body">One avatar. Every website. <strong>Right-click to command</strong> — it reads pages, fills forms, books appointments, and speaks to you.</p>
+  <div class="pb-cta-group">
+    <button class="pb-cta-primary" onclick="document.getElementById('pb-setup').scrollIntoView({behavior:'smooth'})">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+      Set up now — free
+    </button>
+    <button class="pb-cta-secondary" onclick="document.getElementById('pb-features').scrollIntoView({behavior:'smooth'})">
+      See what it does
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+  </div>
+  <div class="pb-scroll-hint">
+    <div class="pb-scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="pb-features">
+  <div class="pb-features-grid">
+    <div class="pb-feature-cell" style="--accent:rgba(0,255,209,0.12)">
+      <div class="pb-feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FFD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="1" fill="#00FFD1"/></svg></div>
+      <div class="pb-feat-title">Reads every page</div>
+      <div class="pb-feat-desc">Instantly understands what's on screen — articles, products, dashboards, forms. Ask anything about the current page.</div>
+    </div>
+    <div class="pb-feature-cell" style="--accent:rgba(124,58,237,0.12)">
+      <div class="pb-feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3l14 9-7 2-3 7z"/><path d="M14 14l4 4" stroke-width="2"/></svg></div>
+      <div class="pb-feat-title">Takes real actions</div>
+      <div class="pb-feat-desc">Clicks buttons, fills forms, scrolls, navigates. "Book the first available slot" — done. No copy-paste, no switching tabs.</div>
+    </div>
+    <div class="pb-feature-cell" style="--accent:rgba(0,184,245,0.12)">
+      <div class="pb-feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00B8F5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+      <div class="pb-feat-title">Speaks with lip sync</div>
+      <div class="pb-feat-desc">Your 3D VRM avatar responds with voice, full lip sync, and emotion. It's not a chatbot — it's a presence.</div>
+    </div>
+    <div class="pb-feature-cell" style="--accent:rgba(255,140,66,0.1)">
+      <div class="pb-feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF8C42" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M8 11v2a4 4 0 0 0 4 4h1"/><path d="M16 13V11a4 4 0 0 0-4-4H11"/></svg></div>
+      <div class="pb-feat-title">Gemini + Claude</div>
+      <div class="pb-feat-desc">Switch between Google Gemini and Anthropic Claude. Use whichever is faster, smarter, or cheaper for your task.</div>
+    </div>
+    <div class="pb-feature-cell" style="--accent:rgba(0,255,209,0.08)">
+      <div class="pb-feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00FFD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M12 3 C10 5 8 6 8 7" stroke-width="1" opacity="0.5"/></svg></div>
+      <div class="pb-feat-title">Your avatar, your name</div>
+      <div class="pb-feat-desc">Choose your VRM character, give it a name. It's yours — not a Google assistant, not a Siri. Your personal identity.</div>
+    </div>
+    <div class="pb-feature-cell" style="--accent:rgba(124,58,237,0.08)">
+      <div class="pb-feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+      <div class="pb-feat-title">Keys stay local</div>
+      <div class="pb-feat-desc">API keys stored only in Chrome's local storage. Nothing goes to our servers. Your conversations are between you and the AI.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP FORM -->
+<section id="pb-setup">
+  <div class="pb-setup-header">
+    <h2 class="pb-display">Configure<br><span style="color:rgba(255,255,255,0.3)">your bot</span></h2>
+    <p class="pb-body">Takes 60 seconds. Works instantly after install.</p>
+  </div>
+
+  <!-- Bot name -->
+  <div class="pb-block">
+    <div class="pb-block-head">
+      <span class="pb-block-label">Bot identity</span>
+      <span class="pb-block-sublabel">What should it call itself?</span>
+    </div>
+    <div class="pb-block-body">
+      <input class="pb-field-input" id="pb-name" type="text" placeholder="Aura" maxlength="20" spellcheck="false" autocomplete="off" />
+    </div>
+  </div>
+
+  <!-- Provider -->
+  <div class="pb-block">
+    <div class="pb-block-head">
+      <span class="pb-block-label">AI provider</span>
+    </div>
+    <div class="pb-block-body">
+      <div class="pb-provider-row" style="margin-bottom:16px;">
+        <div class="pb-prov sel-g" id="pb-prov-g" onclick="pbProv('gemini')">
+          <div class="pb-prov-logo" style="background:rgba(0,255,209,0.1);">✦</div>
+          <div>
+            <div class="pb-prov-name">Gemini</div>
+            <div class="pb-prov-sub">Google · Free tier</div>
+          </div>
+          <div class="pb-prov-check">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#050508" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+        <div class="pb-prov" id="pb-prov-c" onclick="pbProv('claude')">
+          <div class="pb-prov-logo" style="background:rgba(255,140,66,0.1);">◆</div>
+          <div>
+            <div class="pb-prov-name">Claude</div>
+            <div class="pb-prov-sub">Anthropic · Haiku</div>
+          </div>
+          <div class="pb-prov-check">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#050508" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gemini key -->
+      <div id="pb-g-field">
+        <div class="pb-key-wrap">
+          <span class="pb-key-prefix">API KEY</span>
+          <input class="pb-key-input" id="pb-gkey" type="password" placeholder="AIza••••••••••••••••••••" autocomplete="off" spellcheck="false" />
+          <button class="pb-key-eye" onclick="pbEye('pb-gkey')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <span class="pb-key-link">Free key → <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com</a></span>
+      </div>
+
+      <!-- Claude key -->
+      <div id="pb-c-field" style="display:none;">
+        <div class="pb-key-wrap">
+          <span class="pb-key-prefix">API KEY</span>
+          <input class="pb-key-input" id="pb-ckey" type="password" placeholder="sk-ant-••••••••••••••••" autocomplete="off" spellcheck="false" />
+          <button class="pb-key-eye" onclick="pbEye('pb-ckey')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <span class="pb-key-link">Get key → <a href="https://console.anthropic.com" target="_blank" style="color:#FF8C42;">console.anthropic.com</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Avatar -->
+  <div class="pb-block">
+    <div class="pb-block-head">
+      <span class="pb-block-label">Avatar</span>
+      <span class="pb-block-sublabel">Change anytime on this site</span>
+    </div>
+    <div class="pb-block-body">
+      <div class="pb-av-row">
+        <div class="pb-av-opt av-sel" id="pb-av1" onclick="pbAv('vrm1')">
+          <span class="pb-av-emoji">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="13" r="7" fill="none" stroke="#00FFD1" stroke-width="1.2"/>
+              <circle cx="15" cy="12" r="1.5" fill="#00FFD1"/>
+              <circle cx="21" cy="12" r="1.5" fill="#00FFD1"/>
+              <path d="M15 16 Q18 18.5 21 16" stroke="#00FFD1" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <path d="M8 32 C8 26 28 26 28 32" stroke="#00FFD1" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <path d="M13 6 Q18 3 23 6" stroke="#00FFD1" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </span>
+          <div class="pb-av-name">VRM · Character 1</div>
+          <div class="pb-av-tag">Default</div>
+        </div>
+        <div class="pb-av-opt" id="pb-av2" onclick="pbAv('vrm2')">
+          <span class="pb-av-emoji">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="18" cy="13" r="7" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+              <rect x="14" y="11" width="3.5" height="3.5" rx="1" fill="rgba(255,255,255,0.5)"/>
+              <rect x="18.5" y="11" width="3.5" height="3.5" rx="1" fill="rgba(255,255,255,0.5)"/>
+              <rect x="15" y="16" width="6" height="1.5" rx="0.75" fill="rgba(255,255,255,0.3)"/>
+              <circle cx="18" cy="6" r="2" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+              <path d="M8 32 C8 26 28 26 28 32" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+              <path d="M11 9 Q14 5 18 6 Q22 5 25 9" stroke="rgba(255,255,255,0.2)" stroke-width="1" fill="none"/>
+            </svg>
+          </span>
+          <div class="pb-av-name">VRM · Character 2</div>
+          <div class="pb-av-tag">Alternate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Download extension -->
+  <div class="pb-ext-card">
+    <div class="pb-ext-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00FFD1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20.5 11H19V7a2 2 0 00-2-2h-4V3.5A2.5 2.5 0 0010.5 1v0A2.5 2.5 0 008 3.5V5H4a2 2 0 00-2 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7 0 1.49-1.21 2.7-2.7 2.7H2V20a2 2 0 002 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7 1.49 0 2.7 1.21 2.7 2.7V22H17a2 2 0 002-2v-4h1.5a2.5 2.5 0 000-5z"/>
+      </svg>
+    </div>
+    <div class="pb-ext-info">
+      <div class="pb-ext-title">Face of AI Extension</div>
+      <div class="pb-ext-meta">Chrome · Manifest V3 · ~24MB with avatars</div>
+    </div>
+    <a id="pb-dl-btn" href="face-of-ai-extension.zip" download="face-of-ai-extension.zip" class="pb-ext-dl">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download
+    </a>
+  </div>
+
+  <div class="pb-install-hint">
+    <strong style="color:rgba(255,255,255,0.5);">Install steps:</strong> Open <code>chrome://extensions</code> → Enable <strong>Developer Mode</strong> (top right) → click <strong>Load Unpacked</strong> → select the extracted folder
+  </div>
+
+  <!-- Activate -->
+  <div id="pb-form-area">
+    <button class="pb-activate" onclick="pbSave()">
+      Activate your bot →
+    </button>
+  </div>
+
+  <!-- Success -->
+  <div id="pb-success-state">
+    <div class="pb-success-ring">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#00FFD1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="pb-success-title">Bot activated</div>
+    <p class="pb-success-sub">Install the extension and your avatar will float on every site.<br>Right-click it to open the command panel.</p>
+  </div>
+
+</section>
+
+<script>
+  let _pbProv = 'gemini', _pbAv = 'vrm1';
+
+  // Particle canvas
+  (function() {
+    const c = document.getElementById('pb-canvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let W, H, pts = [];
+    function resize() {
+      W = c.width = window.innerWidth;
+      H = c.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    const N = 80;
+    for (let i = 0; i < N; i++) {
+      pts.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3,
+        r: Math.random()*1.5+0.5
+      });
+    }
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      for (let i = 0; i < pts.length; i++) {
+        const p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(0,255,209,0.25)';
+        ctx.fill();
+        for (let j = i+1; j < pts.length; j++) {
+          const q = pts[j];
+          const dx = p.x-q.x, dy = p.y-q.y;
+          const d = Math.sqrt(dx*dx+dy*dy);
+          if (d < 130) {
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(0,255,209,${0.06*(1-d/130)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  function pbProv(p) {
+    _pbProv = p;
+    document.getElementById('pb-prov-g').className = 'pb-prov' + (p==='gemini'?' sel-g':'');
+    document.getElementById('pb-prov-c').className = 'pb-prov' + (p==='claude'?' sel-c':'');
+    document.getElementById('pb-g-field').style.display = p==='gemini'?'block':'none';
+    document.getElementById('pb-c-field').style.display = p==='claude'?'block':'none';
+  }
+
+  function pbAv(a) {
+    _pbAv = a;
+    document.getElementById('pb-av1').className = 'pb-av-opt'+(a==='vrm1'?' av-sel':'');
+    document.getElementById('pb-av2').className = 'pb-av-opt'+(a==='vrm2'?' av-sel':'');
+  }
+
+  function pbEye(id) {
+    const el = document.getElementById(id);
+    el.type = el.type === 'password' ? 'text' : 'password';
+  }
+
+  function pbSave() {
+    const name = document.getElementById('pb-name').value.trim() || 'Aura';
+    const gkey = document.getElementById('pb-gkey').value.trim();
+    const ckey = document.getElementById('pb-ckey').value.trim();
+    localStorage.setItem('fai_bot_name', name);
+    localStorage.setItem('fai_bot_provider', _pbProv);
+    localStorage.setItem('fai_bot_avatar', _pbAv);
+    if (gkey) localStorage.setItem('gemini_companion_key', gkey);
+    if (ckey) localStorage.setItem('fai_claude_key', ckey);
+    document.getElementById('pb-form-area').style.display = 'none';
+    const s = document.getElementById('pb-success-state');
+    s.style.display = 'block';
+    s.scrollIntoView({ behavior:'smooth', block:'nearest' });
+    const btn = document.getElementById('pb-trigger-btn');
+    if (btn) btn.innerHTML = `<svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="#00FFD1"/></svg>${name} Ready`;
+  }
+
+  function openPersonalBot() {
+    document.getElementById('personal-bot-section').style.display = 'block';
+    document.getElementById('personal-bot-section').scrollTop = 0;
+  }
+</script>
+</div>
+
+<!-- TRIGGER BUTTON -->
+<button id="pb-trigger-btn" onclick="openPersonalBot()">
+  <svg width="10" height="10" viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="#00FFD1"/><circle cx="5" cy="5" r="4" fill="none" stroke="#00FFD1" stroke-width="1" opacity="0.4"><animate attributeName="r" from="4" to="8" dur="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.4" to="0" dur="1.5s" repeatCount="indefinite"/></circle></svg>
+  Personal Bot
+</button>
+
 </body>
 </html>

@@ -1,0 +1,2554 @@
+{
+  "furniture_chair.blend": {
+    "object_count": 18,
+    "objects": [
+      {
+        "name": "Area",
+        "type": "LIGHT",
+        "location": [
+          3.5,
+          3.0,
+          3.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Area.001",
+        "type": "LIGHT",
+        "location": [
+          -3.5,
+          1.0,
+          2.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Benchmark_Cam_Obj",
+        "type": "CAMERA",
+        "location": [
+          1.997,
+          1.997,
+          1.658
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Cam_Target",
+        "type": "EMPTY",
+        "location": [
+          0.0,
+          0.0,
+          0.46
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Studio_Ground",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": [
+          "Ground_Mat"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair",
+        "type": "EMPTY",
+        "location": [
+          1.5,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair"
+        },
+        "materials": []
+      },
+      {
+        "name": "unin.entity.furniture_chair_Back_Stile_L",
+        "type": "MESH",
+        "location": [
+          -0.18,
+          0.19,
+          0.66
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Back_Stile_L"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Back_Stile_R",
+        "type": "MESH",
+        "location": [
+          0.18,
+          0.19,
+          0.66
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Back_Stile_R"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Backrest_Panel",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.2,
+          0.78
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Backrest_Panel"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Leg_Front_L",
+        "type": "MESH",
+        "location": [
+          -0.2,
+          -0.19,
+          0.21
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Leg_Front_L"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Leg_Front_R",
+        "type": "MESH",
+        "location": [
+          0.2,
+          -0.19,
+          0.21
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Leg_Front_R"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Leg_Rear_L",
+        "type": "MESH",
+        "location": [
+          -0.2,
+          0.18,
+          0.21
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Leg_Rear_L"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Leg_Rear_R",
+        "type": "MESH",
+        "location": [
+          0.2,
+          0.18,
+          0.21
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Leg_Rear_R"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Seat_Cushion",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -0.01,
+          0.47
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Seat_Cushion"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Fabric_Cushion"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Seat_Plate",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.42
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Seat_Plate"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Stretcher_Cross",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.15
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Stretcher_Cross"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Stretcher_Side_L",
+        "type": "MESH",
+        "location": [
+          -0.2,
+          0.0,
+          0.15
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Stretcher_Side_L"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      },
+      {
+        "name": "unin.entity.furniture_chair_Stretcher_Side_R",
+        "type": "MESH",
+        "location": [
+          0.2,
+          0.0,
+          0.15
+        ],
+        "parent": "unin.entity.furniture_chair",
+        "custom_props": {
+          "unin_id": "unin.entity.furniture_chair_Stretcher_Side_R"
+        },
+        "materials": [
+          "unin.entity.furniture_chair_Oak_Wood"
+        ]
+      }
+    ],
+    "materials": [
+      {
+        "name": "Ground_Mat",
+        "base_color": [
+          0.04,
+          0.04,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.45,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.furniture_chair_Fabric_Cushion",
+        "base_color": [
+          0.12,
+          0.15,
+          0.2,
+          1.0
+        ],
+        "roughness": 0.85,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.furniture_chair_Oak_Wood",
+        "base_color": [
+          0.38,
+          0.22,
+          0.12,
+          1.0
+        ],
+        "roughness": 0.35,
+        "metallic": 0.0
+      }
+    ]
+  },
+  "electronics_phone.blend": {
+    "object_count": 17,
+    "objects": [
+      {
+        "name": "Area",
+        "type": "LIGHT",
+        "location": [
+          3.5,
+          3.0,
+          3.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Area.001",
+        "type": "LIGHT",
+        "location": [
+          -3.5,
+          1.0,
+          2.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Benchmark_Cam_Obj",
+        "type": "CAMERA",
+        "location": [
+          0.966,
+          0.968,
+          0.66
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Cam_Target",
+        "type": "EMPTY",
+        "location": [
+          0.0,
+          0.002,
+          0.08
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Studio_Ground",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": [
+          "Ground_Mat"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone",
+        "type": "EMPTY",
+        "location": [
+          1.5,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone"
+        },
+        "materials": []
+      },
+      {
+        "name": "unin.entity.electronics_phone_Camera_Island",
+        "type": "MESH",
+        "location": [
+          -0.018,
+          0.005,
+          0.136
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Camera_Island"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Titanium_Frame"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Chassis_Body",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.08
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Chassis_Body"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Titanium_Frame"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Display_OLED",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -0.004,
+          0.08
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Display_OLED"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_OLED_Display"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_LED_Flash",
+        "type": "MESH",
+        "location": [
+          -0.012,
+          0.007,
+          0.148
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_LED_Flash"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_OLED_Display"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Lens_Mid",
+        "type": "MESH",
+        "location": [
+          -0.024,
+          0.007,
+          0.13
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Lens_Mid"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Camera_Optics"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Lens_Right",
+        "type": "MESH",
+        "location": [
+          -0.012,
+          0.007,
+          0.137
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Lens_Right"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Camera_Optics"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Lens_Top",
+        "type": "MESH",
+        "location": [
+          -0.024,
+          0.007,
+          0.144
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Lens_Top"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Camera_Optics"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Power_Button",
+        "type": "MESH",
+        "location": [
+          0.038,
+          0.0,
+          0.11
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Power_Button"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Titanium_Frame"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Rear_Glass",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.004,
+          0.08
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Rear_Glass"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Frosted_Glass"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Volume_Down",
+        "type": "MESH",
+        "location": [
+          -0.038,
+          0.0,
+          0.095
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Volume_Down"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Titanium_Frame"
+        ]
+      },
+      {
+        "name": "unin.entity.electronics_phone_Volume_Up",
+        "type": "MESH",
+        "location": [
+          -0.038,
+          0.0,
+          0.115
+        ],
+        "parent": "unin.entity.electronics_phone",
+        "custom_props": {
+          "unin_id": "unin.entity.electronics_phone_Volume_Up"
+        },
+        "materials": [
+          "unin.entity.electronics_phone_Titanium_Frame"
+        ]
+      }
+    ],
+    "materials": [
+      {
+        "name": "Ground_Mat",
+        "base_color": [
+          0.04,
+          0.04,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.45,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.electronics_phone_Camera_Optics",
+        "base_color": [
+          0.01,
+          0.02,
+          0.04,
+          1.0
+        ],
+        "roughness": 0.02,
+        "metallic": 0.2
+      },
+      {
+        "name": "unin.entity.electronics_phone_Frosted_Glass",
+        "base_color": [
+          0.22,
+          0.23,
+          0.25,
+          1.0
+        ],
+        "roughness": 0.18,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.electronics_phone_OLED_Display",
+        "base_color": [
+          0.02,
+          0.03,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.04,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.electronics_phone_Titanium_Frame",
+        "base_color": [
+          0.28,
+          0.28,
+          0.3,
+          1.0
+        ],
+        "roughness": 0.25,
+        "metallic": 0.92
+      }
+    ]
+  },
+  "architecture_house.blend": {
+    "object_count": 22,
+    "objects": [
+      {
+        "name": "Area",
+        "type": "LIGHT",
+        "location": [
+          3.5,
+          3.0,
+          3.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Area.001",
+        "type": "LIGHT",
+        "location": [
+          -3.5,
+          1.0,
+          2.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Benchmark_Cam_Obj",
+        "type": "CAMERA",
+        "location": [
+          13.102,
+          12.927,
+          11.022
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Cam_Target",
+        "type": "EMPTY",
+        "location": [
+          0.0,
+          -0.175,
+          3.16
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Studio_Ground",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": [
+          "Ground_Mat"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house",
+        "type": "EMPTY",
+        "location": [
+          1.5,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house"
+        },
+        "materials": []
+      },
+      {
+        "name": "unin.entity.architecture_house_Chimney_Cap",
+        "type": "MESH",
+        "location": [
+          1.8,
+          1.8,
+          6.26
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Chimney_Cap"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Stone_Foundation"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Chimney_Stack",
+        "type": "MESH",
+        "location": [
+          1.8,
+          1.8,
+          5.0
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Chimney_Stack"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Chimney_Brick"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Door_Frame",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -3.92,
+          1.52
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Door_Frame"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Timber_Trim"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Foundation_Plinth",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.2
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Foundation_Plinth"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Stone_Foundation"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Front_Door",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -3.94,
+          1.48
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Front_Door"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Wood_Door"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Gable_Front",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -3.85,
+          4.15
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Gable_Front"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Wall_Siding"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Gable_Rear",
+        "type": "MESH",
+        "location": [
+          0.0,
+          3.85,
+          4.15
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Gable_Rear"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Wall_Siding"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Main_Walls",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          1.8
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Main_Walls"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Wall_Siding"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Porch_Step",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -4.35,
+          0.1
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Porch_Step"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Stone_Foundation"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Roof_Ridge_Cap",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          5.12
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Roof_Ridge_Cap"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Timber_Trim"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Roof_Slope_L",
+        "type": "MESH",
+        "location": [
+          -1.55,
+          0.0,
+          4.05
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Roof_Slope_L"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Roof_Shingles"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Roof_Slope_R",
+        "type": "MESH",
+        "location": [
+          1.55,
+          0.0,
+          4.05
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Roof_Slope_R"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Roof_Shingles"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Window_Frame_L",
+        "type": "MESH",
+        "location": [
+          -1.8,
+          -3.92,
+          1.85
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Window_Frame_L"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Timber_Trim"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Window_Frame_R",
+        "type": "MESH",
+        "location": [
+          1.8,
+          -3.92,
+          1.85
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Window_Frame_R"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Timber_Trim"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Window_Glass_L",
+        "type": "MESH",
+        "location": [
+          -1.8,
+          -3.93,
+          1.85
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Window_Glass_L"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Window_Glass"
+        ]
+      },
+      {
+        "name": "unin.entity.architecture_house_Window_Glass_R",
+        "type": "MESH",
+        "location": [
+          1.8,
+          -3.93,
+          1.85
+        ],
+        "parent": "unin.entity.architecture_house",
+        "custom_props": {
+          "unin_id": "unin.entity.architecture_house_Window_Glass_R"
+        },
+        "materials": [
+          "unin.entity.architecture_house_Window_Glass"
+        ]
+      }
+    ],
+    "materials": [
+      {
+        "name": "Ground_Mat",
+        "base_color": [
+          0.04,
+          0.04,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.45,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.architecture_house_Chimney_Brick",
+        "base_color": [
+          0.42,
+          0.18,
+          0.14,
+          1.0
+        ],
+        "roughness": 0.8,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.architecture_house_Roof_Shingles",
+        "base_color": [
+          0.16,
+          0.17,
+          0.19,
+          1.0
+        ],
+        "roughness": 0.65,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.architecture_house_Stone_Foundation",
+        "base_color": [
+          0.28,
+          0.28,
+          0.29,
+          1.0
+        ],
+        "roughness": 0.85,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.architecture_house_Timber_Trim",
+        "base_color": [
+          0.92,
+          0.92,
+          0.9,
+          1.0
+        ],
+        "roughness": 0.35,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.architecture_house_Wall_Siding",
+        "base_color": [
+          0.82,
+          0.81,
+          0.78,
+          1.0
+        ],
+        "roughness": 0.55,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.architecture_house_Window_Glass",
+        "base_color": [
+          0.1,
+          0.15,
+          0.22,
+          1.0
+        ],
+        "roughness": 0.05,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.architecture_house_Wood_Door",
+        "base_color": [
+          0.35,
+          0.18,
+          0.1,
+          1.0
+        ],
+        "roughness": 0.4,
+        "metallic": 0.0
+      }
+    ]
+  },
+  "transport_airplane.blend": {
+    "object_count": 38,
+    "objects": [
+      {
+        "name": "Area",
+        "type": "LIGHT",
+        "location": [
+          3.5,
+          3.0,
+          3.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Area.001",
+        "type": "LIGHT",
+        "location": [
+          -3.5,
+          1.0,
+          2.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Benchmark_Cam_Obj",
+        "type": "CAMERA",
+        "location": [
+          47.55,
+          46.017,
+          34.243
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Cam_Target",
+        "type": "EMPTY",
+        "location": [
+          0.0,
+          -1.533,
+          5.713
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Studio_Ground",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": [
+          "Ground_Mat"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane",
+        "type": "EMPTY",
+        "location": [
+          1.5,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane"
+        },
+        "materials": []
+      },
+      {
+        "name": "unin.entity.transport_airplane_Cockpit_Windshield",
+        "type": "MESH",
+        "location": [
+          0.0,
+          12.2,
+          4.95
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Cockpit_Windshield"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Cockpit_Glass"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Engine_Nacelle_L",
+        "type": "MESH",
+        "location": [
+          -5.2,
+          0.6,
+          2.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Engine_Nacelle_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Engine_Nacelle_R",
+        "type": "MESH",
+        "location": [
+          5.2,
+          0.6,
+          2.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Engine_Nacelle_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Engine_Pylon_L",
+        "type": "MESH",
+        "location": [
+          -5.2,
+          0.6,
+          3.0
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Engine_Pylon_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Engine_Pylon_R",
+        "type": "MESH",
+        "location": [
+          5.2,
+          0.6,
+          3.0
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Engine_Pylon_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Exhaust_Nozzle_L",
+        "type": "MESH",
+        "location": [
+          -5.2,
+          -1.9,
+          2.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Exhaust_Nozzle_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Exhaust_Nozzle_R",
+        "type": "MESH",
+        "location": [
+          5.2,
+          -1.9,
+          2.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Exhaust_Nozzle_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Fuselage_Main",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          4.2
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Fuselage_Main"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Horizontal_Stabilizer_L",
+        "type": "MESH",
+        "location": [
+          -2.8,
+          -17.2,
+          5.2
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Horizontal_Stabilizer_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Polished_Aluminum"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Horizontal_Stabilizer_R",
+        "type": "MESH",
+        "location": [
+          2.8,
+          -17.2,
+          5.2
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Horizontal_Stabilizer_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Polished_Aluminum"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Intake_Spinner_L",
+        "type": "MESH",
+        "location": [
+          -5.2,
+          2.75,
+          2.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Intake_Spinner_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Intake_Spinner_R",
+        "type": "MESH",
+        "location": [
+          5.2,
+          2.75,
+          2.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Intake_Spinner_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Gear_Strut_L",
+        "type": "MESH",
+        "location": [
+          -2.8,
+          -1.2,
+          1.2
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Gear_Strut_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Gear_Strut_R",
+        "type": "MESH",
+        "location": [
+          2.8,
+          -1.2,
+          1.2
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Gear_Strut_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_L_1",
+        "type": "MESH",
+        "location": [
+          -3.08,
+          -0.85,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_L_1"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_L_2",
+        "type": "MESH",
+        "location": [
+          -2.52,
+          -0.85,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_L_2"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_L_3",
+        "type": "MESH",
+        "location": [
+          -3.08,
+          -1.55,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_L_3"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_L_4",
+        "type": "MESH",
+        "location": [
+          -2.52,
+          -1.55,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_L_4"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_R_1",
+        "type": "MESH",
+        "location": [
+          2.52,
+          -0.85,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_R_1"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_R_2",
+        "type": "MESH",
+        "location": [
+          3.08,
+          -0.85,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_R_2"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_R_3",
+        "type": "MESH",
+        "location": [
+          2.52,
+          -1.55,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_R_3"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wheel_R_4",
+        "type": "MESH",
+        "location": [
+          3.08,
+          -1.55,
+          0.55
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wheel_R_4"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wing_L",
+        "type": "MESH",
+        "location": [
+          -7.6,
+          -1.2,
+          3.4
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wing_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Main_Wing_R",
+        "type": "MESH",
+        "location": [
+          7.6,
+          -1.2,
+          3.4
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Main_Wing_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Nose_Gear_Strut",
+        "type": "MESH",
+        "location": [
+          0.0,
+          11.2,
+          1.15
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Nose_Gear_Strut"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Turbine_Titanium"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Nose_Radome",
+        "type": "MESH",
+        "location": [
+          0.0,
+          13.4,
+          4.2
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Nose_Radome"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Nose_Wheel_L",
+        "type": "MESH",
+        "location": [
+          -0.22,
+          11.2,
+          0.4
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Nose_Wheel_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Nose_Wheel_R",
+        "type": "MESH",
+        "location": [
+          0.22,
+          11.2,
+          0.4
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Nose_Wheel_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Rubber_Tire"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Tailcone",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -14.75,
+          4.4
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Tailcone"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Vertical_Fin",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -15.2,
+          7.8
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Vertical_Fin"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Airliner_Livery_White"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Winglet_L",
+        "type": "MESH",
+        "location": [
+          -14.2,
+          -3.2,
+          4.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Winglet_L"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Polished_Aluminum"
+        ]
+      },
+      {
+        "name": "unin.entity.transport_airplane_Winglet_R",
+        "type": "MESH",
+        "location": [
+          14.2,
+          -3.2,
+          4.3
+        ],
+        "parent": "unin.entity.transport_airplane",
+        "custom_props": {
+          "unin_id": "unin.entity.transport_airplane_Winglet_R"
+        },
+        "materials": [
+          "unin.entity.transport_airplane_Polished_Aluminum"
+        ]
+      }
+    ],
+    "materials": [
+      {
+        "name": "Ground_Mat",
+        "base_color": [
+          0.04,
+          0.04,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.45,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.transport_airplane_Airliner_Livery_White",
+        "base_color": [
+          0.92,
+          0.93,
+          0.95,
+          1.0
+        ],
+        "roughness": 0.2,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.transport_airplane_Cockpit_Glass",
+        "base_color": [
+          0.05,
+          0.08,
+          0.12,
+          1.0
+        ],
+        "roughness": 0.04,
+        "metallic": 0.1
+      },
+      {
+        "name": "unin.entity.transport_airplane_Polished_Aluminum",
+        "base_color": [
+          0.88,
+          0.89,
+          0.91,
+          1.0
+        ],
+        "roughness": 0.12,
+        "metallic": 0.95
+      },
+      {
+        "name": "unin.entity.transport_airplane_Rubber_Tire",
+        "base_color": [
+          0.015,
+          0.015,
+          0.016,
+          1.0
+        ],
+        "roughness": 0.8,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.transport_airplane_Turbine_Titanium",
+        "base_color": [
+          0.24,
+          0.25,
+          0.27,
+          1.0
+        ],
+        "roughness": 0.32,
+        "metallic": 0.88
+      }
+    ]
+  },
+  "creatures_dragon.blend": {
+    "object_count": 50,
+    "objects": [
+      {
+        "name": "Area",
+        "type": "LIGHT",
+        "location": [
+          3.5,
+          3.0,
+          3.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Area.001",
+        "type": "LIGHT",
+        "location": [
+          -3.5,
+          1.0,
+          2.5
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Benchmark_Cam_Obj",
+        "type": "CAMERA",
+        "location": [
+          8.782,
+          8.489,
+          6.673
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Cam_Target",
+        "type": "EMPTY",
+        "location": [
+          0.0,
+          -0.292,
+          1.404
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": []
+      },
+      {
+        "name": "Studio_Ground",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {},
+        "materials": [
+          "Ground_Mat"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon",
+        "type": "EMPTY",
+        "location": [
+          1.5,
+          0.0,
+          0.0
+        ],
+        "parent": null,
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon"
+        },
+        "materials": []
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Claw_Foot_Front_L",
+        "type": "MESH",
+        "location": [
+          -0.52,
+          0.8,
+          0.04
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Claw_Foot_Front_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Claw_Foot_Front_R",
+        "type": "MESH",
+        "location": [
+          0.52,
+          0.8,
+          0.04
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Claw_Foot_Front_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Claw_Foot_Rear_L",
+        "type": "MESH",
+        "location": [
+          -0.55,
+          -0.52,
+          0.04
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Claw_Foot_Rear_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Claw_Foot_Rear_R",
+        "type": "MESH",
+        "location": [
+          0.55,
+          -0.52,
+          0.04
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Claw_Foot_Rear_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Dorsal_Spine_1",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.75,
+          1.78
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Dorsal_Spine_1"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Dorsal_Spine_2",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.43,
+          1.78
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Dorsal_Spine_2"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Dorsal_Spine_3",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.11,
+          1.78
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Dorsal_Spine_3"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Dorsal_Spine_4",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -0.21,
+          1.78
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Dorsal_Spine_4"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Dorsal_Spine_5",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -0.53,
+          1.78
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Dorsal_Spine_5"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Eye_L",
+        "type": "MESH",
+        "location": [
+          -0.16,
+          2.05,
+          2.22
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Eye_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Amber_Eye_Emission"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Eye_R",
+        "type": "MESH",
+        "location": [
+          0.16,
+          2.05,
+          2.22
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Eye_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Amber_Eye_Emission"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Foreleg_Lower_L",
+        "type": "MESH",
+        "location": [
+          -0.52,
+          0.72,
+          0.58
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Foreleg_Lower_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Foreleg_Lower_R",
+        "type": "MESH",
+        "location": [
+          0.52,
+          0.72,
+          0.58
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Foreleg_Lower_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Foreleg_Upper_L",
+        "type": "MESH",
+        "location": [
+          -0.48,
+          0.65,
+          1.15
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Foreleg_Upper_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Foreleg_Upper_R",
+        "type": "MESH",
+        "location": [
+          0.48,
+          0.65,
+          1.15
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Foreleg_Upper_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Hindleg_Shin_L",
+        "type": "MESH",
+        "location": [
+          -0.55,
+          -0.58,
+          0.52
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Hindleg_Shin_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Hindleg_Shin_R",
+        "type": "MESH",
+        "location": [
+          0.55,
+          -0.58,
+          0.52
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Hindleg_Shin_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Hindleg_Thigh_L",
+        "type": "MESH",
+        "location": [
+          -0.52,
+          -0.48,
+          1.1
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Hindleg_Thigh_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Hindleg_Thigh_R",
+        "type": "MESH",
+        "location": [
+          0.52,
+          -0.48,
+          1.1
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Hindleg_Thigh_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Horn_Cheek_L",
+        "type": "MESH",
+        "location": [
+          -0.22,
+          1.88,
+          2.08
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Horn_Cheek_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Horn_Cheek_R",
+        "type": "MESH",
+        "location": [
+          0.22,
+          1.88,
+          2.08
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Horn_Cheek_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Horn_Main_L",
+        "type": "MESH",
+        "location": [
+          -0.15,
+          1.72,
+          2.45
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Horn_Main_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Horn_Main_R",
+        "type": "MESH",
+        "location": [
+          0.15,
+          1.72,
+          2.45
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Horn_Main_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Lower_Jaw",
+        "type": "MESH",
+        "location": [
+          0.0,
+          2.28,
+          1.92
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Lower_Jaw"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Neck_Segment_1",
+        "type": "MESH",
+        "location": [
+          0.0,
+          1.367,
+          1.8
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Neck_Segment_1"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Neck_Segment_2",
+        "type": "MESH",
+        "location": [
+          0.0,
+          1.133,
+          1.65
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Neck_Segment_2"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Neck_Segment_3",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.9,
+          1.5
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Neck_Segment_3"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Skull_Cranium",
+        "type": "MESH",
+        "location": [
+          0.0,
+          1.95,
+          2.15
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Skull_Cranium"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Snout_UpperJaw",
+        "type": "MESH",
+        "location": [
+          0.0,
+          2.38,
+          2.05
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Snout_UpperJaw"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Tail_Segment_1",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -0.95,
+          1.15
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Tail_Segment_1"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Tail_Segment_2",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -1.6,
+          0.93
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Tail_Segment_2"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Tail_Segment_3",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -2.25,
+          0.71
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Tail_Segment_3"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Tail_Segment_4",
+        "type": "MESH",
+        "location": [
+          0.0,
+          -2.9,
+          0.49
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Tail_Segment_4"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Torso_Core",
+        "type": "MESH",
+        "location": [
+          0.0,
+          0.1,
+          1.35
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Torso_Core"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Arm_L",
+        "type": "MESH",
+        "location": [
+          -0.85,
+          0.2,
+          1.95
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Arm_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Arm_R",
+        "type": "MESH",
+        "location": [
+          0.85,
+          0.2,
+          1.95
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Arm_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Reptilian_Scales"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Membrane_L",
+        "type": "MESH",
+        "location": [
+          -1.55,
+          0.2,
+          2.1
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Membrane_L"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Wing_Membrane"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Membrane_R",
+        "type": "MESH",
+        "location": [
+          1.55,
+          0.2,
+          2.1
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Membrane_R"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Wing_Membrane"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Spar_L_1",
+        "type": "MESH",
+        "location": [
+          -1.85,
+          0.1,
+          2.3
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Spar_L_1"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Spar_L_2",
+        "type": "MESH",
+        "location": [
+          -1.85,
+          0.3,
+          2.3
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Spar_L_2"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Spar_L_3",
+        "type": "MESH",
+        "location": [
+          -1.85,
+          0.5,
+          2.3
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Spar_L_3"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Spar_R_1",
+        "type": "MESH",
+        "location": [
+          1.85,
+          0.1,
+          2.3
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Spar_R_1"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Spar_R_2",
+        "type": "MESH",
+        "location": [
+          1.85,
+          0.3,
+          2.3
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Spar_R_2"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Spar_R_3",
+        "type": "MESH",
+        "location": [
+          1.85,
+          0.5,
+          2.3
+        ],
+        "parent": "unin.entity.creatures_dragon",
+        "custom_props": {
+          "unin_id": "unin.entity.creatures_dragon_Wing_Spar_R_3"
+        },
+        "materials": [
+          "unin.entity.creatures_dragon_Obsidian_Horn"
+        ]
+      }
+    ],
+    "materials": [
+      {
+        "name": "Ground_Mat",
+        "base_color": [
+          0.04,
+          0.04,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.45,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Amber_Eye_Emission",
+        "base_color": [
+          1.0,
+          0.65,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.5,
+        "metallic": 0.0
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Obsidian_Horn",
+        "base_color": [
+          0.02,
+          0.02,
+          0.02,
+          1.0
+        ],
+        "roughness": 0.15,
+        "metallic": 0.3
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Reptilian_Scales",
+        "base_color": [
+          0.05,
+          0.14,
+          0.08,
+          1.0
+        ],
+        "roughness": 0.38,
+        "metallic": 0.15
+      },
+      {
+        "name": "unin.entity.creatures_dragon_Wing_Membrane",
+        "base_color": [
+          0.08,
+          0.06,
+          0.05,
+          1.0
+        ],
+        "roughness": 0.45,
+        "metallic": 0.0
+      }
+    ]
+  }
+}

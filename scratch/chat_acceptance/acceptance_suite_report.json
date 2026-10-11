@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-10-11T15:21:48.966Z",
+  "steps": {
+    "1_chair": {
+      "prompt": "Create a detailed chair.",
+      "durationMs": 33215,
+      "passed": true,
+      "objectsCount": 27,
+      "chairObjectsCount": 5,
+      "cushionMaterial": "Chair_Black_Leather",
+      "cushionWorldLocation": [
+        0,
+        -0.011,
+        0.011
+      ],
+      "uiThought": ""
+    },
+    "2_cushion_move": {
+      "prompt": "Change the cushion to black leather and move the chair left.",
+      "durationMs": 18930,
+      "passed": true,
+      "cushionColorBefore": [
+        0.015,
+        0.015,
+        0.018,
+        1
+      ],
+      "cushionColorAfter": [
+        0.015,
+        0.015,
+        0.018,
+        1
+      ],
+      "worldLocationBefore": [
+        0,
+        -0.011,
+        0.011
+      ],
+      "worldLocationAfter": [
+        -1.5,
+        -0.011,
+        0.011
+      ],
+      "isColorBlack": true,
+      "isMovedLeft": true,
+      "uiThought": ""
+    },
+    "3_house_roof_window": {
+      "prompt": "Create a house, change only its roof to blue, and add a window.",
+      "durationMs": 51200,
+      "passed": true,
+      "houseObjectsCount": 8,
+      "roofColor": [
+        0.04,
+        0.18,
+        0.85,
+        1
+      ],
+      "isRoofBlue": true,
+      "windowAdded": "Window_Detail",
+      "isWindowAdded": true,
+      "isWallPreserved": true,
+      "uiThought": ""
+    },
+    "4_motorcycle_rain_sunset": {
+      "prompt": "Create a motorcycle scene, change its paint, add rain and sunset lighting.",
+      "durationMs": 45352,
+      "passed": true,
+      "motoObjectsCount": 129,
+      "rainEmitter": "unin.vfx.rain_emitter",
+      "isRainActive": true,
+      "paintMaterial": "MC_Body_Paint",
+      "isSunsetActive": true,
+      "uiThought": ""
+    },
+    "5_stop_rain_preserve": {
+      "prompt": "Stop the rain while preserving the sunset and motorcycle paint.",
+      "durationMs": 17140,
+      "passed": true,
+      "isRainStopped": true,
+      "isSunsetPreserved": true,
+      "isPaintPreserved": true,
+      "uiThought": ""
+    },
+    "6_save_reopen": {
+      "prompt": "Save, reopen in a fresh Blender process, and inspect the result.",
+      "durationMs": 17089,
+      "passed": true,
+      "savedBlendExists": true,
+      "reopenedObjectsCount": 143,
+      "reopenedMaterialsCount": 122,
+      "uiThought": ""
+    }
+  },
+  "passedCount": 6,
+  "failedCount": 0
+}

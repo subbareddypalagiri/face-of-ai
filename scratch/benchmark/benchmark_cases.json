@@ -1,0 +1,790 @@
+[
+  {
+    "item": {
+      "id": "furniture_chair",
+      "name": "Ergonomic office chair with armrests and caster wheels",
+      "category": "furniture",
+      "requestedName": "chair"
+    },
+    "entity": {
+      "id": "unin.entity.furniture_chair",
+      "name": "Ergonomic office chair with armrests and caster wheels",
+      "category": "furniture",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+      "format": "GLB",
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "confidence": 1,
+      "reason": "Exact name match for verified asset \"Ergonomic Office Chair\"",
+      "limitations": "Static pre-authored geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": true,
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 154880,
+          "estimatedTriangles": 2248,
+          "vertexCount": 4194,
+          "meshCount": 11,
+          "materialCount": 3,
+          "hasTextures": false,
+          "checksum": "e73c7a7b1750bc670bc9ef6761947cabb5b4a69d46408be8ad10a65cc8b7d1d3"
+        }
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Ergonomic Office Chair\""
+        }
+      ]
+    },
+    "bpyCode": "\n# Import Local 3D Asset\nimport bpy\nroot = bpy.data.objects.new(\"unin.entity.furniture_chair\", None)\nroot[\"unin_id\"] = \"unin.entity.furniture_chair\"\nbpy.context.collection.objects.link(root)\nbpy.ops.import_scene.gltf(filepath=r\"C:/Users/subba/Downloads/prime -ps/face of me/assets/models/chair.glb\")\nfor obj in bpy.context.selected_objects:\n    if obj != root and not obj.parent:\n        obj.parent = root\n        obj[\"unin_id\"] = f\"unin.entity.furniture_chair_{obj.name}\"\n"
+  },
+  {
+    "item": {
+      "id": "furniture_desk",
+      "name": "Executive wooden office desk with drawers and metal legs",
+      "category": "furniture",
+      "requestedName": "office desk"
+    },
+    "entity": {
+      "id": "unin.entity.furniture_desk",
+      "name": "Executive wooden office desk with drawers and metal legs",
+      "category": "furniture",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/desk.glb",
+      "format": "GLB",
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "confidence": 1,
+      "reason": "Exact name match for verified asset \"Executive Wooden Desk\"",
+      "limitations": "Static pre-authored geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": true,
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/desk.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 50764,
+          "estimatedTriangles": 692,
+          "vertexCount": 1320,
+          "meshCount": 7,
+          "materialCount": 3,
+          "hasTextures": false,
+          "checksum": "f755b75342b1d20831e5141b4e79f3f963c164fefef93ac5ce68d02ab1716887"
+        }
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Executive Wooden Desk\""
+        }
+      ]
+    },
+    "bpyCode": "\n# Import Local 3D Asset\nimport bpy\nroot = bpy.data.objects.new(\"unin.entity.furniture_desk\", None)\nroot[\"unin_id\"] = \"unin.entity.furniture_desk\"\nbpy.context.collection.objects.link(root)\nbpy.ops.import_scene.gltf(filepath=r\"C:/Users/subba/Downloads/prime -ps/face of me/assets/models/desk.glb\")\nfor obj in bpy.context.selected_objects:\n    if obj != root and not obj.parent:\n        obj.parent = root\n        obj[\"unin_id\"] = f\"unin.entity.furniture_desk_{obj.name}\"\n"
+  },
+  {
+    "item": {
+      "id": "electronics_phone",
+      "name": "Sleek glass smartphone with camera lenses and OLED screen",
+      "category": "electronics",
+      "requestedName": "smartphone"
+    },
+    "entity": {
+      "id": "unin.entity.electronics_phone",
+      "name": "Sleek glass smartphone with camera lenses and OLED screen",
+      "category": "electronics",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/smartphone.glb",
+      "format": "GLB",
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "confidence": 1,
+      "reason": "Exact name match for verified asset \"Titanium OLED Smartphone\"",
+      "limitations": "Static pre-authored geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": true,
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/smartphone.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 131556,
+          "estimatedTriangles": 1960,
+          "vertexCount": 3560,
+          "meshCount": 10,
+          "materialCount": 4,
+          "hasTextures": false,
+          "checksum": "b6106a695250780bf6d3d4d669ac87fc2ec3c9e614222a1cd22c6dea490703a2"
+        }
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Titanium OLED Smartphone\""
+        }
+      ]
+    },
+    "bpyCode": "\n# Import Local 3D Asset\nimport bpy\nroot = bpy.data.objects.new(\"unin.entity.electronics_phone\", None)\nroot[\"unin_id\"] = \"unin.entity.electronics_phone\"\nbpy.context.collection.objects.link(root)\nbpy.ops.import_scene.gltf(filepath=r\"C:/Users/subba/Downloads/prime -ps/face of me/assets/models/smartphone.glb\")\nfor obj in bpy.context.selected_objects:\n    if obj != root and not obj.parent:\n        obj.parent = root\n        obj[\"unin_id\"] = f\"unin.entity.electronics_phone_{obj.name}\"\n"
+  },
+  {
+    "item": {
+      "id": "electronics_computer",
+      "name": "Desktop computer tower with monitor and keyboard",
+      "category": "electronics",
+      "requestedName": "desktop computer"
+    },
+    "entity": {
+      "id": "unin.entity.electronics_computer",
+      "name": "Desktop computer tower with monitor and keyboard",
+      "category": "electronics",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_COMPUTER_ASSEMBLY",
+      "path": null,
+      "format": "PROCEDURAL",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "confidence": 0.85,
+      "reason": "Synthesizing desktop workstation assembly with mid-tower PC chassis, widescreen monitor and keyboard",
+      "limitations": "Procedural component geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": false,
+      "validation": {
+        "valid": true
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Desktop computer tower with monitor and keyboard\" (electronics)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Desktop computer tower with monitor and keyboard\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing desktop workstation assembly with mid-tower PC chassis, widescreen monitor and keyboard"
+        }
+      ]
+    },
+    "bpyCode": "\n# ==============================================================================\n# PROCEDURAL ELECTRONICS: DESKTOP WORKSTATION (PC TOWER + MONITOR + KEYBOARD)\n# Dimensions: ~2m W x ~2m L x ~2m H\n# Assembly: Mid-Tower ATX Chassis, Front Mesh Grille, Tempered Glass Side Panel,\n# Widescreen Gaming Monitor with Articulated Stand, Ergonomic Desktop Keyboard\n# ==============================================================================\nimport bpy\nimport bmesh\nimport math\nimport mathutils\n\nentity_id = \"unin.entity.electronics_computer\"\nbase_loc = (0, 0, 0)\n\nfocal_root = bpy.data.objects.new(entity_id, None)\nfocal_root[\"unin_id\"] = entity_id\nfocal_root.empty_display_type = 'ARROWS'\nfocal_root.location = base_loc\nbpy.context.collection.objects.link(focal_root)\n\n# Materials\nmat_chassis = bpy.data.materials.new(name=f\"{entity_id}_Powder_Steel\")\nmat_chassis.use_nodes = True\nb_ch = mat_chassis.node_tree.nodes.get('Principled BSDF')\nif b_ch:\n    b_ch.inputs['Base Color'].default_value = (0.08, 0.09, 0.10, 1.0)\n    b_ch.inputs['Roughness'].default_value = 0.35\n    if 'Metallic' in b_ch.inputs: b_ch.inputs['Metallic'].default_value = 0.8\n\nmat_screen = bpy.data.materials.new(name=f\"{entity_id}_Monitor_Screen\")\nmat_screen.use_nodes = True\nb_sc = mat_screen.node_tree.nodes.get('Principled BSDF')\nif b_sc:\n    b_sc.inputs['Base Color'].default_value = (0.03, 0.04, 0.06, 1.0)\n    b_sc.inputs['Roughness'].default_value = 0.08\n    if 'Emission Color' in b_sc.inputs:\n        b_sc.inputs['Emission Color'].default_value = (0.04, 0.09, 0.18, 1.0)\n        b_sc.inputs['Emission Strength'].default_value = 0.25\n\nmat_alum = bpy.data.materials.new(name=f\"{entity_id}_Brushed_Alum\")\nmat_alum.use_nodes = True\nb_al = mat_alum.node_tree.nodes.get('Principled BSDF')\nif b_al:\n    b_al.inputs['Base Color'].default_value = (0.75, 0.76, 0.78, 1.0)\n    b_al.inputs['Roughness'].default_value = 0.20\n    if 'Metallic' in b_al.inputs: b_al.inputs['Metallic'].default_value = 0.95\n\nmat_glass = bpy.data.materials.new(name=f\"{entity_id}_Tempered_Glass\")\nmat_glass.use_nodes = True\nb_gl = mat_glass.node_tree.nodes.get('Principled BSDF')\nif b_gl:\n    b_gl.inputs['Base Color'].default_value = (0.1, 0.12, 0.15, 1.0)\n    b_gl.inputs['Roughness'].default_value = 0.05\n    if 'Transmission Weight' in b_gl.inputs: b_gl.inputs['Transmission Weight'].default_value = 0.85\n\ndef add_part(name, mesh_func, loc_rel, rot_rel=(0,0,0), mat=mat_chassis):\n    obj = mesh_func()\n    obj.name = f\"{entity_id}_{name}\"\n    obj[\"unin_id\"] = f\"{entity_id}_{name}\"\n    obj.location = (base_loc[0] + loc_rel[0], base_loc[1] + loc_rel[1], base_loc[2] + loc_rel[2])\n    obj.rotation_euler = rot_rel\n    obj.parent = focal_root\n    if mat: obj.data.materials.append(mat)\n    bpy.ops.object.shade_smooth()\n    return obj\n\n# ----------------- 1. PC TOWER (Right Side) -----------------\n# Main Tower Chassis\ndef create_tower():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.21, 0.44, 0.46)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"TowerBevel\", 'BEVEL')\n    bev.width = 0.008\n    bev.segments = 3\n    return o\nadd_part(\"Tower_Chassis\", create_tower, (0.42, 0.05, 0.23), mat=mat_chassis)\n\n# Tower Tempered Glass Side Window\ndef create_tower_glass():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.004, 0.38, 0.40)\n    bpy.ops.object.transform_apply(scale=True)\n    return o\nadd_part(\"Tower_Glass_Panel\", create_tower_glass, (0.312, 0.05, 0.23), mat=mat_glass)\n\n# Tower Front Ventilation Mesh Inset\ndef create_tower_front():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.19, 0.012, 0.42)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.005\n    bev.segments = 2\n    return o\nadd_part(\"Tower_Front_Mesh\", create_tower_front, (0.42, -0.175, 0.23), mat=mat_chassis)\n\n# ----------------- 2. WIDESCREEN MONITOR (Center) -----------------\n# Monitor Display Bezel & Casing\ndef create_monitor_casing():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.64, 0.024, 0.38)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.006\n    bev.segments = 3\n    return o\nadd_part(\"Monitor_Casing\", create_monitor_casing, (-0.12, 0.05, 0.36), mat=mat_chassis)\n\n# Monitor Screen Face\ndef create_monitor_screen():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.62, 0.002, 0.36)\n    bpy.ops.object.transform_apply(scale=True)\n    return o\nadd_part(\"Monitor_Screen\", create_monitor_screen, (-0.12, 0.037, 0.36), mat=mat_screen)\n\n# Monitor Articulated Stand Neck\ndef create_stand_neck():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.045, 0.045, 0.26)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.004\n    bev.segments = 2\n    return o\nadd_part(\"Monitor_Stand_Neck\", create_stand_neck, (-0.12, 0.09, 0.20), mat=mat_alum)\n\n# Monitor Stand Base Plate\ndef create_stand_base():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.24, 0.20, 0.012)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.004\n    bev.segments = 2\n    return o\nadd_part(\"Monitor_Stand_Base\", create_stand_base, (-0.12, 0.05, 0.006), mat=mat_alum)\n\n# ----------------- 3. DESKTOP KEYBOARD (Front Center) -----------------\n# Keyboard Wedge Body\ndef create_keyboard():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.44, 0.14, 0.016)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.003\n    bev.segments = 2\n    return o\nadd_part(\"Keyboard_Body\", create_keyboard, (-0.12, -0.22, 0.008), rot_rel=(math.radians(3), 0, 0), mat=mat_chassis)\n\n# Keyboard Keycap Matrix Plate\ndef create_keybed():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.41, 0.12, 0.006)\n    bpy.ops.object.transform_apply(scale=True)\n    return o\nadd_part(\"Keyboard_Keys\", create_keybed, (-0.12, -0.22, 0.018), rot_rel=(math.radians(3), 0, 0), mat=mat_screen)\n"
+  },
+  {
+    "item": {
+      "id": "vehicles_car",
+      "name": "High-performance red sports car",
+      "category": "vehicle",
+      "requestedName": "car"
+    },
+    "entity": {
+      "id": "unin.entity.vehicles_car",
+      "name": "High-performance red sports car",
+      "category": "vehicle",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/ferrari.glb",
+      "format": "GLB",
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "confidence": 1,
+      "reason": "Exact name match for verified asset \"Ferrari SF90 Supercar\"",
+      "limitations": "Static pre-authored geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": true,
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/ferrari.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 1681572,
+          "estimatedTriangles": 358788,
+          "vertexCount": 337068,
+          "meshCount": 51,
+          "materialCount": 17,
+          "hasTextures": false,
+          "checksum": "cafe3f48da6797aa9bde75ca768bc5b57db366575fd233e90df186ae988a876e"
+        }
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Ferrari SF90 Supercar\""
+        }
+      ]
+    },
+    "bpyCode": "\n# Import Local 3D Asset\nimport bpy\nroot = bpy.data.objects.new(\"unin.entity.vehicles_car\", None)\nroot[\"unin_id\"] = \"unin.entity.vehicles_car\"\nbpy.context.collection.objects.link(root)\nbpy.ops.import_scene.gltf(filepath=r\"C:/Users/subba/Downloads/prime -ps/face of me/ferrari.glb\")\nfor obj in bpy.context.selected_objects:\n    if obj != root and not obj.parent:\n        obj.parent = root\n        obj[\"unin_id\"] = f\"unin.entity.vehicles_car_{obj.name}\"\n"
+  },
+  {
+    "item": {
+      "id": "vehicles_motorcycle",
+      "name": "Hero chopper motorcycle with V-twin engine and chrome exhaust",
+      "category": "vehicle",
+      "requestedName": "motorcycle"
+    },
+    "entity": {
+      "id": "unin.entity.vehicles_motorcycle",
+      "name": "Hero chopper motorcycle with V-twin engine and chrome exhaust",
+      "category": "vehicle",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_MOTORCYCLE_ASSEMBLY",
+      "path": null,
+      "format": "PROCEDURAL",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "confidence": 0.85,
+      "reason": "Synthesizing multi-component procedural geometric assembly for Cruiser Motorcycle",
+      "limitations": "Procedural component geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": false,
+      "validation": {
+        "valid": true
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Hero chopper motorcycle with V-twin engine and chrome exhaust\" (vehicle)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Hero chopper motorcycle with V-twin engine and chrome exhaust\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing multi-component procedural geometric assembly for Cruiser Motorcycle"
+        }
+      ]
+    },
+    "bpyCode": "\n# ==============================================================================\n# HERO ASSET: HIGH-FIDELITY CHOPPER MOTORCYCLE (PROCEDURAL ASSEMBLY ENGINE V3)\n# Dimensions: ~${dim[0]}m W x ~${dim[1]}m L x ~${dim[2]}m H\n# 127 Mechanical Components: Profiled Vulcanized Tires, Hollow Rims,\n# Radial Spoke Lacing, Brake Rotors & Calipers, Double-Cradle Frame,\n# Sculpted Teardrop Tank with Tunnel, V-Twin Engine Block, Cooling Fins,\n# Rocker Heads, Pushrods, Dual Staggered Exhausts, Raked Triple-Tree Fork,\n# Handlebars & Grips, Solo Leather Saddle, Bobbed Fender, Belt Drive.\n# ==============================================================================\nimport bpy\nimport bmesh\nimport math\nimport mathutils\n\nentity_id = \"unin.entity.vehicles_motorcycle\"\nbase_loc = (0, 0, 0)\n\nscene = bpy.context.scene\n\nroot = bpy.data.objects.new(entity_id, None)\nroot.empty_display_type = 'ARROWS'\nroot.location = base_loc\nroot[\"unin_id\"] = entity_id\nroot[\"unin_world_id\"] = \"unin_world_hero\"\nroot[\"unin_role\"] = \"hero\"\nroot[\"unin_version\"] = 1\nbpy.context.collection.objects.link(root)\n\ndef create_pbr_mat(name, base_color, metallic=0.0, roughness=0.5, clearcoat=0.0, specular=0.5, bump_scale=0.0):\n    mat = bpy.data.materials.get(name)\n    if not mat:\n        mat = bpy.data.materials.new(name=name)\n    mat.use_nodes = True\n    nodes = mat.node_tree.nodes\n    links = mat.node_tree.links\n    nodes.clear()\n    \n    output = nodes.new(type='ShaderNodeOutputMaterial')\n    output.location = (400, 0)\n    \n    bsdf = nodes.new(type='ShaderNodeBsdfPrincipled')\n    bsdf.location = (0, 0)\n    \n    if 'Base Color' in bsdf.inputs: bsdf.inputs['Base Color'].default_value = base_color\n    if 'Metallic' in bsdf.inputs: bsdf.inputs['Metallic'].default_value = float(metallic)\n    if 'Roughness' in bsdf.inputs: bsdf.inputs['Roughness'].default_value = float(roughness)\n    if 'Clearcoat Weight' in bsdf.inputs: bsdf.inputs['Clearcoat Weight'].default_value = float(clearcoat)\n    elif 'Clearcoat' in bsdf.inputs: bsdf.inputs['Clearcoat'].default_value = float(clearcoat)\n    if 'Clearcoat Roughness' in bsdf.inputs: bsdf.inputs['Clearcoat Roughness'].default_value = 0.02\n    if 'Specular IOR Level' in bsdf.inputs: bsdf.inputs['Specular IOR Level'].default_value = float(specular)\n    elif 'Specular' in bsdf.inputs: bsdf.inputs['Specular'].default_value = float(specular)\n    \n    if bump_scale > 0:\n        noise = nodes.new(type='ShaderNodeTexNoise')\n        noise.location = (-400, -100)\n        noise.noise_dimensions = '3D'\n        noise.inputs['Scale'].default_value = 160.0\n        noise.inputs['Detail'].default_value = 3.0\n        \n        bump = nodes.new(type='ShaderNodeBump')\n        bump.location = (-180, -100)\n        bump.inputs['Strength'].default_value = float(bump_scale)\n        bump.inputs['Distance'].default_value = 0.001\n        \n        links.new(noise.outputs['Fac'], bump.inputs['Height'])\n        links.new(bump.outputs['Normal'], bsdf.inputs['Normal'])\n        \n    links.new(bsdf.outputs['BSDF'], output.inputs['Surface'])\n    return mat\n\ndef convert_to_mesh(obj):\n    bpy.context.view_layer.objects.active = obj\n    obj.select_set(True)\n    bpy.ops.object.convert(target='MESH')\n    return bpy.context.view_layer.objects.active\n\nmat_paint = create_pbr_mat(\"MC_Body_Paint\", (0.58, 0.012, 0.022, 1.0), metallic=0.45, roughness=0.16, clearcoat=1.0, specular=0.75, bump_scale=0.0)\nmat_chrome = create_pbr_mat(\"MC_Polished_Chrome\", (0.94, 0.95, 0.97, 1.0), metallic=0.90, roughness=0.06, clearcoat=0.8, specular=1.0)\nmat_tire = create_pbr_mat(\"MC_Rubber_Tread\", (0.008, 0.008, 0.009, 1.0), metallic=0.0, roughness=0.58, specular=0.08, bump_scale=0.006)\nmat_leather = create_pbr_mat(\"MC_Saddle_Leather\", (0.028, 0.014, 0.008, 1.0), metallic=0.0, roughness=0.48, specular=0.30, bump_scale=0.015)\nmat_engine = create_pbr_mat(\"MC_Engine_Crankcase\", (0.042, 0.044, 0.048, 1.0), metallic=0.80, roughness=0.35, specular=0.45, bump_scale=0.008)\nmat_rotor = create_pbr_mat(\"MC_Brake_Steel\", (0.78, 0.80, 0.82, 1.0), metallic=0.92, roughness=0.22, specular=0.75)\nmat_headlight_glass = create_pbr_mat(\"MC_Glass_Lens\", (0.95, 0.98, 1.0, 1.0), metallic=0.0, roughness=0.05, specular=0.95)\n\ndef register_child(obj, name_suffix):\n    full_name = f\"{entity_id}_{name_suffix}\"\n    obj.name = full_name\n    obj[\"unin_id\"] = full_name\n    obj.parent = root\n    bpy.context.view_layer.objects.active = obj\n    obj.select_set(True)\n    bpy.ops.object.shade_smooth()\n    return obj\n\n# A. WHEELS (Rear: Y=-0.75, Z=0.32; Front: Y=0.95, Z=0.36; Axle along X)\nwheels_data = [\n    {\"is_front\": False, \"y\": -0.75, \"z\": 0.32, \"r_tire\": 0.32, \"w_tire\": 0.16, \"r_rim\": 0.22, \"prefix\": \"Rear\"},\n    {\"is_front\": True,  \"y\":  0.95, \"z\": 0.36, \"r_tire\": 0.36, \"w_tire\": 0.09, \"r_rim\": 0.26, \"prefix\": \"Front\"}\n]\n\nfor w in wheels_data:\n    pfx = w[\"prefix\"]\n    wy, wz = w[\"y\"], w[\"z\"]\n    rt, wt, rr = w[\"r_tire\"], w[\"w_tire\"], w[\"r_rim\"]\n    \n    # 1. Tire\n    major_r = (rt + rr) * 0.5\n    minor_r = (rt - rr) * 0.5\n    bpy.ops.mesh.primitive_torus_add(\n        major_radius=major_r, minor_radius=minor_r,\n        location=(0, wy, wz), rotation=(0, math.radians(90), 0),\n        major_segments=48, minor_segments=24\n    )\n    tire = bpy.context.view_layer.objects.active\n    thickness_scale = wt / (minor_r * 2.0)\n    tire.scale = (1.0, 1.0, thickness_scale)\n    bpy.ops.object.transform_apply(scale=True)\n    tire.data.materials.append(mat_tire)\n    sub_t = tire.modifiers.new(\"Subsurf\", 'SUBSURF')\n    sub_t.levels = 1\n    register_child(tire, f\"{pfx}_Tire\")\n    \n    # 2. Hollow Rim\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=rr, depth=wt * 0.88,\n        location=(0, wy, wz), rotation=(0, math.radians(90), 0),\n        vertices=36\n    )\n    rim = bpy.context.view_layer.objects.active\n    bm_rim = bmesh.new()\n    bm_rim.from_mesh(rim.data)\n    caps = [f for f in bm_rim.faces if abs(f.normal.z) > 0.8]\n    bmesh.ops.delete(bm_rim, geom=caps, context='FACES_ONLY')\n    bm_rim.to_mesh(rim.data)\n    bm_rim.free()\n    rim.data.materials.append(mat_chrome)\n    sol = rim.modifiers.new(\"Solidify\", 'SOLIDIFY')\n    sol.thickness = 0.008\n    bev = rim.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.004\n    bev.segments = 2\n    register_child(rim, f\"{pfx}_Rim\")\n    \n    # 3. Axle Hub\n    hub_w = wt * 0.80\n    hub_r = 0.052 if w[\"is_front\"] else 0.065\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=hub_r, depth=hub_w,\n        location=(0, wy, wz), rotation=(0, math.radians(90), 0),\n        vertices=24\n    )\n    hub = bpy.context.view_layer.objects.active\n    hub.data.materials.append(mat_chrome)\n    register_child(hub, f\"{pfx}_Hub\")\n    \n    # 4. Spoke Flanges\n    for fl_idx, fl_x in enumerate([-hub_w * 0.42, hub_w * 0.42]):\n        bpy.ops.mesh.primitive_cylinder_add(\n            radius=hub_r + 0.018, depth=0.006,\n            location=(fl_x, wy, wz), rotation=(0, math.radians(90), 0),\n            vertices=24\n        )\n        flange = bpy.context.view_layer.objects.active\n        flange.data.materials.append(mat_chrome)\n        register_child(flange, f\"{pfx}_Spoke_Flange_{fl_idx}\")\n        \n    # 5. Radial Laced Spokes (24 per wheel)\n    num_spokes = 24\n    spoke_r = 0.0028\n    fl_x_dist = hub_w * 0.40\n    rim_inner_r = rr - 0.008\n    for sp_i in range(num_spokes):\n        ang = sp_i * (2 * math.pi / num_spokes)\n        side = -1 if sp_i % 2 == 0 else 1\n        start_pt = mathutils.Vector((side * fl_x_dist, wy + math.sin(ang) * (hub_r + 0.014), wz + math.cos(ang) * (hub_r + 0.014)))\n        cross_offset = 0.28 * side\n        end_pt = mathutils.Vector((side * 0.010, wy + math.sin(ang + cross_offset) * rim_inner_r, wz + math.cos(ang + cross_offset) * rim_inner_r))\n        diff = end_pt - start_pt\n        bpy.ops.mesh.primitive_cylinder_add(\n            radius=spoke_r, depth=diff.length,\n            location=(start_pt + end_pt) * 0.5,\n            vertices=8\n        )\n        spoke = bpy.context.view_layer.objects.active\n        spoke.rotation_euler = mathutils.Vector((0, 0, 1)).rotation_difference(diff.normalized()).to_euler()\n        spoke.data.materials.append(mat_chrome)\n        register_child(spoke, f\"{pfx}_Spoke_{sp_i}\")\n        \n    # 6. Ventilated Brake Rotor\n    rotor_x = -hub_w * 0.48 if w[\"is_front\"] else hub_w * 0.48\n    rot_outer = rr * 0.52\n    rot_inner = rr * 0.32\n    rot_mesh = bpy.data.meshes.new(f\"{pfx}_Brake_Rotor_Mesh\")\n    bm_rot = bmesh.new()\n    rot_seg = 24\n    rot_vo = []\n    rot_vi = []\n    for ri in range(rot_seg):\n        rang = ri * (2 * math.pi / rot_seg)\n        vo = bm_rot.verts.new((rotor_x, wy + math.sin(rang) * rot_outer, wz + math.cos(rang) * rot_outer))\n        vi = bm_rot.verts.new((rotor_x, wy + math.sin(rang) * rot_inner, wz + math.cos(rang) * rot_inner))\n        rot_vo.append(vo)\n        rot_vi.append(vi)\n    for ri in range(rot_seg):\n        rin = (ri + 1) % rot_seg\n        bm_rot.faces.new((rot_vo[ri], rot_vo[rin], rot_vi[rin], rot_vi[ri]))\n    bm_rot.to_mesh(rot_mesh)\n    bm_rot.free()\n    rotor = bpy.data.objects.new(f\"{pfx}_Brake_Rotor\", rot_mesh)\n    bpy.context.collection.objects.link(rotor)\n    sol_rot = rotor.modifiers.new(\"Solidify\", 'SOLIDIFY')\n    sol_rot.thickness = 0.005\n    rotor.data.materials.append(mat_rotor)\n    register_child(rotor, f\"{pfx}_Brake_Rotor\")\n    \n    # 7. Brake Caliper\n    caliper_y = wy + (0.10 if w[\"is_front\"] else -0.09)\n    caliper_z = wz + (0.11 if w[\"is_front\"] else 0.09)\n    bpy.ops.mesh.primitive_cube_add(size=0.045, location=(rotor_x + (0.010 if w[\"is_front\"] else -0.010), caliper_y, caliper_z))\n    caliper = bpy.context.view_layer.objects.active\n    caliper.scale = (0.6, 1.4, 0.9)\n    bpy.ops.object.transform_apply(scale=True)\n    caliper.data.materials.append(mat_engine)\n    register_child(caliper, f\"{pfx}_Brake_Caliper\")\n\n# B. CHOPPER FRAME\nneck_pos = mathutils.Vector((0.0, 0.56, 0.98))\nneck_rot = math.radians(35)\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.030, depth=0.18, location=neck_pos, vertices=20)\nneck = bpy.context.view_layer.objects.active\nneck.rotation_euler = (neck_rot, 0, 0)\nneck.data.materials.append(mat_engine)\nregister_child(neck, \"Frame_Neck\")\n\nbb_curve = bpy.data.curves.new('Backbone_Curve', type='CURVE')\nbb_curve.dimensions = '3D'\nbb_curve.bevel_depth = 0.024\nbb_curve.bevel_resolution = 4\nbb_sp = bb_curve.splines.new('BEZIER')\nbb_sp.bezier_points.add(2)\nbb_sp.bezier_points[0].co = (0.0, 0.54, 0.95)\nbb_sp.bezier_points[0].handle_right = (0.0, 0.35, 0.92)\nbb_sp.bezier_points[1].co = (0.0, 0.18, 0.82)\nbb_sp.bezier_points[1].handle_left = (0.0, 0.30, 0.88)\nbb_sp.bezier_points[1].handle_right = (0.0, 0.05, 0.74)\nbb_sp.bezier_points[2].co = (0.0, -0.16, 0.62)\nbb_sp.bezier_points[2].handle_left = (0.0, -0.05, 0.68)\nbb_obj = bpy.data.objects.new(\"Chopper_Backbone\", bb_curve)\nbpy.context.collection.objects.link(bb_obj)\nbb_mesh = convert_to_mesh(bb_obj)\nbb_mesh.data.materials.append(mat_engine)\nregister_child(bb_mesh, \"Frame_Backbone\")\n\nfor dt_x in [-0.09, 0.09]:\n    dt_c = bpy.data.curves.new(f'Downtube_{dt_x}', type='CURVE')\n    dt_c.dimensions = '3D'\n    dt_c.bevel_depth = 0.020\n    dt_c.bevel_resolution = 4\n    dt_sp = dt_c.splines.new('BEZIER')\n    dt_sp.bezier_points.add(2)\n    dt_sp.bezier_points[0].co = (dt_x * 0.3, 0.52, 0.90)\n    dt_sp.bezier_points[0].handle_right = (dt_x, 0.45, 0.65)\n    dt_sp.bezier_points[1].co = (dt_x, 0.38, 0.38)\n    dt_sp.bezier_points[1].handle_left = (dt_x, 0.42, 0.50)\n    dt_sp.bezier_points[1].handle_right = (dt_x, 0.35, 0.24)\n    dt_sp.bezier_points[2].co = (dt_x, 0.30, 0.18)\n    dt_sp.bezier_points[2].handle_left = (dt_x, 0.32, 0.20)\n    dto = bpy.data.objects.new(\"Downtube\", dt_c)\n    bpy.context.collection.objects.link(dto)\n    dt_m = convert_to_mesh(dto)\n    dt_m.data.materials.append(mat_engine)\n    register_child(dt_m, f\"Frame_Downtube_{'L' if dt_x < 0 else 'R'}\")\n\nfor cr_x in [-0.09, 0.09]:\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.020, depth=0.62,\n        location=(cr_x, -0.01, 0.18), rotation=(math.radians(90), 0, 0),\n        vertices=16\n    )\n    cradle = bpy.context.view_layer.objects.active\n    cradle.data.materials.append(mat_engine)\n    register_child(cradle, f\"Frame_Cradle_{'L' if cr_x < 0 else 'R'}\")\n\nbpy.ops.mesh.primitive_cylinder_add(\n    radius=0.022, depth=0.46,\n    location=(0.0, -0.17, 0.40), rotation=(math.radians(-12), 0, 0),\n    vertices=16\n)\nseat_post = bpy.context.view_layer.objects.active\nseat_post.data.materials.append(mat_engine)\nregister_child(seat_post, \"Frame_Seat_Post\")\n\nrear_axle_y, rear_axle_z = -0.75, 0.32\nfor side_x in [-0.085, 0.085]:\n    sfx = 'L' if side_x < 0 else 'R'\n    diff_u = mathutils.Vector((side_x, rear_axle_y, rear_axle_z)) - mathutils.Vector((side_x * 0.7, -0.18, 0.60))\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.018, depth=diff_u.length,\n        location=(mathutils.Vector((side_x * 0.7, -0.18, 0.60)) + mathutils.Vector((side_x, rear_axle_y, rear_axle_z))) * 0.5,\n        vertices=16\n    )\n    ustay = bpy.context.view_layer.objects.active\n    ustay.rotation_euler = mathutils.Vector((0, 0, 1)).rotation_difference(diff_u.normalized()).to_euler()\n    ustay.data.materials.append(mat_engine)\n    register_child(ustay, f\"Frame_Upper_Stay_{sfx}\")\n    \n    diff_l = mathutils.Vector((side_x, rear_axle_y, rear_axle_z)) - mathutils.Vector((side_x, -0.32, 0.18))\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.018, depth=diff_l.length,\n        location=(mathutils.Vector((side_x, -0.32, 0.18)) + mathutils.Vector((side_x, rear_axle_y, rear_axle_z))) * 0.5,\n        vertices=16\n    )\n    lstay = bpy.context.view_layer.objects.active\n    lstay.rotation_euler = mathutils.Vector((0, 0, 1)).rotation_difference(diff_l.normalized()).to_euler()\n    lstay.data.materials.append(mat_engine)\n    register_child(lstay, f\"Frame_Lower_Stay_{sfx}\")\n    \n    bpy.ops.mesh.primitive_cube_add(size=0.08, location=(side_x, rear_axle_y, rear_axle_z))\n    plate = bpy.context.view_layer.objects.active\n    plate.scale = (0.15, 1.4, 0.9)\n    bpy.ops.object.transform_apply(scale=True)\n    plate.data.materials.append(mat_engine)\n    register_child(plate, f\"Frame_Axle_Plate_{sfx}\")\n\n# C. SCULPTED CHOPPER FUEL TANK\ntank_mesh = bpy.data.meshes.new(\"Chopper_Tank_Mesh\")\nbm_t = bmesh.new()\ntank_stations = [\n    {\"y\": 0.50, \"z\": 0.98, \"w\": 0.14, \"h\": 0.14, \"tun\": 0.04},\n    {\"y\": 0.44, \"z\": 1.00, \"w\": 0.22, \"h\": 0.20, \"tun\": 0.06},\n    {\"y\": 0.35, \"z\": 0.98, \"w\": 0.24, \"h\": 0.20, \"tun\": 0.07},\n    {\"y\": 0.25, \"z\": 0.93, \"w\": 0.20, \"h\": 0.17, \"tun\": 0.07},\n    {\"y\": 0.16, \"z\": 0.86, \"w\": 0.15, \"h\": 0.13, \"tun\": 0.06},\n    {\"y\": 0.08, \"z\": 0.79, \"w\": 0.10, \"h\": 0.09, \"tun\": 0.04},\n    {\"y\": 0.03, \"z\": 0.74, \"w\": 0.06, \"h\": 0.06, \"tun\": 0.02}\n]\nrings = []\nfor st in tank_stations:\n    ty, tzc = st[\"y\"], st[\"z\"]\n    tw = st[\"w\"] * 0.5\n    th = st[\"h\"] * 0.5\n    tun = st[\"tun\"]\n    rv = [\n        bm_t.verts.new((0.0, ty, tzc + th)),\n        bm_t.verts.new((tw * 0.55, ty, tzc + th * 0.85)),\n        bm_t.verts.new((tw * 0.95, ty, tzc + th * 0.40)),\n        bm_t.verts.new((tw, ty, tzc - th * 0.10)),\n        bm_t.verts.new((tw * 0.75, ty, tzc - th * 0.75)),\n        bm_t.verts.new((0.04, ty, tzc - th * 0.85)),\n        bm_t.verts.new((0.0, ty, tzc - th * 0.85 + tun)),\n        bm_t.verts.new((-0.04, ty, tzc - th * 0.85)),\n        bm_t.verts.new((-tw * 0.75, ty, tzc - th * 0.75)),\n        bm_t.verts.new((-tw, ty, tzc - th * 0.10)),\n        bm_t.verts.new((-tw * 0.95, ty, tzc + th * 0.40)),\n        bm_t.verts.new((-tw * 0.55, ty, tzc + th * 0.85))\n    ]\n    rings.append(rv)\n\nfor i in range(len(rings) - 1):\n    r1 = rings[i]\n    r2 = rings[i+1]\n    for j in range(12):\n        jn = (j + 1) % 12\n        f = bm_t.faces.new((r1[j], r1[jn], r2[jn], r2[j]))\n        f.smooth = True\nf_front = bm_t.faces.new(list(reversed(rings[0])))\nf_front.smooth = True\nf_rear = bm_t.faces.new(rings[-1])\nf_rear.smooth = True\nbm_t.to_mesh(tank_mesh)\nbm_t.free()\n\ntank_mesh.polygons.foreach_set('use_smooth', [True] * len(tank_mesh.polygons))\ntank_obj = bpy.data.objects.new(\"Chopper_Fuel_Tank\", tank_mesh)\nbpy.context.collection.objects.link(tank_obj)\ntank_obj.data.materials.append(mat_paint)\nsub_tank = tank_obj.modifiers.new(\"Subsurf\", 'SUBSURF')\nsub_tank.levels = 2\nregister_child(tank_obj, \"Fuel_Tank\")\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.032, depth=0.022, location=(0.045, 0.40, 1.09), vertices=20)\ngas_cap = bpy.context.view_layer.objects.active\ngas_cap.data.materials.append(mat_chrome)\nbev_gc = gas_cap.modifiers.new(\"Bevel\", 'BEVEL')\nbev_gc.width = 0.003\nregister_child(gas_cap, \"Gas_Cap\")\n\n# D. V-TWIN ENGINE\nbpy.ops.mesh.primitive_cube_add(size=0.28, location=(0.0, 0.05, 0.34))\ncase = bpy.context.view_layer.objects.active\ncase.scale = (0.75, 1.25, 0.85)\nbpy.ops.object.transform_apply(scale=True)\ncase.data.materials.append(mat_engine)\nbev_cs = case.modifiers.new(\"Bevel\", 'BEVEL')\nbev_cs.width = 0.03\nbev_cs.segments = 3\nregister_child(case, \"Engine_Crankcase\")\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.075, depth=0.025, location=(0.12, 0.03, 0.32), rotation=(0, math.radians(90), 0), vertices=24)\ncam_cover = bpy.context.view_layer.objects.active\ncam_cover.data.materials.append(mat_chrome)\nregister_child(cam_cover, \"Engine_Cam_Cover\")\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.12, depth=0.04, location=(-0.13, 0.02, 0.32), rotation=(0, math.radians(90), 0), vertices=24)\nprimary = bpy.context.view_layer.objects.active\nprimary.scale = (1.0, 1.5, 0.9)\nbpy.ops.object.transform_apply(scale=True)\nprimary.data.materials.append(mat_chrome)\nregister_child(primary, \"Primary_Cover\")\n\nbpy.ops.mesh.primitive_cube_add(size=0.22, location=(0.0, -0.16, 0.28))\ntrans = bpy.context.view_layer.objects.active\ntrans.scale = (0.8, 0.9, 0.75)\nbpy.ops.object.transform_apply(scale=True)\ntrans.data.materials.append(mat_engine)\nregister_child(trans, \"Transmission_Box\")\n\ncyl_configs = [\n    {\"idx\": 0, \"ang\": math.radians(-22.5), \"y\": -0.06, \"z\": 0.44, \"prefix\": \"Rear\"},\n    {\"idx\": 1, \"ang\": math.radians(22.5),  \"y\":  0.14, \"z\": 0.44, \"prefix\": \"Front\"}\n]\nfor ccfg in cyl_configs:\n    c_ang, cy, cz, cpfx = ccfg[\"ang\"], ccfg[\"y\"], ccfg[\"z\"], ccfg[\"prefix\"]\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.095, depth=0.26,\n        location=(0.0, cy + math.sin(c_ang) * 0.13, cz + math.cos(c_ang) * 0.13),\n        rotation=(c_ang, 0, 0), vertices=24\n    )\n    cyl_barrel = bpy.context.view_layer.objects.active\n    cyl_barrel.data.materials.append(mat_engine)\n    register_child(cyl_barrel, f\"Engine_Cylinder_{cpfx}\")\n    \n    for fin_i in range(6):\n        fin_dist = 0.03 + (fin_i * 0.038)\n        bpy.ops.mesh.primitive_cylinder_add(\n            radius=0.125 - (fin_i * 0.003), depth=0.006,\n            location=(0.0, cy + math.sin(c_ang) * fin_dist, cz + math.cos(c_ang) * fin_dist),\n            rotation=(c_ang, 0, 0), vertices=24\n        )\n        fin = bpy.context.view_layer.objects.active\n        fin.data.materials.append(mat_chrome)\n        register_child(fin, f\"Engine_Fin_{cpfx}_{fin_i}\")\n        \n    head_dist = 0.28\n    hy = cy + math.sin(c_ang) * head_dist\n    hz = cz + math.cos(c_ang) * head_dist\n    bpy.ops.mesh.primitive_cube_add(size=0.18, location=(0.0, hy, hz), rotation=(c_ang, 0, 0))\n    head = bpy.context.view_layer.objects.active\n    head.scale = (0.95, 0.75, 0.40)\n    bpy.ops.object.transform_apply(scale=True)\n    head.data.materials.append(mat_chrome)\n    bev_hd = head.modifiers.new(\"Bevel\", 'BEVEL')\n    bev_hd.width = 0.015\n    bev_hd.segments = 2\n    register_child(head, f\"Rocker_Head_{cpfx}\")\n    \n    for pr_i in [-0.04, 0.04]:\n        pr_start = mathutils.Vector((0.08, cy + pr_i, cz - 0.04))\n        pr_end = mathutils.Vector((0.08, hy + pr_i * 0.8, hz - 0.02))\n        diff_pr = pr_end - pr_start\n        bpy.ops.mesh.primitive_cylinder_add(\n            radius=0.007, depth=diff_pr.length,\n            location=(pr_start + pr_end) * 0.5, vertices=12\n        )\n        pushrod = bpy.context.view_layer.objects.active\n        pushrod.rotation_euler = mathutils.Vector((0, 0, 1)).rotation_difference(diff_pr.normalized()).to_euler()\n        pushrod.data.materials.append(mat_chrome)\n        register_child(pushrod, f\"Pushrod_{cpfx}_{'A' if pr_i < 0 else 'B'}\")\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.08, depth=0.045, location=(0.14, 0.05, 0.52), rotation=(0, math.radians(90), 0), vertices=24)\nair_cleaner = bpy.context.view_layer.objects.active\nair_cleaner.data.materials.append(mat_chrome)\nbev_ac = air_cleaner.modifiers.new(\"Bevel\", 'BEVEL')\nbev_ac.width = 0.008\nregister_child(air_cleaner, \"Air_Cleaner\")\n\n# E. DUAL EXHAUST DRAG PIPES\nef_c = bpy.data.curves.new('Exhaust_Front', type='CURVE')\nef_c.dimensions = '3D'\nef_c.bevel_depth = 0.022\nef_c.bevel_resolution = 6\nef_sp = ef_c.splines.new('BEZIER')\nef_sp.bezier_points.add(3)\nef_sp.bezier_points[0].co = (0.07, 0.22, 0.60)\nef_sp.bezier_points[0].handle_right = (0.16, 0.28, 0.55)\nef_sp.bezier_points[1].co = (0.17, 0.18, 0.38)\nef_sp.bezier_points[1].handle_left = (0.17, 0.24, 0.45)\nef_sp.bezier_points[1].handle_right = (0.17, 0.08, 0.28)\nef_sp.bezier_points[2].co = (0.17, -0.15, 0.24)\nef_sp.bezier_points[2].handle_left = (0.17, 0.0, 0.24)\nef_sp.bezier_points[2].handle_right = (0.17, -0.35, 0.24)\nef_sp.bezier_points[3].co = (0.17, -0.72, 0.24)\nef_sp.bezier_points[3].handle_left = (0.17, -0.55, 0.24)\nef_obj = bpy.data.objects.new(\"Exhaust_Front\", ef_c)\nbpy.context.collection.objects.link(ef_obj)\nef_m = convert_to_mesh(ef_obj)\nef_m.data.materials.append(mat_chrome)\nregister_child(ef_m, \"Exhaust_Pipe_Front\")\n\ner_c = bpy.data.curves.new('Exhaust_Rear', type='CURVE')\ner_c.dimensions = '3D'\ner_c.bevel_depth = 0.022\ner_c.bevel_resolution = 6\ner_sp = er_c.splines.new('BEZIER')\ner_sp.bezier_points.add(3)\ner_sp.bezier_points[0].co = (0.07, -0.14, 0.58)\ner_sp.bezier_points[0].handle_right = (0.18, -0.18, 0.52)\ner_sp.bezier_points[1].co = (0.18, -0.22, 0.40)\ner_sp.bezier_points[1].handle_left = (0.18, -0.18, 0.48)\ner_sp.bezier_points[1].handle_right = (0.18, -0.28, 0.34)\ner_sp.bezier_points[2].co = (0.18, -0.38, 0.32)\ner_sp.bezier_points[2].handle_left = (0.18, -0.30, 0.32)\ner_sp.bezier_points[2].handle_right = (0.18, -0.48, 0.32)\ner_sp.bezier_points[3].co = (0.18, -0.62, 0.32)\ner_sp.bezier_points[3].handle_left = (0.18, -0.52, 0.32)\ner_obj = bpy.data.objects.new(\"Exhaust_Rear\", er_c)\nbpy.context.collection.objects.link(er_obj)\ner_m = convert_to_mesh(er_obj)\ner_m.data.materials.append(mat_chrome)\nregister_child(er_m, \"Exhaust_Pipe_Rear\")\n\n# F. FORKS & HANDLEBARS\nfork_vec = mathutils.Vector((0.0, math.sin(neck_rot), -math.cos(neck_rot)))\nbpy.ops.mesh.primitive_cube_add(size=0.04, location=(0.0, 0.53, 0.90), rotation=(neck_rot, 0, 0))\nb_tree = bpy.context.view_layer.objects.active\nb_tree.scale = (5.5, 1.4, 0.7)\nbpy.ops.object.transform_apply(scale=True)\nb_tree.data.materials.append(mat_chrome)\nbev_bt = b_tree.modifiers.new(\"Bevel\", 'BEVEL')\nbev_bt.width = 0.005\nregister_child(b_tree, \"Triple_Tree_Bottom\")\n\nbpy.ops.mesh.primitive_cube_add(size=0.04, location=(0.0, 0.59, 1.04), rotation=(neck_rot, 0, 0))\nt_tree = bpy.context.view_layer.objects.active\nt_tree.scale = (5.5, 1.4, 0.7)\nbpy.ops.object.transform_apply(scale=True)\nt_tree.data.materials.append(mat_chrome)\nbev_tt = t_tree.modifiers.new(\"Bevel\", 'BEVEL')\nbev_tt.width = 0.005\nregister_child(t_tree, \"Triple_Tree_Top\")\n\nfor fork_x in [-0.10, 0.10]:\n    sfx = 'L' if fork_x < 0 else 'R'\n    stanchion_top = mathutils.Vector((fork_x, 0.60, 1.06))\n    stanchion_bot = stanchion_top + fork_vec * 0.55\n    st_mid = (stanchion_top + stanchion_bot) * 0.5\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.021, depth=0.55,\n        location=st_mid, rotation=(neck_rot, 0, 0),\n        vertices=20\n    )\n    stanchion = bpy.context.view_layer.objects.active\n    stanchion.data.materials.append(mat_chrome)\n    register_child(stanchion, f\"Fork_Stanchion_{sfx}\")\n    \n    slider_top = stanchion_bot\n    slider_bot = mathutils.Vector((fork_x, 0.95, 0.36))\n    sl_diff = slider_bot - slider_top\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.026, depth=sl_diff.length,\n        location=(slider_top + slider_bot) * 0.5,\n        vertices=20\n    )\n    slider = bpy.context.view_layer.objects.active\n    slider.rotation_euler = mathutils.Vector((0, 0, 1)).rotation_difference(sl_diff.normalized()).to_euler()\n    slider.data.materials.append(mat_chrome)\n    register_child(slider, f\"Fork_Slider_{sfx}\")\n    \n    bpy.ops.mesh.primitive_cube_add(size=0.05, location=slider_bot)\n    boss = bpy.context.view_layer.objects.active\n    boss.scale = (0.8, 1.1, 0.9)\n    bpy.ops.object.transform_apply(scale=True)\n    boss.data.materials.append(mat_chrome)\n    register_child(boss, f\"Fork_Axle_Clamp_{sfx}\")\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.012, depth=0.24, location=(0.0, 0.95, 0.36), rotation=(0, math.radians(90), 0), vertices=16)\nf_axle = bpy.context.view_layer.objects.active\nf_axle.data.materials.append(mat_chrome)\nregister_child(f_axle, \"Front_Axle_Spindle\")\n\nfor rx in [-0.06, 0.06]:\n    bpy.ops.mesh.primitive_cylinder_add(radius=0.016, depth=0.08, location=(rx, 0.60, 1.08), rotation=(neck_rot, 0, 0), vertices=16)\n    riser = bpy.context.view_layer.objects.active\n    riser.data.materials.append(mat_chrome)\n    register_child(riser, f\"Handlebar_Riser_{'L' if rx < 0 else 'R'}\")\n\nbar_c = bpy.data.curves.new('Handlebar_Curve', type='CURVE')\nbar_c.dimensions = '3D'\nbar_c.bevel_depth = 0.015\nbar_c.bevel_resolution = 4\nbar_sp = bar_c.splines.new('BEZIER')\nbar_sp.bezier_points.add(4)\nbar_sp.bezier_points[0].co = (-0.38, 0.45, 1.12)\nbar_sp.bezier_points[0].handle_right = (-0.25, 0.52, 1.14)\nbar_sp.bezier_points[1].co = (-0.06, 0.60, 1.12)\nbar_sp.bezier_points[1].handle_left = (-0.15, 0.58, 1.12)\nbar_sp.bezier_points[1].handle_right = (0.0, 0.60, 1.12)\nbar_sp.bezier_points[2].co = (0.0, 0.60, 1.12)\nbar_sp.bezier_points[2].handle_left = (-0.03, 0.60, 1.12)\nbar_sp.bezier_points[2].handle_right = (0.03, 0.60, 1.12)\nbar_sp.bezier_points[3].co = (0.06, 0.60, 1.12)\nbar_sp.bezier_points[3].handle_left = (0.0, 0.60, 1.12)\nbar_sp.bezier_points[3].handle_right = (0.15, 0.58, 1.12)\nbar_sp.bezier_points[4].co = (0.38, 0.45, 1.12)\nbar_sp.bezier_points[4].handle_left = (0.25, 0.52, 1.14)\nbar_obj = bpy.data.objects.new(\"Handlebars\", bar_c)\nbpy.context.collection.objects.link(bar_obj)\nbar_m = convert_to_mesh(bar_obj)\nbar_m.data.materials.append(mat_chrome)\nregister_child(bar_m, \"Handlebars\")\n\nfor gx in [-0.35, 0.35]:\n    sfx = 'L' if gx < 0 else 'R'\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.019, depth=0.12,\n        location=(gx, 0.47, 1.12),\n        rotation=(math.radians(12), math.radians(-25 if gx > 0 else 25), math.radians(70 if gx > 0 else -70)),\n        vertices=16\n    )\n    grip = bpy.context.view_layer.objects.active\n    grip.data.materials.append(mat_tire)\n    register_child(grip, f\"Handlebar_Grip_{sfx}\")\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.075, depth=0.14, location=(0.0, 0.66, 0.94), rotation=(math.radians(90), 0, 0), vertices=24)\nhl_bucket = bpy.context.view_layer.objects.active\nhl_bucket.data.materials.append(mat_chrome)\nbev_hl = hl_bucket.modifiers.new(\"Bevel\", 'BEVEL')\nbev_hl.width = 0.015\nbev_hl.segments = 3\nregister_child(hl_bucket, \"Headlight_Bucket\")\n\nbpy.ops.mesh.primitive_cylinder_add(radius=0.068, depth=0.012, location=(0.0, 0.73, 0.94), rotation=(math.radians(90), 0, 0), vertices=24)\nhl_lens = bpy.context.view_layer.objects.active\nhl_lens.data.materials.append(mat_headlight_glass)\nregister_child(hl_lens, \"Headlight_Lens\")\n\nhl_light_data = bpy.data.lights.new(name=f\"{entity_id}_Headlight_Beam_Data\", type='SPOT')\nhl_light_data.energy = 450.0\nhl_light_data.color = (1.0, 0.96, 0.90)\nhl_light_data.spot_size = math.radians(55)\nhl_light_data.spot_blend = 0.35\nhl_light_obj = bpy.data.objects.new(name=f\"{entity_id}_Headlight_Beam\", object_data=hl_light_data)\nhl_light_obj.location = (0, 0.75, 0.94)\nhl_light_obj.rotation_euler = (math.radians(85), 0, 0)\nbpy.context.collection.objects.link(hl_light_obj)\nhl_light_obj.parent = root\n\n# G. SOLO SADDLE & REAR FENDER\nseat_m = bpy.data.meshes.new(\"Solo_Seat_Mesh\")\nbm_s = bmesh.new()\nseat_stations = [\n    {\"y\": 0.06,  \"z\": 0.72, \"w\": 0.12, \"t\": 0.04},\n    {\"y\": -0.06, \"z\": 0.64, \"w\": 0.22, \"t\": 0.06},\n    {\"y\": -0.18, \"z\": 0.63, \"w\": 0.24, \"t\": 0.06},\n    {\"y\": -0.28, \"z\": 0.70, \"w\": 0.18, \"t\": 0.05}\n]\ns_rings = []\nfor st in seat_stations:\n    sy, sz, sw, sth = st[\"y\"], st[\"z\"], st[\"w\"] * 0.5, st[\"t\"]\n    rv = [\n        bm_s.verts.new((0.0, sy, sz + sth)),\n        bm_s.verts.new((sw * 0.6, sy, sz + sth * 0.9)),\n        bm_s.verts.new((sw, sy, sz + sth * 0.3)),\n        bm_s.verts.new((sw * 0.8, sy, sz - sth * 0.5)),\n        bm_s.verts.new((0.0, sy, sz - sth * 0.6)),\n        bm_s.verts.new((-sw * 0.8, sy, sz - sth * 0.5)),\n        bm_s.verts.new((-sw, sy, sz + sth * 0.3)),\n        bm_s.verts.new((-sw * 0.6, sy, sz + sth * 0.9))\n    ]\n    s_rings.append(rv)\nfor i in range(len(s_rings) - 1):\n    for j in range(8):\n        jn = (j + 1) % 8\n        f = bm_s.faces.new((s_rings[i][j], s_rings[i][jn], s_rings[i+1][jn], s_rings[i+1][j]))\n        f.smooth = True\nf_sf = bm_s.faces.new(list(reversed(s_rings[0])))\nf_sf.smooth = True\nf_sr = bm_s.faces.new(s_rings[-1])\nf_sr.smooth = True\nbm_s.to_mesh(seat_m)\nbm_s.free()\nseat_m.polygons.foreach_set('use_smooth', [True] * len(seat_m.polygons))\nseat_obj = bpy.data.objects.new(\"Solo_Seat\", seat_m)\nbpy.context.collection.objects.link(seat_obj)\nseat_obj.data.materials.append(mat_leather)\nsub_s = seat_obj.modifiers.new(\"Subsurf\", 'SUBSURF')\nsub_s.levels = 2\nregister_child(seat_obj, \"Solo_Saddle\")\n\nrf_m = bpy.data.meshes.new(\"Rear_Fender_Mesh\")\nbm_rf = bmesh.new()\nnum_arc_steps = 20\nfender_r = 0.355\nfender_w = 0.088\nfender_rings = []\nfor step in range(num_arc_steps + 1):\n    t = step / num_arc_steps\n    phi = math.radians(35 + t * 115)\n    fcy = -0.75 + fender_r * math.cos(phi)\n    fcz = 0.32 + fender_r * math.sin(phi)\n    rverts = [\n        bm_rf.verts.new((-fender_w, fcy, fcz)),\n        bm_rf.verts.new((-fender_w * 0.5, fcy, fcz + 0.008)),\n        bm_rf.verts.new((0.0, fcy, fcz + 0.012)),\n        bm_rf.verts.new((fender_w * 0.5, fcy, fcz + 0.008)),\n        bm_rf.verts.new((fender_w, fcy, fcz))\n    ]\n    fender_rings.append(rverts)\nfor i in range(len(fender_rings) - 1):\n    r1 = fender_rings[i]\n    r2 = fender_rings[i + 1]\n    for j in range(4):\n        f = bm_rf.faces.new((r1[j], r1[j + 1], r2[j + 1], r2[j]))\n        f.smooth = True\nbm_rf.to_mesh(rf_m)\nbm_rf.free()\nrf_m.polygons.foreach_set('use_smooth', [True] * len(rf_m.polygons))\nrf_obj = bpy.data.objects.new(\"Rear_Fender\", rf_m)\nbpy.context.collection.objects.link(rf_obj)\nrf_obj.data.materials.append(mat_paint)\nsol_rf = rf_obj.modifiers.new(\"Solidify\", 'SOLIDIFY')\nsol_rf.thickness = 0.006\nsub_rf = rf_obj.modifiers.new(\"Subsurf\", 'SUBSURF')\nsub_rf.levels = 1\nregister_child(rf_obj, \"Rear_Fender\")\n\nfor fs_x in [-0.09, 0.09]:\n    strut_start = mathutils.Vector((fs_x, rear_axle_y, rear_axle_z))\n    strut_end = mathutils.Vector((fs_x, -0.88, 0.56))\n    diff_s = strut_end - strut_start\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.009, depth=diff_s.length,\n        location=(strut_start + strut_end) * 0.5,\n        vertices=12\n    )\n    strut = bpy.context.view_layer.objects.active\n    strut.rotation_euler = mathutils.Vector((0, 0, 1)).rotation_difference(diff_s.normalized()).to_euler()\n    strut.data.materials.append(mat_chrome)\n    register_child(strut, f\"Fender_Strut_{'L' if fs_x < 0 else 'R'}\")\n\n# H. BELT DRIVE & PEGS\nbpy.ops.mesh.primitive_cylinder_add(\n    radius=0.012, depth=0.52,\n    location=(-0.11, -0.48, 0.30), rotation=(math.radians(82), 0, 0),\n    vertices=16\n)\nbelt = bpy.context.view_layer.objects.active\nbelt.scale = (0.6, 1.0, 1.8)\nbpy.ops.object.transform_apply(scale=True)\nbelt.data.materials.append(mat_tire)\nregister_child(belt, \"Final_Drive_Belt\")\n\nfor px in [-0.20, 0.20]:\n    sfx = 'L' if px < 0 else 'R'\n    bpy.ops.mesh.primitive_cylinder_add(\n        radius=0.016, depth=0.12,\n        location=(px, 0.28, 0.24), rotation=(0, math.radians(90), 0),\n        vertices=16\n    )\n    peg = bpy.context.view_layer.objects.active\n    peg.data.materials.append(mat_chrome)\n    register_child(peg, f\"Foot_Peg_{sfx}\")\n"
+  },
+  {
+    "item": {
+      "id": "architecture_house",
+      "name": "Modern residential small house with pitched roof and windows",
+      "category": "architecture",
+      "requestedName": "small house"
+    },
+    "entity": {
+      "id": "unin.entity.architecture_house",
+      "name": "Modern residential small house with pitched roof and windows",
+      "category": "architecture",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+      "format": "GLB",
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "confidence": 1,
+      "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\"",
+      "limitations": "Static pre-authored geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": true,
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 21416,
+          "estimatedTriangles": 204,
+          "vertexCount": 408,
+          "meshCount": 9,
+          "materialCount": 5,
+          "hasTextures": false,
+          "checksum": "bdc8221a286c82da26849b3cd76f91f9e6f24ecc8a3910a8bf8b3f5d3c3b390f"
+        }
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\""
+        }
+      ]
+    },
+    "bpyCode": "\n# Import Local 3D Asset\nimport bpy\nroot = bpy.data.objects.new(\"unin.entity.architecture_house\", None)\nroot[\"unin_id\"] = \"unin.entity.architecture_house\"\nbpy.context.collection.objects.link(root)\nbpy.ops.import_scene.gltf(filepath=r\"C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb\")\nfor obj in bpy.context.selected_objects:\n    if obj != root and not obj.parent:\n        obj.parent = root\n        obj[\"unin_id\"] = f\"unin.entity.architecture_house_{obj.name}\"\n"
+  },
+  {
+    "item": {
+      "id": "nature_tree",
+      "name": "Broadleaf canopy forest tree with branching limbs and foliage",
+      "category": "vegetation",
+      "requestedName": "tree"
+    },
+    "entity": {
+      "id": "unin.entity.nature_tree",
+      "name": "Broadleaf canopy forest tree with branching limbs and foliage",
+      "category": "vegetation",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/tree.glb",
+      "format": "GLB",
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "confidence": 1,
+      "reason": "Exact name match for verified asset \"Canopy Forest Tree\"",
+      "limitations": "Static pre-authored geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": true,
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/tree.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 7481068,
+          "estimatedTriangles": 6017,
+          "vertexCount": 8726,
+          "meshCount": 2,
+          "materialCount": 2,
+          "hasTextures": true,
+          "checksum": "1b2e4c04c1f50e396e7e703e66ae2a54b73a711b1ed3ede86e50f55dc810f176"
+        }
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Canopy Forest Tree\""
+        }
+      ]
+    },
+    "bpyCode": "\n# Import Local 3D Asset\nimport bpy\nroot = bpy.data.objects.new(\"unin.entity.nature_tree\", None)\nroot[\"unin_id\"] = \"unin.entity.nature_tree\"\nbpy.context.collection.objects.link(root)\nbpy.ops.import_scene.gltf(filepath=r\"C:/Users/subba/Downloads/prime -ps/face of me/tree.glb\")\nfor obj in bpy.context.selected_objects:\n    if obj != root and not obj.parent:\n        obj.parent = root\n        obj[\"unin_id\"] = f\"unin.entity.nature_tree_{obj.name}\"\n"
+  },
+  {
+    "item": {
+      "id": "creatures_dragon",
+      "name": "Mythical winged dragon with horned skull and serpentine tail",
+      "category": "creature",
+      "requestedName": "dragon"
+    },
+    "entity": {
+      "id": "unin.entity.creatures_dragon",
+      "name": "Mythical winged dragon with horned skull and serpentine tail",
+      "category": "creature",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_DRAGON_CREATURE_ASSEMBLY",
+      "path": null,
+      "format": "PROCEDURAL",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "confidence": 0.85,
+      "reason": "Synthesizing biomorphic mythical winged dragon with horned cranium, serpentine spine, bat wings and talons",
+      "limitations": "Procedural component geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": false,
+      "validation": {
+        "valid": true
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Mythical winged dragon with horned skull and serpentine tail\" (creature)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Mythical winged dragon with horned skull and serpentine tail\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing biomorphic mythical winged dragon with horned cranium, serpentine spine, bat wings and talons"
+        }
+      ]
+    },
+    "bpyCode": "\n# ==============================================================================\n# PROCEDURAL CREATURE: MYTHICAL WINGED DRAGON (BIOMORPHIC ASSEMBLY ENGINE V2)\n# Dimensions: ~2m W x ~2m L x ~2m H\n# Assembly: Sculpted Reptilian Head, Brow Ridges, Quad Swept Horns, Glowing Amber\n# Eyes, Segmented Serpentine Neck, Muscular Torso, 4 Articulated Claws,\n# Swept Bat-Wing Membrane Spars, Tapered Spined Serpentine Tail\n# ==============================================================================\nimport bpy\nimport bmesh\nimport math\nimport mathutils\n\nentity_id = \"unin.entity.creatures_dragon\"\nbase_loc = (0, 0, 0)\n\ndragon_root = bpy.data.objects.new(entity_id, None)\ndragon_root[\"unin_id\"] = entity_id\ndragon_root.empty_display_type = 'ARROWS'\ndragon_root.location = base_loc\nbpy.context.collection.objects.link(dragon_root)\n\n# Materials\nmat_scales = bpy.data.materials.new(name=f\"{entity_id}_Reptilian_Scales\")\nmat_scales.use_nodes = True\nb_sc = mat_scales.node_tree.nodes.get('Principled BSDF')\nif b_sc:\n    b_sc.inputs['Base Color'].default_value = (0.05, 0.14, 0.08, 1.0)\n    b_sc.inputs['Roughness'].default_value = 0.38\n    if 'Metallic' in b_sc.inputs: b_sc.inputs['Metallic'].default_value = 0.15\n\nmat_horn = bpy.data.materials.new(name=f\"{entity_id}_Obsidian_Horn\")\nmat_horn.use_nodes = True\nb_hn = mat_horn.node_tree.nodes.get('Principled BSDF')\nif b_hn:\n    b_hn.inputs['Base Color'].default_value = (0.02, 0.02, 0.02, 1.0)\n    b_hn.inputs['Roughness'].default_value = 0.15\n    if 'Metallic' in b_hn.inputs: b_hn.inputs['Metallic'].default_value = 0.3\n\nmat_eye = bpy.data.materials.new(name=f\"{entity_id}_Amber_Eye_Emission\")\nmat_eye.use_nodes = True\nb_ey = mat_eye.node_tree.nodes.get('Principled BSDF')\nif b_ey:\n    b_ey.inputs['Base Color'].default_value = (1.0, 0.65, 0.05, 1.0)\n    if 'Emission Color' in b_ey.inputs:\n        b_ey.inputs['Emission Color'].default_value = (1.0, 0.65, 0.05, 1.0)\n        b_ey.inputs['Emission Strength'].default_value = 18.0\n\nmat_wing = bpy.data.materials.new(name=f\"{entity_id}_Wing_Membrane\")\nmat_wing.use_nodes = True\nb_wg = mat_wing.node_tree.nodes.get('Principled BSDF')\nif b_wg:\n    b_wg.inputs['Base Color'].default_value = (0.08, 0.06, 0.05, 1.0)\n    b_wg.inputs['Roughness'].default_value = 0.45\n\ndef add_part(name, mesh_func, loc_rel, rot_rel=(0,0,0), mat=mat_scales):\n    obj = mesh_func()\n    obj.name = f\"{entity_id}_{name}\"\n    obj[\"unin_id\"] = f\"{entity_id}_{name}\"\n    obj.location = (base_loc[0] + loc_rel[0], base_loc[1] + loc_rel[1], base_loc[2] + loc_rel[2])\n    obj.rotation_euler = rot_rel\n    obj.parent = dragon_root\n    if mat: obj.data.materials.append(mat)\n    bpy.ops.object.shade_smooth()\n    return obj\n\n# ----------------- 1. HEAD & SKULL ASSEMBLY -----------------\n# Cranium & Brow Ridge\ndef create_cranium():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.36, 0.45, 0.28)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.06\n    bev.segments = 3\n    return o\nadd_part(\"Skull_Cranium\", create_cranium, (0, 1.95, 2.15), mat=mat_scales)\n\n# Tapered Snout & Upper Jaw\ndef create_snout():\n    bpy.ops.mesh.primitive_cone_add(radius1=0.22, radius2=0.10, depth=0.55, vertices=16)\n    o = bpy.context.view_layer.objects.active\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.02\n    bev.segments = 2\n    return o\nadd_part(\"Snout_UpperJaw\", create_snout, (0, 2.38, 2.05), rot_rel=(math.radians(82), 0, 0), mat=mat_scales)\n\n# Lower Jaw\ndef create_lower_jaw():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.24, 0.48, 0.10)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.02\n    bev.segments = 2\n    return o\nadd_part(\"Lower_Jaw\", create_lower_jaw, (0, 2.28, 1.92), rot_rel=(math.radians(6), 0, 0), mat=mat_scales)\n\n# Glowing Amber Slit Eyes (Left & Right)\ndef create_eye():\n    bpy.ops.mesh.primitive_uv_sphere_add(radius=0.045, segments=16, ring_count=12)\n    return bpy.context.view_layer.objects.active\nadd_part(\"Eye_L\", create_eye, (-0.16, 2.05, 2.22), mat=mat_eye)\nadd_part(\"Eye_R\", create_eye, (0.16, 2.05, 2.22), mat=mat_eye)\n\n# Swept Horns (Primary Dorsal Horns)\ndef create_main_horn(curve_dir):\n    bpy.ops.mesh.primitive_cone_add(radius1=0.075, depth=0.75, vertices=16)\n    o = bpy.context.view_layer.objects.active\n    return o\nadd_part(\"Horn_Main_L\", lambda: create_main_horn(-1), (-0.15, 1.72, 2.45), rot_rel=(math.radians(-35), math.radians(-15), 0), mat=mat_horn)\nadd_part(\"Horn_Main_R\", lambda: create_main_horn(1), (0.15, 1.72, 2.45), rot_rel=(math.radians(-35), math.radians(15), 0), mat=mat_horn)\n\n# Cheek Horn Spikes\nadd_part(\"Horn_Cheek_L\", lambda: create_main_horn(-1), (-0.22, 1.88, 2.08), rot_rel=(math.radians(-10), math.radians(-45), 0), mat=mat_horn)\nadd_part(\"Horn_Cheek_R\", lambda: create_main_horn(1), (0.22, 1.88, 2.08), rot_rel=(math.radians(-10), math.radians(45), 0), mat=mat_horn)\n\n# ----------------- 2. SERPENTINE NECK & MUSCULAR TORSO -----------------\n# S-Curved Neck Segments (3 articulated vertebrae)\nfor i in range(3):\n    t = (i + 1) / 3.0\n    ny = 1.6 - (t * 0.7)\n    nz = 1.95 - (t * 0.45)\n    def create_neck_seg(r):\n        bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=0.45, vertices=16)\n        o = bpy.context.view_layer.objects.active\n        bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n        bev.width = 0.02\n        bev.segments = 2\n        return o\n    add_part(f\"Neck_Segment_{i+1}\", lambda: create_neck_seg(0.24 - i*0.02), (0, ny, nz), rot_rel=(math.radians(25), 0, 0), mat=mat_scales)\n\n# Muscular Chest & Torso Core\ndef create_torso():\n    bpy.ops.mesh.primitive_cylinder_add(radius=0.55, depth=1.65, vertices=20)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.75, 1.0, 0.70)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.08\n    bev.segments = 3\n    return o\nadd_part(\"Torso_Core\", create_torso, (0, 0.10, 1.35), rot_rel=(math.radians(90), 0, 0), mat=mat_scales)\n\n# Dorsal Spine Plates along back\nfor sp in range(5):\n    sy = 0.75 - sp * 0.32\n    def create_dorsal_spine():\n        bpy.ops.mesh.primitive_cone_add(radius1=0.045, depth=0.22, vertices=8)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Dorsal_Spine_{sp+1}\", create_dorsal_spine, (0, sy, 1.78), rot_rel=(math.radians(-15), 0, 0), mat=mat_horn)\n\n# ----------------- 3. ARTICULATED FORE & HIND LIMBS -----------------\n# Forelimbs (Left & Right)\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    # Shoulder / Upper Arm\n    def create_arm():\n        bpy.ops.mesh.primitive_cylinder_add(radius=0.12, depth=0.55, vertices=16)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Foreleg_Upper_{pfx}\", create_arm, (sx * 0.48, 0.65, 1.15), rot_rel=(math.radians(-15), math.radians(sx * 15), 0), mat=mat_scales)\n    \n    # Forearm & Claws\n    def create_forearm():\n        bpy.ops.mesh.primitive_cylinder_add(radius=0.09, depth=0.60, vertices=16)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Foreleg_Lower_{pfx}\", create_forearm, (sx * 0.52, 0.72, 0.58), rot_rel=(math.radians(10), 0, 0), mat=mat_scales)\n    \n    # Claw Foot\n    def create_claw_foot():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (0.22, 0.30, 0.08)\n        bpy.ops.object.transform_apply(scale=True)\n        return o\n    add_part(f\"Claw_Foot_Front_{pfx}\", create_claw_foot, (sx * 0.52, 0.80, 0.04), mat=mat_horn)\n\n# Hind Limbs (Left & Right with powerful thighs)\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    def create_thigh():\n        bpy.ops.mesh.primitive_cylinder_add(radius=0.20, depth=0.70, vertices=16)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Hindleg_Thigh_{pfx}\", create_thigh, (sx * 0.52, -0.48, 1.10), rot_rel=(math.radians(25), math.radians(sx * 15), 0), mat=mat_scales)\n    \n    def create_shin():\n        bpy.ops.mesh.primitive_cylinder_add(radius=0.12, depth=0.72, vertices=16)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Hindleg_Shin_{pfx}\", create_shin, (sx * 0.55, -0.58, 0.52), rot_rel=(math.radians(-20), 0, 0), mat=mat_scales)\n    \n    add_part(f\"Claw_Foot_Rear_{pfx}\", create_claw_foot, (sx * 0.55, -0.52, 0.04), mat=mat_horn)\n\n# ----------------- 4. SWEPT BAT WINGS WITH BONE SPARS -----------------\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    # Main Wing Arm Spar\n    def create_wing_arm():\n        bpy.ops.mesh.primitive_cylinder_add(radius=0.075, depth=1.65, vertices=16)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Wing_Arm_{pfx}\", create_wing_arm, (sx * 0.85, 0.20, 1.95), rot_rel=(math.radians(15), math.radians(sx * 48), 0), mat=mat_scales)\n    \n    # Outer Radiating Finger Spars (3 spars)\n    for f_idx, fang in enumerate([-25, 0, 25]):\n        def create_finger():\n            bpy.ops.mesh.primitive_cylinder_add(radius=0.035, depth=1.55, vertices=12)\n            return bpy.context.view_layer.objects.active\n        add_part(f\"Wing_Spar_{pfx}_{f_idx+1}\", create_finger, (sx * 1.85, 0.10 + f_idx*0.2, 2.30), rot_rel=(math.radians(fang), math.radians(sx * 70), 0), mat=mat_horn)\n        \n    # Wing Membrane Webbing\n    def create_membrane():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (1.80, 1.25, 0.015)\n        bpy.ops.object.transform_apply(scale=True)\n        return o\n    add_part(f\"Wing_Membrane_{pfx}\", create_membrane, (sx * 1.55, 0.20, 2.10), rot_rel=(math.radians(10), math.radians(sx * 22), 0), mat=mat_wing)\n\n# ----------------- 5. SERPENTINE SPINED TAIL -----------------\n# 4 Tapered Tail Segments\nfor ti in range(4):\n    ty = -0.95 - ti * 0.65\n    tz = 1.15 - ti * 0.22\n    t_rad = 0.28 * (1.0 - ti * 0.22)\n    def create_tail_seg(r):\n        bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=0.72, vertices=16)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Tail_Segment_{ti+1}\", lambda: create_tail_seg(t_rad), (0, ty, tz), rot_rel=(math.radians(95), 0, 0), mat=mat_scales)\n"
+  },
+  {
+    "item": {
+      "id": "transport_airplane",
+      "name": "Commercial passenger jet airliner with turbofan engines",
+      "category": "vehicle",
+      "requestedName": "commercial airplane"
+    },
+    "entity": {
+      "id": "unin.entity.transport_airplane",
+      "name": "Commercial passenger jet airliner with turbofan engines",
+      "category": "vehicle",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_AIRPLANE_ASSEMBLY",
+      "path": null,
+      "format": "PROCEDURAL",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "confidence": 0.85,
+      "reason": "Synthesizing aerodynamic commercial airliner assembly with turbofan jet engines",
+      "limitations": "Procedural component geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": false,
+      "validation": {
+        "valid": true
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Commercial passenger jet airliner with turbofan engines\" (vehicle)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Commercial passenger jet airliner with turbofan engines\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing aerodynamic commercial airliner assembly with turbofan jet engines"
+        }
+      ]
+    },
+    "bpyCode": "\n# ==============================================================================\n# PROCEDURAL VEHICLE: COMMERCIAL PASSENGER AIRLINER (HIGH-FIDELITY ASSEMBLY)\n# Dimensions: ~2m W x ~2m L x ~2m H\n# Assembly: Aerodynamic Cylindrical Fuselage, Tapered Nose Radome, Cockpit Windshield,\n# Low Swept Cantilever Wings with Winglets, Twin Underslung Turbofan Jet Engines,\n# Pylon Struts, Intake Fan Spinners, Exhaust Nozzles, Swept Empennage (Vertical &\n# Horizontal Stabilizers), Tricycle Landing Gear with Rubber Tires\n# ==============================================================================\nimport bpy\nimport bmesh\nimport math\nimport mathutils\n\nentity_id = \"unin.entity.transport_airplane\"\nbase_loc = (0, 0, 0)\n\nairliner_root = bpy.data.objects.new(entity_id, None)\nairliner_root[\"unin_id\"] = entity_id\nairliner_root.empty_display_type = 'ARROWS'\nairliner_root.location = base_loc\nbpy.context.collection.objects.link(airliner_root)\n\n# Materials\nmat_livery = bpy.data.materials.new(name=f\"{entity_id}_Airliner_Livery_White\")\nmat_livery.use_nodes = True\nb_lv = mat_livery.node_tree.nodes.get('Principled BSDF')\nif b_lv:\n    b_lv.inputs['Base Color'].default_value = (0.92, 0.93, 0.95, 1.0)\n    b_lv.inputs['Roughness'].default_value = 0.20\n    if 'Clearcoat Weight' in b_lv.inputs: b_lv.inputs['Clearcoat Weight'].default_value = 0.85\n    elif 'Clearcoat' in b_lv.inputs: b_lv.inputs['Clearcoat'].default_value = 0.85\n\nmat_alum = bpy.data.materials.new(name=f\"{entity_id}_Polished_Aluminum\")\nmat_alum.use_nodes = True\nb_al = mat_alum.node_tree.nodes.get('Principled BSDF')\nif b_al:\n    b_al.inputs['Base Color'].default_value = (0.88, 0.89, 0.91, 1.0)\n    b_al.inputs['Roughness'].default_value = 0.12\n    if 'Metallic' in b_al.inputs: b_al.inputs['Metallic'].default_value = 0.95\n\nmat_titanium = bpy.data.materials.new(name=f\"{entity_id}_Turbine_Titanium\")\nmat_titanium.use_nodes = True\nb_ti = mat_titanium.node_tree.nodes.get('Principled BSDF')\nif b_ti:\n    b_ti.inputs['Base Color'].default_value = (0.24, 0.25, 0.27, 1.0)\n    b_ti.inputs['Roughness'].default_value = 0.32\n    if 'Metallic' in b_ti.inputs: b_ti.inputs['Metallic'].default_value = 0.88\n\nmat_glass = bpy.data.materials.new(name=f\"{entity_id}_Cockpit_Glass\")\nmat_glass.use_nodes = True\nb_gl = mat_glass.node_tree.nodes.get('Principled BSDF')\nif b_gl:\n    b_gl.inputs['Base Color'].default_value = (0.05, 0.08, 0.12, 1.0)\n    b_gl.inputs['Roughness'].default_value = 0.04\n    if 'Metallic' in b_gl.inputs: b_gl.inputs['Metallic'].default_value = 0.1\n\nmat_tire = bpy.data.materials.new(name=f\"{entity_id}_Rubber_Tire\")\nmat_tire.use_nodes = True\nb_tr = mat_tire.node_tree.nodes.get('Principled BSDF')\nif b_tr:\n    b_tr.inputs['Base Color'].default_value = (0.015, 0.015, 0.016, 1.0)\n    b_tr.inputs['Roughness'].default_value = 0.80\n\ndef add_part(name, mesh_func, loc_rel, rot_rel=(0,0,0), mat=mat_livery):\n    obj = mesh_func()\n    obj.name = f\"{entity_id}_{name}\"\n    obj[\"unin_id\"] = f\"{entity_id}_{name}\"\n    obj.location = (base_loc[0] + loc_rel[0], base_loc[1] + loc_rel[1], base_loc[2] + loc_rel[2])\n    obj.rotation_euler = rot_rel\n    obj.parent = airliner_root\n    if mat: obj.data.materials.append(mat)\n    bpy.ops.object.shade_smooth()\n    return obj\n\n# ----------------- 1. STREAMLINED FUSELAGE -----------------\n# Main Cabin Cylinder\ndef create_fuselage_tube():\n    bpy.ops.mesh.primitive_cylinder_add(radius=1.85, depth=22.0, vertices=32)\n    o = bpy.context.view_layer.objects.active\n    return o\nadd_part(\"Fuselage_Main\", create_fuselage_tube, (0, 0, 4.2), rot_rel=(math.radians(90), 0, 0), mat=mat_livery)\n\n# Tapered Nose Radome (Front)\ndef create_nose_radome():\n    bpy.ops.mesh.primitive_cone_add(radius1=1.85, radius2=0.35, depth=4.8, vertices=32)\n    o = bpy.context.view_layer.objects.active\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.08\n    bev.segments = 2\n    return o\nadd_part(\"Nose_Radome\", create_nose_radome, (0, 13.4, 4.2), rot_rel=(math.radians(90), 0, 0), mat=mat_livery)\n\n# Cockpit Windshield Glass Band\ndef create_windshield():\n    bpy.ops.mesh.primitive_cylinder_add(radius=1.86, depth=1.6, vertices=32)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.95, 1.0, 0.45)\n    bpy.ops.object.transform_apply(scale=True)\n    return o\nadd_part(\"Cockpit_Windshield\", create_windshield, (0, 12.2, 4.95), rot_rel=(math.radians(110), 0, 0), mat=mat_glass)\n\n# Tailcone (Rear Taper)\ndef create_tailcone():\n    bpy.ops.mesh.primitive_cone_add(radius1=1.85, radius2=0.25, depth=7.5, vertices=32)\n    o = bpy.context.view_layer.objects.active\n    return o\nadd_part(\"Tailcone\", create_tailcone, (0, -14.75, 4.4), rot_rel=(math.radians(-90), 0, 0), mat=mat_livery)\n\n# ----------------- 2. SWEPT WINGS & WINGLETS -----------------\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    # Main Swept Cantilever Wing\n    def create_wing():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (12.8, 3.4, 0.38)\n        bpy.ops.object.transform_apply(scale=True)\n        bev = o.modifiers.new(\"WingBevel\", 'BEVEL')\n        bev.width = 0.06\n        bev.segments = 2\n        return o\n    add_part(f\"Main_Wing_{pfx}\", create_wing, (sx * 7.6, -1.2, 3.4), rot_rel=(math.radians(sx * -4), math.radians(sx * 4), math.radians(sx * 24)), mat=mat_livery)\n    \n    # Upturned Winglet Tip\n    def create_winglet():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (0.22, 1.4, 1.6)\n        bpy.ops.object.transform_apply(scale=True)\n        bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n        bev.width = 0.04\n        bev.segments = 2\n        return o\n    add_part(f\"Winglet_{pfx}\", create_winglet, (sx * 14.2, -3.2, 4.3), rot_rel=(0, math.radians(sx * 12), math.radians(sx * 24)), mat=mat_alum)\n\n# ----------------- 3. TWIN UNDERSLUNG TURBOFAN JET ENGINES -----------------\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    ey = 0.6\n    ex = sx * 5.2\n    ez = 2.3\n    \n    # Engine Pylon Strut\n    def create_pylon():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (0.24, 2.8, 1.2)\n        bpy.ops.object.transform_apply(scale=True)\n        return o\n    add_part(f\"Engine_Pylon_{pfx}\", create_pylon, (ex, ey, ez + 0.7), mat=mat_titanium)\n    \n    # Nacelle Outer Cowling\n    def create_nacelle():\n        bpy.ops.mesh.primitive_cylinder_add(radius=1.1, depth=4.2, vertices=28)\n        o = bpy.context.view_layer.objects.active\n        bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n        bev.width = 0.08\n        bev.segments = 3\n        return o\n    add_part(f\"Engine_Nacelle_{pfx}\", create_nacelle, (ex, ey, ez), rot_rel=(math.radians(90), 0, 0), mat=mat_livery)\n    \n    # Front Intake Spinner Cone\n    def create_spinner():\n        bpy.ops.mesh.primitive_cone_add(radius1=0.45, depth=0.9, vertices=20)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Intake_Spinner_{pfx}\", create_spinner, (ex, ey + 2.15, ez), rot_rel=(math.radians(-90), 0, 0), mat=mat_titanium)\n    \n    # Rear Exhaust Cone Nozzle\n    def create_exhaust():\n        bpy.ops.mesh.primitive_cone_add(radius1=0.75, radius2=0.55, depth=1.2, vertices=24)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Exhaust_Nozzle_{pfx}\", create_exhaust, (ex, ey - 2.5, ez), rot_rel=(math.radians(90), 0, 0), mat=mat_titanium)\n\n# ----------------- 4. EMPENNAGE (TAIL ASSEMBLY) -----------------\n# Swept Vertical Tail Fin Stabilizer\ndef create_vertical_fin():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.28, 4.4, 5.8)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.05\n    bev.segments = 2\n    return o\nadd_part(\"Vertical_Fin\", create_vertical_fin, (0, -15.2, 7.8), rot_rel=(math.radians(-32), 0, 0), mat=mat_livery)\n\n# Horizontal Tailplane Elevators (Left & Right)\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    def create_horizontal_tail():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (4.8, 1.8, 0.18)\n        bpy.ops.object.transform_apply(scale=True)\n        bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n        bev.width = 0.03\n        bev.segments = 2\n        return o\n    add_part(f\"Horizontal_Stabilizer_{pfx}\", create_horizontal_tail, (sx * 2.8, -17.2, 5.2), rot_rel=(0, 0, math.radians(sx * 20)), mat=mat_alum)\n\n# ----------------- 5. TRICYCLE LANDING GEAR (TIRES & STRUTS) -----------------\n# Nose Gear (Front Center)\ndef create_gear_strut(depth):\n    bpy.ops.mesh.primitive_cylinder_add(radius=0.10, depth=depth, vertices=16)\n    return bpy.context.view_layer.objects.active\nadd_part(\"Nose_Gear_Strut\", lambda: create_gear_strut(2.3), (0, 11.2, 1.15), mat=mat_titanium)\n\ndef create_wheel(r=0.45, w=0.25):\n    bpy.ops.mesh.primitive_cylinder_add(radius=r, depth=w, vertices=24)\n    return bpy.context.view_layer.objects.active\nadd_part(\"Nose_Wheel_L\", lambda: create_wheel(0.40, 0.20), (-0.22, 11.2, 0.40), rot_rel=(0, math.radians(90), 0), mat=mat_tire)\nadd_part(\"Nose_Wheel_R\", lambda: create_wheel(0.40, 0.20), (0.22, 11.2, 0.40), rot_rel=(0, math.radians(90), 0), mat=mat_tire)\n\n# Main Gear (Left & Right under wings)\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    add_part(f\"Main_Gear_Strut_{pfx}\", lambda: create_gear_strut(2.4), (sx * 2.8, -1.2, 1.20), mat=mat_titanium)\n    add_part(f\"Main_Wheel_{pfx}_1\", lambda: create_wheel(0.55, 0.32), (sx * 2.8 - 0.28, -0.85, 0.55), rot_rel=(0, math.radians(90), 0), mat=mat_tire)\n    add_part(f\"Main_Wheel_{pfx}_2\", lambda: create_wheel(0.55, 0.32), (sx * 2.8 + 0.28, -0.85, 0.55), rot_rel=(0, math.radians(90), 0), mat=mat_tire)\n    add_part(f\"Main_Wheel_{pfx}_3\", lambda: create_wheel(0.55, 0.32), (sx * 2.8 - 0.28, -1.55, 0.55), rot_rel=(0, math.radians(90), 0), mat=mat_tire)\n    add_part(f\"Main_Wheel_{pfx}_4\", lambda: create_wheel(0.55, 0.32), (sx * 2.8 + 0.28, -1.55, 0.55), rot_rel=(0, math.radians(90), 0), mat=mat_tire)\n"
+  },
+  {
+    "item": {
+      "id": "scifi_spaceship",
+      "name": "Futuristic delta-wing spacecraft interceptor with dual ion thrusters",
+      "category": "vehicle",
+      "requestedName": "spaceship"
+    },
+    "entity": {
+      "id": "unin.entity.scifi_spaceship",
+      "name": "Futuristic delta-wing spacecraft interceptor with dual ion thrusters",
+      "category": "vehicle",
+      "role": "hero",
+      "estimatedDimensions": [
+        2,
+        2,
+        2
+      ]
+    },
+    "resolution": {
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_SPACESHIP_ASSEMBLY",
+      "path": null,
+      "format": "PROCEDURAL",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "confidence": 0.85,
+      "reason": "Synthesizing futuristic delta-wing interceptor assembly with ion thrusters",
+      "limitations": "Procedural component geometry",
+      "targetDimensions": [
+        2,
+        2,
+        2
+      ],
+      "sanitizationRequired": false,
+      "validation": {
+        "valid": true
+      },
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Futuristic delta-wing spacecraft interceptor with dual ion thrusters\" (vehicle)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Futuristic delta-wing spacecraft interceptor with dual ion thrusters\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing futuristic delta-wing interceptor assembly with ion thrusters"
+        }
+      ]
+    },
+    "bpyCode": "\n# ==============================================================================\n# PROCEDURAL VEHICLE: SCI-FI STEALTH INTERCEPTOR SPACESHIP (HIGH-FIDELITY)\n# Dimensions: ~2m W x ~2m L x ~2m H\n# Assembly: Faceted Lifting Body Hull, Composite Armor Plates, Recessed Canopy\n# Cockpit with Iridescent Shield Glass, Swept Canted Wings with Wingtip Rails,\n# Twin Ion Plasma Thrusters with Glowing Blue Cores, Radiator Cooling Dorsal Fins\n# ==============================================================================\nimport bpy\nimport bmesh\nimport math\nimport mathutils\n\nentity_id = \"unin.entity.scifi_spaceship\"\nbase_loc = (0, 0, 0)\n\nship_root = bpy.data.objects.new(entity_id, None)\nship_root[\"unin_id\"] = entity_id\nship_root.empty_display_type = 'ARROWS'\nship_root.location = base_loc\nbpy.context.collection.objects.link(ship_root)\n\n# Materials\nmat_composite = bpy.data.materials.new(name=f\"{entity_id}_Stealth_Composite\")\nmat_composite.use_nodes = True\nb_cp = mat_composite.node_tree.nodes.get('Principled BSDF')\nif b_cp:\n    b_cp.inputs['Base Color'].default_value = (0.05, 0.06, 0.08, 1.0)\n    b_cp.inputs['Roughness'].default_value = 0.22\n    if 'Metallic' in b_cp.inputs: b_cp.inputs['Metallic'].default_value = 0.88\n\nmat_plasma = bpy.data.materials.new(name=f\"{entity_id}_Plasma_Thruster_Core\")\nmat_plasma.use_nodes = True\nb_pl = mat_plasma.node_tree.nodes.get('Principled BSDF')\nif b_pl:\n    b_pl.inputs['Base Color'].default_value = (0.0, 0.85, 1.0, 1.0)\n    if 'Emission Color' in b_pl.inputs:\n        b_pl.inputs['Emission Color'].default_value = (0.0, 0.85, 1.0, 1.0)\n        b_pl.inputs['Emission Strength'].default_value = 35.0\n\nmat_canopy = bpy.data.materials.new(name=f\"{entity_id}_Shield_Canopy_Glass\")\nmat_canopy.use_nodes = True\nb_cn = mat_canopy.node_tree.nodes.get('Principled BSDF')\nif b_cn:\n    b_cn.inputs['Base Color'].default_value = (0.02, 0.12, 0.18, 1.0)\n    b_cn.inputs['Roughness'].default_value = 0.05\n    if 'Metallic' in b_cn.inputs: b_cn.inputs['Metallic'].default_value = 0.45\n\nmat_trim = bpy.data.materials.new(name=f\"{entity_id}_Alloy_Armor_Trim\")\nmat_trim.use_nodes = True\nb_tr = mat_trim.node_tree.nodes.get('Principled BSDF')\nif b_tr:\n    b_tr.inputs['Base Color'].default_value = (0.18, 0.20, 0.24, 1.0)\n    b_tr.inputs['Roughness'].default_value = 0.28\n    if 'Metallic' in b_tr.inputs: b_tr.inputs['Metallic'].default_value = 0.92\n\ndef add_part(name, mesh_func, loc_rel, rot_rel=(0,0,0), mat=mat_composite):\n    obj = mesh_func()\n    obj.name = f\"{entity_id}_{name}\"\n    obj[\"unin_id\"] = f\"{entity_id}_{name}\"\n    obj.location = (base_loc[0] + loc_rel[0], base_loc[1] + loc_rel[1], base_loc[2] + loc_rel[2])\n    obj.rotation_euler = rot_rel\n    obj.parent = ship_root\n    if mat: obj.data.materials.append(mat)\n    bpy.ops.object.shade_smooth()\n    return obj\n\n# ----------------- 1. FACETED LIFTING BODY HULL -----------------\n# Main Central Lifting Body\ndef create_central_hull():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (2.4, 8.5, 0.95)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"HullBevel\", 'BEVEL')\n    bev.width = 0.18\n    bev.segments = 3\n    return o\nadd_part(\"Central_Hull\", create_central_hull, (0, 0, 1.1), mat=mat_composite)\n\n# Chiseled Forward Nosecone\ndef create_nose_cone():\n    bpy.ops.mesh.primitive_cone_add(radius1=1.2, depth=3.8, vertices=16)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (1.0, 1.0, 0.45)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"NoseBevel\", 'BEVEL')\n    bev.width = 0.05\n    bev.segments = 2\n    return o\nadd_part(\"Forward_Nosecone\", create_nose_cone, (0, 5.8, 1.05), rot_rel=(math.radians(90), 0, 0), mat=mat_composite)\n\n# Recessed Cockpit Canopy\ndef create_canopy():\n    bpy.ops.mesh.primitive_cylinder_add(radius=0.75, depth=2.8, vertices=24)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.75, 1.0, 0.42)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"CanopyBevel\", 'BEVEL')\n    bev.width = 0.06\n    bev.segments = 2\n    return o\nadd_part(\"Cockpit_Canopy\", create_canopy, (0, 2.2, 1.62), rot_rel=(math.radians(82), 0, 0), mat=mat_canopy)\n\n# ----------------- 2. SWEPT CANTED WINGS & WINGLETS -----------------\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    # Main Swept Delta Wing Plate\n    def create_delta_wing():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (3.2, 4.8, 0.14)\n        bpy.ops.object.transform_apply(scale=True)\n        bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n        bev.width = 0.04\n        bev.segments = 2\n        return o\n    add_part(f\"Delta_Wing_{pfx}\", create_delta_wing, (sx * 2.4, -0.6, 1.05), rot_rel=(0, math.radians(sx * -6), math.radians(sx * 26)), mat=mat_composite)\n    \n    # Canted Wingtip Stabilizer Fin\n    def create_canted_fin():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (0.12, 2.2, 1.4)\n        bpy.ops.object.transform_apply(scale=True)\n        bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n        bev.width = 0.03\n        bev.segments = 2\n        return o\n    add_part(f\"Canted_Fin_{pfx}\", create_canted_fin, (sx * 3.8, -1.8, 1.65), rot_rel=(math.radians(-15), math.radians(sx * 28), 0), mat=mat_trim)\n\n# ----------------- 3. DUAL ION PLASMA ENGINE THRUSTERS -----------------\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    tx = sx * 0.95\n    ty = -4.6\n    tz = 1.15\n    \n    # Outer Heavy Thruster Housing\n    def create_thruster_bell():\n        bpy.ops.mesh.primitive_cylinder_add(radius=0.55, depth=2.4, vertices=24)\n        o = bpy.context.view_layer.objects.active\n        bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n        bev.width = 0.05\n        bev.segments = 2\n        return o\n    add_part(f\"Ion_Housing_{pfx}\", create_thruster_bell, (tx, ty, tz), rot_rel=(math.radians(90), 0, 0), mat=mat_trim)\n    \n    # Glowing Plasma Interior Core\n    def create_plasma_core():\n        bpy.ops.mesh.primitive_cylinder_add(radius=0.38, depth=0.6, vertices=24)\n        return bpy.context.view_layer.objects.active\n    add_part(f\"Plasma_Core_{pfx}\", create_plasma_core, (tx, ty - 1.05, tz), rot_rel=(math.radians(90), 0, 0), mat=mat_plasma)\n\n# ----------------- 4. DORSAL RADIATOR FINS & GREEBLES -----------------\n# Central Dorsal Spine Fin\ndef create_spine_fin():\n    bpy.ops.mesh.primitive_cube_add(size=1.0)\n    o = bpy.context.view_layer.objects.active\n    o.scale = (0.12, 3.6, 0.65)\n    bpy.ops.object.transform_apply(scale=True)\n    bev = o.modifiers.new(\"Bevel\", 'BEVEL')\n    bev.width = 0.02\n    bev.segments = 2\n    return o\nadd_part(\"Dorsal_Spine_Fin\", create_spine_fin, (0, -1.2, 1.82), mat=mat_trim)\n\n# Left & Right Heat Dissipation Radiator Grilles\nfor sx in [-1, 1]:\n    pfx = 'L' if sx < 0 else 'R'\n    def create_radiator():\n        bpy.ops.mesh.primitive_cube_add(size=1.0)\n        o = bpy.context.view_layer.objects.active\n        o.scale = (0.45, 2.2, 0.06)\n        bpy.ops.object.transform_apply(scale=True)\n        return o\n    add_part(f\"Radiator_Grille_{pfx}\", create_radiator, (sx * 0.9, -0.8, 1.58), rot_rel=(0, math.radians(sx * 8), 0), mat=mat_trim)\n"
+  }
+]

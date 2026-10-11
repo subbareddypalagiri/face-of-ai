@@ -1,0 +1,416 @@
+{
+  "taskId": "unin_3d_1791468722010",
+  "prompt": "Create a realistic dragon standing on a rocky mountain at sunset",
+  "timestamp": "2026-10-08T14:12:02.011Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "Photorealistic scene featuring a massive dragon perched atop a rugged rocky mountain summit during a dramatic sunset.",
+      "heroEntities": [
+        {
+          "id": "hero_primary",
+          "name": "Mythical Dragon",
+          "category": "creature",
+          "description": "Formidable reptilian dragon with textured scales, expansive leathery wings, horns, and sharp talons gripping the craggy peak.",
+          "importance": "hero",
+          "estimatedDimensions": [
+            12,
+            16,
+            6.5
+          ],
+          "materials": [
+            "reptilian_scales",
+            "leathery_wing_membrane",
+            "keratin_horns",
+            "glossy_cornea"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "open_terrain",
+        "baseSurface": "ancient_stone_tiles",
+        "secondaryProps": [
+          "craggy_boulders",
+          "talus_scree",
+          "alpine_shrubs",
+          "jagged_rock_spires"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.2
+      },
+      "timeOfDay": "sunset",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "moody_contrast",
+        "colors": [
+          "amber",
+          "deep_crimson",
+          "cool_violet"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "constraints": [
+        "accurate ground contact and inverse kinematics on rugged rock terrain",
+        "subsurface scattering on wing membranes",
+        "volumetric atmospheric haze catching sunset rim light",
+        "high-detail microfacet displacement on dragon scales and rock surfaces"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791468737305",
+      "version": "2.0.0",
+      "summary": "Photorealistic scene featuring a massive dragon perched atop a rugged rocky mountain summit during a dramatic sunset.",
+      "style": "photorealistic",
+      "environment": {
+        "type": "open_terrain",
+        "baseSurface": "ancient_stone_tiles",
+        "secondaryProps": [
+          "craggy_boulders",
+          "talus_scree",
+          "alpine_shrubs",
+          "jagged_rock_spires"
+        ]
+      },
+      "weather": {
+        "precipitation": "clear",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.2
+      },
+      "timeOfDay": "sunset",
+      "lighting": {
+        "primaryType": "sun",
+        "mood": "moody_contrast",
+        "colors": [
+          "amber",
+          "deep_crimson",
+          "cool_violet"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 2.8
+      },
+      "entities": [
+        {
+          "id": "hero_primary",
+          "name": "Mythical Dragon",
+          "category": "creature",
+          "role": "hero",
+          "description": "Formidable reptilian dragon with textured scales, expansive leathery wings, horns, and sharp talons gripping the craggy peak.",
+          "estimatedDimensions": [
+            12,
+            16,
+            6.5
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "reptilian_scales",
+            "leathery_wing_membrane",
+            "keratin_horns",
+            "glossy_cornea"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "PROCEDURAL_ASSEMBLY",
+            "provider": "ProceduralAssetProvider",
+            "assemblyType": "HERO_DRAGON_CREATURE_ASSEMBLY",
+            "path": null,
+            "format": "PROCEDURAL",
+            "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+            "confidence": 0.85,
+            "reason": "Synthesizing multi-component mythical winged dragon with horned skull and serpentine tail",
+            "limitations": "Procedural component geometry",
+            "targetDimensions": [
+              12,
+              16,
+              6.5
+            ],
+            "sanitizationRequired": false,
+            "validation": {
+              "valid": true
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "No verified local asset matches \"Mythical Dragon\" (creature)"
+              },
+              {
+                "provider": "CachedAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "LOCAL_CACHE",
+                "reason": "No cached asset found for \"Mythical Dragon\""
+              },
+              {
+                "provider": "RemoteAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "REMOTE_CATALOG",
+                "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+              },
+              {
+                "provider": "AI3DAssetProvider",
+                "status": "NOT_CONFIGURED",
+                "canResolve": false,
+                "confidence": 0,
+                "strategy": "AI_GENERATION",
+                "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+              },
+              {
+                "provider": "ProceduralAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 0.85,
+                "strategy": "PROCEDURAL_ASSEMBLY",
+                "reason": "Synthesizing multi-component mythical winged dragon with horned skull and serpentine tail"
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_ancient_stone_tiles",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with ancient_stone_tiles PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "ancient_stone_tiles"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "open_terrain",
+              "baseSurface": "ancient_stone_tiles",
+              "secondaryProps": [
+                "craggy_boulders",
+                "talus_scree",
+                "alpine_shrubs",
+                "jagged_rock_spires"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 35,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 2.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "accurate ground contact and inverse kinematics on rugged rock terrain",
+        "subsurface scattering on wing membranes",
+        "volumetric atmospheric haze catching sunset rim light",
+        "high-detail microfacet displacement on dragon scales and rock surfaces"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Mythical Dragon",
+      "strategy": "PROCEDURAL_ASSEMBLY",
+      "provider": "ProceduralAssetProvider",
+      "assemblyType": "HERO_DRAGON_CREATURE_ASSEMBLY",
+      "qualityLevel": "PROCEDURAL_STUDIO_GRADE",
+      "reason": "Synthesizing multi-component mythical winged dragon with horned skull and serpentine tail",
+      "limitations": "Procedural component geometry",
+      "path": null,
+      "format": "PROCEDURAL",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "No verified local asset matches \"Mythical Dragon\" (creature)"
+        },
+        {
+          "provider": "CachedAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "LOCAL_CACHE",
+          "reason": "No cached asset found for \"Mythical Dragon\""
+        },
+        {
+          "provider": "RemoteAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "REMOTE_CATALOG",
+          "reason": "Remote Asset Catalog endpoint is not configured (PROVIDER_STATUS.NOT_CONFIGURED)"
+        },
+        {
+          "provider": "AI3DAssetProvider",
+          "status": "NOT_CONFIGURED",
+          "canResolve": false,
+          "confidence": 0,
+          "strategy": "AI_GENERATION",
+          "reason": "AI 3D generation provider is not configured (AI3D_PROVIDER_NOT_CONFIGURED). No external 3D API key in config.json."
+        },
+        {
+          "provider": "ProceduralAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 0.85,
+          "strategy": "PROCEDURAL_ASSEMBLY",
+          "reason": "Synthesizing multi-component mythical winged dragon with horned skull and serpentine tail"
+        }
+      ],
+      "validation": {
+        "valid": true
+      },
+      "timestamp": 1791468737309
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791468738180
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Mythical Dragon)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791468738803
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791468739306
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791468739929
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791468740452
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 0,
+      "flaws": [],
+      "metrics": {
+        "objectsCount": 29,
+        "totalTriangles": 12952,
+        "totalVertices": 6671,
+        "lightsCount": 4,
+        "camerasCount": 2,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -2.2,
+            -3.2,
+            1.1
+          ],
+          "focalLength": 35,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 2.8,
+          "focusDistance": 3.91
+        }
+      },
+      "timestamp": 1791468741044
+    }
+  ],
+  "corrections": [],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 29744,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "c:\\Users\\subba\\Downloads\\prime -ps\\face of me"],
+      "enabled": false,
+      "description": "Local filesystem access via official Model Context Protocol"
+    },
+    "memory": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "enabled": false,
+      "description": "Persistent knowledge graph memory server"
+    }
+  }
+}

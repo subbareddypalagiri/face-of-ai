@@ -1,0 +1,75 @@
+{
+  "hero_chair": {
+    "exists": true,
+    "type": "EMPTY",
+    "loc": [
+      0.0,
+      -0.010778539814054966,
+      0.01124278549104929
+    ],
+    "world_loc": [
+      0.0,
+      -0.010778539814054966,
+      0.01124278549104929
+    ],
+    "dims": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "parent": null,
+    "children": [
+      "Chair_Root"
+    ]
+  },
+  "Chair_Root": {
+    "exists": true,
+    "type": "EMPTY",
+    "loc": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "world_loc": [
+      0.0,
+      -0.010778539814054966,
+      0.01124278549104929
+    ],
+    "dims": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "parent": "hero_chair",
+    "children": [
+      "Backrest_Panel",
+      "Cylinder",
+      "Cylinder.001",
+      "Cylinder.002",
+      "Cylinder.003",
+      "Cylinder.004",
+      "Cylinder.005",
+      "Cylinder.006",
+      "Cylinder.007",
+      "Seat_Cushion",
+      "Seat_Pan"
+    ]
+  },
+  "cam": {
+    "exists": true,
+    "loc": [
+      -2.759999990463257,
+      -3.9100000858306885,
+      1.4900000095367432
+    ],
+    "lens": 35.0
+  },
+  "tgt": {
+    "exists": true,
+    "loc": [
+      0.0,
+      0.0,
+      0.4300000071525574
+    ]
+  }
+}

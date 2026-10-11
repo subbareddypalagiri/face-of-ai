@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+
+# WhatsApp session data & secrets
+unin_whatsapp_session/
+*.session
+
+# Blender temporary files & render outputs
+*.blend
+*.blend1
+*.blend@
+
+# Log files & caches
+*.log
+logs/
+output/
+__pycache__/
+*.pyc
+*.bak
+*.tmp
+assets/cache/
+assets/avatars/
+
+# Executables & binary builds
+bin/*.exe
+*.exe
+*.dll
+
+# Vendor internal git repos
+vendor/talkinghead-repo/
+
+# Scratch runtime data & renders
+scratch/worlds/
+scratch/worlds_test_*/
+scratch/test_scale_renders/
+scratch/unin-swarm-build/
+scratch/unin-swarm-test/
+scratch/unin-test-service/
+scratch/acceptance/
+scratch/benchmark/
+scratch/chat_acceptance/
+scratch/pilot/
+scratch/**/*.blend
+scratch/**/*.blend1
+scratch/**/*.png
+scratch/**/*.jpg
+scratch/**/*.wav
+scratch/**/*.mp3
+scratch/**/*.json.tmp
+
+# Generated temporary renders in root
+unin_cinematic_render.png
+unin_forest_render.png
+unin_world_render.png
+unin_eval_preview.png
+unin_whatsapp_qr.png
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

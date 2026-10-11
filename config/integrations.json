@@ -1,0 +1,12 @@
+{
+  "gmail": {
+    "connected": true,
+    "accountName": "subbareddy123sub@gmail.com",
+    "lastVerified": "2026-10-06T11:49:36.198Z",
+    "encryptedData": {
+      "email": "aes_gcm:f8kClcgH4Hb0xSak:fYZSzXZEFGZyKQ7QyaGHCQ==:WM/OkUX09Yl9qgrv4fEHYlDCanz6ETWUZq0=",
+      "appPassword": "aes_gcm:zGC0iRYoD47D2maB:V1TbNcbVEH5mdcNrlPJOlQ==:NU2HdP8qMxzt0BygeIhmtKhjEA=="
+    },
+    "metadata": {}
+  }
+}

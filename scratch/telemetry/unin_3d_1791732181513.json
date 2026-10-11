@@ -1,0 +1,422 @@
+{
+  "taskId": "unin_3d_1791732181513",
+  "prompt": "Create a house",
+  "timestamp": "2026-10-11T15:23:01.513Z",
+  "stages": {
+    "intent": {
+      "taskType": "create_world",
+      "visualFidelity": "photorealistic",
+      "summary": "Autonomous 3D build for: Create a house",
+      "heroEntities": [
+        {
+          "id": "hero_house",
+          "name": "Small Contemporary House",
+          "category": "architecture",
+          "description": "Gabled contemporary house with weatherboard siding, shingled roof, front door and windows",
+          "importance": "hero",
+          "estimatedDimensions": [
+            6,
+            8,
+            5.5
+          ],
+          "materials": [
+            "wall_siding",
+            "roof_shingles",
+            "window_glass",
+            "timber_trim",
+            "chimney_brick"
+          ],
+          "groundPlacement": true
+        }
+      ],
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "curbs",
+          "street_lights",
+          "puddles"
+        ]
+      },
+      "weather": {
+        "precipitation": "none",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.015
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "cyan",
+          "amber",
+          "deep_navy"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ]
+    },
+    "sceneGraph": {
+      "id": "unin_scene_1791732182817",
+      "version": "2.0.0",
+      "summary": "Autonomous 3D build for: Create a house",
+      "style": "photorealistic",
+      "environment": {
+        "type": "urban_street",
+        "baseSurface": "wet_asphalt",
+        "secondaryProps": [
+          "curbs",
+          "street_lights",
+          "puddles"
+        ]
+      },
+      "weather": {
+        "precipitation": "none",
+        "puddles": false,
+        "wetReflections": false,
+        "fogDensity": 0.015
+      },
+      "timeOfDay": "night",
+      "lighting": {
+        "primaryType": "streetlights",
+        "mood": "moody_contrast",
+        "colors": [
+          "cyan",
+          "amber",
+          "deep_navy"
+        ]
+      },
+      "cinematography": {
+        "lensFocalLength": 35,
+        "cameraAngle": "low_angle_hero",
+        "enableDoF": true,
+        "apertureFStop": 1.8
+      },
+      "entities": [
+        {
+          "id": "hero_house",
+          "name": "Small Contemporary House",
+          "category": "architecture",
+          "role": "hero",
+          "description": "Gabled contemporary house with weatherboard siding, shingled roof, front door and windows",
+          "estimatedDimensions": [
+            6,
+            8,
+            5.5
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "wall_siding",
+            "roof_shingles",
+            "window_glass",
+            "timber_trim",
+            "chimney_brick"
+          ],
+          "qualityTier": "HERO",
+          "triangleBudget": 1500000,
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "LOCAL_CATALOG",
+            "provider": "LocalAssetProvider",
+            "assemblyType": null,
+            "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+            "format": "GLB",
+            "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+            "confidence": 1,
+            "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\"",
+            "limitations": "Static pre-authored geometry",
+            "targetDimensions": [
+              6,
+              8,
+              5.5
+            ],
+            "sanitizationRequired": true,
+            "validation": {
+              "valid": true,
+              "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+              "errors": [],
+              "warnings": [],
+              "metrics": {
+                "format": "GLB",
+                "sizeBytes": 21416,
+                "estimatedTriangles": 204,
+                "vertexCount": 408,
+                "meshCount": 9,
+                "materialCount": 5,
+                "hasTextures": false,
+                "checksum": "bdc8221a286c82da26849b3cd76f91f9e6f24ecc8a3910a8bf8b3f5d3c3b390f"
+              }
+            },
+            "attempts": [
+              {
+                "provider": "LocalAssetProvider",
+                "status": "AVAILABLE",
+                "canResolve": true,
+                "confidence": 1,
+                "strategy": "LOCAL_CATALOG",
+                "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\""
+              }
+            ]
+          }
+        },
+        {
+          "id": "unin.environment.foundation",
+          "name": "Foundation_wet_asphalt",
+          "category": "environment",
+          "role": "foundation",
+          "description": "Ground plane terrain with wet_asphalt PBR shader",
+          "estimatedDimensions": [
+            40,
+            40,
+            1
+          ],
+          "targetLocation": [
+            0,
+            0,
+            0
+          ],
+          "targetRotationEuler": [
+            0,
+            0,
+            0
+          ],
+          "materials": [
+            "wet_asphalt"
+          ],
+          "groundPlacement": true,
+          "assetResolution": {
+            "strategy": "procedural_grid",
+            "details": {
+              "type": "urban_street",
+              "baseSurface": "wet_asphalt",
+              "secondaryProps": [
+                "curbs",
+                "street_lights",
+                "puddles"
+              ]
+            }
+          }
+        },
+        {
+          "id": "unin.camera.primary",
+          "name": "Cinematic_Main_Camera",
+          "category": "camera",
+          "role": "camera",
+          "description": "Primary camera with cinematic lens and tracking constraint",
+          "estimatedDimensions": [
+            0.2,
+            0.3,
+            0.2
+          ],
+          "targetLocation": [
+            -3.8,
+            -4.5,
+            1.4
+          ],
+          "targetRotationEuler": [
+            1.3,
+            0,
+            -0.7
+          ],
+          "materials": [],
+          "groundPlacement": false,
+          "optics": {
+            "lensFocalLength": 35,
+            "cameraAngle": "low_angle_hero",
+            "enableDoF": true,
+            "apertureFStop": 1.8
+          }
+        }
+      ],
+      "relationships": [],
+      "constraints": [
+        "ground contact zero penetration",
+        "PBR specular reflection",
+        "cinematic framing"
+      ]
+    }
+  },
+  "assetDecisions": [
+    {
+      "entity": "Small Contemporary House",
+      "strategy": "LOCAL_CATALOG",
+      "provider": "LocalAssetProvider",
+      "assemblyType": null,
+      "qualityLevel": "HIGH_FIDELITY_VERIFIED",
+      "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\"",
+      "limitations": "Static pre-authored geometry",
+      "path": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+      "format": "GLB",
+      "attempts": [
+        {
+          "provider": "LocalAssetProvider",
+          "status": "AVAILABLE",
+          "canResolve": true,
+          "confidence": 1,
+          "strategy": "LOCAL_CATALOG",
+          "reason": "Exact name match for verified asset \"Residential House with Pitched Roof\""
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "filePath": "C:/Users/subba/Downloads/prime -ps/face of me/assets/models/house.glb",
+        "errors": [],
+        "warnings": [],
+        "metrics": {
+          "format": "GLB",
+          "sizeBytes": 21416,
+          "estimatedTriangles": 204,
+          "vertexCount": 408,
+          "meshCount": 9,
+          "materialCount": 5,
+          "hasTextures": false,
+          "checksum": "bdc8221a286c82da26849b3cd76f91f9e6f24ecc8a3910a8bf8b3f5d3c3b390f"
+        }
+      },
+      "timestamp": 1791732182822
+    }
+  ],
+  "executionLog": [
+    {
+      "taskId": "task_1_foundation",
+      "title": "Stage 1: Ground Foundation & World Reset",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791732186334
+    },
+    {
+      "taskId": "task_2_hero_asset",
+      "title": "Stage 2: Hero Asset Placement (Small Contemporary House)",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791732187076
+    },
+    {
+      "taskId": "task_3_secondary_props",
+      "title": "Stage 3: Secondary Props & Environmental Physics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791732187855
+    },
+    {
+      "taskId": "task_4_lighting_atmosphere",
+      "title": "Stage 4: Atmospheric World Lighting & Volumetrics",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791732188597
+    },
+    {
+      "taskId": "task_5_camera_optics",
+      "title": "Stage 5: Cinema Camera Alignment & Viewport Lock",
+      "status": "SUCCEEDED",
+      "success": true,
+      "error": null,
+      "timestamp": 1791732189500
+    }
+  ],
+  "inspections": [
+    {
+      "verified": true,
+      "flawsCount": 1,
+      "flaws": [
+        {
+          "code": "DIMENSION_TOO_SMALL",
+          "severity": "HIGH",
+          "target": "hero_house",
+          "actualMax": 0,
+          "targetMax": 8,
+          "message": "Hero entity scale is too small (0.00m vs target 8.00m)."
+        }
+      ],
+      "metrics": {
+        "objectsCount": 25,
+        "totalTriangles": 8692,
+        "totalVertices": 4793,
+        "lightsCount": 99,
+        "camerasCount": 22,
+        "activeCamera": {
+          "name": "unin.camera.primary",
+          "location": [
+            -17.45,
+            -24.73,
+            9.45
+          ],
+          "focalLength": 35,
+          "sensorWidth": 36,
+          "dofEnabled": true,
+          "fStop": 1.8,
+          "focusDistance": 31.06
+        }
+      },
+      "timestamp": 1791732190269
+    }
+  ],
+  "corrections": [
+    {
+      "appliedCount": 1,
+      "fixes": [
+        {
+          "flaw": "DIMENSION_TOO_SMALL",
+          "target": "hero_house",
+          "action": "Upscale by 3.00x"
+        }
+      ],
+      "timestamp": 1791732190348
+    }
+  ],
+  "finalStatus": "SUCCEEDED",
+  "durationMs": 30274,
+  "renderOutput": {
+    "blendPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_scene.blend",
+    "renderPath": "C:/Users/subba/Downloads/prime -ps/face of me/unin_world_render.png",
+    "visualEvaluation": {
+      "overallStatus": "FAIL",
+      "qualityScore": 6,
+      "minScoreThreshold": 8.8,
+      "confidence": 0.88,
+      "defects": [
+        {
+          "id": "defect_geom_floating",
+          "dimension": "SPATIAL",
+          "severity": "CRITICAL",
+          "description": "Object \"hero_house\" is floating 0.00m above the ground plane.",
+          "confidence": 0.95,
+          "target": "hero_house",
+          "recommendedAction": "GROUND_OBJECT",
+          "actionParams": {
+            "groundZ": 0,
+            "currentZ": 0
+          }
+        }
+      ],
+      "criticalCount": 1,
+      "highCount": 0,
+      "mediumCount": 0,
+      "lowCount": 0,
+      "critiqueSummary": "Telemetry inspection: 1 defects identified, score 6.0/10"
+    }
+  }
+}
