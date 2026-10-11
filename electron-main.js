@@ -2,6 +2,58 @@ const { app, BrowserWindow, ipcMain, screen, Tray, Menu, globalShortcut, desktop
 const path = require('path');
 const fs = require('fs');
 
+// Lightweight .env loader & secret storage (zero external dependency)
+function loadEnvFile() {
+  const envPath = path.join(__dirname, '.env');
+  if (fs.existsSync(envPath)) {
+    try {
+      const content = fs.readFileSync(envPath, 'utf8');
+      content.split(/\r?\n/).forEach(line => {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) return;
+        const eqIdx = trimmed.indexOf('=');
+        if (eqIdx > 0) {
+          const key = trimmed.slice(0, eqIdx).trim();
+          let val = trimmed.slice(eqIdx + 1).trim();
+          if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
+            val = val.slice(1, -1);
+          }
+          if (!process.env[key]) {
+            process.env[key] = val;
+          }
+        }
+      });
+    } catch (e) {}
+  }
+}
+loadEnvFile();
+
+function saveEnvKey(key, value) {
+  const envPath = path.join(__dirname, '.env');
+  let lines = [];
+  if (fs.existsSync(envPath)) {
+    try {
+      lines = fs.readFileSync(envPath, 'utf8').split(/\r?\n/);
+    } catch (e) {}
+  }
+  let found = false;
+  const newLines = lines.map(line => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith(key + '=')) {
+      found = true;
+      return `${key}=${value}`;
+    }
+    return line;
+  });
+  if (!found) {
+    newLines.push(`${key}=${value}`);
+  }
+  try {
+    fs.writeFileSync(envPath, newLines.join('\n'), 'utf8');
+  } catch (e) {}
+  process.env[key] = value;
+}
+
 // Long-Term Memory Core
 const memoryCore = require('./memory-core');
 
@@ -150,15 +202,39 @@ function createDesktopWindow() {
   if (!config.gemini_key && (process.env.GEMINI_API_KEY || process.env.GEMINI_KEY)) {
     config.gemini_key = process.env.GEMINI_API_KEY || process.env.GEMINI_KEY;
   }
+  if (!config.openrouter_key && (process.env.OPENROUTER_API_KEY || process.env.OPENROUTER_KEY)) {
+    config.openrouter_key = process.env.OPENROUTER_API_KEY || process.env.OPENROUTER_KEY;
+  }
 
-  ipcMain.handle('get-app-config', () => config);
+  ipcMain.handle('get-app-config', () => {
+    if (process.env.GEMINI_API_KEY) config.gemini_key = process.env.GEMINI_API_KEY;
+    if (process.env.OPENROUTER_API_KEY) config.openrouter_key = process.env.OPENROUTER_API_KEY;
+    return config;
+  });
 
   ipcMain.on('save-app-config', (event, newConfig) => {
     try {
+      if (newConfig.gemini_key) {
+        saveEnvKey('GEMINI_API_KEY', newConfig.gemini_key);
+        process.env.GEMINI_API_KEY = newConfig.gemini_key;
+        process.env.GEMINI_KEY = newConfig.gemini_key;
+      }
+      if (newConfig.openrouter_key) {
+        saveEnvKey('OPENROUTER_API_KEY', newConfig.openrouter_key);
+        process.env.OPENROUTER_API_KEY = newConfig.openrouter_key;
+      }
+      if (newConfig.mongodb_uri) {
+        saveEnvKey('MONGODB_URI', newConfig.mongodb_uri);
+        process.env.MONGODB_URI = newConfig.mongodb_uri;
+      }
       config = { ...config, ...newConfig };
+      const safeConfig = { ...config, gemini_key: '', openrouter_key: '' };
       const cfgPath = path.join(__dirname, 'config.json');
-      fs.writeFileSync(cfgPath, JSON.stringify(config, null, 2), 'utf8');
-    } catch (e) {}
+      fs.writeFileSync(cfgPath, JSON.stringify(safeConfig, null, 2), 'utf8');
+      console.log('✅ [AppConfig] Config & secrets saved to .env and memory successfully.');
+    } catch (e) {
+      console.error('[save-app-config error]:', e);
+    }
   });
 
   ipcMain.handle('get-screen-bounds', () => {

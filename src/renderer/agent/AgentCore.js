@@ -358,8 +358,21 @@ export class AgentCore {
       return content;
     } else {
       // Direct Google Gemini Provider with Multi-Model Resilient Fallback Loop
-      const apiKey = localStorage.getItem('gemini_companion_key');
-      if (!apiKey) throw new Error("Please configure your Gemini API Key in Settings.");
+      let apiKey = localStorage.getItem('gemini_companion_key');
+      if (!apiKey && window.electronDesktopAPI && window.electronDesktopAPI.getAppConfig) {
+        try {
+          const cfg = await window.electronDesktopAPI.getAppConfig();
+          if (cfg && cfg.gemini_key) {
+            apiKey = cfg.gemini_key;
+            localStorage.setItem('gemini_companion_key', apiKey);
+          }
+        } catch (e) {}
+      }
+      if (!apiKey) {
+        document.getElementById('apiKeyModal')?.classList.remove('opacity-0', 'pointer-events-none', 'hidden');
+        document.getElementById('inputGeminiKey')?.focus();
+        throw new Error("Gemini API Key ledu buddy! Direct ga ikkade chat lo nee key (AIzaSy...) paste cheyyi, automatic ga save aipothundi.");
+      }
       const activeModel = this.getActiveGeminiModel();
 
       const contents = [];

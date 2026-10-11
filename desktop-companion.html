@@ -2260,12 +2260,71 @@
       }
     });
 
+    // Intelligent API Key Auto-Detection & Zero-Friction Storage
+    const handleApiKeyInput = (rawText) => {
+      if (!rawText) return false;
+      const t = rawText.trim();
+      
+      // 1. Detect Gemini API Key (starts with AIzaSy followed by 33 chars)
+      const geminiMatch = t.match(/\b(AIzaSy[A-Za-z0-9_-]{33})\b/);
+      if (geminiMatch) {
+        const key = geminiMatch[1];
+        localStorage.setItem('gemini_companion_key', key);
+        const inputKey = document.getElementById('inputGeminiKey');
+        if (inputKey) inputKey.value = key;
+        if (window.electronDesktopAPI && window.electronDesktopAPI.saveAppConfig) {
+          window.electronDesktopAPI.saveAppConfig({ gemini_key: key });
+        }
+        const masked = key.slice(0, 6) + '...' + key.slice(-4);
+        uiManager.displayThought(`🔑 Gemini API Key (${masked}) received & automatically saved to .env!`, 8000);
+        AuraAudio.playSuccess();
+        if (avatarEngine && avatarEngine.speak) {
+          avatarEngine.speak('API key save aindi buddy! Na brain ippudu fully ready ga undi. Nuvvu em cheppina execute chestha.');
+        }
+        return true;
+      }
+
+      // 2. Detect OpenRouter API Key
+      const openRouterMatch = t.match(/\b(sk-or-[A-Za-z0-9_-]{20,})\b/);
+      if (openRouterMatch) {
+        const key = openRouterMatch[1];
+        localStorage.setItem('openrouter_key', key);
+        if (window.electronDesktopAPI && window.electronDesktopAPI.saveAppConfig) {
+          window.electronDesktopAPI.saveAppConfig({ openrouter_key: key });
+        }
+        const masked = key.slice(0, 7) + '...' + key.slice(-4);
+        uiManager.displayThought(`🔑 OpenRouter Key (${masked}) received & saved to .env!`, 8000);
+        AuraAudio.playSuccess();
+        if (avatarEngine && avatarEngine.speak) {
+          avatarEngine.speak('OpenRouter key save aindi buddy!');
+        }
+        return true;
+      }
+
+      // 3. User asking where / how to set API key in English or Telugu
+      if (/\b(?:set|update|enter|change|give|add|paste)?\s*(?:api\s*key|gemini\s*key|brain\s*settings)\b/i.test(t) ||
+          /(?:api\s*key\s*(?:ekada|ekkada|pettali|evvali|ivvali|ivvana))/i.test(t)) {
+        document.getElementById('apiKeyModal')?.classList.remove('opacity-0', 'pointer-events-none', 'hidden');
+        document.getElementById('inputGeminiKey')?.focus();
+        uiManager.displayThought('🔑 Brain Settings opened! Paste your Gemini API key here or directly in chat.', 8000);
+        if (avatarEngine && avatarEngine.speak) {
+          avatarEngine.speak('Settings modal open chesa buddy. Nuvvu akkada paste cheyyachu, leda direct ga ee chat lone nee key type chesina auto ga save cheskunta!');
+        }
+        return true;
+      }
+
+      return false;
+    };
+
     const sendChat = () => {
       if (!inputDialogue) return;
       const text = inputDialogue.value.trim();
       if (text) {
         inputDialogue.value = '';
         chatDrawer?.classList.add('hidden');
+        if (handleApiKeyInput(text)) {
+          return;
+        }
         if (/\b(?:director\s+questions?|director\s+dialogue|open\s+(?:the\s+)?blender\s+(?:studio|drawer|window))\b/i.test(text)) {
           blenderStudioDrawer?.classList.remove('hidden');
           openDirectorDialogue(text);
@@ -2588,6 +2647,7 @@
       const text = promptText || (inputBlenderPrompt ? inputBlenderPrompt.value.trim() : '');
       if (!text) return;
       if (inputBlenderPrompt) inputBlenderPrompt.value = '';
+      if (handleApiKeyInput(text)) return;
       AuraAudio.playClick();
 
       // Only open interactive director questions if user explicitly asks for director questions/mode
@@ -2694,14 +2754,39 @@
       }
     });
 
-    // 12. Save Brain Settings
+    // 12. Save Brain Settings with Auto-Save on Paste / Type
+    const inputGeminiKeyEl = document.getElementById('inputGeminiKey');
+    const autoSaveKeyFromInput = () => {
+      const keyVal = inputGeminiKeyEl?.value.trim();
+      if (keyVal && (keyVal.startsWith('AIzaSy') || keyVal.length > 25)) {
+        localStorage.setItem('gemini_companion_key', keyVal);
+        if (window.electronDesktopAPI && window.electronDesktopAPI.saveAppConfig) {
+          window.electronDesktopAPI.saveAppConfig({ gemini_key: keyVal });
+        }
+        uiManager.displayThought('✅ Gemini Key automatically saved to .env & memory');
+      }
+    };
+    inputGeminiKeyEl?.addEventListener('input', autoSaveKeyFromInput);
+    inputGeminiKeyEl?.addEventListener('paste', () => setTimeout(autoSaveKeyFromInput, 50));
+    inputGeminiKeyEl?.addEventListener('change', autoSaveKeyFromInput);
+
     document.getElementById('btnSaveGeminiKey')?.addEventListener('click', () => {
-      const keyVal = document.getElementById('inputGeminiKey')?.value.trim();
+      const keyVal = inputGeminiKeyEl?.value.trim();
       const modelVal = document.getElementById('selectGeminiModel')?.value;
-      if (keyVal) localStorage.setItem('gemini_companion_key', keyVal);
-      if (modelVal) localStorage.setItem('gemini_selected_model', modelVal);
+      if (keyVal) {
+        localStorage.setItem('gemini_companion_key', keyVal);
+        if (window.electronDesktopAPI && window.electronDesktopAPI.saveAppConfig) {
+          window.electronDesktopAPI.saveAppConfig({ gemini_key: keyVal, gemini_model: modelVal });
+        }
+      }
+      if (modelVal) {
+        localStorage.setItem('gemini_selected_model', modelVal);
+        if (window.electronDesktopAPI && window.electronDesktopAPI.saveAppConfig) {
+          window.electronDesktopAPI.saveAppConfig({ gemini_model: modelVal });
+        }
+      }
       document.getElementById('apiKeyModal')?.classList.add('opacity-0', 'pointer-events-none', 'hidden');
-      uiManager.displayThought('Brain updated to ' + modelVal);
+      uiManager.displayThought('Brain updated & saved to .env!');
     });
 
     // 12b. Auto-Start on Windows Boot Wiring
@@ -2819,8 +2904,18 @@
       if (window.electronDesktopAPI.getAppConfig) {
         window.electronDesktopAPI.getAppConfig().then((cfg) => {
           if (cfg) {
-            if (cfg.gemini_key && !localStorage.getItem('gemini_companion_key')) {
+            const inputKey = document.getElementById('inputGeminiKey');
+            if (cfg.gemini_key) {
               localStorage.setItem('gemini_companion_key', cfg.gemini_key);
+              if (inputKey && !inputKey.value) inputKey.value = cfg.gemini_key;
+            } else {
+              const stored = localStorage.getItem('gemini_companion_key');
+              if (stored && stored.startsWith('AIzaSy')) {
+                if (inputKey && !inputKey.value) inputKey.value = stored;
+                if (window.electronDesktopAPI.saveAppConfig) {
+                  window.electronDesktopAPI.saveAppConfig({ gemini_key: stored });
+                }
+              }
             }
             if (cfg.gemini_model) {
               const currentModel = localStorage.getItem('gemini_selected_model');
